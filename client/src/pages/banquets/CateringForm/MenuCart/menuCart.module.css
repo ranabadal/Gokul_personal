@@ -1,0 +1,89 @@
+.body{
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+ 
+}
+.main{
+    box-sizing: border-box;
+    max-width: 185px;
+    max-height: 500px;
+    border-radius: 22.5px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    /* margin: 20px 10px; */
+    cursor: pointer;
+
+    
+}
+
+.main:hover{
+    outline: 2px solid #E31E24;
+
+}
+
+.image{
+    /* max-width: 185px; */
+    width: 100%;
+    max-height: 283px;
+}
+
+/* .content{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: start;
+    padding: 8px 8px;
+} */
+
+.menuName{
+    color: #4B4B4B;
+    font-family: 'Inter';
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.description{
+    color: #4B4B4B;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.price{
+    color: #E31E24;
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: start;
+    padding: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Selected State */
+.selected .selectedContent {
+  
+    background-color: #E31E24;
+    padding-top: -5px;
+}
+
+
+.selected {
+    border-radius: 22.5px;
+    outline: 2px solid #E31E24 !important; /* Ensures the outline stays when selected */
+}
+
+.selected .menuName,
+.selected .description,
+.selected .price {
+    color: white;
+}

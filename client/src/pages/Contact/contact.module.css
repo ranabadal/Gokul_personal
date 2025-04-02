@@ -1,0 +1,128 @@
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.contact{
+    border-radius: 18px;
+    background-color: #FFF3F5;
+    max-width: 700px;
+    padding: 40px 48px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.mainHeading{
+    font-family: 'Poppins';
+    font-size: 40px;
+    font-weight: 500;
+    color: #4B4B4B;
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+}
+
+.heading{
+    font-family: 'Poppins';
+    font-size: 32px;
+    font-weight: 500;
+    color: #4B4B4B;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+}
+
+
+.heading {
+    transition: color 0.3s ease-in-out;
+    position: relative;
+}
+
+.heading::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #E31E24;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+  }
+
+.heading:hover {
+    color: #E31E24;
+    cursor: pointer;
+}
+
+.heading:hover::after {
+    width: 100%;
+    left: 0;
+  }
+
+  .desc{
+    font-family: 'Poppins';
+
+    font-size: 18px;
+    font-weight: 400;
+    color: #4B4B4B;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+textarea {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #FFE9E9;
+    text-align: left;
+    padding: 10px 30px;
+    color: #E31E24;
+    font-family: 'Inter';
+    font-size: 22px;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.leftDivInputName,
+.leftDivInputEmail {
+    height: 45px;
+    /* border: 1px solid black; */
+}
+
+textarea {
+    height: 245px;
+    resize: none;
+    /* outline: none; */
+
+}
+
+.leftDivInputName:focus,
+.leftDivInputEmail:focus,.textarea:focus{
+    border: 2px solid rgb(16, 50, 7);
+}
+
+textarea::placeholder {
+    color: #575858;
+    font-family: 'Inter';
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.error{
+    color: red;
+}

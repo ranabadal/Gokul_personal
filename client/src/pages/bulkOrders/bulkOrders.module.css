@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bulkOrders{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hall_details{
+    display: flex;
+    flex-direction: column;
+    gap: 17.25rem;
+    
+}
+
+.gokul_heading{
+    display: flex;
+    align-items: center;
+    font-size: 4rem;
+    justify-content: center;
+    color: #E31E24;
+    font-family: "Madimi One";
+    font-weight: 400;
+}
+
+
+.backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: transparent;
+    border: none;
+    color: #007BFF;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.backButton:hover {
+    color: #0056b3;
+}

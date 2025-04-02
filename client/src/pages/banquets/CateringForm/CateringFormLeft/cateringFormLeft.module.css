@@ -1,0 +1,346 @@
+/* General Styling */
+
+.cateringForm{
+    margin: 10px 0;
+  }
+  
+  .mainHeading{
+    color: #E31E24;
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 24px;
+  
+  }
+
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  .maxCapacityNote {
+    color: #555;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  
+  .fields {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    width: 852px;
+    max-height: 148px;
+    padding: 48px;
+    border-radius: 18px;
+    /* margin: 0 24px; */
+    background-color: #FFF3F5;
+  }
+  
+  .inputWrapper {
+    position: relative;
+   
+  }
+  
+  .input {
+  width: 366px;
+  height: 52px;
+  border-radius: 8px;
+    padding: 10px 16px; /* Add padding to avoid overlapping text and icon */
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #E31E24;
+    font-family: 'Inter';
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #FFE9E9;
+  }
+  
+  .icon {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Position icon inside the field */
+    transform: translateY(-50%); /* Vertically center the icon */
+    width: 20px; /* Size of the SVG */
+    height: 20px;
+  }
+  
+  
+  
+  .cateringForm {
+    max-width: 852px;
+    margin: auto;
+  }
+  
+  .mainHeading {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .heroSecHeading {
+    color: #E31E24;
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .heroSec {
+    background-color: #FFF3F5;
+    border-radius: 18px;
+    max-height: 708px;
+    max-width: 852px;
+    margin: 20px 0;
+    padding: 20px;
+   
+    border-radius: 18px; /* Adds rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for better depth */
+  }
+  
+  .carts {
+    display: flex;
+    flex-direction: row;
+    gap: 16px; /* Space between cards */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #E31E24 #f0f0f0; /* Custom scrollbar colors for Firefox */
+    padding-bottom: 16px;
+  }
+  
+  .carts::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+  }
+  
+  .carts::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Scrollbar track background color */
+  }
+  
+  .carts::-webkit-scrollbar-thumb {
+    background-color: #E31E24; /* Scrollbar thumb color */
+    border-radius: 10px; /* Rounded scrollbar */
+  }
+  
+  .note {
+    margin: 10px 0;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 500;
+    /* text-align: center; */
+    font-size: 14px;
+    color: #E31E24; /* Subtle font color */
+  }
+  
+  .heroSecButton {
+    width: 100%;
+    height: 49px;
+    border-radius: 18px;
+    color: #A0A0A0;
+    outline: 1px solid #A0A0A0;
+    border: none;
+    background-color: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 15.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .heroSecButton:hover {
+    color: #E31E24;
+    outline: 1px solid #E31E24;
+  }
+  
+  /* Calendar Styling */
+  
+  .calender ,.time{
+  
+    max-height: 405px;
+  }
+  
+  .eventTimeAndDate{
+    max-width: 852px;
+    max-height: 453px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* justify-content: center;
+    text-align: center; */
+    border-radius: 18px;
+    background-color: #FFF3F5;
+  padding: 24px 48px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  
+  .calendarHeading {
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 600;
+  
+    color: #E31E24;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  /* Highlight Selected Dates */
+  .selectedDate {
+    background: #E31E24;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+  
+  /* Crossed Out Booked Dates */
+  /* .bookedDate {
+    background: #E31E24;
+    color: white;
+    text-decoration: line-through;
+    border-radius: 50%;
+  } */
+  
+  
+  .bookedDate {
+    position: relative;
+    background: #E31E24;
+    color: #E31E24;
+    border-radius: 50%;
+  }
+  
+  .bookedDate::before, .bookedDate::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%; /* Adjust width for the size of the cross */
+    height: 2px; /* Thickness of the cross line */
+    background: #E31E24; /* Cross color */
+    transform-origin: center;
+    border-radius: 2px;
+  }
+  
+  .bookedDate::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .bookedDate::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  
+  
+  /* Time Section Styling */
+  .timeSection , .time{
+    width: 367px;
+   padding-bottom: 10px;
+  }
+  
+  .timeHeading {
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #E31E24;
+    text-align: center;
+  }
+  
+  .timeOptions {
+    display: flex;
+    flex-direction: column;
+  width: 100%;
+    gap: 16px;
+   
+  }
+  
+  .timeOption {
+    display: flex;
+    height: 68px;
+   color: #030712;
+   font-family: 'Inter';
+   font-size: 20px;
+   font-weight: 500;
+    display: flex;
+   
+    align-items: center;
+    justify-content:flex-start;
+    padding-left: 20px;
+    gap: 10px;
+    
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  .timeOption input[type="checkbox"] {
+    width: 18px;
+    
+    height: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    accent-color: red;
+  
+  }
+  
+  .timeOption span {
+    font-size: 1em;
+    color: #555;
+  }
+  
+  .comments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  margin: 24px 0;
+    background-color: #FFF3F5;
+    height: 270px;
+    max-width: 852px;
+    border-radius: 18px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .commentHeading{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Inter';
+   font-size: 20px;
+   font-weight: 600;
+    color: #E31E24;
+    padding: 12px 48px;
+  }
+  
+  .textarea{
+    border-radius: 8px;
+    width: 756px;
+    height: 138px;
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .heroSec,
+    .calendarHeading,
+    .carts {
+        max-width: 100%;
+        padding: 10px;
+    }
+  
+    .heroSecButton {
+        font-size: 14px;
+        height: 45px;
+    }
+  
+    .carts {
+        gap: 12px; /* Reduce spacing for smaller screens */
+    }
+  }
+  

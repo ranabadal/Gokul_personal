@@ -1,0 +1,122 @@
+.container {
+    width: 100%;
+    height: 42.375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcontainer {
+    height: 36.375rem; 
+    display: flex;
+    gap: 2.125rem; 
+}
+.subcontainercard1 {
+    position: relative;
+    width: 23.25rem; 
+    height: 36.375rem; 
+    border-radius: 1.25rem; 
+    border: 0.08875rem solid #A0A0A0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem; 
+    background: url(./assets/cardImage.png);
+    background-size: cover;
+}
+.subcontainercard2 {
+    position: relative;
+    width: 23.25rem; 
+    height: 36.375rem; 
+    border-radius: 1.25rem; 
+    border: 0.08875rem solid #A0A0A0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem; 
+    background: url(./assets/cardImage2.png);
+    background-size: cover;
+}
+.subcontainercard3 {
+    position: relative;
+    width: 23.25rem; 
+    height: 36.375rem; 
+    border-radius: 1.25rem; 
+    border: 0.08875rem solid #A0A0A0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem; 
+    background: url(./assets/cardImage3.png);
+    background-size: cover;
+}
+
+.subcontainercard1:hover .subcontainercardorder,
+.subcontainercard1:hover .subcontainercardtitle {
+    display: block;
+}
+.subcontainercard2:hover .subcontainercardorder,
+.subcontainercard2:hover .subcontainercardtitle {
+    display: block;
+}
+.subcontainercard3:hover .subcontainercardorder,
+.subcontainercard3:hover .subcontainercardtitle {
+    display: block;
+}
+.subcontainercard1:hover .subcontainercardimg{
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcontainercard2:hover .subcontainercardimg{
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcontainercard3:hover .subcontainercardimg{
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcontainercard1:hover {
+    background: linear-gradient(rgba(227, 30, 36, 0.6), rgba(227, 30, 36, 0.6)), 
+    url(./assets/cardImage.png);
+    background-size: cover;
+}
+.subcontainercard2:hover {
+    background: linear-gradient(rgba(227, 30, 36, 0.6), rgba(227, 30, 36, 0.6)), 
+    url(./assets/cardImage2.png);
+    background-size: cover;
+}
+.subcontainercard3:hover {
+    background: linear-gradient(rgba(227, 30, 36, 0.6), rgba(227, 30, 36, 0.6)), 
+    url(./assets/cardImage3.png);
+    background-size: cover;
+}
+.subcontainercardorder {
+    position: absolute;
+    top: 11.276rem; 
+    font-weight: 600;
+    font-size: 2rem; 
+    color: #FFFFFF;
+    display: none;
+}
+.subcontainercardtitle {
+    position: absolute;
+    top: 14.464rem; 
+    font-weight: 600;
+    font-size: 3rem; 
+    color: #FFFFFF;
+    display: none;
+}
+.subcontainercardimg {
+    position: absolute;
+    top: 18.839rem; 
+    width: 6.26rem; 
+    height: 6.26rem; 
+    border-radius: 3.13rem; 
+    background-color: #FFFFFF;
+    display: none;
+}

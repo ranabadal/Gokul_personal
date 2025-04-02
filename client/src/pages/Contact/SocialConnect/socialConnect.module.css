@@ -1,0 +1,119 @@
+.container {
+    width: 100%;
+    
+}
+
+.upperDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 48px 96px;
+    padding-top: 20px;
+}
+
+.line {
+    width: 470px;
+}
+
+.upperDivText {
+    font-family: 'Inter';
+    font-size: 32px;
+    font-weight: 500;
+    color: #E31E24;
+}
+
+.lowerDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 96px;
+    padding-bottom: 48px;
+}
+
+.icons {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.icons:hover {
+    transform: translateY(-10px);
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .upperDiv {
+        flex-direction: column;
+        padding: 24px 48px;
+    }
+
+    .line {
+        width: 100%;
+    }
+
+    .upperDivText {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .lowerDiv {
+        flex-direction: row;
+        padding: 0 48px;
+        padding-bottom: 24px;
+    }
+
+    .icons {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .upperDiv {
+        padding: 16px 24px;
+    }
+
+    .upperDivText {
+        font-size: 24px;
+    }
+
+    .lowerDiv {
+        padding: 0 24px;
+        padding-bottom: 16px;
+    }
+
+    .icons {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .upperDiv {
+        gap: 20px;
+        padding: 14px 12px;
+    }
+
+    .upperDivText {
+        font-size: 20px;
+    }
+
+    .lowerDiv {
+        padding: 0 16px;
+        padding-bottom: 8px;
+    }
+
+    .icons {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 8px;
+    }
+}
