@@ -1,0 +1,156 @@
+.wishlistContainer {
+  width: 741px;
+  height: 581.730712890625px;
+  margin: 20px 0;
+  /* padding: 20px; */
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.wishlistHeader {
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content:space-between; /* Align title to left, button to right */
+  width: 100%;
+}
+.addAllButton {
+  margin-left: auto; /* Ensures it moves to the right */
+}
+
+.wishlistTitle {
+  font-family: 'Madimi One';
+  font-size: 32px;
+  font-weight: 700;
+  color: red;
+}
+
+.addAllButton {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.totalPrice {
+  padding: 10px 12px;
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 15px;
+}
+
+.wishlistItemsContainer {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.wishlistItem {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.productImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+.productDetails {
+  flex: 1;
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.productPrice {
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.productRating {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.reviewCount {
+  color: gray;
+  margin-left: 5px;
+}
+
+.productActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button {
+  background-color: red;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+.button:hover {
+  background-color: darkred;
+}
+.deleteIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;  /* Adjust spacing from the wishlist items */
+  gap: 8px; 
+}
+
+.pageButton {
+  border: 1px solid red;
+  background: white;
+  color: red;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.pageButtonActive {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+.deleteIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}

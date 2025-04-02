@@ -1,0 +1,109 @@
+.bulk_order_container {
+    
+    /* height: 17.25rem;  */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.906rem; 
+    background-color: #E31E24;
+    width: 941px;
+   height: 201px;
+    gap: 14.58px;
+
+  margin-left: 10%;
+  margin-right: 10%;
+ 
+}
+
+.bulk_order_container_left {
+    width: 65%;
+    height: 17.25rem; /* 276px → 17.25rem */
+    padding: 2rem 2rem 2rem 6rem; /* 32px 32px 32px 96px → 2rem 2rem 2rem 6rem */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem; /* 12px → 0.75rem */
+    
+
+}
+
+.bulk_order_container_left_heading {
+    
+    font-weight: 400;
+    font-size: 3rem; /* 48px → 3rem */
+    color: #FFFFFF;
+    font-family: Madimi One;
+   font-weight: 400;
+   font-size: 29.16px;
+   line-height: 38.49px;
+   letter-spacing: 0%;
+   width: 501.9458312988281px;
+height: 38px;
+
+
+}
+
+/* .bulk_order_container_right {
+    width: 35%;
+    height: 17.25rem;
+   
+    margin-right: 50px;
+} */
+.bulk_order_container_right {
+    width: 35%;
+    height: 201px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.bulk_order_container_left_btn {
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 372px;
+height: 43.73749923706055px;
+gap: 15px;
+
+}
+
+.bulk_order_container_left_btn_left button, 
+.bulk_order_container_left_btn_right button {
+   
+    border-radius: 1.125rem; /* 18px → 1.125rem */
+    font-weight: 700;
+    color: #FFFFFF;
+    font-size: 1.37rem; /* 21.87px → 1.37rem */
+    border: 0.125rem solid #FFFFFF; /* 2px → 0.125rem */
+    background-color: #E31E24;
+    width: 178.5px;    
+    height: 43.73749923706055px;
+    gap: 14.58px;
+
+}
+
+.bulk_order_container_left_btn_left button:hover, 
+.bulk_order_container_left_btn_right button:hover {
+    background-color: #FFFFFF;
+    color: #E31E24;
+    border: 0.125rem solid #E31E24; /* 2px → 0.125rem */
+}
+
+/* .bulk_order_container_right img {
+    
+    width: 337px;
+    height: 201px;
+    margin-top: 10px;
+    
+
+} */
+.bulk_order_container_right img {
+    width: 100%;
+    height: auto;
+    max-width: 337px;
+    max-height: 201px;
+    object-fit: contain; /* Ensures the full image is visible */
+    margin-top: 10px;
+}

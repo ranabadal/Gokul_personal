@@ -1,0 +1,125 @@
+.container {
+  padding: 16px;
+  background-color: #fff0f0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 259px;
+  height: 768.4px;
+  gap: 25px;
+  border-radius: 18px;
+  padding: 24px;
+  float: right;
+  margin-right: 90px;
+}
+
+.priceInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.inputField {
+  width: 70px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Styling for the Minus (-) Sign */
+.minusSign {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+.priceSlider {
+  margin: 10px 0;
+  width: 180px;
+  height: 3px;
+  border-radius: 10px;
+  background-color: black; /* Changed to black */
+  cursor: pointer;
+}
+
+.priceFilterContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priceText {
+  font-size: 14px;
+  color: black;
+}
+
+.filterButton {
+  background-color: #e63946;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filterButton:hover {
+  background-color: #b52a34;
+}
+
+/* Categories */
+.categoryContainer {
+  margin-top: 12px;
+}
+
+.category-title {
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 0;
+}
+
+/* Checkbox Styling - Turns red when checked */
+.customCheckbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* When checked, the checkbox turns red */
+.customCheckbox:checked {
+  background-color: red;
+  border-color: red;
+}
+.customCheckbox:checked::before {
+  content: "✔";
+  font-size: 14px;
+  
+  color: white; 
+  position: absolute;
+  top: -2px;
+  left: 2px;
+}
+
+.redHighlight {
+  color: #e63946;
+  font-weight: bold;
+}
+
+.normalLabel {
+  color: black;
+}

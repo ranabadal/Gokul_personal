@@ -1,0 +1,112 @@
+import React, { useState, useEffect } from "react";
+import styles from "./bulkOrderHistory.module.css";
+import OrderDetailsModal from "./OrderDetailsModal/orderDetailsModal"; // Modal Component
+
+const BulkOrderHistory = () => {
+  const [orders, setOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  // Fetch user's bulk order history
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem("jwtToken");
+        const response = await fetch("http://localhost:8080/api/bulkOrderQueries/user", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setOrders(data);
+        } else {
+          setErrorMessage("Failed to fetch bulk orders.");
+        }
+      } catch (error) {
+        console.error("Error fetching bulk orders:", error);
+        setErrorMessage("An error occurred while fetching bulk orders.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  // Handle cancel order
+  const handleCancelOrder = async (orderId) => {
+    if (!window.confirm("Are you sure you want to cancel this order?")) return;
+
+    try {
+      const token = localStorage.getItem("jwtToken");
+      const response = await fetch(`http://localhost:8080/api/user/bulkOrders/${orderId}/cancel`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("Order canceled successfully!");
+        setOrders(orders.filter((order) => order._id !== orderId));
+      } else {
+        alert("Failed to cancel order.");
+      }
+    } catch (error) {
+      console.error("Error canceling order:", error);
+      alert("An error occurred. Please try again later.");
+    }
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (errorMessage) return <p className={styles.error}>{errorMessage}</p>;
+
+  return (
+    <div className={styles.orderContainer}>
+      <h2>Bulk Order History</h2>
+      <table className={styles.orderTable}>
+        <thead>
+          <tr>
+            <th>Box Name</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Total Cost</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order) => (
+            <tr key={order._id}>
+              <td>{order.boxName || "N/A"}</td>
+              <td>{order.productName || "N/A"}</td>
+              <td>{order.quantity || "N/A"}</td>
+              <td>₹{order.totalCost || 0}</td>
+              <td>{order.status || "Pending"}</td>
+              <td>
+                <button className={styles.cancel} onClick={() => handleCancelOrder(order._id)}>
+                  Cancel
+                </button>
+                <button className={styles.view} onClick={() => setSelectedOrder(order)}>
+                  View Details
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Order Details Modal */}
+      {selectedOrder && (
+        <OrderDetailsModal order={selectedOrder} onClose={() => setSelectedOrder(null)} />
+      )}
+    </div>
+  );
+};
+
+export default BulkOrderHistory;

@@ -1,0 +1,11 @@
+.Filter{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+} 
+ .mainContaine{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+} 

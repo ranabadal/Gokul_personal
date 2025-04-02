@@ -1,0 +1,106 @@
+.wishlistContainer {
+  width: 430px;
+height: 581px;
+border-radius: 24px;
+border-width: 1px;
+padding-top: 48px;
+padding-right: 24px;
+padding-bottom: 48px;
+/* padding-left: 24px; */
+    background-color: red;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .dealSection h2 {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 45px;
+  }
+  
+  .timer {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 15px;
+  }
+  
+  .timer span {
+    background: white;
+    color: red;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .checkoutBtn {
+    margin: 10px 0;
+    background: white;
+    color: red;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .checkoutBtn:hover {
+    background: #f8d7da;
+  }
+  
+  .productCard {
+    display: flex;
+    gap:20px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    margin-top: 20px;
+  }
+  
+  .productImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .productDetails {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex: 1;
+    margin-left: 10px;
+  }
+  
+  .productName {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .productPrice {
+    color: #ff5733;
+    font-size: 1.2rem;
+  }
+  
+  .originalPrice {
+    text-decoration: line-through;
+    color: #999;
+  }
+  
+  .discount {
+    background-color: red;
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+  }
+  

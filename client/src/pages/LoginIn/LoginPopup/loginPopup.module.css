@@ -1,0 +1,93 @@
+.popupContainer {
+  width: 635.04px;
+  height: 690px;
+  background-color: #FFF3F5;
+  border-radius: 10px;
+  padding: 20px;
+  margin: auto;
+  margin-top: 5%;
+  outline: none;
+  border-radius: 18px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.activeTab {
+  color: #E31E24 !important;
+  font-weight: 500 !important;
+  font-size: 24px;
+}
+
+.inactiveTab {
+  color: #888 !important;
+  font-size: 24px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 20px 0;
+}
+
+.inputField {
+  width: 540px !important;
+  height: 72px !important;
+  margin-bottom: 10px !important;
+}
+
+.forgotPassword {
+  font-size: 20px;
+  color: #555;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-right: 15px;
+  font-weight: 500px;
+}
+
+.loginButton, .signupButton {
+  width: 539.04px !important;
+  height: 72px !important;
+  border-radius: 70px !important;
+  background-color: #E31E24 !important;
+  color: white !important;
+  font-size: 16px !important;
+  margin-top: 10px !important;
+}
+
+.orText {
+  margin: 20px 0;
+  color: #666;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.socialButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.socialButton {
+  width: 200px !important;
+  height: 50px !important;
+  border: 1px solid #ccc !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+}
+
+.icon {
+  margin-right: 10px;
+}
