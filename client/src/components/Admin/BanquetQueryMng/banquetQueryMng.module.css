@@ -1,0 +1,85 @@
+.queryContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 30px auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .queryContainer h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .queryTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  .queryTable th,
+  .queryTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .queryTable th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .queryTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .queryTable tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  
+  .queryTable tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  .first {
+    background-color: #28a745; /* Approve */
+    color: white;
+  }
+  
+ .second {
+    background-color: #dc3545; /* Delete */
+    color: white;
+  }
+  
+  .third {
+    background-color: #007bff; /* Edit */
+    color: white;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }

@@ -1,0 +1,53 @@
+.deals_timer_container {
+    width: 100%;
+    height: 23rem; /* 368px → 23rem */
+    border: 0.0625rem solid red; /* 1px → 0.0625rem */
+    padding: 3rem 6rem; /* 48px 96px → 3rem 6rem */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #E31E24;
+}
+
+.deals_timer_container_left {
+    width: 30.13rem; /* 482px → 30.13rem */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.deals_timer_heading {
+    width: 100%;
+    height: 2.75rem; /* 44px → 2.75rem */
+    font-weight: 600;
+    font-size: 2.29rem; /* 36.67px → 2.29rem */
+    line-height: 2.75rem; /* 44px → 2.75rem */
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.deals_timer {
+    width: 30.13rem; /* 482px → 30.13rem */
+    height: 4.09rem; /* 65.5px → 4.09rem */
+}
+
+.deals_timer_button button {
+    width: 30.13rem; /* 482px → 30.13rem */
+    height: 5.38rem; /* 86px → 5.38rem */
+    background-color: #FFFFFF;
+    border-radius: 1.125rem; /* 18px → 1.125rem */
+    padding: 0.447rem 7.16rem; /* 7.16px 114.57px → 0.447rem 7.16rem */
+    font-weight: 700;
+    font-size: 1.79rem; /* 28.64px → 1.79rem */
+    line-height: 2.13rem; /* 34px → 2.13rem */
+    color: #E31E24;
+    border: none;
+}
+
+.deals_timer_container_right_top, 
+.deals_timer_container_right_bottom {
+    display: flex;
+    gap: 3rem; /* 48px → 3rem */
+    margin-top: 1.12rem; /* 17.86px → 1.12rem */
+}

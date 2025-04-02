@@ -1,0 +1,179 @@
+.usersManagement {
+  padding: 20px;
+  background-color: #f0f8ff; /* Alice Blue */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  overflow-x: auto; /* Prevents table from breaking */
+}
+
+.usersManagement:hover {
+  background-color: #e6f7ff; /* Light Cyan */
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #4682b4; /* Steel Blue */
+  font-size: 1.5rem;
+}
+
+/* Wrap header content for mobile */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+}
+
+/* Table Container for Responsive Scrolling */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto; /* Enables horizontal scrolling */
+}
+
+/* Users Table */
+.usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in;
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.usersTable th,
+.usersTable td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.usersTable th {
+  background-color: #5f9ea0; /* Cadet Blue */
+  color: white;
+}
+
+.usersTable tr:nth-child(even) {
+  background-color: #f0f8ff; /* Alice Blue */
+}
+
+.usersTable tr:hover {
+  background-color: #e6f7ff; /* Light Cyan */
+}
+
+/* Input Fields */
+.input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Buttons */
+.saveButton, .cancelButton, .editButton, .deleteButton {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.saveButton, .cancelButton, .editButton, .deleteButton:hover {
+  transform: translateY(-2px);
+}
+
+.editButton {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.deleteButton {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.saveButton {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.cancelButton {
+  background-color: #e0e0e0; /* Light Gray */
+  color: black;
+}
+
+/* 📌 RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .usersManagement {
+    padding: 15px;
+  }
+
+  .usersTable th,
+  .usersTable td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .saveButton, .cancelButton, .editButton, .deleteButton {
+    padding: 7px 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .usersManagement {
+    padding: 10px;
+  }
+
+  .usersTable th,
+  .usersTable td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  /* Stack buttons below table on mobile */
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .saveButton, .cancelButton, .editButton, .deleteButton {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    font-size: 1.2rem;
+  }
+
+  .usersTable {
+    font-size: 12px;
+  }
+
+  .saveButton, .cancelButton, .editButton, .deleteButton {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  /* Make table scrollable on small screens */
+  .tableContainer {
+    overflow-x: auto;
+    width: 100%;
+  }
+}

@@ -1,0 +1,132 @@
+.cartContainer {
+    width: 852px;
+    height: auto;
+    padding: 24px;
+    border-radius: 24px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+
+
+.cartTitle {
+    font-family: Madimi One;
+    font-weight: 400;
+    font-size: 48px;
+    font-weight: bold;
+    color: #E31E24;
+    margin-bottom: 12px;
+}
+
+.cartTotal {
+    font-size: 18px;
+    font-weight: 500;
+    color: #E31E24;
+    margin-bottom: 16px;
+}
+
+
+
+
+.cartItems {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cartItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.checkbox {
+    transform: scale(1.2);
+    margin-right: 12px;
+}
+
+.productImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.productDetails {
+    flex: 1;
+    margin-left: 12px;
+}
+
+.productDetails h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.productPrice {
+    font-size: 16px;
+    color: #333;
+    margin: 4px 0;
+}
+
+.productRating {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.productActions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.productActionsnumb {
+    width: 58px;
+    height: 43px;
+    background-color: #FFE9E9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantityBtn {
+    color: #E31E24;
+    background-color: white;
+    border: 1px solid #E31E24;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.quantityBtn:hover {
+    background-color: #e63946;
+    color: white;
+}
+
+.count {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.deleteIcon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.deleteIcon:hover {
+    opacity: 0.7;
+}

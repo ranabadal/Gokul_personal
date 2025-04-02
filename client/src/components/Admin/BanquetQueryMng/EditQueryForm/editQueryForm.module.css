@@ -1,0 +1,82 @@
+.editForm {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .editForm h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .editForm label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin: 10px 0 5px;
+  }
+  
+  .editForm input,
+  .editForm textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .editForm textarea {
+    resize: vertical;
+  }
+  
+  button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .sec:hover , .first:hover{
+    opacity: 0.9;
+  }
+  
+ .first {
+    background-color: #28a745; /* Save */
+    color: white;
+  }
+  
+ .sec {
+    background-color: #dc3545; /* Cancel */
+    color: white;
+    margin-left: 10px;
+  }
+
+  .menuPreferenceItem {
+    margin-bottom: 10px;
+  }
+  
+  .menuPreferenceItem label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .menuPreferenceItem textarea {
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    resize: vertical;
+  }
