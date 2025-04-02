@@ -1,0 +1,225 @@
+.header {
+    background-color: #E31E24;
+    height: 7.625rem; /* 122px = 7.625rem */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.625rem 1.5rem; /* 10px 24px = 0.625rem 1.5rem */
+    align-items: center;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 0.77rem; /* 12.32px = 0.77rem */
+    height: 3.6875rem; /* 59px = 3.6875rem */
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.left_logo {
+    width: 9.75rem; /* 156px = 9.75rem */
+    height: 5.75rem; /* 92px = 5.75rem */
+    background-color: #E31E24;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left_evara {
+    width: 6.75rem; /* 108px = 6.75rem */
+    height: 3.687rem; /* 59px = 3.687rem */
+    font-weight: 400;
+    font-size: 3.083rem; /* 49.33px = 3.083rem */
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+}
+
+.middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    /* width: 30.68rem; */
+    height: 1.375rem; /* 22px = 1.375rem */
+    gap: 3.6875rem; /* 59px = 3.6875rem */
+    font-weight: 700;
+    font-size: 1.125rem; /* 18px = 1.125rem */
+    /* transition: color 0.3s ease-in-out;
+    position: relative; */
+  
+}
+
+.middle span {
+    transition: color 0.3s ease-in-out;
+    position: relative;
+}
+
+.right_user{
+    transition: color 0.3s ease-in-out;
+    position: relative;
+}
+
+.middle span::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+  }
+
+  .right_user::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+  }
+
+.middle span:hover {
+    color: #ffff;
+    cursor: pointer;
+}
+
+
+.right_user:hover{
+    color: #ffff;
+    cursor: pointer;
+}
+.middle span:hover::after {
+    width: 100%;
+    left: 0;
+  }
+
+  .right_user:hover::after {
+    width: 100%;
+    left: 0;
+  }
+
+.middle_todays_deals:hover,
+.middle_about:hover,
+.middle_products:hover,
+.about:hover,
+.contact:hover {
+    cursor: pointer;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    gap: 1.5rem; /* 24px = 1.5rem */
+}
+
+.right_cart,
+.right_heart,
+.right_image,
+.right_user,
+.right_downarrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right_cart:hover,
+.right_heart:hover,
+.right_image:hover,
+.right_user:hover,
+.right_downarrow:hover {
+    cursor: pointer;
+}
+
+.right_cart {
+    width: 1.75rem; /* 28px = 1.75rem */
+    height: 1.75rem; /* 28px = 1.75rem */
+}
+
+.right_heart {
+    width: 1.63rem; /* 26.03px = 1.63rem */
+    height: 1.46rem; /* 23.44px = 1.46rem */
+}
+
+.right_image {
+    width: 2.3125rem; /* 37px = 2.3125rem */
+    height: 2.3125rem; /* 37px = 2.3125rem */
+    border-radius: 50%;
+}
+
+.profilePicc{
+    width: 2.3125rem; /* 37px = 2.3125rem */
+    height: 2.3125rem; /* 37px = 2.3125rem */
+    border-radius: 50%;
+}
+
+.right_user {
+    /* width: 5.9375rem; 
+    height: 1.1875rem; */
+    font-weight: 500;
+    font-size: 1.5rem; /* 16px = 1rem */
+    color: #FFFFFF;
+}
+
+
+
+.logoutIcon{
+    width: 2.3125rem; /* 37px = 2.3125rem */
+    height: 2.3125rem; /* 37px = 2.3125rem */
+}
+
+.right_cart img,
+.right_heart img,
+.right_image img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.right_cart img:hover,
+.right_heart img:hover,
+.right_image img:hover {
+  transform: translateY(-5px);
+}
+
+.right_image,
+.right_user,
+.right_downarrow,
+.right_logout {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.right_logout img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.right_logout:hover img {
+  transform: scale(1.1);
+}
+
+.logout_text {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffff;
+  color: #E31E24;
+  padding: 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.right_logout:hover .logout_text {
+    display: block;
+  }

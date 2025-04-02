@@ -1,0 +1,214 @@
+.hall_details {
+  width: 100%;
+  height: 530px;
+  padding: 3rem 6rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-direction: row-reverse;
+  overflow: hidden;
+}
+
+/* Left Section */
+.hall_details_left {
+  width: 37.5rem; 
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hall_details_left_top {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Title and Heart Icon */
+.hall_details_left_top_line1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hall_details_left_top_left_heading {
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: #4B4B4B;
+}
+
+.hall_details_left_top__right img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* Price and Rating */
+.hall_details_left_top_line2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hall_details_left_top_price {
+  font-weight: 700;
+  font-size: 32px;
+  color: #E31E24;
+}
+
+.hall_details_left_rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hall_details_left_rating_star img {
+  width: 20px;
+  height: 20px;
+}
+
+.hall_details_left_rating_number {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #4B4B4B;
+}
+
+/* Seating and Plate Price */
+.hall_details_left_top_seating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hall_details_left_top_seating_left,
+.hall_details_left_top_seating_right {
+  font-weight: 700;
+  font-size: 20px;
+  color: #4B4B4B;
+}
+
+/* Description */
+.hall_details_left_descption {
+  font-weight: 500;
+  font-size: 16px;
+  text-align: justify;
+  color: #4B4B4B;
+}
+
+/* Image Cards */
+.hall_details_left_cards {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hall_details_left_cards_left {
+  width: 108px;
+  height: 108px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border 0.3s ease;
+  position: relative;
+}
+
+.hall_details_left_cards_left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Highlight Selected Image */
+.hall_details_left_cards_left.selected {
+  border: 2px solid #E31E24;
+  border-radius: 16.46px;
+}
+
+.more_images_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-radius: 10px;
+}
+
+/* Right Section */
+.hall_details_right {
+  width: 600px;
+  height: 431px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hall_details_right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 2px solid transparent;
+}
+
+/* Highlight Selected Image */
+.hall_details_right img.selected {
+  border-color: #E31E24;
+}
+
+/* Check Availability Button */
+.hall_details_left_bottom_box {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.hall_details_left_bottom_box_button {
+  width: 100%;
+  height: 50px;
+  background-color: #E31E24;
+  border-radius: 1.125rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.hall_details_left_bottom_box_button:hover {
+  background-color: #FF0000;
+  color: #FFF3F5;
+}
+
+
+/* Expanded Hall Details */
+.hall_details.expanded {
+  height: auto; /* Allow height to expand dynamically */
+}
+
+/* Extra Images Row */
+.extra_images {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Cards Styling (Reused) */
+.extra_images .hall_details_left_cards_left {
+  width: 108px;
+  height: 108px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+.extra_images .hall_details_left_cards_left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

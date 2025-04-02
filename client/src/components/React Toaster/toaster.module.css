@@ -1,0 +1,17 @@
+.toastContainer {
+    width: max-content !important;
+    min-width: 194px;
+    /* background-color: white; */
+    border-radius: 8px;
+    /* border: 1px solid #D8D8D8; */
+    display: flex;
+    /* padding: 22px 17px; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+   
+   
+   
+   
+ 

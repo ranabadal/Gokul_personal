@@ -1,0 +1,221 @@
+.hero_section {
+    width: 100%;
+    height: 41.56rem;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.875rem;
+    position: relative;
+}
+
+.hero_section_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.hero_section_bttn_left,
+.hero_section_bttn_right {
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 2px solid #E31E24;
+    background: white;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #E31E24;
+    text-align: center;
+    align-content: center;
+
+}
+
+
+.hero_section_bttn_left span:hover,
+.hero_section_bttn_right span:hover {
+    background-color: #E31E24;
+    color: white;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero_section_left {
+    width: 29.99rem;
+    height: 35.56rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero_section_left_div_1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.51rem;
+    width: 100%;
+    height: 10.375rem;
+    padding: 2.027rem;
+
+}
+
+.hero_section_left_top {
+    font-weight: 600;
+    font-size: 1.75rem;
+    color: #4B4B4B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero_section_left_bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 900;
+    font-size: 1.25rem;
+}
+
+.hero_section_left_bottom_box {
+    width: 3.125rem;
+    height: 3.125rem;
+    background-color: #FF364D;
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+}
+
+.hero_section_right_container {
+    width: 40.93rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.hero_section_right_title {
+    font-size: 5.625rem;
+    font-weight: 400;
+    color: #E31E24;
+}
+
+.hero_section_right_description {
+    font-size: 1.625rem;
+    color: #4B4B4B;
+}
+
+.hero_section_right_buttons {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+    left: 15rem;
+    bottom: 4rem;
+    justify-content: center; /* Center the buttons horizontally */
+}
+
+.order_button,
+.explore_button {
+    width: 18rem;
+    height: 4.5rem;
+    border-radius: 1.125rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.explore_button, .order_button {
+    background: white;
+    border: 1px solid #E31E24;
+    color: #E31E24;
+}
+
+.explore_button:hover, .order_button:hover {
+    background-color: #E31E24;
+    color: white;
+}
+
+.hero_section_bottom_dots {
+    display: flex;
+    justify-content: center;
+    gap: 1.125rem;
+    margin-top: 1.25rem;
+}
+
+.hero_section_bottom_dot {
+    width: 0.881rem;
+    height: 0.881rem;
+    background-color: #FFB7B7;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.hero_section_bottom_dot:hover {
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: #E31E24;
+}
+
+@media (max-width: 440px) {
+    .hero_section{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        height: 100%;
+    }
+
+    .hero_section_bttn_left,
+    .hero_section_bttn_right {
+        display: none;
+    }
+
+    .hero_section_left {
+        width: 100%;
+        height: 100%;
+    }
+
+    .hero_section_left_div_1 {
+        width: 100%;
+        height: 100%;
+        padding: 1.5rem;
+    }
+
+    .hero_section_right_container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero_section_right_title {
+        font-size: 3.5rem;
+        text-align: center; 
+
+    }
+
+    .hero_section_right_description {
+        font-size: 1.125rem;
+        text-align: justify;
+    }
+
+    .hero_section_right_buttons {
+        gap: 1.5rem;
+        width: 100%;
+    }
+    
+}

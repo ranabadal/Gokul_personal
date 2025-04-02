@@ -1,0 +1,68 @@
+.searchBar{
+    width: 100%;
+    height: 10.625rem; /* 10.62rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28.125rem; /* 4.5rem */
+}
+
+.searchBarTitle{
+    width: 18.5rem; /* 18.56px / 16 */
+    height: 3rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.searchBarTitle1{
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: #4B4B4B;
+}
+
+.searchBarTitle2{
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: #FF364D;
+}
+
+.searchBarSpace{
+    width: 60.9375rem; /* 60.93px / 16 */
+    height: 4.625rem; /* 4.62px / 16 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1.125rem; /* 1.12px / 16 */
+    background-color: #F5F7F9;
+    padding: 0rem 0.6875rem 0rem 1.25rem; /* 0.68px / 16, 1.25px / 16 */
+}
+
+.searchBarSpaceText{
+    width: 11.6875rem; /* 11.75px / 16 */
+    height: 1.5rem;
+    font-size: 1.25rem; /* 1.25px / 16 */
+    font-weight: 400;
+    color: #4B4B4B;
+}
+
+.searchBarSpaceBtn{
+    width: 9.6875rem; /* 9.81px / 16 */
+    height: 3.25rem;
+    background-image: linear-gradient(to top,#FF364D,#B22636,#99202E);
+    border-radius: 0.9375rem; /* 0.93px / 16 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBarSpaceBtn span{
+    width: 4.1875rem; /* 4.18px / 16 */
+    height: 1.1875rem; /* 1.18px / 16 */
+    font-weight: 600;
+    font-size: 1rem;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

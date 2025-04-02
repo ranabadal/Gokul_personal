@@ -1,0 +1,132 @@
+.inputField {
+  height: 50px;
+  position: relative;
+}
+
+.input {
+  font-size: 20px;
+  color: #E31E24;
+  font-weight: 700;
+  height: 55px;
+  border-radius: 70px;
+  padding-left: 60px;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #FFE9E9;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  position: absolute;
+  bottom: -25px;
+  left: 10px;
+}
+.noIcon {
+  padding-left: 20px !important;
+}
+
+.input::placeholder {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 20px;
+  color: #4B4B4B;
+  padding-right: 40px;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 28px;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #E31E24;
+}
+
+@media (max-width: 1024px) {
+  .input {
+    height: 40px;
+  }
+
+  .inputField {
+    height: 50px;
+    margin: 0px 0;
+  }
+
+  .inputIcon {
+    left: 12px;
+    top: 34%;
+    width: 28px;
+    height: 24px;
+  }
+
+  .eyeIcon {
+    top: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .input {
+    height: 35px;
+  }
+
+  .inputField {
+    height: 40px;
+    margin: 5px 0;
+  }
+
+  .inputIcon {
+    left: 12px;
+    top: 40%;
+    width: 25px;
+    height: 20px;
+  }
+
+  .eyeIcon {
+    top: 40%;
+    right: 20px;
+    color: #005026;
+  }
+}
+
+@media (max-width: 480px) {
+  .input {
+    padding-left: 45px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .inputField {
+    height: 25px;
+    margin: 12px 0;
+  }
+
+  .inputIcon {
+    left: 10px;
+    top: 22%;
+    width: 26px;
+    height: 18px;
+  }
+
+  .input::placeholder {
+    font-size: 14px;
+    padding-right: 20px;
+  }
+
+  .eyeIcon {
+    top: 55%;
+    right: 10px;
+    color: #005026;
+  }
+}

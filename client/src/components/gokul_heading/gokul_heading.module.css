@@ -1,0 +1,16 @@
+.gokul_heading {
+    width: 100%;
+    height: 6.25rem; /* 100px → 6.25rem */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #E31E24;
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    /* margin-top: 3rem; 48px → 3rem */
+}
+
+.gokul_heading span {
+    color: #E31E24;
+    font-size: 4rem; /* 64px → 4rem */
+}

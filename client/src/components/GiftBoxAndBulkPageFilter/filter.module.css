@@ -1,0 +1,90 @@
+
+.filters{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 548px;
+    height: 31px;
+}
+
+.filtersection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.filterCards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    font-family: inter;
+    font-weight: 500;
+}
+
+.filterCardschip{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 66px;
+    height: 31px;
+    color: rgba(126, 126, 126, 1);
+    border: 1px solid rgba(189, 159, 255, 1);
+    background-color: rgba(251, 240, 255, 1);
+    border-radius: 8px;
+}
+
+.filterCardschip:hover{
+    border: 1px solid rgba(225, 53, 60, 1);
+    border-radius: 8px;
+    
+}
+.filterCardschip1:hover{
+    border: 1px solid rgba(225, 53, 60, 1);
+    border-radius: 8px;
+}
+.filterCardschip2:hover{
+    border: 1px solid rgba(225, 53, 60, 1);
+    border-radius: 8px;
+}
+.filterCardschip3:hover{
+    border: 1px solid rgba(225, 53, 60, 1);
+    border-radius: 8px;
+}
+
+.filterCardschip1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 137px;
+    height: 31px;
+    color: rgba(126, 126, 126, 1);
+    border: 1px solid rgba(189, 159, 255, 1);
+    background-color: rgba(251, 240, 255, 1);
+    border-radius: 8px; 
+}
+
+.filterCardschip2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 128px;
+    height: 31px;
+    color: rgba(126, 126, 126, 1);
+    border: 1px solid rgba(189, 159, 255, 1);
+    background-color: rgba(251, 240, 255, 1);
+    border-radius: 8px; 
+}
+
+.filterCardschip3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 113px;
+    height: 31px;
+    color: rgba(126, 126, 126, 1);
+    border: 1px solid rgba(189, 159, 255, 1);
+    background-color: rgba(251, 240, 255, 1);
+    border-radius: 8px; 
+}
