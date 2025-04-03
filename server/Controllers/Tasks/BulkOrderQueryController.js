@@ -3,29 +3,35 @@ const User = require("../../Models/Auth/Auth.model"); // Import User model (adju
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
 
-
 const sendConfirmationEmail = async (userEmail, queryDetails) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: "Gmail", // Use Gmail (or other SMTP provider)
+      service: "Gmail",
       auth: {
-        user: process.env.EMAIL_USER, // Email credentials from environment variables
+        user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
 
+    // Format the address properly
+    const formattedAddress = queryDetails.address
+      ? `${queryDetails.address.province || "N/A"}, ${queryDetails.address.city || "N/A"}, 
+         ${queryDetails.address.area || "N/A"}, ${queryDetails.address.landmark || "N/A"}`
+      : "Address not provided";
+
     const mailOptions = {
-      from: process.env.EMAIL_USER, // Sender email
-      to: userEmail, // Recipient email
+      from: process.env.EMAIL_USER,
+      to: userEmail,
       subject: "Order Confirmation - Bulk Order Boxes",
-         text: `Dear ${queryDetails.userName},
+      text: `Dear ${queryDetails.userName},
 
       Thank you for your order! Here are your order details:
+
       Box Name: ${queryDetails.boxName}
       Box Size: ${queryDetails.boxSize}
-      Sweet Selected:  ${queryDetails.productName}
+      Sweet Selected: ${queryDetails.productName}
       Quantity Selected: ${queryDetails.quantity}
-      Address Selected: ${queryDetails.address}
+      Address Selected: ${formattedAddress}
       Total Cost: ₹${queryDetails.totalCost}
 
       We will notify you once your order is processed.
@@ -40,6 +46,54 @@ const sendConfirmationEmail = async (userEmail, queryDetails) => {
     console.error("Error sending email:", error);
   }
 };
+
+const sendAdminNotificationEmail = async (userEmail, subject, queryDetails) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    // Format the address properly
+    const formattedAddress = queryDetails.address
+      ? `${queryDetails.address.province || "N/A"}, ${queryDetails.address.city || "N/A"}, 
+         ${queryDetails.address.area || "N/A"}, ${queryDetails.address.landmark || "N/A"}`
+      : "Address not provided";
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: userEmail,
+      subject: subject,
+      text: `Dear Admin,
+
+       Here are the order details:
+
+      User Name: ${queryDetails.userName}
+      User Number: ${queryDetails.userNumber}
+      User Email: ${queryDetails.userEmail}
+      Box Name: ${queryDetails.boxName}
+      Box Size: ${queryDetails.boxSize}
+      Sweet Selected: ${queryDetails.productName}
+      Quantity Selected: ${queryDetails.quantity}
+      Total Cost: ₹${queryDetails.totalCost}
+
+      To view the order, please log in to the admin panel.
+
+      Best regards,
+      Gokuls`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Confirmation email sent!");
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+};
+
+
 // Create a new bulk order query
 exports.createQuery = async (req, res) => {
   try {
@@ -52,15 +106,16 @@ exports.createQuery = async (req, res) => {
 
     // Assemble query data including user reference
     const queryData = {
-      ...req.body,
-      user: userId, // Store user reference
-    };
+        ...req.body,
+       user: new mongoose.Types.ObjectId(userId), // Converts userId to ObjectId before saving
+             userName: user.name,
+        userNumber: user.number,
+        userEmail: user.email,
+      };
+      console.log("Final Query Data:", queryData); 
 
     const newQuery = new BulkOrderQuery(queryData); // Create a new query
     await newQuery.save();
-
-
-    await sendConfirmationEmail(user.email, "Banquet Query Submitted", queryData);
 
 
     res.status(201).json({
@@ -68,6 +123,26 @@ exports.createQuery = async (req, res) => {
       query: newQuery,
       user: { name: user.name, number: user.number , email: user.email}, // Include user details in response
     });
+
+    await sendAdminNotificationEmail(
+      process.env.ADMIN_EMAIL, // Admin email from environment variables
+     
+      "New Order Arrived - Bulk Order Boxes",
+        queryData,
+     
+
+      
+    );
+
+
+    await sendConfirmationEmail(user.email, queryData);
+
+
+    // res.status(201).json({
+    //   message: "Bulk order query created successfully",
+    //   query: newQuery,
+    //   user: { name: user.name, number: user.number , email: user.email}, // Include user details in response
+    // });
   } catch (error) {
     console.error("Error creating query:", error.message);
     res.status(500).json({ error: "Failed to create bulk order query" });
@@ -173,7 +248,7 @@ exports.deleteQuery = async (req, res) => {
 };
 
 
-const sendApprovalEmail = async (userEmail, queryDetails) => {
+const sendApprovalEmail = async (userEmail,subject, queryDetails) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
@@ -186,18 +261,17 @@ const sendApprovalEmail = async (userEmail, queryDetails) => {
     const mailOptions = {
       from: process.env.EMAIL_USER, // Sender email
       to: userEmail, // Recipient email
-      subject: "Order Approved - Bulk Order Boxes",
+      subject: subject,
         text: `Dear ${queryDetails.userName},
 
-      Your order has been approved! Here are your order details:
+    Here are your order details:
       Box Name: ${queryDetails.boxName}
       Box Size: ${queryDetails.boxSize}
       Sweet Selected:  ${queryDetails.productName}
       Quantity Selected: ${queryDetails.quantity}
-      Address Selected: ${queryDetails.address}
       Total Cost: ₹${queryDetails.totalCost}
 
-      Thank you for choosing us for your gift box needs.
+      Thank you,
 
       Best regards,
       Gokuls`,
@@ -230,7 +304,7 @@ exports.approveQuery = async (req, res) => {
     try {
       const userEmail = query.user?.email;
       if (userEmail) {
-        await sendApprovalEmail(userEmail,query);
+        await sendApprovalEmail(userEmail,"Order Approved - Bulk Order Boxes",query);
       }
     } catch (emailError) {
       console.error("Error sending approval email:", emailError.message);
@@ -240,5 +314,120 @@ exports.approveQuery = async (req, res) => {
   } catch (error) {
     console.error("Error approving query:", error.message);
     res.status(500).json({ error: "Failed to approve query" });
+  }
+};
+
+
+
+// exports.cancelUserOrder = async (req, res) => {
+//   try {
+//     const orderId = req.params.id; // Extract order ID
+
+//     console.log("Canceling Order ID:", orderId);
+
+//     // Find the order and update its status to "Canceled"
+//     const order = await BulkOrderQuery.findByIdAndUpdate(
+//       orderId,
+//       { status: "Canceled" },
+//       { new: true }
+//     ).populate({
+//       path: "user",
+//       model: "users",
+//       select: "name number email",
+//     });
+
+//     const userEmail = order.user?.email;
+
+//     if (!order) {
+//       return res.status(404).json({ error: "Order not found" });
+//     }
+
+//     res.status(200).json({ message: "Order canceled successfully", order });
+
+//     await sendApprovalEmail(userEmail,"Order Canceled - Bulk Order Boxes",{
+//       boxName: name,
+//       boxSize: size,
+//       productName: product.name,
+//       productPrice: product.price,
+//       quantity: selectedQuantity,
+//       totalCost: basketTotal,
+//     });
+//     await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, "User Cancelled Order - Bulk Order Boxes", {
+//       userName: order.user.name,
+//       userNumber: order.user.number,
+//       userEmail: order.user.email,
+//       boxName: name,
+//       boxSize: size,
+//       productName: product.name,
+//       productPrice: product.price,
+//       quantity: selectedQuantity,
+//       totalCost: basketTotal,
+//     });
+
+
+//   } catch (error) {
+//     console.error("Error canceling order:", error.message);
+//     res.status(500).json({ error: "Failed to cancel order" });
+//   }
+// };
+
+
+exports.cancelUserOrder = async (req, res) => {
+  try {
+    const orderId = req.params.id; // Extract order ID
+    console.log("Canceling Order ID:", orderId);
+
+    // Find the order and update its status to "Canceled"
+    const order = await BulkOrderQuery.findByIdAndUpdate(
+      orderId,
+      { status: "Canceled" },
+      { new: true }
+    ).populate({
+      path: "user",
+      model: "users",
+      select: "name number email",
+    });
+
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    console.log("Order after cancellation:", order);
+
+    // Check if user exists before sending emails
+    if (!order.user || !order.user.email) {
+      console.error("Error: User data is missing in order.");
+      return res.status(500).json({ error: "User information unavailable." });
+    }
+
+  
+
+    res.status(200).json({ message: "Order canceled successfully", order });
+
+    await sendApprovalEmail(order.user.email, "Order Canceled - Bulk Order Boxes", {
+      userName: order.user.name,
+      boxName: order.boxName,
+      boxSize: order.boxSize,
+      productName: order.productName,
+      productPrice: order.productPrice,
+      quantity: order.quantity,
+      totalCost: order.totalCost,
+    });
+
+    await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, "User Cancelled Order - Bulk Order Boxes", {
+      userName: order.user.name,
+      userNumber: order.user.number,
+      userEmail: order.user.email,
+      boxName: order.boxName,
+      boxSize: order.boxSize,
+      productName: order.productName,
+      productPrice: order.productPrice,
+      quantity: order.quantity,
+      totalCost: order.totalCost,
+    });
+
+  } catch (error) {
+    console.error("Error canceling order:", error.message);
+    res.status(500).json({ error: "Failed to cancel order" });
   }
 };

@@ -14,6 +14,7 @@ const PreviewScreen = ({
   basketTotal,
   onBack,
 }) => {
+  const [loading, setLoading] = useState(false); // Manage loading state
   const [basket, setBasket] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [addresses, setAddresses] = useState([]);
@@ -26,8 +27,8 @@ const PreviewScreen = ({
     const storedBasket = JSON.parse(localStorage.getItem("basket")) || [];
     setBasket(storedBasket);
 
-    const storedAddress = JSON.parse(localStorage.getItem("selectedAddress"));
-    setSelectedAddress(storedAddress);
+    // const storedAddress = JSON.parse(localStorage.getItem("selectedAddress"));
+    // setSelectedAddress(storedAddress);
   }, []);
 
   const fetchAddresses = async () => {
@@ -73,10 +74,12 @@ const PreviewScreen = ({
 
   const handleConfirmOrder = async () => {
     if (!selectedAddress) {
+      setLoading(false);
       alert("Please select a delivery address first!");
+   
       return;
     }
-
+    setLoading(true);
     const requestData = {
       boxName: name,
       boxSize: size,
@@ -114,12 +117,15 @@ const PreviewScreen = ({
 
       if (response.data.success) {
         alert(response.data.message || "Order confirmed successfully!");
+        
       } else {
-        alert(response.data.message || "Failed to confirm order. Please try again.");
+        alert(response.data.message || "Failed to confirm order. Please try again."); 
+         setLoading(false);
       }
     } catch (error) {
       console.error("Error confirming order:", error.message || error);
       alert("An error occurred while confirming the order. Please try again later.");
+      setLoading(false);
     }
 
     navigate("/giftbox");
@@ -233,8 +239,9 @@ const PreviewScreen = ({
           <button
             className={styles.confirmOrderButton}
             onClick={handleConfirmOrder}
-          >
-            Confirm Order
+            disabled={loading}
+            >
+              {loading ? "Submitting..." : "Confirm and Save"}
           </button>
         </div>
       </div>

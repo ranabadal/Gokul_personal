@@ -325,6 +325,7 @@ const BanquetQueryPage = () => {
               <th>User Name</th>
               <th>Phone Number</th>
               <th>Email</th>
+              <th>Hall Name</th>
               <th>Occasion</th>
               <th>Guests</th>
               <th>Menu</th>
@@ -344,6 +345,7 @@ const BanquetQueryPage = () => {
       <td>{query.user ? query.user.name : "N/A"}</td>
       <td>{query.user ? query.user.number : "N/A"}</td>
       <td>{query.user ? query.user.email : "N/A"}</td>
+      <td>{query.hallTitle || "N/A"}</td>
       <td>{query.occasion || "N/A"}</td>
       <td>{query.guestCount || "N/A"}</td>
       <td>{query.selectedCart || "N/A"}</td>

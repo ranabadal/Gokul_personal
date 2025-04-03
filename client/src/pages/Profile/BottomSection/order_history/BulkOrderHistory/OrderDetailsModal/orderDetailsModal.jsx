@@ -4,11 +4,10 @@ import styles from "./orderDetailsModal.module.css";
 const OrderDetailsModal = ({ order, onClose }) => {
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
-        <h2>Order Details</h2>
-        <p><strong>User Name:</strong> {order.user?.name || "N/A"}</p>
-        <p><strong>Phone Number:</strong> {order.user?.number || "N/A"}</p>
-        <p><strong>Email:</strong> {order.user?.email || "N/A"}</p>
+<div className={styles.modalContent}>
+<h2 className={styles.modalHeading}>Order Details</h2>
+
+<div className={styles.modalBody}>
         <p><strong>Box Name:</strong> {order.boxName || "N/A"}</p>
         <p><strong>Box Size:</strong> {order.boxSize || "N/A"}</p>
         <p><strong>Product Name:</strong> {order.productName || "N/A"}</p>
@@ -19,6 +18,7 @@ const OrderDetailsModal = ({ order, onClose }) => {
         <p><strong>Status:</strong> {order.status || "Pending"}</p>
         <button onClick={onClose} className={styles.closeBtn}>Close</button>
       </div>
+</div>
     </div>
   );
 };

@@ -140,6 +140,9 @@ const User = require("../../Models/Auth/Auth.model"); // Import User model
 const nodemailer = require("nodemailer"); // For email notifications
 const mongoose = require("mongoose");
 // Function to send notification emails
+
+
+
 const sendNotificationEmail = async (userEmail, subject, queryDetails) => {
   try {
     const transporter = nodemailer.createTransport({
@@ -197,6 +200,70 @@ Gokuls`,
   }
 };
 
+
+
+const sendAdminNotificationEmail = async (userEmail, subject, queryDetails) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_USER, // Email credentials
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    // Format data for email
+    const formattedSelectedDates = queryDetails.selectedDates?.length > 0
+      ? queryDetails.selectedDates.map((date) => new Date(date).toDateString()).join(", ")
+      : "No Dates Selected";
+
+    const formattedPreferredTimings = queryDetails.preferredTimings?.length > 0
+      ? queryDetails.preferredTimings.join(", ")
+      : "Not Specified";
+
+    const formattedMenuPreferences = queryDetails.menuPreferences
+      ? Object.entries(queryDetails.menuPreferences)
+          .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(", ") : value}`)
+          .join("\n")
+      : "No Preferences Provided";
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: userEmail,
+      subject: subject,
+      text: `Dear Admin,
+
+  A new order has been placed! Here are the full details:
+
+
+   User Name: ${queryDetails.userName}
+      User Number: ${queryDetails.userNumber}
+      User Email: ${queryDetails.userEmail}
+Hall Name: ${queryDetails.hallTitle}
+Occasion: ${queryDetails.occasion}
+Number of Guests: ${queryDetails.guestCount}
+Selected Cart: ${queryDetails.selectedCart}
+Selected Dates: ${formattedSelectedDates}
+Preferred Timings: ${formattedPreferredTimings}
+Additional Comments: ${queryDetails.comments || "None"}
+Menu Preferences:
+${formattedMenuPreferences}
+Total Cost: ₹${queryDetails.totalCost}
+
+  To view the order, please log in to the admin panel.
+
+
+Best regards,
+Gokuls`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Email sent successfully!");
+  } catch (error) {
+    console.error("Error sending email:", error.message);
+  }
+};
+
 // Create a new banquet query
 const createQuery = async (req, res) => {
   try {
@@ -215,14 +282,18 @@ const createQuery = async (req, res) => {
     const queryData = {
       ...req.body,
       user: new mongoose.Types.ObjectId(userId), // Converts userId to ObjectId before saving
-      userName: user.name, // Keeps existing logic unchanged
+      userName: user.name,
+      userNumber: user.number,
+      userEmail: user.email, // Keeps existing logic unchanged
     };
+    console.log("Final Query Data:", queryData); 
 
     const newQuery = new BanquetQuery(queryData); // Create a new query
     await newQuery.save();
 
     // Send confirmation email
     await sendNotificationEmail(user.email, "Banquet Query Submitted", queryData);
+    await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, "Banquet Query Submitted", queryData);
 
     res.status(201).json({
       message: "Query created successfully",

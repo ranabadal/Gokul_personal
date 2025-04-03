@@ -115,37 +115,37 @@ const Boking = () => {
 
     return (
         <div className={styles.boking_Container}>
-            <div className={styles.boking_Container_main}>
-                <h2>My Banquet Bookings</h2>
+    <div className={styles.boking_Container_main}>
+        <div className={styles.Heading}>My Banquet Bookings</div>
 
-                {loading ? (
-                    <Loader /> 
-                ) : selectedQuery ? (
-                    <div className={styles.queryDetails}>
-                        <h3>{selectedQuery.hallTitle}</h3>
-                        <p><strong>Guests:</strong> {selectedQuery.guestCount}</p>
-                        <p><strong>Occasion:</strong> {selectedQuery.occasion}</p>
-                        <p><strong>Total Cost:</strong> ₹{selectedQuery.totalCost}</p>
-                        <p><strong>Status:</strong> <span className={styles.status}>{selectedQuery.status}</span></p>
-                        <button onClick={() => setSelectedQuery(null)}>Close</button>
-                    </div>
-                ) : (
-                    currentBookings.map((booking) => (
-                        <div key={booking._id} className={styles.bookingCard}>
-                            <h3>{booking.hallTitle}</h3>
-                            <p>Booked on: {new Date(booking.createdAt).toLocaleDateString()}</p>
-                            <p>Guests: {booking.guestCount}</p>
-                            <p>Price: ₹{booking.totalCost}</p>
-                            <div className={styles.status}>
-                                Status: {booking.status === "Approved" ? "✅ Approved" : "⌛ Pending"}
-                            </div>
-                            <button onClick={() => setSelectedQuery(booking)}>View Details</button>
+        {loading ? (
+            <Loader />
+        ) : selectedQuery ? (
+            <div className={styles.queryDetails}>
+                <h3>{selectedQuery.hallTitle}</h3>
+                <p><strong>Guests:</strong> {selectedQuery.guestCount}</p>
+                <p><strong>Occasion:</strong> {selectedQuery.occasion}</p>
+                <p><strong>Total Cost:</strong> ₹{selectedQuery.totalCost}</p>
+                <p><strong>Status:</strong> <span className={styles.status}>{selectedQuery.status}</span></p>
+                <button onClick={() => setSelectedQuery(null)}>Close</button>
+            </div>
+        ) : (
+            <>
+                {currentBookings.map((booking) => (
+                    <div key={booking._id} className={styles.bookingCard}>
+                        <h3>{booking.hallTitle}</h3>
+                        <p>Booked on: {new Date(booking.createdAt).toLocaleDateString()}</p>
+                        <p>Guests: {booking.guestCount}</p>
+                        <p>Price: ₹{booking.totalCost}</p>
+                        <div className={styles.status}>
+                            Status: {booking.status === "Approved" ? "✅ Approved" : "⌛ Pending"}
                         </div>
-                    ))
-                )}
+                        <button onClick={() => setSelectedQuery(booking)}>View Details</button>
+                    </div>
+                ))}
 
-                {/* Dynamic pagination */}
-                {totalPages > 1 && (
+                {/* Show pagination only if no query is selected */}
+                {totalPages > 1 && !selectedQuery && (
                     <div className={styles.pagination}>
                         {[...Array(totalPages)].map((_, index) => (
                             <button 
@@ -158,8 +158,10 @@ const Boking = () => {
                         ))}
                     </div>
                 )}
-            </div>
-        </div>
+            </>
+        )}
+    </div>
+</div>
     );
 };
 

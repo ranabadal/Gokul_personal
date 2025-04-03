@@ -46,7 +46,7 @@
     gap: 1rem;
 }
 
-.order_history button {
+.sidebar button {
     width: 100%;
     padding: 1rem 2rem;
     font-weight: 600;
@@ -68,7 +68,7 @@
 
 /* Right Section (Orders Content) */
 .content {
-    width: 38.25rem;
+    width: 58.25rem;
     min-height: 30rem;
     border-radius: 1.5rem;
     border: 0.06rem solid #0000001A;

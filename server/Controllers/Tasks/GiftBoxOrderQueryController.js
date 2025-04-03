@@ -143,27 +143,37 @@
 const GiftBoxOrderQuery = require("../../Models/Tasks/GiftBoxOrderQuery");
 const User = require("../../Models/Auth/Auth.model"); // Import User model
 const nodemailer = require("nodemailer");
+const mongoose = require("mongoose");
 
-// Function to send confirmation email
+
+
 const sendConfirmationEmail = async (userEmail, orderDetails) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: "Gmail", // Use Gmail (or other SMTP provider)
+      service: "Gmail",
       auth: {
-        user: process.env.EMAIL_USER, // Email credentials from environment variables
+        user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
 
+    // Format product details correctly
+    const formattedProducts = orderDetails.products
+      .map((product) => `${product.productName} - ₹${product.productPrice} x ${product.quantity}`)
+      .join("\n");
+
     const mailOptions = {
-      from: process.env.EMAIL_USER, // Sender email
-      to: userEmail, // Recipient email
+      from: process.env.EMAIL_USER,
+      to: userEmail,
       subject: "Order Confirmation - Gift Box",
-      text: `Dear Customer,
+      text: `Dear ${orderDetails.userName},
 
       Thank you for your order! Here are your order details:
+      
       Box Name: ${orderDetails.boxName}
       Box Size: ${orderDetails.boxSize}
+      Products Selected: 
+      ${formattedProducts}  
       Total Cost: ₹${orderDetails.totalCost}
 
       We will notify you once your order is processed.
@@ -179,39 +189,52 @@ const sendConfirmationEmail = async (userEmail, orderDetails) => {
   }
 };
 
-// // Create a new bulk order query
-// exports.createQuery = async (req, res) => {
-//   try {
-//     const userId = req.user.id; // Extract the logged-in user ID from the request (assuming authentication middleware sets it)
-//     const user = await User.findById(userId); // Fetch user details from the database
 
-//     if (!user) {
-//       return res.status(404).json({ error: "User not found" });
-//     }
 
-//     // Assemble query data including user reference
-//     const { boxName, boxSize, totalCost } = req.body;
-//     const queryData = {
-//       ...req.body,
-//       user: userId, // Store user reference
-//     };
+const sendAdminNotificationEmail = async (userEmail, subject,orderDetails) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
-//     const newQuery = new BulkOrderQuery(queryData); // Create a new query
-//     await newQuery.save();
+    // Format product details correctly
+    const formattedProducts = orderDetails.products
+      .map((product) => `${product.productName} - ₹${product.productPrice} x ${product.quantity}`)
+      .join("\n");
 
-//     // Send confirmation email
-//     await sendConfirmationEmail(user.email, { boxName, boxSize, totalCost });
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: userEmail,
+      subject: subject,
+      text: `Dear Admin,
 
-//     res.status(201).json({
-//       message: "Bulk order query created successfully",
-//       query: newQuery,
-//       user: { name: user.name, number: user.number, email: user.email }, // Include user details in response
-//     });
-//   } catch (error) {
-//     console.error("Error creating query:", error.message);
-//     res.status(500).json({ error: "Failed to create bulk order query" });
-//   }
-// };
+      A new order has been placed! Here are the order details:
+
+      User Name: ${orderDetails.userName}
+      User Number: ${orderDetails.userNumber}
+      User Email: ${orderDetails.userEmail}
+      Box Name: ${orderDetails.boxName}
+      Box Size: ${orderDetails.boxSize}
+      Products Selected:
+      ${formattedProducts}
+      Total Cost: ₹${orderDetails.totalCost}
+
+      To view the order, please log in to the admin panel.
+
+      Best regards,
+      Gokuls`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Confirmation email sent!");
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+};
 
 
 
@@ -228,36 +251,33 @@ exports.createQuery = async (req, res) => {
       }
   
       // Destructure necessary fields from the request body
-      const { boxName, boxSize, products, totalCost, address } = req.body;
+      // const { boxName, boxSize, products, totalCost, address } = req.body;
   
-      // Validate required fields
-      if (!boxName || !boxSize || !products || products.length === 0 || !totalCost || !address) {
-        return res.status(400).json({ error: "Missing required fields in the request body" });
-      }
+      // // Validate required fields
+      // if (!boxName || !boxSize || !products || products.length === 0 || !totalCost || !address) {
+      //   return res.status(400).json({ error: "Missing required fields in the request body" });
+      // }
   
       // Assemble query data including user reference
       const queryData = {
-        boxName,
-        boxSize,
-        products, // Array of products (handle multiple items)
-        totalCost,
-        address,
-        user: userId, // Store user reference
+        ...req.body,
+       user: new mongoose.Types.ObjectId(userId), // Converts userId to ObjectId before saving
+             userName: user.name,
+        userNumber: user.number,
+        userEmail: user.email,
       };
-  
+      console.log("Final Query Data:", queryData); 
       const newQuery = new GiftBoxOrderQuery(queryData); // Create a new query
       await newQuery.save(); // Save the query to the database
   
       // Send confirmation email
-      try {
-        await sendConfirmationEmail(user.email, { boxName, boxSize, totalCost });
-      } catch (emailError) {
-        console.error("Error sending confirmation email:", emailError.message);
-      }
-  
+      
+        await sendConfirmationEmail(user.email, queryData);
+
+      await sendAdminNotificationEmail(process.env.ADMIN_EMAIL,"Order Confirmation - Gift Box Order", queryData);
       // Respond with success message and details
       res.status(201).json({
-        message: "Bulk order query created successfully",
+        message: "Gift Box Order query created successfully",
         query: newQuery,
         user: { name: user.name, number: user.number, email: user.email }, // Include user details in response
       });
@@ -268,6 +288,29 @@ exports.createQuery = async (req, res) => {
     }
   };
 
+
+  exports.getUserOrders = async (req, res) => {
+    try {
+      const userId = req.user?.id; // Ensure req.user exists
+  
+      console.log("User ID received:", userId, "Type:", typeof userId);
+  
+      if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ error: "Invalid User ID format" });
+      }
+  
+      // Convert userId to ObjectId for consistency in querying
+      const objectUserId = new mongoose.Types.ObjectId(userId);
+  
+      // Fetch bulk orders specific to the logged-in user
+      const orders = await GiftBoxOrderQuery.find({ user: objectUserId });
+  
+      res.status(200).json(orders);
+    } catch (error) {
+      console.error("Error fetching gift box orders:", error.message);
+      res.status(500).json({ error: "Failed to gift box orders" });
+    }
+  };
 
 // Get all bulk order queries
 exports.getAllQueries = async (req, res) => {
@@ -296,7 +339,7 @@ exports.getQueryById = async (req, res) => {
     );
 
     if (!query) {
-      return res.status(404).json({ error: "Bulk order query not found" });
+      return res.status(404).json({ error: "Gift Box order query not found" });
     }
 
     res.status(200).json(query);
@@ -349,7 +392,7 @@ exports.deleteQuery = async (req, res) => {
 };
 
 
-const sendApprovalEmail = async (userEmail, orderDetails) => {
+const sendApprovalEmail = async (userEmail,subject, orderDetails) => {
     try {
       const transporter = nodemailer.createTransport({
         service: "Gmail",
@@ -362,15 +405,15 @@ const sendApprovalEmail = async (userEmail, orderDetails) => {
       const mailOptions = {
         from: process.env.EMAIL_USER, // Sender email
         to: userEmail, // Recipient email
-        subject: "Order Approved - Gift Box",
-        text: `Dear Customer,
+        subject: subject,
+        text: `Dear  ${orderDetails.userName},
   
-        Your order has been approved! Here are your order details:
+      Here are your order details:
         Box Name: ${orderDetails.boxName}
         Box Size: ${orderDetails.boxSize}
         Total Cost: ₹${orderDetails.totalCost}
   
-        Thank you for choosing us for your gift box needs.
+        Thank you,
   
         Best regards,
         Gokuls`,
@@ -403,7 +446,7 @@ const sendApprovalEmail = async (userEmail, orderDetails) => {
       try {
         const userEmail = query.user?.email;
         if (userEmail) {
-          await sendApprovalEmail(userEmail, {
+          await sendApprovalEmail(userEmail,"Order Approved - Gift Box", {
             boxName: query.boxName,
             boxSize: query.boxSize,
             totalCost: query.totalCost,
@@ -417,5 +460,54 @@ const sendApprovalEmail = async (userEmail, orderDetails) => {
     } catch (error) {
       console.error("Error approving query:", error.message);
       res.status(500).json({ error: "Failed to approve query" });
+    }
+  };
+
+
+  
+  exports.cancelUserOrder = async (req, res) => {
+    try {
+      const orderId = req.params.id; // Extract order ID
+  
+      console.log("Canceling Order ID:", orderId);
+  
+      // Find the order and update its status to "Canceled"
+      const order = await GiftBoxOrderQuery.findByIdAndUpdate(
+        orderId,
+      { status: "Canceled" },
+      { new: true }
+    ).populate({
+      path: "user",
+      model: "users",
+      select: "name number email",
+    });
+  
+      if (!order) {
+        return res.status(404).json({ error: "Order not found" });
+      }
+  
+   
+      res.status(200).json({ message: "Order canceled successfully", order });
+
+      await sendApprovalEmail(order.user.email, "Order Canceled - Gift Boxes Order", {
+        userName: order.user.name,
+        boxName: order.boxName,
+        boxSize: order.boxSize,
+        totalCost: order.totalCost,
+      });
+  
+      await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, "User Cancelled Order - Gift Boxes Boxes", {
+        userName: order.user.name,
+        userNumber: order.user.number,
+        userEmail: order.user.email,
+        boxName: order.boxName,
+        boxSize: order.boxSize,
+        products: order.products,
+        totalCost: order.totalCost,
+      });
+  
+    } catch (error) {
+      console.error("Error canceling order:", error.message);
+      res.status(500).json({ error: "Failed to cancel order" });
     }
   };

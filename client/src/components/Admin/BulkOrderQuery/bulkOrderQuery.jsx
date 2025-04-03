@@ -265,7 +265,20 @@ const BulkOrderQueryPage = () => {
   }, []);
 
   // Approve a query
-  const handleApprove = async (queryId) => {
+  const handleApprove = async (queryId,orderStatus) => {
+
+    
+    if (orderStatus === "Approved") {
+      alert("This order has already been Approved.");
+      return;
+    }
+
+    if (orderStatus === "Canceled") {
+      alert("This order has been canceled. Now you cant Approve it");
+      return;
+    }
+
+
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await fetch(`http://localhost:8080/api/bulkOrderQueries/${queryId}/approve`, {
@@ -399,7 +412,7 @@ const BulkOrderQueryPage = () => {
                 </td>
                 <td>{query.status || "Pending"}</td>
                 <td>
-                  <button className={styles.first} onClick={() => handleApprove(query._id)}>
+                  <button className={styles.first} onClick={() => handleApprove(query._id,query.status)}>
                     Approve
                   </button>
                   <button className={styles.second} onClick={() => handleDelete(query._id)}>

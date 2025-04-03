@@ -6,7 +6,8 @@ const {
     updateQuery,
     deleteQuery,
     approveQuery,
-    getUserBulkOrders
+    getUserBulkOrders,
+    cancelUserOrder
 } = require("../../Controllers/Tasks/BulkOrderQueryController");
 
 const {isAuthenticated} = require("../../Middlewares/isAuthenticated"); // Middleware to verify logged-in user
@@ -20,4 +21,5 @@ router.get("/:id", isAuthenticated, getBulkQueryById); // Read by ID
 router.put("/:id", isAuthenticated, updateQuery); // Update
 router.delete("/:id", isAuthenticated, deleteQuery); // Delete
 router.put("/:id/approve", isAuthenticated, approveQuery); // Delete
+router.put("/:id/cancel", isAuthenticated, cancelUserOrder); // Delete
 module.exports = router;

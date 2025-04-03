@@ -42,7 +42,7 @@ const BulkOrderQuerySchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Pending", "Processed", "Approved"],
+      enum: ["Pending", "Canceled", "Approved"],
       default: "Pending",
     },
     createdAt: {

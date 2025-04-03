@@ -1,0 +1,55 @@
+.cancel, .view {
+    max-width: max-content;
+    background: #FFE9E9;
+    border-radius: 4.38rem;
+}
+
+.orderTableContainer {
+    max-height: 25rem; /* Limits the table height */
+    overflow-y: auto; /* Enables vertical scrolling when needed */
+    border: 1px solid #ddd; /* Adds a subtle border */
+}
+
+/* Hide scrollbar for modern browsers */
+.orderTableContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.orderTableContainer::-webkit-scrollbar-thumb {
+    background-color: #E31E24;
+    border-radius: 4px;
+}
+
+.orderTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.orderTable th, .orderTable td {
+    padding: 1rem; /* Improved spacing for better readability */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.orderTable th {
+    background-color: #E31E24;
+    color: white;
+    font-size: 1.2rem; /* Ensuring proper font size */
+    font-weight: bold;
+}
+
+.orderTable td {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Improve row spacing */
+.orderTable tr {
+    height: 4rem;
+}
+
+/* Add hover effect */
+.orderTable tr:hover {
+    background-color: #f5f5f5;
+}

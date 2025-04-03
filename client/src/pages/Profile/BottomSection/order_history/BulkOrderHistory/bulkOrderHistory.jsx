@@ -8,7 +8,6 @@ const BulkOrderHistory = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Fetch user's bulk order history
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -16,9 +15,7 @@ const BulkOrderHistory = () => {
         const token = localStorage.getItem("jwtToken");
         const response = await fetch("http://localhost:8080/api/bulkOrderQueries/user", {
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         if (response.ok) {
@@ -37,23 +34,41 @@ const BulkOrderHistory = () => {
 
     fetchOrders();
   }, []);
-
-  // Handle cancel order
-  const handleCancelOrder = async (orderId) => {
+  const handleCancelOrder = async (orderId, orderStatus) => {
+    if (orderStatus === "Approved") {
+      alert("You cannot cancel an order once it has been approved.");
+      return;
+    }
+  
+    if (orderStatus === "Canceled") {
+      alert("This order has already been canceled.");
+      return;
+    }
+  
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
-
+  
     try {
       const token = localStorage.getItem("jwtToken");
-      const response = await fetch(`http://localhost:8080/api/user/bulkOrders/${orderId}/cancel`, {
+      const response = await fetch(`http://localhost:8080/api/bulkOrderQueries/${orderId}/cancel`, {
         method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-
+  
       if (response.ok) {
         alert("Order canceled successfully!");
-        setOrders(orders.filter((order) => order._id !== orderId));
+  
+        // Fetch the correct updated orders list
+        const updatedResponse = await fetch("http://localhost:8080/api/bulkOrderQueries/user", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+  
+        if (updatedResponse.ok) {
+          const updatedData = await updatedResponse.json();
+          setOrders(updatedData); // Update state correctly
+        } else {
+          alert("Failed to refresh orders. Please try again.");
+        }
       } else {
         alert("Failed to cancel order.");
       }
@@ -63,48 +78,48 @@ const BulkOrderHistory = () => {
     }
   };
 
+
   if (loading) return <p>Loading...</p>;
   if (errorMessage) return <p className={styles.error}>{errorMessage}</p>;
 
   return (
     <div className={styles.orderContainer}>
       <h2>Bulk Order History</h2>
-      <table className={styles.orderTable}>
-        <thead>
-          <tr>
-            <th>Box Name</th>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Total Cost</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order._id}>
-              <td>{order.boxName || "N/A"}</td>
-              <td>{order.productName || "N/A"}</td>
-              <td>{order.quantity || "N/A"}</td>
-              <td>₹{order.totalCost || 0}</td>
-              <td>{order.status || "Pending"}</td>
-              <td>
-                <button className={styles.cancel} onClick={() => handleCancelOrder(order._id)}>
-                  Cancel
-                </button>
-                <button className={styles.view} onClick={() => setSelectedOrder(order)}>
-                  View Details
-                </button>
-              </td>
+      <div className={styles.orderTableContainer}>
+        <table className={styles.orderTable}>
+          <thead>
+            <tr>
+              <th>Box Name</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Total Cost</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order._id}>
+                <td>{order.boxName || "N/A"}</td>
+                <td>{order.productName || "N/A"}</td>
+                <td>{order.quantity || "N/A"}</td>
+                <td>₹{order.totalCost || 0}</td>
+                <td>{order.status || "Pending"}</td>
+                <td>
+                  <button className={styles.cancel} onClick={() => handleCancelOrder(order._id, order.status)}>
+                    Cancel
+                  </button>
+                  <button className={styles.view} onClick={() => setSelectedOrder(order)}>
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {/* Order Details Modal */}
-      {selectedOrder && (
-        <OrderDetailsModal order={selectedOrder} onClose={() => setSelectedOrder(null)} />
-      )}
+      {selectedOrder && <OrderDetailsModal order={selectedOrder} onClose={() => setSelectedOrder(null)} />}
     </div>
   );
 };
