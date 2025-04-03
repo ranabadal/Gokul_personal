@@ -360,9 +360,9 @@ const FestSweet = ({ filters }) => {
       </div>
       <div>
         {!loading && (
-          <a href="#" onClick={() => setPage((prev) => prev + 1)}>
-            <p className={styles.viewMoreContainer}>View More</p>
-          </a>
+         <button onClick={() => setPage((prev) => prev + 1)} className={styles.viewMoreContainer}>
+         View More
+       </button>
         )}
       </div>
     </div>

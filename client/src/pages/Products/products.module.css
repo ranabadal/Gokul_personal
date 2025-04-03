@@ -1,5 +1,17 @@
-.heroSec{
+.topSection {
     display: flex;
-    justify-content: center;
- 
-}
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .gokulSection {
+    flex: 1; /* Adjust width as needed */
+  }
+  
+  .filterSection {
+    
+    width: 200px; /* Set fixed width or adjust as you like */
+  }
+  

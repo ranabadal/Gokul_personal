@@ -1,11 +1,26 @@
-.Filter{
+.mainContent {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-} 
- .mainContaine{
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap; /* Ensure elements wrap on smaller screens */
+}
+
+.timer, .mainContainer {
+    flex: 1; /* Take available space */
+}
+
+.filter {
+    flex: 0.3;
     display: flex;
-    justify-content: center;
-    align-items: center;
-  
-} 
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+/* Hide filter when zoomed in or on smaller screens */
+@media (max-width: 1433px) { /* Adjust based on the zoom level */
+    .filter {
+        display: none;
+    }
+}

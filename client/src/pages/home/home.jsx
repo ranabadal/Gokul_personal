@@ -11,8 +11,11 @@ import laddu from "../../components/cards/assets/laddu.svg";
 import pedda from "../../components/cards/assets/pedaa.svg";
 import CardHeader from "../../components/card_header/card_header";
 import HorizontalCard from "../../components/horizontal_card/horizontal_card";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+    const navigate = useNavigate();
+
     const [cardData, setCardData] = useState([
         {
             name: 'Lalmohan',
@@ -36,9 +39,13 @@ function Home() {
             <div className={styles.card_section_container}>
                 {Array.isArray(cardData) && cardData.map((item, index) => {
                     return (
-                        <div key={index}>
-                            <Cards data={item} />
-                        </div>
+                        <div
+                        key={index}
+                        onClick={() => navigate("/products")}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <Cards data={item} />
+                      </div>
                     )
                 })}
             </div>

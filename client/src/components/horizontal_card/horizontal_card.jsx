@@ -3,8 +3,12 @@ import styles from "./horizontal_card.module.css";
 import capacity from "./assets/capacity.svg";
 import heart from "./assets/heart.svg";
 import star from "./assets/Star.svg";
+import { useNavigate } from "react-router-dom";
 
 const HorizontalCard = () => {
+    const navigate = useNavigate();
+
+
     return(
         <div className={styles.card_container}>
             <div className={styles.card_container_left}>
@@ -39,8 +43,9 @@ const HorizontalCard = () => {
                 <div className={styles.card_container_right_bottom}>
                     <div className={styles.card_container_right_bottom_left}>₹14959</div>
                     <div className={styles.card_container_right_bottom_right}>
-                        <button>Proceed Booking</button>
-                    </div>
+                    <button onClick={() => navigate("/banquets")}>
+              Proceed Booking
+            </button>                    </div>
                 </div>
             </div>
         </div>
