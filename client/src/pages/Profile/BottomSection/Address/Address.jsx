@@ -53,7 +53,7 @@ const Address = () => {
                     onSaveAddress={handleSaveAddress}
                 />
             </div>  
-            <div className={styles.footer}><Footer /></div>  
+           
         </div>
     );
 };  

@@ -7,6 +7,7 @@ const {
   approveQuery,
   deleteQuery,
   getUserQueries,
+  cancelUserOrder
 } = require("../../Controllers/Tasks/banquetQueryController");
 
 
@@ -34,5 +35,8 @@ router.put("/:id", isAuthenticated, updateQuery);
 router.delete("/:id", isAuthenticated, deleteQuery);
 
 router.put("/:id/approve", isAuthenticated, approveQuery);
+
+
+router.put("/:id/cancel", isAuthenticated, cancelUserOrder);
 
 module.exports = router;

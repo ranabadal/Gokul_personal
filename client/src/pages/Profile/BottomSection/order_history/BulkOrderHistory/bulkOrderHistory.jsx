@@ -34,38 +34,38 @@ const BulkOrderHistory = () => {
 
     fetchOrders();
   }, []);
+
   const handleCancelOrder = async (orderId, orderStatus) => {
     if (orderStatus === "Approved") {
       alert("You cannot cancel an order once it has been approved.");
       return;
     }
-  
+
     if (orderStatus === "Canceled") {
       alert("This order has already been canceled.");
       return;
     }
-  
+
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
-  
+
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await fetch(`http://localhost:8080/api/bulkOrderQueries/${orderId}/cancel`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });
-  
+
       if (response.ok) {
         alert("Order canceled successfully!");
-  
-        // Fetch the correct updated orders list
+
         const updatedResponse = await fetch("http://localhost:8080/api/bulkOrderQueries/user", {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
-  
+
         if (updatedResponse.ok) {
           const updatedData = await updatedResponse.json();
-          setOrders(updatedData); // Update state correctly
+          setOrders(updatedData);
         } else {
           alert("Failed to refresh orders. Please try again.");
         }
@@ -78,13 +78,16 @@ const BulkOrderHistory = () => {
     }
   };
 
-
   if (loading) return <p>Loading...</p>;
   if (errorMessage) return <p className={styles.error}>{errorMessage}</p>;
+  if (orders.length === 0) return <>
+    <div className={styles.heading}>Bulk Order History</div>
+     <p className={styles.noOrders}>📦 No bulk orders yet! Place an order today!</p>
+  </>
 
   return (
     <div className={styles.orderContainer}>
-      <h2>Bulk Order History</h2>
+    
       <div className={styles.orderTableContainer}>
         <table className={styles.orderTable}>
           <thead>

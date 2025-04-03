@@ -48,8 +48,18 @@
 .orderTable tr {
     height: 4rem;
 }
+.noOrders {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #777;
+    font-weight: bold;
+    margin-top: 20px;
+}
 
-/* Add hover effect */
-.orderTable tr:hover {
-    background-color: #f5f5f5;
+.heading {
+    font-weight: 400;
+    font-size: 2.5rem;
+    color: #E31E24;
+    text-align: center;
+    font-family: "Madimi One";
 }

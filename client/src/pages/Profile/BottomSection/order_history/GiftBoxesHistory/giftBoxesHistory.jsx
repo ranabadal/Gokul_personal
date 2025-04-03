@@ -22,11 +22,11 @@ const GiftBoxesHistory = () => {
           const data = await response.json();
           setOrders(data);
         } else {
-          setErrorMessage("Failed to fetch bulk orders.");
+          setErrorMessage("Failed to fetch gift box orders.");
         }
       } catch (error) {
-        console.error("Error fetching bulk orders:", error);
-        setErrorMessage("An error occurred while fetching bulk orders.");
+        console.error("Error fetching gift box orders:", error);
+        setErrorMessage("An error occurred while fetching orders.");
       } finally {
         setLoading(false);
       }
@@ -34,35 +34,35 @@ const GiftBoxesHistory = () => {
 
     fetchOrders();
   }, []);
+
   const handleCancelOrder = async (orderId, orderStatus) => {
     if (orderStatus === "Approved") {
       alert("You cannot cancel an order once it has been approved.");
       return;
     }
-  
+
     if (orderStatus === "Canceled") {
       alert("This order has already been canceled.");
       return;
     }
-  
+
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
-  
+
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${orderId}/cancel`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });
-  
+
       if (response.ok) {
         alert("Order canceled successfully!");
-  
-        // Fetch updated orders to reflect status changes
+
         const updatedResponse = await fetch("http://localhost:8080/api/giftBoxOrderQueries/user", {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
-  
+
         if (updatedResponse.ok) {
           const updatedData = await updatedResponse.json();
           setOrders(updatedData);
@@ -78,14 +78,16 @@ const GiftBoxesHistory = () => {
     }
   };
 
-
-
   if (loading) return <p>Loading...</p>;
   if (errorMessage) return <p className={styles.error}>{errorMessage}</p>;
+  if (orders.length === 0) return <>
+    <div className={styles.heading}>Gift Boxes Order History</div>
+     <p className={styles.noOrders}>🎁 No gift box orders yet! Start shopping now!</p>
+  </>
 
   return (
     <div className={styles.orderContainer}>
-      <h2>Gift Boxes Order History</h2>
+      {/* <h2>Gift Boxes Order History</h2> */}
       <div className={styles.orderTableContainer}>
         <table className={styles.orderTable}>
           <thead>

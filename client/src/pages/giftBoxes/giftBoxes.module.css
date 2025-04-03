@@ -10,7 +10,13 @@
     gap: 17.25rem;
     
 }
-
+.noItems {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #777;
+    font-weight: bold;
+    margin-top: 20px;
+}
 
 
 .gokul_heading{

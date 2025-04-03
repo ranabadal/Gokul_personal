@@ -156,7 +156,7 @@
   }
   
   .heroSecButton:hover {
-    color: #E31E24;
+    color: #ffffff;
     outline: 1px solid #E31E24;
   }
   
@@ -277,6 +277,26 @@
     background-color: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
+
+  .customCalendar {
+    background-color: #e16c6c; /* Light gray */
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the header color changes */
+.customCalendar .react-calendar__navigation {
+    background-color: #c54306; /* Blue */
+    color: rgb(0, 0, 0);
+    border-radius: 8px;
+}
+
+/* Change selected dates */
+.customCalendar .react-calendar__tile--active {
+    background-color: #28a745; /* Green */
+    color: rgb(0, 0, 0);
+}
   
   
   .timeOption input[type="checkbox"] {
@@ -320,8 +340,9 @@
   }
   
   .textarea{
+    margin-top: 20px;
     border-radius: 8px;
-    width: 756px;
+    width: 856px;
     height: 138px;
   }
   

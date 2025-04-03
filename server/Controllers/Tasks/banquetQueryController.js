@@ -442,6 +442,68 @@ const deleteQuery = async (req, res) => {
   }
 };
 
+
+
+const cancelUserOrder = async (req, res) => {
+  try {
+    const orderId = req.params.id; // Extract order ID
+
+    console.log("Canceling Order ID:", orderId);
+
+    // Find the order and update its status to "Canceled"
+    const order = await BanquetQuery.findByIdAndUpdate(
+      orderId,
+    { status: "Canceled" },
+    { new: true }
+  ).populate({
+    path: "user",
+    model: "users",
+    select: "name number email",
+  });
+
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+ 
+    res.status(200).json({ message: "Banquet Hall request canceled successfully", order });
+
+    await sendNotificationEmail(order.user.email, "Banquet Hall request Canceled - Banquet Hall Booking", {
+      hallTitle: order.hallTitle,
+      occasion: order.occasion,
+      guestCount: order.guestCount,
+      selectedCart: order.selectedCart,
+      selectedDates: order.selectedDates,
+      preferredTimings: order.preferredTimings,
+      comments: order.comments,
+      menuPreferences: order.menuPreferences,
+      totalCost: order.totalCost,
+      userName: order.user.name,
+    });
+
+    await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, "User Cancelled Order - Gift Boxes Boxes", {
+      userName: order.user.name,
+      userNumber: order.user.number,
+      userEmail: order.user.email,
+      hallTitle: order.hallTitle,
+      occasion: order.occasion,
+      guestCount: order.guestCount,
+      selectedCart: order.selectedCart,
+      selectedDates: order.selectedDates,
+      preferredTimings: order.preferredTimings,
+      comments: order.comments,
+      menuPreferences: order.menuPreferences,
+      totalCost: order.totalCost,
+
+    });
+
+  } catch (error) {
+    console.error("Error canceling order:", error.message);
+    res.status(500).json({ error: "Failed to cancel order" });
+  }
+};
+
+
 // Exporting all methods
 module.exports = {
   createQuery,
@@ -451,4 +513,5 @@ module.exports = {
   approveQuery,
   deleteQuery,
   getUserQueries,
+  cancelUserOrder
 };

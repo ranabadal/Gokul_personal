@@ -1,8 +1,8 @@
-/* *{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-} */
+}
 
 /* Main Container */
 .container {
@@ -14,6 +14,13 @@
     gap: 1.5rem;
     
 }
+
+.order_history{
+    
+    font-family: "Madimi One";
+}
+
+
 
 /* Left Sidebar (Navigation Menu) */
 .sidebar {
