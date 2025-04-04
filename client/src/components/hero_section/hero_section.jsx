@@ -163,12 +163,12 @@ const HeroSection = () => {
     const slides = [
         {
             title: "Handmade Happiness in Every Bite!",
-            description: "Elevate every occasion with Evara, where we offer premium gifts that illuminate life’s special moments.",
+            description: "Elevate every occasion with Gokul, where we offer premium gifts that illuminate life’s special moments.",
             image: box,
             timer: <CountdownTimer />
         },
         {
-            title: "Celebrate with Evara!",
+            title: "Celebrate with Gokul!",
             description: "Discover the joy of gifting with our exclusive Diwali offers.",
             image: box,
             timer: <CountdownTimer />
