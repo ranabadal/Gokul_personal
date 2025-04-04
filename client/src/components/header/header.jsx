@@ -9,11 +9,9 @@ import downarrow from "./assets/images/down_arrow.svg";
 import userIcon from "./assets/images/userIcon.svg";
 import logoutIcon from "./assets/images/exit.png";
 import cx from "classnames";
-
 const Header = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // Use user context
-
   const handleUserClick = () => {
     if (user) {
       navigate("/profile");
@@ -21,7 +19,6 @@ const Header = () => {
       navigate("/login");
     }
   };
-
   const handleLogout = () => {
     // Clear user data from context and local storage
     setUser(null);
@@ -29,7 +26,6 @@ const Header = () => {
     localStorage.removeItem("jwtToken");
     navigate("/login");
   };
-
   return (
     <header className={styles.header}>
       <div className={cx(styles.pointer, styles.left)}>
@@ -47,7 +43,7 @@ const Header = () => {
         </span>
         <span
           className={styles.middle_todays_deals}
-          onClick={() => navigate("/todaysDeal")}
+          onClick={() => navigate("/products")}
         >
           TakeAway{" "}
         </span>
@@ -70,7 +66,6 @@ const Header = () => {
           Contact
         </span>
       </div>
-
       <div className={styles.right}>
         <div className={styles.right_cart}>
           <img src={cart} alt="cart" onClick={() => navigate("/basket")} />
@@ -94,10 +89,7 @@ const Header = () => {
         </div>
         {user && (  
           <>
-            <div
-              className={styles.right_downarrow}
-              onClick={() => navigate("/profile")}
-            >
+            <div className={styles.right_downarrow} onClick={() => navigate("/profile")}>
               <img src={downarrow} alt="downarrow" />
             </div>
             <div className={styles.right_logout} onClick={handleLogout}>
