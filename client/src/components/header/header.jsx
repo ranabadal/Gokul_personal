@@ -80,6 +80,7 @@ const Header = () => {
               src={`data:image/jpeg;base64,${user.profilePic}`}
               alt="user"
             />
+            
           ) : (
             <img src={userIcon} alt="user" />
           )}
@@ -102,4 +103,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;
