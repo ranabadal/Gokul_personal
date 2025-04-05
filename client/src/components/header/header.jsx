@@ -9,7 +9,6 @@ import downarrow from "./assets/images/down_arrow.svg";
 import userIcon from "./assets/images/userIcon.svg";
 import logoutIcon from "./assets/images/exit.png";
 import cx from "classnames";
-
 const Header = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // Use user context
@@ -20,9 +19,6 @@ const Header = () => {
       navigate("/login");
     }
   };
-
-  
-
   const handleLogout = () => {
     // Clear user data from context and local storage
     setUser(null);
@@ -30,7 +26,6 @@ const Header = () => {
     localStorage.removeItem("jwtToken");
     navigate("/login");
   };
-
   return (
     <header className={styles.header}>
       <div className={cx(styles.pointer, styles.left)}>
@@ -38,7 +33,6 @@ const Header = () => {
           <img src={logo} alt="logo" />
         </div>
       </div>
-
       <div className={styles.middle}>
         <span
           className={styles.middle_about}
@@ -52,7 +46,6 @@ const Header = () => {
         >
           TakeAway{" "}
         </span>
-
         {/*
          <span
           className={styles.middle_products}
@@ -60,7 +53,6 @@ const Header = () => {
         >
           Products
         </span> */}
-
         <span className={styles.about} onClick={() => navigate("/banquets")}>
           Banquet Hall
         </span>
@@ -110,5 +102,4 @@ const Header = () => {
     </header>
   );
 };
-
 export default Header;
