@@ -76,7 +76,9 @@ const HeroSection = () => {
   }, [currentSlide]);
   const navigate = useNavigate();
   return (
+
     <div>
+
       <div className={styles.hero_section_container}>
         <div className={styles.hero_section}>
           <button className={styles.hero_section_bttn_left} onClick={prevSlide}>

@@ -9,7 +9,9 @@ import downarrow from "./assets/images/down_arrow.svg";
 import userIcon from "./assets/images/userIcon.svg";
 import logoutIcon from "./assets/images/exit.png";
 import cx from "classnames";
+
 const Header = () => {
+
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // Use user context
   const handleUserClick = () => {
@@ -18,15 +20,20 @@ const Header = () => {
     } else {
       navigate("/login");
     }
+
   };
+
   const handleLogout = () => {
     // Clear user data from context and local storage
     setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("jwtToken");
     navigate("/login");
+    
   };
+
   return (
+  
     <header className={styles.header}>
       <div className={cx(styles.pointer, styles.left)}>
         <div className={styles.left_logo} onClick={() => navigate("/")}>
@@ -80,7 +87,7 @@ const Header = () => {
               src={`data:image/jpeg;base64,${user.profilePic}`}
               alt="user"
             />
-            
+
           ) : (
             <img src={userIcon} alt="user" />
           )}
