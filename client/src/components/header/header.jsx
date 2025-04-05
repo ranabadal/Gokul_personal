@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../Context/userContext"; // Adjust the path as necessary
+import { useUser } from "../Context/userContext"; 
 import styles from "./header.module.css";
 import logo from "./assets/images/Vector.svg";
 import cart from "./assets/images/cart.svg";
@@ -9,6 +9,7 @@ import downarrow from "./assets/images/down_arrow.svg";
 import userIcon from "./assets/images/userIcon.svg";
 import logoutIcon from "./assets/images/exit.png";
 import cx from "classnames";
+
 const Header = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // Use user context
@@ -19,6 +20,9 @@ const Header = () => {
       navigate("/login");
     }
   };
+
+  
+
   const handleLogout = () => {
     // Clear user data from context and local storage
     setUser(null);
@@ -26,6 +30,7 @@ const Header = () => {
     localStorage.removeItem("jwtToken");
     navigate("/login");
   };
+
   return (
     <header className={styles.header}>
       <div className={cx(styles.pointer, styles.left)}>
@@ -37,7 +42,7 @@ const Header = () => {
       <div className={styles.middle}>
         <span
           className={styles.middle_about}
-          onClick={() => navigate("/about")}
+          onClick={() => navigate("/todaysDeal")}
         >
           Today's deal
         </span>
@@ -47,12 +52,15 @@ const Header = () => {
         >
           TakeAway{" "}
         </span>
-        {/* <span
+
+        {/*
+         <span
           className={styles.middle_products}
           onClick={() => navigate("/products")}
         >
           Products
         </span> */}
+
         <span className={styles.about} onClick={() => navigate("/banquets")}>
           Banquet Hall
         </span>
