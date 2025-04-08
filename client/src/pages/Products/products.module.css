@@ -15,3 +15,11 @@
     width: 200px; /* Set fixed width or adjust as you like */
   }
   
+
+  .loaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+
+  }

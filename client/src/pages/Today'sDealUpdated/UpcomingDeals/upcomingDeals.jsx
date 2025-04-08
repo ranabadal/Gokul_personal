@@ -45,14 +45,14 @@
 
 // export default UpcomingDeals;
 
-
-
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./upcomingDeals.module.css";
-import DealCard from "../DealCard/dealCard"; // Adjust the import path as necessary
+import DealCard from "../DealCard/dealCard"; // Adjust the import path
+import Loader from "../../../components/Loader/loader5/loader5"; // Import the loader
 
 const UpcomingDeals = () => {
   const [upcomingDeals, setUpcomingDeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Loading state
   const scrollRef = useRef(null);
 
   // Fetch upcoming deals from backend
@@ -70,6 +70,9 @@ const UpcomingDeals = () => {
         }
       } catch (error) {
         console.error("Error fetching upcoming deals:", error);
+        setUpcomingDeals([]);
+      } finally {
+        setIsLoading(false); // Stop loading once data is fetched
       }
     };
 
@@ -87,19 +90,27 @@ const UpcomingDeals = () => {
   return (
     <div className={styles.upcomingDeals}>
       <h2 className={styles.title}>Upcoming Deals</h2>
-      <div className={styles.controls}>
-        <button onClick={scrollLeft} className={styles.arrowButton}>&#10094;</button>
-        <div className={styles.dealsGrid} ref={scrollRef}>
-          {upcomingDeals.length > 0 ? (
-            upcomingDeals.map((deal, index) => (
-              <DealCard key={index} deal={deal} />
-            ))
-          ) : (
-            <p className={styles.noDeals}>No upcoming deals available.</p>
-          )}
+
+      {/* Show Loader while fetching data */}
+       {isLoading && <div className={styles.loaderContainer}>
+            <Loader />
+            </div>}
+
+      {!isLoading && (
+        <div className={styles.controls}>
+          <button onClick={scrollLeft} className={styles.arrowButton}>&#10094;</button>
+          <div className={styles.dealsGrid} ref={scrollRef}>
+            {upcomingDeals.length > 0 ? (
+              upcomingDeals.map((deal, index) => (
+                <DealCard key={index} deal={deal} />
+              ))
+            ) : (
+              <p className={styles.noDeals}>No upcoming deals available.</p>
+            )}
+          </div>
+          <button onClick={scrollRight} className={styles.arrowButton}>&#10095;</button>
         </div>
-        <button onClick={scrollRight} className={styles.arrowButton}>&#10095;</button>
-      </div>
+      )}
     </div>
   );
 };

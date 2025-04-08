@@ -5,6 +5,7 @@
   }
   
   .title {
+    padding-left: 20px;
     margin: 15px 0;
     font-size: 2rem;
     font-weight: 400;
@@ -70,4 +71,11 @@
 
 
 
-  
+  .loaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+
+  }

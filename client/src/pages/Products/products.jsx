@@ -314,7 +314,7 @@ import SweetProduct from "./SweetProduct/SweetProduct/sweetProduct";
 import Background from "./Assets/bg1.png";
 import { useToaster } from '../../utils';
 import { FiSearch } from "react-icons/fi";
-
+import Loader from "../../components/Loader/loader5/loader5"; // Import the loader
 
 export default function TakeawayPage() {
   const [selectedCategory, setSelectedCategory] = useState("Restaurant");
@@ -525,7 +525,9 @@ const handleRemoveFromCart = async (productId) => {
     {/* Product Grid for Sweets */}
 <div className={styles.productGrid}>
   {loadingProducts ? (
-    <p>Loading sweets...</p>
+     <div className={styles.loaderContainer}>
+            <Loader />
+            </div>
   ) : errorProducts ? (
     <p>{errorProducts}</p>
   ) : (
@@ -568,7 +570,9 @@ const handleRemoveFromCart = async (productId) => {
             <FiChevronLeft className={styles.arrow} onClick={() => scrollSubcategories("left")} />
             <div className={styles.subcategories} ref={subcategoriesRef}>
               {loadingSubcategories ? (
-                <p>Loading...</p>
+                <div className={styles.loaderContainer}>
+                <Loader />
+                </div>
               ) : errorSubcategories ? (
                 <p>{errorSubcategories}</p>
               ) : (
@@ -590,7 +594,9 @@ const handleRemoveFromCart = async (productId) => {
           {/* Product Grid */}
           <div className={styles.productGrid}>
             {loadingProducts ? (
-              <p>Loading products...</p>
+               <div className={styles.loaderContainer}>
+               <Loader />
+               </div>
             ) : errorProducts ? (
               <p>{errorProducts}</p>
             ) : (
