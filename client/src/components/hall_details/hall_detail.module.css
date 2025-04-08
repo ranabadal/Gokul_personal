@@ -1,6 +1,6 @@
 .hall_details {
   width: 100%;
-  height: 530px;
+  height: max-content;
   padding: 3rem 6rem;
   display: flex;
   justify-content: center;
