@@ -74,7 +74,7 @@ const Hover = () => {
             </svg>
           </div>
         </div>
-        <div className={styles.hover_content_edits}>BanquetHall's</div>
+        <div className={styles.hover_content_edits}>BanquetHalls</div>
       </div>
       <div className={styles.hover_content}>
         <div className={styles.hover_content_logo}>
