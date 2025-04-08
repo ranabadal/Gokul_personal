@@ -87,7 +87,7 @@ The organization is located at Geeta Gopal Satsang Bhawan, Anaj Mandi, Ambala Ca
         <Facilities />
       </div>
 
-      {true && <Testimonial />} 
+      {/* {true && <Testimonial />}  */}
 
       <Footer />
     </div>
