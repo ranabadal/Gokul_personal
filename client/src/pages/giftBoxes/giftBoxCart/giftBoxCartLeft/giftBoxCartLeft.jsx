@@ -256,9 +256,15 @@ const GiftBoxCartLeft = ({ filters, basket, addToCart, removeFromCart, size }) =
         setLoading(true);
         try {
           const response = await axios.get("http://localhost:8080/api/products", {
-            params: { ...filters, page, isTodaysDeal: false },
+            params: { ...filters, page, isTodaysDeal: false }
           });
-          setSweets((prevSweets) => [...prevSweets, ...response.data.products]);
+    
+          // Apply category filtering manually (if API does not support it)
+          const filteredSweets = response.data?.products?.filter(
+            (product) => product?.category?.toLowerCase() === "sweets"
+          ) || [];
+    
+          setSweets(filteredSweets);
         } catch (error) {
           console.error("Error fetching products:", error);
           setToast("Failed to load products. Please try again.", "error");
@@ -266,9 +272,11 @@ const GiftBoxCartLeft = ({ filters, basket, addToCart, removeFromCart, size }) =
           setLoading(false);
         }
       };
+    
       fetchProducts();
     }, [filters, page, setToast]);
-  
+
+    
     const handleBackClick = () => {
       navigate(-1);
     };
