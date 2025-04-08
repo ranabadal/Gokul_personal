@@ -202,7 +202,7 @@ const HeroSection = () => {
                     <button className={styles.hero_section_bttn_left} onClick={prevSlide}><span>&larr;</span></button>
                     <div className={styles.hero_section_left}>
                         <div className={styles.hero_section_left_div_1}>
-                            <div className={styles.hero_section_left_top}>Diwali Offer Ends in</div>
+                            <div className={styles.hero_section_left_top}>Baisakhi Offer Ends in</div>
                             {slides[currentSlide].timer}
                         </div>
                         <div className={styles.hero_section_left_bottom}>
