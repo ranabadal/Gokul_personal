@@ -28,7 +28,7 @@ import GiftBoxCart from "../pages/giftBoxes/giftBoxCart/giftBoxCart"
 import BulkOrder from "../pages/bulkOrders/bulkOrders";
 import BulkOrderCart from "../pages/bulkOrders/bulkOrderCart/bulkOrderCart";
 import PreviewScreen from '../pages/bulkOrders/PreviewScreen/previewScreen'
-
+import Title from "../pages/about/Title/title"
 
 
 const routes = [
@@ -36,6 +36,10 @@ const routes = [
       path: '/',
       element: <Home />
     },
+    {
+        path: '/title',
+        element: <Title />
+      },
     {
         path: '/banquets',
         element : <Banquets />

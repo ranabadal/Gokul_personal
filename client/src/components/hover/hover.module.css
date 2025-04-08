@@ -41,6 +41,7 @@
 
 .hover_content_edits{
     height: 1.9375rem; /* 31px / 16 */
+    
     font-weight: 600;
     font-size: 1.624rem; /* 25.97px / 16 */
     color: #4B4B4B;
@@ -54,7 +55,7 @@
     color: white;
 }
 
-.hover_content:hover .svg2 path, .hover_content:hover .svg3 path, .hover_content:hover .svg4 path{
+.hover_content:hover .svg2 path, .hover_content:hover .svg3 path, .hover_content:hover .svg4 path, .hover_content:hover .svg5 path{
     fill: #f6f6f6;
 }
 
