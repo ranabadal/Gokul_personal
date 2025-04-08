@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../Context/userContext"; 
+import { useUser } from "../Context/userContext";
 import styles from "./header.module.css";
 import logo from "./assets/images/Vector.svg";
 import cart from "./assets/images/cart.svg";
@@ -18,7 +18,6 @@ const Header = () => {
     } else {
       navigate("/login");
     }
-
   };
 
   const handleLogout = () => {
@@ -78,16 +77,19 @@ const Header = () => {
           <img src={heart} alt="heart" onClick={() => navigate("/wishlist")} />
         </div> */}
         {user && (
-  <>
-    <div className={styles.right_cart}>
-      <img src={cart} alt="cart" onClick={() => navigate("/basket")} />
-    </div>
-    <div className={styles.right_heart}>
-      <img src={heart} alt="heart" onClick={() => navigate("/wishlist")} />
-    </div>
-  </>
-)}
-
+          <>
+            <div className={styles.right_cart}>
+              <img src={cart} alt="cart" onClick={() => navigate("/basket")} />
+            </div>
+            <div className={styles.right_heart}>
+              <img
+                src={heart}
+                alt="heart"
+                onClick={() => navigate("/wishlist")}
+              />
+            </div>
+          </>
+        )}
 
         <div className={styles.right_image}>
           {user?.profilePic ? (
@@ -101,30 +103,25 @@ const Header = () => {
           )}
         </div>
         <div className={styles.right_user} onClick={handleUserClick}>
-
           {user ? user.name : "Login"}
-
         </div>
 
         {user && (
-
           <>
-
-            <div className={styles.right_downarrow} onClick={() => navigate("/profile")}>
+            <div
+              className={styles.right_downarrow}
+              onClick={() => navigate("/profile")}
+            >
               <img src={downarrow} alt="downarrow" />
             </div>
             <div className={styles.right_logout} onClick={handleLogout}>
               <img src={logoutIcon} alt="Logout" />
               <span className={styles.logout_text}>Logout</span>
             </div>
-
           </>
-
         )}
-
       </div>
     </header>
-    
   );
 };
 
