@@ -1,53 +1,81 @@
 .deals_timer_container {
     width: 100%;
-    height: 23rem; /* 368px → 23rem */
-    border: 0.0625rem solid red; /* 1px → 0.0625rem */
-    padding: 3rem 6rem; /* 48px 96px → 3rem 6rem */
+    height: auto;
+    border: 1px solid red;
+    padding: 3rem 6rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #E31E24;
+    flex-wrap: wrap; /* Allows elements to stack on smaller screens */
 }
 
+/* Left section */
 .deals_timer_container_left {
-    width: 30.13rem; /* 482px → 30.13rem */
-    height: 100%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    text-align: center;
 }
 
+/* Heading */
 .deals_timer_heading {
-    width: 100%;
-    height: 2.75rem; /* 44px → 2.75rem */
     font-weight: 600;
-    font-size: 2.29rem; /* 36.67px → 2.29rem */
-    line-height: 2.75rem; /* 44px → 2.75rem */
-    text-align: center;
+    font-size: 2rem; /* Adjusted for responsiveness */
     color: #FFFFFF;
 }
 
+/* Timer */
 .deals_timer {
-    width: 30.13rem; /* 482px → 30.13rem */
-    height: 4.09rem; /* 65.5px → 4.09rem */
+    width: 100%;
+    max-width: 30rem;
 }
 
+/* Button */
 .deals_timer_button button {
-    width: 30.13rem; /* 482px → 30.13rem */
-    height: 5.38rem; /* 86px → 5.38rem */
-    background-color: #FFFFFF;
-    border-radius: 1.125rem; /* 18px → 1.125rem */
-    padding: 0.447rem 7.16rem; /* 7.16px 114.57px → 0.447rem 7.16rem */
+    width: 100%;
+    max-width: 25rem;
+    height: 4rem;
+    border-radius: 1rem;
     font-weight: 700;
-    font-size: 1.79rem; /* 28.64px → 1.79rem */
-    line-height: 2.13rem; /* 34px → 2.13rem */
+    font-size: 1.5rem;
     color: #E31E24;
+    background-color: #FFFFFF;
     border: none;
+    transition: 0.3s;
 }
 
-.deals_timer_container_right_top, 
+.deals_timer_button button:hover {
+    background-color: #E31E24;
+    color: #FFFFFF;
+}
+
+/* Right section */
+.deals_timer_container_right_top,
 .deals_timer_container_right_bottom {
     display: flex;
-    gap: 3rem; /* 48px → 3rem */
-    margin-top: 1.12rem; /* 17.86px → 1.12rem */
+    gap: 2rem; /* Adjusted spacing */
+    margin-top: 1rem;
+    flex-wrap: wrap; /* Allows stacking */
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .deals_timer_container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .deals_timer_heading {
+        font-size: 1.75rem;
+    }
+
+    .deals_timer_button button {
+        font-size: 1.2rem;
+        max-width: 20rem;
+    }
 }

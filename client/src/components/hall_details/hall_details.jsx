@@ -155,7 +155,7 @@ const HallDetails = ({
                             />
                         </div>
                     ))}
-                    {images.length > 4 && !showExtraImages && (
+                    {/* {images.length > 4 && !showExtraImages && (
                         <div
                             className={`${styles.hall_details_left_cards_left} ${
                                 selectedImage === images[4] ? styles.selected : ""
@@ -169,7 +169,24 @@ const HallDetails = ({
                             />
                             <div className={styles.more_images_overlay}>+{images.length - 5}</div>
                         </div>
-                    )}
+                    )} */}
+                  {images.length > 4 && !showExtraImages && (
+    <div
+        className={`${styles.hall_details_left_cards_left} ${
+            selectedImage === images[4] ? styles.selected : ""
+        }`}
+        onClick={() => handleCardClick(4)}
+    >
+        <img
+            src={images[4]}
+            alt="card5"
+            className={selectedImage === images[4] ? "selected" : ""}
+        />
+        {images.length > 5 && (
+            <div className={styles.more_images_overlay}>+{images.length - 5}</div>
+        )}
+    </div>
+)}
                 </div>
 
                 {/* Render extra images in a row with the same style */}

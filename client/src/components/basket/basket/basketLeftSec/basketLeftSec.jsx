@@ -206,7 +206,8 @@ import axios from 'axios';
 const Basket = ({ cartItems, updateCartItems }) => {
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      const price = item.productId.isTodaysDeal ? item.productId.discountPrice : item.productId.price;
+      // const price = item.productId.isTodaysDeal ? item.productId.discountPrice : item.productId.price;
+      const price = item.productId.price;
       return item.checked ? total + price * item.quantity : total;
     }, 0);
   };
@@ -277,7 +278,7 @@ const Basket = ({ cartItems, updateCartItems }) => {
 />
               <div className={styles.productDetails}>
                 <h3>{item.productId.name}</h3>
-                 <p className={styles.productPrice}>₹{item.productId.isTodaysDeal ? item.productId.discountPrice : item.productId.price}</p>
+                 <p className={styles.productPrice}>₹{item.productId.price}</p>
                     {/* <p className={styles.productRating}>
 <img src={star} alt="rating" /> {item.productId.rating}{" "}
 {'('}{item.productId.reviewCount}{')'}
