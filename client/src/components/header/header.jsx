@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../Context/userContext"; 
+import { useUser } from "../Context/userContext";
 import styles from "./header.module.css";
 import logo from "./assets/images/Vector.svg";
 import cart from "./assets/images/cart.svg";
@@ -9,9 +9,7 @@ import downarrow from "./assets/images/down_arrow.svg";
 import userIcon from "./assets/images/userIcon.svg";
 import logoutIcon from "./assets/images/exit.png";
 import cx from "classnames";
-
 const Header = () => {
-
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // Use user context
   const handleUserClick = () => {
@@ -20,7 +18,6 @@ const Header = () => {
     } else {
       navigate("/login");
     }
-
   };
 
   const handleLogout = () => {
@@ -29,11 +26,9 @@ const Header = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("jwtToken");
     navigate("/login");
-    
   };
 
   return (
-  
     <header className={styles.header}>
       <div className={cx(styles.pointer, styles.left)}>
         <div className={styles.left_logo} onClick={() => navigate("/")}>
@@ -73,13 +68,29 @@ const Header = () => {
           Contact
         </span>
       </div>
+
       <div className={styles.right}>
-        <div className={styles.right_cart}>
+        {/* <div className={styles.right_cart}>
           <img src={cart} alt="cart" onClick={() => navigate("/basket")} />
         </div>
         <div className={styles.right_heart}>
           <img src={heart} alt="heart" onClick={() => navigate("/wishlist")} />
-        </div>
+        </div> */}
+        {user && (
+          <>
+            <div className={styles.right_cart}>
+              <img src={cart} alt="cart" onClick={() => navigate("/basket")} />
+            </div>
+            <div className={styles.right_heart}>
+              <img
+                src={heart}
+                alt="heart"
+                onClick={() => navigate("/wishlist")}
+              />
+            </div>
+          </>
+        )}
+
         <div className={styles.right_image}>
           {user?.profilePic ? (
             <img
@@ -87,7 +98,6 @@ const Header = () => {
               src={`data:image/jpeg;base64,${user.profilePic}`}
               alt="user"
             />
-
           ) : (
             <img src={userIcon} alt="user" />
           )}
@@ -95,9 +105,13 @@ const Header = () => {
         <div className={styles.right_user} onClick={handleUserClick}>
           {user ? user.name : "Login"}
         </div>
-        {user && (  
+
+        {user && (
           <>
-            <div className={styles.right_downarrow} onClick={() => navigate("/profile")}>
+            <div
+              className={styles.right_downarrow}
+              onClick={() => navigate("/profile")}
+            >
               <img src={downarrow} alt="downarrow" />
             </div>
             <div className={styles.right_logout} onClick={handleLogout}>
