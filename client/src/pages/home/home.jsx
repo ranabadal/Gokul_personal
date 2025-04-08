@@ -1,105 +1,510 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
+// import styles from "./home.module.css";
+
+// import Header from "../../components/header/header";
+
+// import AboveHeader from "../../components/above_header/above_header";
+
+// import HeroSection from "../../components/hero_section/hero_section";
+
+// import Hover from "../../components/hover/hover";
+
+// import Facilities from "../../components/facilities/facilities";
+
+// import Cards from "../../components/cards/cards";
+
+// import Footer from "../../components/footer/footer";
+
+// import laddu from "../../components/cards/assets/laddu.svg";
+
+// import pedda from "../../components/cards/assets/pedaa.svg";
+
+// import CardHeader from "../../components/card_header/card_header";
+
+// import HorizontalCard from "../../components/horizontal_card/horizontal_card";
+
+// import { useNavigate } from "react-router-dom";
+
+// function Home() {
+//   const navigate = useNavigate();
+
+//   const [cardData, setCardData] = useState([
+//     {
+//       name: "Lalmohan",
+//       img: laddu,
+//     },
+//     {
+//       name: "pedda",
+//       img: pedda,
+//     },
+//     {
+//       name: "laddu",
+//       img: laddu,
+//     },
+//   ]);
+
+//   return (
+//     <div className={styles.home}>
+//       <div className={styles.above_header_container}>
+//         <AboveHeader />
+//       </div>
+
+//       <Header />
+
+//       <div className={styles.hero_section_container}>
+//         <HeroSection />
+//       </div>
+
+//       <div className={styles.hover_container}>
+//         <Hover />
+//       </div>
+
+//       <div className={styles.card_header_container}>
+//         <CardHeader />
+//       </div>
+
+//       <div className={styles.card_section_container}>
+//         {Array.isArray(cardData) &&
+//           cardData.map((item, index) => {
+//             return (
+//               <div
+//                 key={index}
+//                 onClick={() => navigate("/products")}
+//                 style={{ cursor: "pointer" }}
+//               >
+//                 <Cards data={item} />
+//               </div>
+//             );
+//           })}
+//       </div>
+
+//       <div className={styles.card_header_container}>
+//         <CardHeader title="Hall Bookings" />
+//       </div>
+
+//       <div className={styles.horizontal_cards_container}>
+//         {/* <HorizontalCard />
+
+//         <HorizontalCard /> */}
+
+//       </div>
+
+//       <div className={styles.facilities_section_container}>
+//         <Facilities />
+//       </div>
+
+//       <div className={styles.footer_container}>
+//         <Footer />
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+
+
+
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import styles from "./home.module.css";
+// import heart from "../../components/hall_details/assets/red heart.svg";
+// import star from "../../components/hall_details/assets/star.svg";
+// import Header from "../../components/header/header";
+// import AboveHeader from "../../components/above_header/above_header";
+// import HeroSection from "../../components/hero_section/hero_section";
+// import Hover from "../../components/hover/hover";
+// import Facilities from "../../components/facilities/facilities";
+// import Cards from "../../components/cards/cards";
+// import Footer from "../../components/footer/footer";
+// import CardHeader from "../../components/card_header/card_header";
+// import HorizontalCard from "../../components/horizontal_card/horizontal_card";
+// import HallDetails from "../../components/hall_details/hall_details";
+// import Loader from "../../components/Loader/loader3/loader3";
+
+// const Home = () => {
+//   const navigate = useNavigate();
+
+//   // Hardcoded card data
+//   const [cardData] = useState([
+//     { name: "Lalmohan", img: require("../../components/cards/assets/laddu.svg") },
+//     { name: "Pedda", img: require("../../components/cards/assets/pedaa.svg") },
+//     { name: "Laddu", img: require("../../components/cards/assets/laddu.svg") },
+//   ]);
+
+//   // Banquet hall state management
+//   const [banquets, setBanquets] = useState([]);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     const fetchBanquets = async () => {
+//       try {
+//         const response = await fetch("http://localhost:8080/api/banquets");
+//         if (!response.ok) throw new Error("Failed to fetch banquet data.");
+
+//         const data = await response.json();
+//         if (data.success) {
+//           const updatedBanquets = data.banquets.map((banquet) => ({
+//             ...banquet,
+//             selectedImage: banquet.images[0]?.data
+//               ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
+//               : null,
+//           }));
+//           setBanquets(updatedBanquets);
+//         } else {
+//           throw new Error("No banquet data found.");
+//         }
+//       } catch (err) {
+//         setError(err.message);
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     };
+//     fetchBanquets();
+//   }, []);
+
+//   return (
+//     <div className={styles.home}>
+//       <div className={styles.above_header_container}>
+//         <AboveHeader />
+//       </div>
+//       <Header />
+
+//       <div className={styles.hero_section_container}>
+//         <HeroSection />
+//       </div>
+
+//       <div className={styles.hover_container}>
+//         <Hover />
+//       </div>
+
+//       <div className={styles.card_header_container}>
+//         <CardHeader />
+//       </div>
+
+//       <div className={styles.card_section_container}>
+//         {cardData.map((item, index) => (
+//           <div key={index} onClick={() => navigate("/products")} style={{ cursor: "pointer" }}>
+//             <Cards data={item} />
+//           </div>
+//         ))}
+//       </div>
+
+//       <div className={styles.card_header_container}>
+//         <CardHeader title="Hall Bookings" />
+//       </div>
+
+//       {/* Loader & error handling */}
+//       {isLoading && <p>Loading...</p>}
+//       {error && <div className={styles.error}>Error: {error}</div>}
+
+//       {/* Display banquet halls dynamically */}
+//       <div className={styles.horizontal_cards_container}>
+//         {!isLoading && !error && banquets.slice(0, 2).map((banquet) => (
+//           <HallDetails
+//             key={banquet._id}
+//             name={banquet.title}
+//             price={`₹ ${banquet.price}/day`}
+//             seating={`${banquet.seatingCapacity} Seating`}
+//             description={banquet.description}
+//             rating={banquet.rating}
+//             icons={{ heart, star }}
+//             images={banquet.images.map(
+//               (img) => `data:${img.contentType};base64,${img.data}`
+//             )}
+//             selectedImage={banquet.selectedImage}
+//             onImageClick={(image) => setBanquets((prevBanquets) =>
+//               prevBanquets.map((b) =>
+//                 b._id === banquet._id ? { ...b, selectedImage: image } : b
+//               )
+//             )}
+//             onCheckAvailability={() => navigate("/cateringForm", {
+//               state: {
+//                 seatingCapacity: banquet.seatingCapacity,
+//                 hallTitle: banquet.title,
+//                 hallPrice: banquet.price,
+//                 hallImage: banquet.images[0]
+//                   ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
+//                   : null,
+//               },
+//             })}
+//           />
+//         ))}
+//       </div>
+
+//       <div className={styles.facilities_section_container}>
+//         <Facilities />
+//       </div>
+
+//       <div className={styles.footer_container}>
+//         <Footer />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Home;
+
+
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
+import heart from "../../components/hall_details/assets/red heart.svg";
+import star from "../../components/hall_details/assets/star.svg";
 
 import Header from "../../components/header/header";
-
 import AboveHeader from "../../components/above_header/above_header";
-
 import HeroSection from "../../components/hero_section/hero_section";
-
 import Hover from "../../components/hover/hover";
-
 import Facilities from "../../components/facilities/facilities";
-
 import Cards from "../../components/cards/cards";
-
 import Footer from "../../components/footer/footer";
-
-import laddu from "../../components/cards/assets/laddu.svg";
-
-import pedda from "../../components/cards/assets/pedaa.svg";
-
 import CardHeader from "../../components/card_header/card_header";
-
 import HorizontalCard from "../../components/horizontal_card/horizontal_card";
+import HallDetails from "../../components/hall_details/hall_details";
+import FestiveSweet from "../Products/SweetProduct/FestiveSweet"; // Sweet Product Component
+import Loader from "../../components/Loader/loader3/loader3";
+import axios from "axios"; // Using axios for cleaner API calls
 
-import { useNavigate } from "react-router-dom";
+import { useToaster } from '../../utils';
 
-function Home() {
 
-    const navigate = useNavigate();
 
-    const [cardData, setCardData] = useState(
-        [
-        {
-            name: 'Lalmohan',
-            img: laddu
-        }, 
-        {
-            name: 'pedda',
-            img: pedda
-        }, 
-        {
-            name: 'laddu',
-            img: laddu
+const Home = () => {
+  const navigate = useNavigate();
+ const setToast = useToaster();
+  // Card Data (Hardcoded)
+  const [cardData] = useState([
+    { name: "Lalmohan", img: require("../../components/cards/assets/laddu.svg") },
+    { name: "Pedda", img: require("../../components/cards/assets/pedaa.svg") },
+    { name: "Laddu", img: require("../../components/cards/assets/laddu.svg") },
+  ]);
+
+  // State Management
+  const [banquets, setBanquets] = useState([]);
+    const [basket, setBasket] = useState([]);
+  const [sweets, setSweets] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch Banquets from API
+  useEffect(() => {
+    const fetchBanquets = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/banquets");
+        if (!response.ok) throw new Error("Failed to fetch banquet data.");
+
+        const data = await response.json();
+        if (data.success) {
+          const updatedBanquets = data.banquets.map((banquet) => ({
+            ...banquet,
+            selectedImage:
+              banquet.images[0]?.data
+                ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
+                : null,
+          }));
+          setBanquets(updatedBanquets);
+        } else {
+          throw new Error("No banquet data found.");
         }
-    ]
+      } catch (error) {
+        console.error("Error:", error.message);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-);
+    fetchBanquets();
+  }, []);
 
-    return (
 
-        <div className={styles.home}>
+  const handleAddToCart = async (productId) => {
+    console.log('Product ID before sending:', typeof productId, productId); // Log the type and value
+  
+    try {
+      const token = localStorage.getItem("jwtToken");
+  
+      if (!token) {
+        setToast('Please log in first!', 'error');
+        return;
+      }
+  
+      // Ensure productId is a simple string and not an object
+      const flatProductId = (typeof productId === 'object' && productId._id) ? productId._id : productId;
+  
+      const response = await fetch("http://localhost:8080/api/cart", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          productId: flatProductId.toString(), // Ensure productId is a string
+          quantity: 1
+        })
+      });
+  
+      const data = await response.json();
+      if (data.success) {
+        setToast('Product added to cart successfully!', 'success');
+        setBasket([...basket, flatProductId]);
+      } else {
+        alert(`Error adding to cart: ${data.message}`);
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      setToast('An error occurred while adding the product to the cart.', 'error');
+    }
+  };
 
-            <div className={styles.above_header_container}><AboveHeader /></div>
+  const handleRemoveFromCart = async (productId) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
 
-            <Header />
+      if (!token) {
+        setToast('Please log in first!', 'error');
+        return;
+      }
 
-            <div className={styles.hero_section_container}><HeroSection /></div>
+      await axios.delete(`http://localhost:8080/api/cart/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-            <div className={styles.hover_container}><Hover /></div>
+      setBasket(basket.filter(id => id !== productId));
+      setToast('Product removed from cart successfully!', 'error');
+    } catch (error) {
+      console.error("Error removing from cart:", error);
+      setToast('An error occurred while removing the product to the cart.', 'error');
+    }
+  };
 
-            <div className={styles.card_header_container}><CardHeader /></div>
+  const handleAddToWishlist = async (productId) => {
+    console.log("Wishlist click detected for product ID:", productId); 
+    try {
+      const token = localStorage.getItem("jwtToken");
 
-            <div className={styles.card_section_container}>
+      if (!token) {
+        setToast('Please log in first!', 'error');
+        return;
+      }
 
-                {Array.isArray(cardData) && cardData.map((item, index) => {
+      const productIdStr = productId.toString(); // Ensure productId is a string
 
-return (
+      const response = await axios.post("http://localhost:8080/api/wishlist", { productId: productIdStr }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-    <div
+      if (response.data.success) {
+        setToast('Product added to wishlist successfully!', 'success');
+      } else {
+        alert(`Error adding to wishlist: ${response.data.message}`);
+      }
+    } catch (error) {
+      console.error("Error adding to wishlist:", error);
+      setToast('An error occurred while adding the product to the wishlist.', 'error');
+    }
+  };
 
-    key={index}
+  // Fetch Sweets from API
+  useEffect(() => {
+    const fetchSweets = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/products");
+        setSweets(response.data.products.slice(0, 3)); // Get only 3 sweets
+      } catch (err) {
+        console.error("Error fetching sweets:", err);
+      }
+    };
+    fetchSweets();
+  }, []);
 
-    onClick={() => navigate("/products")}
+  return (
+    <div className={styles.home}>
+      <div className={styles.above_header_container}>
+        <AboveHeader />
+      </div>
+      <Header />
 
-    style={{ cursor: "pointer" }}>
+      <div className={styles.hero_section_container}>
+        <HeroSection />
+      </div>
 
-    <Cards data={item} />
+      <div className={styles.hover_container}>
+        <Hover />
+      </div>
 
+      <div className={styles.card_header_container}>
+        <CardHeader />
+      </div>
+      {isLoading && <p>Loading...</p>}
+      {/* Render Sweet Products Dynamically */}
+      <div className={styles.card_section_container}>
+        {sweets.map((sweet) => (
+          <FestiveSweet key={sweet._id} product={sweet}  addToCart={handleAddToCart}
+          removeFromCart={handleRemoveFromCart}
+          addToWishlist={handleAddToWishlist}/>
+        ))}
+      </div>
+
+      <div className={styles.card_header_container}>
+        <CardHeader title="Hall Bookings" />
+      </div>
+
+      {/* Loader & Error Handling */}
+      {isLoading && <p>Loading...</p>}
+      {error && <div className={styles.error}>Error: {error}</div>}
+
+      {/* Display Banquet Halls Dynamically */}
+      <div className={styles.horizontal_cards_container}>
+        {!isLoading &&
+          !error &&
+          banquets.slice(0, 2).map((banquet) => (
+            <HallDetails
+              key={banquet._id}
+              name={banquet.title}
+              price={`₹ ${banquet.price}/day`}
+              seating={`${banquet.seatingCapacity} Seating`}
+              description={banquet.description}
+              rating={banquet.rating}
+              icons={{ heart, star }}
+              images={banquet.images.map((img) => `data:${img.contentType};base64,${img.data}`)}
+              selectedImage={banquet.selectedImage}
+              onImageClick={(image) =>
+                setBanquets((prevBanquets) =>
+                  prevBanquets.map((b) => (b._id === banquet._id ? { ...b, selectedImage: image } : b))
+                )
+              }
+              onCheckAvailability={() =>
+                navigate("/cateringForm", {
+                  state: {
+                    seatingCapacity: banquet.seatingCapacity,
+                    hallTitle: banquet.title,
+                    hallPrice: banquet.price,
+                    hallImage: banquet.images[0]
+                      ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
+                      : null,
+                  },
+                })
+              }
+            />
+          ))}
+      </div>
+
+      <div className={styles.facilities_section_container}>
+        <Facilities />
+      </div>
+
+      <div className={styles.footer_container}>
+        <Footer />
+      </div>
     </div>
-
-)
-
-})
-
-}
-
-            </div>
-
-            <div className={styles.card_header_container}><CardHeader title="Hall Bookings" /></div>
-
-            <div className={styles.horizontal_cards_container}><HorizontalCard /><HorizontalCard /></div>
-
-            <div className={styles.facilities_section_container}><Facilities /></div>
-
-            <div className={styles.footer_container}><Footer /></div>
-
-        </div>
-
-);
-
+  );
 };
 
 export default Home;
