@@ -416,11 +416,18 @@ const Home = () => {
     const fetchSweets = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/products");
-        setSweets(response.data.products.slice(0, 3)); // Get only 3 sweets
+        
+        // Filter only "Sweets" category and limit to 3 items
+        const filteredSweets = response.data.products
+          .filter((product) => product.category.toLowerCase() === "sweets")
+          .slice(0, 3);
+  
+        setSweets(filteredSweets);
       } catch (err) {
         console.error("Error fetching sweets:", err);
       }
     };
+  
     fetchSweets();
   }, []);
 
@@ -442,9 +449,10 @@ const Home = () => {
       <div className={styles.card_header_container}>
         <CardHeader />
       </div>
-      {isLoading && <p>Loading...</p>}
+     
       {/* Render Sweet Products Dynamically */}
       <div className={styles.card_section_container}>
+      {isLoading && <p>Loading...</p>}
         {sweets.map((sweet) => (
           <FestiveSweet key={sweet._id} product={sweet}  addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}

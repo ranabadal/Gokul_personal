@@ -176,7 +176,7 @@ const ProductManagement = () => {
         <input className={styles.input} type="number" name="price" placeholder="Price" value={formData.price} onChange={handleInputChange} required />
         <input className={styles.input} type="number" name="rating" placeholder="Rating" value={formData.rating} onChange={handleInputChange} />
         <input className={styles.input} type="number" name="reviewCount" placeholder="Review Count" value={formData.reviewCount} onChange={handleInputChange} />
-        <label>
+        {/* <label>
           <input type="checkbox" name="isTodaysDeal" checked={formData.isTodaysDeal} onChange={handleInputChange} />
           Today's Deal
         </label>
@@ -186,7 +186,7 @@ const ProductManagement = () => {
             <input className={styles.input} type="number" name="oldPrice" placeholder="Old Price" value={formData.oldPrice} onChange={handleInputChange} />
             <input className={styles.input} type="number" name="discountPercent" placeholder="Discount Percent" value={formData.discountPercent} onChange={handleInputChange} />
           </>
-        )}
+        )} */}
         <input id="fileInput" className={styles.input} type="file" accept="image/*" onChange={handleFileChange} />
         <button className={styles.button} type="submit">{editProductId ? 'Save Changes' : 'Add Product'}</button>
         {editProductId && <button type="button" onClick={() => setEditProductId(null)}>Cancel</button>}
@@ -226,11 +226,9 @@ const ProductManagement = () => {
         <td>{product.rating}</td>
         <td>{product.reviewCount}</td>
         <td>
-          {product.image && product.image.data ? (
-            <img className={styles.imgg} src={`data:${product.image.contentType};base64,${product.image.data}`} alt={product.name} width="50" />
-          ) : (
-            'No Image'
-          )}
+         {
+            <img className={styles.imgg} src={product.image} alt={product.name} width="50" />
+         }
         </td>
         <td>
           <button className={styles.button} onClick={() => handleEditClick(product)}>Edit</button>
