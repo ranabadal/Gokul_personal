@@ -55,7 +55,7 @@
     color: white;
 }
 
-.hover_content:hover .svg2 path, .hover_content:hover .svg3 path, .hover_content:hover .svg4 path{
+.hover_content:hover .svg2 path, .hover_content:hover .svg3 path, .hover_content:hover .svg4 path, .hover_content:hover .svg5 path{
     fill: #f6f6f6;
 }
 
