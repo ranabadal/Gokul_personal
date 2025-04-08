@@ -197,39 +197,178 @@
 
 
 
-import React from "react";
+// import React from "react";
+// import styles from "./basketLeftSec.module.css";
+// import deleteIcon from "./Assets/deleteIcon.svg";
+// import star from "./Assets/Star.svg";
+// import axios from 'axios';
+
+// const Basket = ({ cartItems, updateCartItems }) => {
+//   const calculateTotal = () => {
+//     return cartItems.reduce((total, item) => {
+//       // const price = item.productId.isTodaysDeal ? item.productId.discountPrice : item.productId.price;
+//       const price = item.productId.price;
+//       return item.checked ? total + price * item.quantity : total;
+//     }, 0);
+//   };
+  
+
+//   const handleIncrement = async (id) => {
+//     const updatedCartItems = cartItems.map(item => item.productId._id === id ? { ...item, quantity: item.quantity + 1 } : item);
+//     updateCartItems(updatedCartItems);
+//     await updateCartItemInDB(id, { quantity: updatedCartItems.find(item => item.productId._id === id).quantity });
+//   };
+
+//   const handleDecrement = async (id) => {
+//     const updatedCartItems = cartItems.map(item => item.productId._id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item);
+//     updateCartItems(updatedCartItems);
+//     await updateCartItemInDB(id, { quantity: updatedCartItems.find(item => item.productId._id === id).quantity });
+//   };
+
+//   const handleDelete = async (id) => {
+//     try {
+//       updateCartItems(prev => prev.filter(item => item.productId._id !== id));
+
+//       // Remove item from the backend/database
+//       await axios.delete(`http://localhost:8080/api/cart/${id}`, {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
+//         }
+//       });
+//     } catch (error) {
+//       console.error("Error removing item:", error);
+//     }
+//   };
+
+//   const handleCheck = async (id) => {
+//     const updatedCartItems = cartItems.map(item => item.productId._id === id ? { ...item, checked: !item.checked } : item);
+//     updateCartItems(updatedCartItems);
+//     await updateCartItemInDB(id, { checked: updatedCartItems.find(item => item.productId._id === id).checked });
+//   };
+
+//   const updateCartItemInDB = async (productId, updateData) => {
+//     try {
+//       await axios.put(`http://localhost:8080/api/cart`, { productId, ...updateData }, {
+//         headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwtToken")}` }
+//       });
+//     } catch (error) {
+//       console.error("Error updating cart item:", error);
+//     }
+//   };
+
+//   return (
+//     <div className={styles.cartContainer}>
+//       <h2 className={styles.cartTitle}>My Basket</h2>
+//       <p className={styles.cartTotal}>Basket Total: ₹{calculateTotal()}</p>
+
+//       <div className={styles.cartItems}>
+//         {cartItems.length === 0 ? (
+//           <p>Your cart is empty.</p>
+//         ) : (
+//           cartItems.map((item) => (
+//             <div key={item.productId._id} className={styles.cartItem}>
+//               <input type="checkbox" checked={item.checked || false} onChange={() => handleCheck(item.productId._id)} className={styles.checkbox} />
+//               {/* <img src={`data:${item.productId.image.contentType};base64,${item.productId.image.data}`} alt={item.productId.name} className={styles.productImage} /> */}
+//               <img 
+//   src={item.productId.image && item.productId.image.contentType && item.productId.image.data 
+//     ? `data:${item.productId.image.contentType};base64,${item.productId.image.data}` 
+//     : item.productId.image}
+//   alt={item.productId.name} 
+//   className={styles.productImage} 
+// />
+//               <div className={styles.productDetails}>
+//                 <h3>{item.productId.name}</h3>
+//                  <p className={styles.productPrice}>₹{item.productId.price}</p>
+//                     {/* <p className={styles.productRating}>
+// <img src={star} alt="rating" /> {item.productId.rating}{" "}
+// {'('}{item.productId.reviewCount}{')'}
+// </p> */}
+// {/* {item.productId.rating && item.productId.reviewCount > 0 && (
+//   <p className={styles.productRating}>
+//     <img src={star} alt="rating" /> {item.productId.rating} {" "}
+//     {'('}{item.productId.reviewCount}{')'}
+//   </p>
+// )} */}
+
+// </div>
+//                <div className={styles.productActions}>
+//                  <button onClick={() => handleDecrement(item.productId._id)} className={styles.quantityBtn}>-</button>
+//                  <div className={styles.productActionsnumb}><span className={styles.count}>{item.quantity}</span></div>
+//                  <button onClick={() => handleIncrement(item.productId._id)} className={styles.quantityBtn}>+</button>
+//                  <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} onClick={() => handleDelete(item.productId._id)} />
+//                </div>
+//              </div>
+//           ))
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+//  export default Basket;
+
+
+
+import React, { useState, useEffect } from "react";
 import styles from "./basketLeftSec.module.css";
 import deleteIcon from "./Assets/deleteIcon.svg";
 import star from "./Assets/Star.svg";
-import axios from 'axios';
+import axios from "axios";
 
 const Basket = ({ cartItems, updateCartItems }) => {
+  console.log("Cart Items Data:", cartItems); // Debug received cartItems
+
+  // Calculate total price
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      // const price = item.productId.isTodaysDeal ? item.productId.discountPrice : item.productId.price;
-      const price = item.productId.price;
+      if (!item.productId) return total; // Avoid error if productId is missing
+
+      const price = item.productId.isTodaysDeal
+        ? item.productId.discountPrice || item.productId.price // Fallback if discountPrice is undefined
+        : item.productId.price;
+
       return item.checked ? total + price * item.quantity : total;
     }, 0);
   };
-  
 
+  // Update cart item in the database
+  const updateCartItemInDB = async (productId, updateData) => {
+    try {
+      await axios.put(`http://localhost:8080/api/cart`, { productId, ...updateData }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
+        }
+      });
+    } catch (error) {
+      console.error("Error updating cart item:", error);
+    }
+  };
+
+  // Handle Increment Quantity
   const handleIncrement = async (id) => {
-    const updatedCartItems = cartItems.map(item => item.productId._id === id ? { ...item, quantity: item.quantity + 1 } : item);
+    const updatedCartItems = cartItems.map(item =>
+      item.productId?._id === id ? { ...item, quantity: item.quantity + 1 } : item
+    );
     updateCartItems(updatedCartItems);
-    await updateCartItemInDB(id, { quantity: updatedCartItems.find(item => item.productId._id === id).quantity });
+    await updateCartItemInDB(id, { quantity: updatedCartItems.find(item => item.productId?._id === id)?.quantity });
   };
 
+  // Handle Decrement Quantity
   const handleDecrement = async (id) => {
-    const updatedCartItems = cartItems.map(item => item.productId._id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item);
+    const updatedCartItems = cartItems.map(item =>
+      item.productId?._id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+    );
     updateCartItems(updatedCartItems);
-    await updateCartItemInDB(id, { quantity: updatedCartItems.find(item => item.productId._id === id).quantity });
+    await updateCartItemInDB(id, { quantity: updatedCartItems.find(item => item.productId?._id === id)?.quantity });
   };
 
+  // Handle Delete Item
   const handleDelete = async (id) => {
     try {
-      updateCartItems(prev => prev.filter(item => item.productId._id !== id));
+      updateCartItems(prev => prev.filter(item => item.productId?._id !== id));
 
-      // Remove item from the backend/database
+      // Remove item from backend/database
       await axios.delete(`http://localhost:8080/api/cart/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
@@ -240,20 +379,13 @@ const Basket = ({ cartItems, updateCartItems }) => {
     }
   };
 
+  // Handle Checkbox Selection
   const handleCheck = async (id) => {
-    const updatedCartItems = cartItems.map(item => item.productId._id === id ? { ...item, checked: !item.checked } : item);
+    const updatedCartItems = cartItems.map(item =>
+      item.productId?._id === id ? { ...item, checked: !item.checked } : item
+    );
     updateCartItems(updatedCartItems);
-    await updateCartItemInDB(id, { checked: updatedCartItems.find(item => item.productId._id === id).checked });
-  };
-
-  const updateCartItemInDB = async (productId, updateData) => {
-    try {
-      await axios.put(`http://localhost:8080/api/cart`, { productId, ...updateData }, {
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwtToken")}` }
-      });
-    } catch (error) {
-      console.error("Error updating cart item:", error);
-    }
+    await updateCartItemInDB(id, { checked: updatedCartItems.find(item => item.productId?._id === id)?.checked });
   };
 
   return (
@@ -265,44 +397,53 @@ const Basket = ({ cartItems, updateCartItems }) => {
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
-          cartItems.map((item) => (
-            <div key={item.productId._id} className={styles.cartItem}>
-              <input type="checkbox" checked={item.checked || false} onChange={() => handleCheck(item.productId._id)} className={styles.checkbox} />
-              {/* <img src={`data:${item.productId.image.contentType};base64,${item.productId.image.data}`} alt={item.productId.name} className={styles.productImage} /> */}
-              <img 
-  src={item.productId.image && item.productId.image.contentType && item.productId.image.data 
-    ? `data:${item.productId.image.contentType};base64,${item.productId.image.data}` 
-    : item.productId.image}
-  alt={item.productId.name} 
-  className={styles.productImage} 
-/>
-              <div className={styles.productDetails}>
-                <h3>{item.productId.name}</h3>
-                 <p className={styles.productPrice}>₹{item.productId.price}</p>
-                    {/* <p className={styles.productRating}>
-<img src={star} alt="rating" /> {item.productId.rating}{" "}
-{'('}{item.productId.reviewCount}{')'}
-</p> */}
-{/* {item.productId.rating && item.productId.reviewCount > 0 && (
-  <p className={styles.productRating}>
-    <img src={star} alt="rating" /> {item.productId.rating} {" "}
-    {'('}{item.productId.reviewCount}{')'}
-  </p>
-)} */}
+          cartItems.map((item) => {
+            console.log("Item Data:", item.productId); // Debug each productId
 
-</div>
-               <div className={styles.productActions}>
-                 <button onClick={() => handleDecrement(item.productId._id)} className={styles.quantityBtn}>-</button>
-                 <div className={styles.productActionsnumb}><span className={styles.count}>{item.quantity}</span></div>
-                 <button onClick={() => handleIncrement(item.productId._id)} className={styles.quantityBtn}>+</button>
-                 <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} onClick={() => handleDelete(item.productId._id)} />
-               </div>
-             </div>
-          ))
+            return (
+              <div key={item.productId?._id} className={styles.cartItem}>
+                <input
+                  type="checkbox"
+                  checked={item.checked || false}
+                  onChange={() => handleCheck(item.productId?._id)}
+                  className={styles.checkbox}
+                />
+                
+                {/* Product Image */}
+                <img
+                  src={item.productId?.image?.data
+                    ? `data:${item.productId.image.contentType};base64,${item.productId.image.data}`
+                    : item.productId?.image || "fallback-image-url.jpg"}
+                  alt={item.productId?.name || "Product Image"}
+                  className={styles.productImage}
+                />
+                
+                <div className={styles.productDetails}>
+                  <h3>{item.productId?.name}</h3>
+                  <p className={styles.productPrice}>₹{item.productId?.isTodaysDeal ? item.productId?.discountPrice : item.productId?.price}</p>
+
+                  {/* Conditional Rating Display */}
+                  {item.productId?.rating > 0 && item.productId?.reviewCount > 0 && (
+                    <p className={styles.productRating}>
+                      <img src={star} alt="rating" /> {item.productId?.rating} {" "}
+                      ({item.productId?.reviewCount})
+                    </p>
+                  )}
+                </div>
+
+                <div className={styles.productActions}>
+                  <button onClick={() => handleDecrement(item.productId?._id)} className={styles.quantityBtn}>-</button>
+                  <div className={styles.productActionsnumb}><span className={styles.count}>{item.quantity}</span></div>
+                  <button onClick={() => handleIncrement(item.productId?._id)} className={styles.quantityBtn}>+</button>
+                  <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} onClick={() => handleDelete(item.productId?._id)} />
+                </div>
+              </div>
+            );
+          })
         )}
       </div>
     </div>
   );
 };
 
- export default Basket;
+export default Basket;

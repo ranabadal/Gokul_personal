@@ -144,7 +144,7 @@ const getCartItems = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid user ID' });
     }
 
-    const cart = await Cart.findOne({ userId }).populate('products.productId', 'category name description price rating reviewCount image discountPrice oldPrice discountPercent isTodaysDeal');
+    const cart = await Cart.findOne({ userId }).populate('products.productId', 'category name description price rating reviewCount image  oldPrice  ');
     if (!cart) {
       console.error(`Cart not found for user ID: ${userId}`);
       return res.status(404).json({ success: false, message: 'Cart not found' });
@@ -211,7 +211,7 @@ const deleteCartItem = async (req, res) => {
       { userId },
       { $pull: { products: { productId: itemId } } },
       { new: true }
-    ).populate('products.productId', 'category name description price rating reviewCount image discountPrice oldPrice discountPercent isTodaysDeal');
+    ).populate('products.productId', 'category name description price rating reviewCount image  oldPrice  ');
 
     if (!cart) {
       console.error(`Cart not found for user ID: ${userId}`);
