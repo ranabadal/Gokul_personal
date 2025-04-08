@@ -94,7 +94,7 @@ const Banquets = () => {
   return (
     <div className={styles.banquets}>
       <div className={styles.above_header}>
-        <AboveHeader />
+        {/* <AboveHeader /> */}
       </div>
       <div className={styles.header}>
         <Header />

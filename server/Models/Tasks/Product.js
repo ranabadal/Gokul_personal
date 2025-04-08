@@ -16,10 +16,9 @@ const productSchema = new mongoose.Schema({
   // },
   image: { type: String, required: true }, // Base64 image string
   // Fields for Today's Deal Product
-  discountPrice: { type: Number },
+ 
   oldPrice: { type: Number },
-  discountPercent: { type: Number },
-  isTodaysDeal: { type: Boolean, default: false },  // Flag to identify Today's Deal Product
+   // Flag to identify Today's Deal Product
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
