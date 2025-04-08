@@ -93,7 +93,7 @@ const Product = require('../../Models/Tasks/Product');
 // Add a new product
 exports.addProduct = async (req, res) => {
   try {
-    const { category,subcategory, name, description, price, rating, reviewCount, image, discountPrice, oldPrice, discountPercent, isTodaysDeal } = req.body;
+    const { category,subcategory, name, description, price, rating, reviewCount, image, oldPrice } = req.body;
 
     const newProduct = new Product({
       category,
@@ -105,10 +105,9 @@ exports.addProduct = async (req, res) => {
       reviewCount,
       // image: image ? { data: image.split(',')[1], contentType: image.split(',')[0].split(':')[1].split(';')[0] } : null,
       image,
-      discountPrice,
-      oldPrice,
-      discountPercent,
-      isTodaysDeal
+      
+      oldPrice
+      
     });
 
     await newProduct.save();
@@ -121,7 +120,7 @@ exports.addProduct = async (req, res) => {
 // Update an existing product
 exports.updateProduct = async (req, res) => {
   try {
-    const { category,subcategory, name, description, price, rating, reviewCount, image, discountPrice, oldPrice, discountPercent, isTodaysDeal } = req.body;
+    const { category,subcategory, name, description, price, rating, reviewCount, image, oldPrice } = req.body;
     const updatedProduct = {
       category,
       subcategory,
@@ -132,10 +131,10 @@ exports.updateProduct = async (req, res) => {
       reviewCount,
       // image: image ? { data: image.split(',')[1], contentType: image.split(',')[0].split(':')[1].split(';')[0] } : null,
       image,
-      discountPrice,
+      
       oldPrice,
-      discountPercent,
-      isTodaysDeal
+      
+      
     };
 
     const product = await Product.findByIdAndUpdate(req.params.id, updatedProduct, { new: true });
@@ -151,18 +150,14 @@ exports.updateProduct = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const { page = 1, limit = 100, isTodaysDeal } = req.query;
-    const filter = isTodaysDeal ? { isTodaysDeal: true } : {isTodaysDeal: false};
-    console.log(isTodaysDeal, filter)
+ 
+  
     let products = []
-    if(isTodaysDeal){
-      products = await Product.find({ isTodaysDeal: isTodaysDeal})
-      .limit(Number(limit))
-      .skip((Number(page) - 1) * Number(limit));
-    }else{
+   
       products = await Product.find()
       .limit(Number(limit))
       .skip((Number(page) - 1) * Number(limit));
-    }
+    
     res.status(200).json({ success: true, products });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error', error });
