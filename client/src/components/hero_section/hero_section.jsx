@@ -164,7 +164,7 @@ const HeroSection = () => {
     const slides = [
         {
             title: "Happiness in Every Bite!",
-            description: "Elevate every occasion with Goku;, where we offer premium gifts that illuminate life’s special moments.",
+            description: "Elevate every occasion with Gokul, where we offer premium gifts that illuminate life’s special moments.",
             image: thali,
             timer: <CountdownTimer />
         },
