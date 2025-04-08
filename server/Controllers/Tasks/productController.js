@@ -93,16 +93,18 @@ const Product = require('../../Models/Tasks/Product');
 // Add a new product
 exports.addProduct = async (req, res) => {
   try {
-    const { category, name, description, price, rating, reviewCount, image, discountPrice, oldPrice, discountPercent, isTodaysDeal } = req.body;
+    const { category,subcategory, name, description, price, rating, reviewCount, image, discountPrice, oldPrice, discountPercent, isTodaysDeal } = req.body;
 
     const newProduct = new Product({
       category,
+      subcategory,
       name,
       description,
       price,
       rating,
       reviewCount,
-      image: image ? { data: image.split(',')[1], contentType: image.split(',')[0].split(':')[1].split(';')[0] } : null,
+      // image: image ? { data: image.split(',')[1], contentType: image.split(',')[0].split(':')[1].split(';')[0] } : null,
+      image,
       discountPrice,
       oldPrice,
       discountPercent,
@@ -119,15 +121,17 @@ exports.addProduct = async (req, res) => {
 // Update an existing product
 exports.updateProduct = async (req, res) => {
   try {
-    const { category, name, description, price, rating, reviewCount, image, discountPrice, oldPrice, discountPercent, isTodaysDeal } = req.body;
+    const { category,subcategory, name, description, price, rating, reviewCount, image, discountPrice, oldPrice, discountPercent, isTodaysDeal } = req.body;
     const updatedProduct = {
       category,
+      subcategory,
       name,
       description,
       price,
       rating,
       reviewCount,
-      image: image ? { data: image.split(',')[1], contentType: image.split(',')[0].split(':')[1].split(';')[0] } : null,
+      // image: image ? { data: image.split(',')[1], contentType: image.split(',')[0].split(':')[1].split(';')[0] } : null,
+      image,
       discountPrice,
       oldPrice,
       discountPercent,
@@ -146,7 +150,7 @@ exports.updateProduct = async (req, res) => {
 // Get all products with filters and pagination
 exports.getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 10, isTodaysDeal } = req.query;
+    const { page = 1, limit = 100, isTodaysDeal } = req.query;
     const filter = isTodaysDeal ? { isTodaysDeal: true } : {isTodaysDeal: false};
     console.log(isTodaysDeal, filter)
     let products = []

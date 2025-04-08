@@ -146,9 +146,9 @@ export default function OrderSummary({
 }) {
   // Set menu prices (could be fetched from an API)
   const [menuPrices, setMenuPrices] = useState({
-    Basic: 499,
-    Premium: 999,
-    Deluxe: 1499,
+    Silver: 580,
+    Golden: 680,
+    Platinum: 780,
     Royal: 1999,
   });
 

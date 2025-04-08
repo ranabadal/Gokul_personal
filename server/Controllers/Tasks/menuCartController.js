@@ -29,7 +29,7 @@ exports.getMenuById = async (req, res) => {
 exports.createMenu = async (req, res) => {
   try {
     const { menuName, description, price, menuImage } = req.body;
-    const newMenu = new Menu({ menuName, description, price, menuImage });
+    const newMenu = new Menu({ menuName, description, price,  menuImage: menuImage ? { data: menuImage.split(',')[1], contentType: image.split(',')[0].split(':')[1].split(';')[0] } : null, });
 
     await newMenu.save();
     res.status(201).json(newMenu);

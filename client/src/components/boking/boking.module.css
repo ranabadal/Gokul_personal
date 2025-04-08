@@ -83,7 +83,7 @@
     color: #28a745;
 }
 
-button {
+/* button {
     padding: 8px 15px;
     background-color: #E31E24;
     color: white;
@@ -92,11 +92,11 @@ button {
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
-}
-
+} */
+/* 
 button:hover {
     background-color: #b71c1c;
-}
+} */
 
 .pagination {
     margin-top: 20px;

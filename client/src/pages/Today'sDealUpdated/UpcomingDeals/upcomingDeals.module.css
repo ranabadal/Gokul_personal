@@ -1,0 +1,73 @@
+.upcomingDeals {
+    padding: 20px;
+    background: #ffff;
+   
+  }
+  
+  .title {
+    margin: 15px 0;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #c51717; /* Dark gray for the title */
+    font-family: "Madimi One";
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+/* Container for scrollable deals */
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+  }
+  
+  /* Scrollable wrapper */
+  .dealsGrid {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+    width: 90%;
+    white-space: nowrap; /* Prevent wrapping */
+  }
+  
+  .dealsGrid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+  }
+  
+  /* Arrow button styles */
+  .arrowButton {
+   background: none;
+    color: #c51717;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    padding: 10px;
+    border-radius: 50%;
+    position: absolute;
+    /* top: 50%;
+    transform: translateY(-50%);
+    z-index: 2; */
+  }
+  
+    .arrowButton:hover {
+        font-size: 32px;
+       transition: font-size 0.3s ease-in-out;
+    }
+  
+  /* Position arrows correctly */
+  .arrowButton:first-child {
+    left: -0px;
+  }
+  
+  .arrowButton:last-child {
+    right: -0px;
+  }
+  
+
+
+
+  

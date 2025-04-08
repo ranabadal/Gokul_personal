@@ -126,11 +126,13 @@ const FestiveSweet = ({ product, addToCart, removeFromCart, basket }) => {
 
   return (
     <div className={styles.card}>
-      <img
-        src={`data:${product.image.contentType};base64,${product.image.data}`}
-        alt={product.name}
-        className={styles.image}
-      />
+    <img 
+  src={product.image && product.image.contentType && product.image.data 
+    ? `data:${product.image.contentType};base64,${product.image.data}` 
+    : product.image}
+  alt={product.name} 
+  className={styles.image} 
+/>
       <div className={styles.content}>
         <h2 className={styles.title}>{product.name}</h2>
         <p className={styles.description}>{product.description}</p>

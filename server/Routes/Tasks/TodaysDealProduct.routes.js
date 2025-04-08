@@ -1,12 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { addTodaysDealProduct, updateTodaysDealProduct, getAllTodaysDealProducts, getTodaysDealProductById, deleteTodaysDealProduct } = require('../../Controllers/Tasks/TodaysDealProduct.controller');
-const { isAuthenticated } = require('../../Middlewares/isAuthenticated');
+const dealController = require("../../Controllers/Tasks/TodaysDealProduct.controller");
 
-router.post('/todaysdeals', addTodaysDealProduct);
-router.put('/todaysdeals/:id', updateTodaysDealProduct);
-router.get('/todaysdeals',getAllTodaysDealProducts);
-router.get('/todaysdeals/:id',getTodaysDealProductById);
-router.delete('/todaysdeals/:id', deleteTodaysDealProduct);
+// Routes
+router.put("/deals/:id", dealController.editDeal);
+router.delete("/deals/:id", dealController.deleteDeal);
+router.get("/deals/active", dealController.getActiveDeals);
+router.get("/deals/upcoming", dealController.getUpcomingDeals);
+router.get("/deals/expired", dealController.getExpiredDeals);
+router.get("/deals/all", dealController.getAllDeals);
+router.post("/deals/add", dealController.createDeal);
+
 
 module.exports = router;

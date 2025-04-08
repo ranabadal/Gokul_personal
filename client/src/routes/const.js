@@ -21,7 +21,7 @@ import Profile from "../pages/Profile/profile";
 import Products from "../pages/Products/products";
 import Admin from "../components/Admin/admin";
 import Basket from "../components/basket/basket/basket";
-import TodaysDeal from "../pages/todaysDeal/todaysDeal";
+import TodaysDeal from "../pages/Today'sDealUpdated/today'sDealUpdated";
 import CateringForm from "../pages/banquets/CateringForm/cateringForm"
 import GiftBoxes from "../pages/giftBoxes/giftBoxes";
 import GiftBoxCart from "../pages/giftBoxes/giftBoxCart/giftBoxCart"

@@ -575,7 +575,7 @@ const OrderCard = ({ item, bulkQuantity, size }) => {
 
   return (
     <div className={styles.orderItem}>
-      <img
+      {/* <img
         src={`data:${
           item.productId.image && item.productId.image.contentType
             ? item.productId.image.contentType
@@ -587,7 +587,8 @@ const OrderCard = ({ item, bulkQuantity, size }) => {
         }`}
         alt={item.productId.name}
         className={styles.itemImage}
-      />
+      /> */}
+      <img src={item.productId.image} alt={item.productId.name} className={styles.itemImage} />
       <div className={styles.itemDetails}>
         <h3 className={styles.itemTitle}>{item.productId.name}</h3>
         <p className={styles.itemQuantity}>

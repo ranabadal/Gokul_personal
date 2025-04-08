@@ -63,6 +63,10 @@ import GiftBoxManagement from './GiftBoxMng/giftBoxMng';
 import BanquetQueryPage from './BanquetQueryMng/banquetQueryMng';
 import BulkOrderQuery from './BulkOrderQuery/bulkOrderQuery'
 import GiftBoxOrderQueryPage from './GiftBoxOrderQuery/giftBoxOrderQuery'
+import MenuMng from './MenuMng/menuMng';
+import RestaurtentNavbar from './RestaurentNavMng/restaurentNavMng'
+
+import TodaysDealMng from './TodaysDealMng/todaysDealMng';
 
 const Admin = () => {
   const location = useLocation();
@@ -89,6 +93,12 @@ const Admin = () => {
                   return <BulkOrderQuery />;
                   case '/admin/giftBoxOrderQuery':
                   return <GiftBoxOrderQueryPage />;
+                  case '/admin/menu':
+                  return <MenuMng />;
+                  case '/admin/restaurentNav':
+                    return <RestaurtentNavbar />;
+                    case '/admin/todaysDeal':
+                      return <TodaysDealMng />;
       default:
         return <UsersManagement />; // Default to Users Management
     }

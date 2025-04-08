@@ -7,6 +7,7 @@ const ProductManagement = () => {
   const [products, setProducts] = useState([]);
   const [formData, setFormData] = useState({
     category: '',
+    subcategory: '',
     name: '',
     description: '',
     price: '',
@@ -72,6 +73,7 @@ const ProductManagement = () => {
         // Reset formData state
         setFormData({
           category: '',
+          subcategory: '',
           name: '',
           description: '',
           price: '',
@@ -110,6 +112,7 @@ const ProductManagement = () => {
         setEditProductId(null);
         setFormData({
           category: '',
+          subcategory: '',
           name: '',
           description: '',
           price: '',
@@ -148,6 +151,7 @@ const ProductManagement = () => {
     setEditProductId(product._id);
     setFormData({
       category: product.category,
+      subcategory: product.subcategory,
       name: product.name,
       description: product.description,
       price: product.price,
@@ -166,6 +170,7 @@ const ProductManagement = () => {
       <h2>Product Management</h2>
       <form onSubmit={editProductId ? handleEditProduct : handleAddProduct} className={styles.form}>
         <input className={styles.input} type="text" name="category" placeholder="Category" value={formData.category} onChange={handleInputChange} required />
+        <input className={styles.input} type="text" name="subcategory" placeholder="Subcategory" value={formData.subcategory} onChange={handleInputChange} required />
         <input className={styles.input} type="text" name="name" placeholder="Name" value={formData.name} onChange={handleInputChange} required />
         <input className={styles.input} type="text" name="description" placeholder="Description" value={formData.description} onChange={handleInputChange} required />
         <input className={styles.input} type="number" name="price" placeholder="Price" value={formData.price} onChange={handleInputChange} required />
@@ -191,6 +196,7 @@ const ProductManagement = () => {
     <tr>
       <th>ID</th>
       <th>Category</th>
+      <th>Subcategory</th>
       <th>Name</th>
       <th>Description</th>
       <th>Price</th>
@@ -209,6 +215,7 @@ const ProductManagement = () => {
       <tr key={product._id}>
         <td>{product._id}</td>
         <td>{product.category}</td>
+        <td>{product.subcategory}</td>
         <td>{product.name}</td>
         <td>{product.description}</td>
         <td>{product.price}</td>

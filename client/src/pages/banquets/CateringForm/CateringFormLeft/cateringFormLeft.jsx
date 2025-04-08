@@ -373,18 +373,18 @@ const CateringFormLeft = ({
       <div className={styles.heroSec}>
         <div className={styles.heroSecHeading}>Choose your Buffet Plan</div>
         <div className={styles.carts}>
-          {["Basic", "Premium", "Deluxe", "Royal"].map((menuName) => (
+          {["Silver", "Golden", "Platinum", "Royal"].map((menuName) => (
             <MenuCart
               key={menuName}
               menuName={menuName}
               description={`Menu description for ${menuName}`}
               price={`₹ ${
-                menuName === "Basic"
-                  ? 499
-                  : menuName === "Premium"
-                  ? 999
-                  : menuName === "Deluxe"
-                  ? 1499
+                menuName === "Silver"
+                  ? 580
+                  : menuName === "Golden"
+                  ? 680
+                  : menuName === "Platinum"
+                  ? 780
                   : 1999
               }/Plate`}
               menuImage={menu}
@@ -412,7 +412,7 @@ const CateringFormLeft = ({
           />
         </div>
 
-        
+
         <div className={styles.timeOptions}>
           {["Morning", "Afternoon", "Evening", "All Day"].map((timeSlot) => (
             <label key={timeSlot}>

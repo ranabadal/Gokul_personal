@@ -267,14 +267,28 @@ const Basket = ({ cartItems, updateCartItems }) => {
           cartItems.map((item) => (
             <div key={item.productId._id} className={styles.cartItem}>
               <input type="checkbox" checked={item.checked || false} onChange={() => handleCheck(item.productId._id)} className={styles.checkbox} />
-              <img src={`data:${item.productId.image.contentType};base64,${item.productId.image.data}`} alt={item.productId.name} className={styles.productImage} />
+              {/* <img src={`data:${item.productId.image.contentType};base64,${item.productId.image.data}`} alt={item.productId.name} className={styles.productImage} /> */}
+              <img 
+  src={item.productId.image && item.productId.image.contentType && item.productId.image.data 
+    ? `data:${item.productId.image.contentType};base64,${item.productId.image.data}` 
+    : item.productId.image}
+  alt={item.productId.name} 
+  className={styles.productImage} 
+/>
               <div className={styles.productDetails}>
                 <h3>{item.productId.name}</h3>
                  <p className={styles.productPrice}>₹{item.productId.isTodaysDeal ? item.productId.discountPrice : item.productId.price}</p>
-                    <p className={styles.productRating}>
+                    {/* <p className={styles.productRating}>
 <img src={star} alt="rating" /> {item.productId.rating}{" "}
 {'('}{item.productId.reviewCount}{')'}
-</p>
+</p> */}
+{/* {item.productId.rating && item.productId.reviewCount > 0 && (
+  <p className={styles.productRating}>
+    <img src={star} alt="rating" /> {item.productId.rating} {" "}
+    {'('}{item.productId.reviewCount}{')'}
+  </p>
+)} */}
+
 </div>
                <div className={styles.productActions}>
                  <button onClick={() => handleDecrement(item.productId._id)} className={styles.quantityBtn}>-</button>

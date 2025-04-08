@@ -1,0 +1,94 @@
+.todaysDeal {
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: #f8f9fa;
+    padding: 20px;
+
+    background-color: #ffff;
+ 
+  }
+
+  .imageContainer{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .todaysDeal img {
+    max-height: 700px;
+    max-width: 500px;
+    border-radius: 10px;
+  }
+
+  .description{
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #7f8286; /* Dark gray for the description */
+    /* font-family: "Madimi One"; */
+    font-weight: 200;
+    margin: 12px 0;
+
+  }
+
+  .OfferEndDate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #c51717; /* Dark gray for the description */
+    /* font-family: "Madimi One"; */
+    font-weight: 200;
+    margin: 12px 0;
+  }
+
+  .title{
+    font-size: 3rem;
+    font-weight: 400;
+    color: #7f8286; /* Dark gray for the title */
+    font-family: "Madimi One";
+
+  }
+  
+  .details {
+    max-width: 600px;
+    margin-left: 20px;
+  }
+  
+  .timer {
+    padding: 5px 10px;
+    max-width: fit-content;
+    border: 2px solid #f5941e; /* Red for urgency */
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3), 0.3); /* Example shadow */
+    font-size: 50px;
+    font-weight: 500;
+    color: #c51717; /* Red for urgency */
+  }
+  
+  .grabButton {
+    width: 100%;
+    background: #ff9900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Madimi One";
+    color: #c51717;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 26px;
+  }
+
+  .grabButton:hover {
+    background-color: #ffff;
+    color: #c51717; /* White for hover effect */
+    transition: background-color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out; /* Smooth transition for color change */
+    outline: 2px solid #ff9900; /* Red for hover effect */
+  }

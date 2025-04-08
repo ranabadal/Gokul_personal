@@ -1,0 +1,123 @@
+/* Main container */
+.dealManagement {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+  }
+  
+  .dealManagement h2 {
+    color: #007bff;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  input, textarea, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background: #0056b3;
+  }
+  
+  .dealsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .dealItem {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .dealItem img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .dealItem h4 {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .dealItem p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* Edit & Delete buttons */
+  .editButton {
+    background: #007bff;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  
+  .editButton:hover {
+    background: #0056b3;
+  }
+  
+  .deleteButton {
+    background: #ff3b3b;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .deleteButton:hover {
+    background: #b30000;
+  }
+  
+  /* No Deals Message */
+  .noDeals {
+    color: gray;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dealItem {
+      width: 100%;
+    }
+  
+    form {
+      width: 100%;
+    }
+  }

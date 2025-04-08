@@ -1,68 +1,20 @@
-// const mongoose = require('mongoose');
 
-// const productSchema = new mongoose.Schema({
-//   category: { type: String, required: true },
-//   name: { type: String, required: true },
-//   description: { type: String, required: true },
-//   price: { type: Number, required: true },
-//   oldPrice: { type: Number, required: false },
-//   rating: { type: Number, required: false },
-//   reviewCount: { type: Number, required: false },
-//   reviews: [{ type: String, required: false }],
-//   stockStatus: { type: Boolean, required: true, default: true },
-//   images: [{ data: Buffer, contentType: String }] // Array of image data
-// });
-
-// module.exports = mongoose.model('Product', productSchema);
-
-
-// const mongoose = require('mongoose');
-
-// const productSchema = new mongoose.Schema({
-//   category: { type: String, required: true },
-//   name: { type: String, required: true },
-//   description: { type: String, required: true },
-//   price: { type: Number, required: true },
-//   oldPrice: { type: Number },
-//   rating: { type: Number },
-//   reviewCount: { type: Number },
-//   reviews: [{ user: String, text: String, rating: Number }],
-//   stockStatus: { type: Boolean, required: true, default: true },
-//   images: [{ data: String, contentType: String }] // Array of base64 encoded image data
-// });
-
-// module.exports = mongoose.model('Product', productSchema);
-
-
-
-// const mongoose = require('mongoose');
-
-// const productSchema = new mongoose.Schema({
-//   category: { type: String, required: true },
-//   name: { type: String, required: true },
-//   description: { type: String, required: true },
-//   price: { type: Number, required: true },
-//   rating: { type: Number },
-//   reviewCount: { type: Number },
-//    stockStatus: { type: Boolean, required: true, default: true },
-//   image: { data: String, contentType: String } // Single base64 encoded image data
-// });
-
-// module.exports = mongoose.model('Product', productSchema);
 
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
   category: { type: String, required: true },
+  subcategory: { type: String },
   name: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
   rating: { type: Number, default: 0 },
   reviewCount: { type: Number, default: 0 },
-  image: { 
-    data: String, 
-    contentType: String 
-  },
+  // image: { 
+  //   data: String, 
+  //   contentType: String 
+  // },
+  image: { type: String, required: true }, // Base64 image string
   // Fields for Today's Deal Product
   discountPrice: { type: Number },
   oldPrice: { type: Number },

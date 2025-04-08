@@ -141,7 +141,16 @@ const Sidebar = () => {
             <NavLink to="/admin/queries" activeClassName={styles.active}>Contact Queries Management</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/menuCart" activeClassName={styles.active}>Menu Cart Management</NavLink>
+            <NavLink to="/admin/menuCart" activeClassName={styles.active}>Menu Buffet Management</NavLink>
+          </li>
+          <li>
+            <NavLink to="/admin/menu" activeClassName={styles.active}>Menu Management</NavLink>
+          </li>
+          <li>
+            <NavLink to="/admin/restaurentNav" activeClassName={styles.active}>Product <i class="fas fa-pagelines    "></i> Navbar Management</NavLink>
+          </li>
+          <li>
+            <NavLink to="/admin/todaysDeal" activeClassName={styles.active}>Todays Deal Products Management</NavLink>
           </li>
         </ul>
       </nav>

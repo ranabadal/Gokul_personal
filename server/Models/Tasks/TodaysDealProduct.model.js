@@ -1,22 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const todaysDealProductSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  image: { data: String, contentType: String }, // Store image as base64 string for simplicity
-  discountPrice: { type: Number, required: true },
-  originalPrice: { type: Number, required: true },
-  discountPercent: { type: Number, required: true },
-  rating: { type: Number, default: 0 },
-  reviewCount: { type: Number, default: 0 },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
-});
+const dealSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    image: { type: String, required: true }, 
+    type: { type: String, enum: ["today", "upcoming", "expired"], required: true },
+    startTime: { type: Date, required: true },
+    endTime: { type: Date, required: true },
+    remainingHours: { type: Number }, // Auto-calculated in backend
+}, { timestamps: true });
 
-todaysDealProductSchema.pre('save', function(next) {
-  this.updatedAt = Date.now();
-  next();
-});
-
-const TodaysDealProduct = mongoose.model('TodaysDealProduct', todaysDealProductSchema);
-
-module.exports = TodaysDealProduct;
+module.exports = mongoose.model("Deal", dealSchema);

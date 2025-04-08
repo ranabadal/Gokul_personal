@@ -8,6 +8,6 @@ const MenuSchema = new mongoose.Schema({
   isAvailable: { type: Boolean, default: true }
 });
 
-const Menu = mongoose.model("Menu", MenuSchema);
+const MenuCart = mongoose.model("MenuCart", MenuSchema);
 
-module.exports = Menu;
+module.exports = MenuCart;

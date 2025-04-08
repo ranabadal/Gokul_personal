@@ -335,9 +335,9 @@ const CateringForm = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const menuPrices = {
-    Basic: 499,
-    Premium: 999,
-    Deluxe: 1499,
+    Silver: 580,
+    Golden: 680,
+    Platinum: 780,
     Royal: 1999,
   };
 
