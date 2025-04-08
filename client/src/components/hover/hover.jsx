@@ -1,5 +1,4 @@
 import React from "react";
-
 import styles from "./hover.module.css";
 import first from "./assets/first.svg";
 import fastfood from "./assets/fastfood.svg";
@@ -8,10 +7,9 @@ import order from "./assets/order.svg";
 import sweetbox from "./assets/sweetbox.svg";
 import { useNavigate } from "react-router-dom";
 
-
 const Hover = () => {
+  
     const navigate = useNavigate();
-
 
   return (
     
