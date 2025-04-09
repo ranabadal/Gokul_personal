@@ -13,7 +13,7 @@ import PreviewScreen from "../PreviewScreen/previewScreen"
 
 const GiftBoxCart = () => {
   const location = useLocation();
-  const { name, image, size } = location.state || {};
+  const { name, image, size,selectedGiftBoxQuantity } = location.state || {};
   // Log to check if values are being received.
 
   const [basket, setBasket] = useState([]);
@@ -115,6 +115,7 @@ const GiftBoxCart = () => {
             addToCart={addToCart}
             removeFromCart={removeFromCart}
           />
+        
         </div>
         <div className={styles.rightSection}>
           {/* Pass the basket as "cartItems" for BasketRight */}
