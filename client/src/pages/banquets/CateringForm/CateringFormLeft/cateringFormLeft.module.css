@@ -172,9 +172,9 @@
     max-height: 453px;
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    /* justify-content: center;
-    text-align: center; */
+    gap: 20px;
+    justify-content: center;
+    /* text-align: center; */
     border-radius: 18px;
     background-color: #FFF3F5;
   padding: 24px 48px;
