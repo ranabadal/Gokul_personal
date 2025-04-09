@@ -32,7 +32,7 @@ function App() {
         <ToasterProvider>
           <BrowserRouter>
             <RouterPath />
-          </BrowserRouter>
+          </BrowserRouter>  
         </ToasterProvider>
    
     </UserProvider>

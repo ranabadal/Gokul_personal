@@ -322,16 +322,16 @@ const LoginSignupPopup = () => {
           <Button fullWidth className={styles.loginButton} onClick={handleLogin}>Login</Button>
           <div className={styles.dividerContainer}>
             <span className={styles.divider}></span>
-            <p className={styles.orText}>Or Login with</p>
+            {/* <p className={styles.orText}>Or Login with</p> */}
             <span className={styles.divider}></span>
           </div>
           <div className={styles.socialButtons}>
-            <Button variant="outlined" className={styles.socialButton}>
+            {/* <Button variant="outlined" className={styles.socialButton}>
               <Google className={styles.icon} /> Google
-            </Button>
-            <Button variant="outlined" className={styles.socialButton}>
+            </Button> */}
+            {/* <Button variant="outlined" className={styles.socialButton}>
               <Facebook className={styles.icon} /> Facebook
-            </Button>
+            </Button> */}
           </div>
         </div>
       ) : (
@@ -345,16 +345,16 @@ const LoginSignupPopup = () => {
           <Button fullWidth className={styles.signupButton} onClick={handleSignup}>Sign Up</Button>
           <div className={styles.dividerContainer}>
             <span className={styles.divider}></span>
-            <p className={styles.orText}>Or Login with</p>
+            {/* <p className={styles.orText}>Or Login with</p> */}
             <span className={styles.divider}></span>
           </div>
           <div className={styles.socialButtons}>
-            <Button variant="outlined" className={styles.socialButton}>
+            {/* <Button variant="outlined" className={styles.socialButton}>
               <Google className={styles.icon} /> Google
             </Button>
             <Button variant="outlined" className={styles.socialButton}>
               <Facebook className={styles.icon} /> Facebook
-            </Button>
+            </Button> */}
           </div>
         </div>
       )}
