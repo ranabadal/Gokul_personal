@@ -33,11 +33,13 @@
     color: #E31E24;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .card_header_right_arrow {
     width: 1.882rem; /* 30.11px = 1.882rem */
     height: 1.347rem; /* 21.55px = 1.347rem */
+    cursor: pointer;
 }
 
 @media (max-width: 440px) {
