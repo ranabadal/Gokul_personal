@@ -124,7 +124,11 @@ const routes = [
         path:'/bulkOrderPreviewScreen',
         element : <PreviewScreen />
     }
-
+,
+{
+    path:'/previewScreen',
+    element : <PreviewScreen />
+}
 
     
    

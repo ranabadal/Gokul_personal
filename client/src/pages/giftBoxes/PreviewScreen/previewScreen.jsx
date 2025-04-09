@@ -178,7 +178,8 @@ const PreviewScreen = ({
               <div key={product._id} className={styles.productCart}>
                 <div className={styles.productImage}>
                   <img
-                    src={`data:${product.image.contentType};base64,${product.image.data}`}
+                    // src={`data:${product.image.contentType};base64,${product.image.data}`}
+                    src={product.image}
                     alt={product.name}
                   />
                 </div>
@@ -193,26 +194,7 @@ const PreviewScreen = ({
             );
           })}
 
-          {/* Delivery Address Section */}
-          {/* <div className={styles.addressSection}>
-            <h3>Delivery Address</h3>
-            {selectedAddress ? (
-              <div>
-                <p>
-                  {selectedAddress.province}, {selectedAddress.city}
-                </p>
-                <p>
-                  {selectedAddress.area}, {selectedAddress.landmark}
-                </p>
-                <button onClick={handleOpenAddressModal}>Change Address</button>
-              </div>
-            ) : (
-              <div>
-                <p>No address selected.</p>
-                <button onClick={handleOpenAddressModal}>Select Address</button>
-              </div>
-            )}
-          </div> */}
+        
           <div className={styles.addressSection}>
   <h3>Delivery Address</h3>
   {selectedAddress ? (
@@ -304,3 +286,201 @@ const PreviewScreen = ({
 };
 
 export default PreviewScreen;
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+// import styles from "./previewScreen.module.css";
+// import Header from "../../../components/header/header";
+// import AboveHeader from "../../../components/above_header/above_header";
+// import Footer from "../../../components/footer/footer";
+
+// const PreviewScreen = () => {
+//   const [loading, setLoading] = useState(false);
+//   const [selectedBoxes, setSelectedBoxes] = useState([]);
+//   const [selectedAddress, setSelectedAddress] = useState(null);
+//   const [addresses, setAddresses] = useState([]);
+//   const [showAddressModal, setShowAddressModal] = useState(false);
+//   const [modalSelectedAddress, setModalSelectedAddress] = useState(null);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const storedBoxes = JSON.parse(localStorage.getItem("selectedBoxes")) || [];
+//     setSelectedBoxes(storedBoxes);
+//   }, []);
+
+//   const fetchAddresses = async () => {
+//     try {
+//       const token = localStorage.getItem("jwtToken");
+//       if (!token) {
+//         console.log("No JWT token found.");
+//         return;
+//       }
+//       const response = await axios.get("http://localhost:8080/addresses", {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
+//       if (response.data.success) {
+//         setAddresses(response.data.data);
+//       } else {
+//         console.error("Failed to fetch addresses.");
+//       }
+//     } catch (error) {
+//       console.error("Error fetching addresses:", error.message || error);
+//     }
+//   };
+
+//   const handleOpenAddressModal = async () => {
+//     await fetchAddresses();
+//     setShowAddressModal(true);
+//   };
+
+//   const handleConfirmModalSelection = () => {
+//     if (!modalSelectedAddress) {
+//       alert("Please select an address to proceed!");
+//       return;
+//     }
+//     const selected = addresses.find((addr) => addr._id === modalSelectedAddress);
+//     if (selected) {
+//       setSelectedAddress(selected);
+//     }
+//     setShowAddressModal(false);
+//   };
+
+//   const handleConfirmOrder = async () => {
+//     if (!selectedAddress) {
+//       setLoading(false);
+//       alert("Please select a delivery address first!");
+//       return;
+//     }
+//     setLoading(true);
+
+//     const requestData = {
+//       selectedBoxes: selectedBoxes.map((box) => ({
+//         boxName: box.name,
+//         boxSize: box.size,
+//         products: box.basket.map((item) => ({
+//           productName: item.productId.name,
+//           productPrice: item.productId.price,
+//           quantity: item.quantity,
+//         })),
+//       })),
+//       totalCost: selectedBoxes.reduce((acc, box) => acc + box.basket.reduce((sum, item) => sum + item.productId.price * item.quantity, 0), 0),
+//       address: {
+//         province: selectedAddress.province,
+//         city: selectedAddress.city,
+//         area: selectedAddress.area,
+//         landmark: selectedAddress.landmark,
+//       },
+//       userEmail: localStorage.getItem('userEmail'),
+//     };
+
+//     try {
+//       const token = localStorage.getItem("jwtToken");
+//       if (!token) {
+//         alert("You must be logged in to confirm the order.");
+//         return;
+//       }
+
+//       const response = await axios.post("http://localhost:8080/api/giftBoxOrderQueries", requestData, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       });
+
+//       if (response.data.success) {
+//         alert(response.data.message || "Order confirmed successfully!");
+//       } else {
+//         alert(response.data.message || "Failed to confirm order. Please try again.");
+//         setLoading(false);
+//       }
+//     } catch (error) {
+//       console.error("Error confirming order:", error.message || error);
+//       alert("An error occurred while confirming the order. Please try again later.");
+//       setLoading(false);
+//     }
+
+//     navigate("/giftbox");
+//     localStorage.removeItem("selectedBoxes");
+//   };
+
+//   return (
+//     <div className={styles.previewScreen}>
+//       <AboveHeader />
+//       <Header />
+
+//       <div className={styles.container}>
+//         <button className={styles.backButton} onClick={() => navigate(-1)}>
+//           &#8592; Back
+//         </button>
+
+//         <h2>Gift Box Order Preview</h2>
+
+//         {selectedBoxes.length === 0 ? (
+//           <div className={styles.emptyScreen}>
+//             <h2>No Gift Box Order Selected</h2>
+//             <p>Please go back and select a box before previewing your order.</p>
+//           </div>
+//         ) : (
+//           <>
+//             {selectedBoxes.map((box, index) => (
+//               <div key={index} className={styles.giftCart}>
+//                 <h3>Box {index + 1} - {box.size}</h3>
+//                 {box.basket.map((orderItem) => {
+//                   const product = orderItem.productId;
+//                   return (
+//                     <div key={product._id} className={styles.productCart}>
+//                       <div className={styles.productImage}>
+//                         <img src={product.image} alt={product.name} />
+//                       </div>
+//                       <div className={styles.productInfo}>
+//                         <div className={styles.productName}>{product.name}</div>
+//                         <p className={styles.productPrice}>₹{product.price}</p>
+//                         <p className={styles.productQuantity}>Quantity: {orderItem.quantity}</p>
+//                       </div>
+//                     </div>
+//                   );
+//                 })}
+//               </div>
+//             ))}
+
+//             <div className={styles.addressSection}>
+//               <h3>Delivery Address</h3>
+//               {selectedAddress ? (
+//                 <div>
+//                   <p>{selectedAddress.province}, {selectedAddress.city}</p>
+//                   <p>{selectedAddress.area}, {selectedAddress.landmark}</p>
+//                   <button onClick={handleOpenAddressModal}>Change Address</button>
+//                 </div>
+//               ) : (
+//                 <div>
+//                   <p>No address selected.</p>
+//                   <button onClick={handleOpenAddressModal}>Select Address</button>
+//                 </div>
+//               )}
+//             </div>
+
+//             <div className={styles.confirmOrderWrapper}>
+//               <p className={styles.productTotalPrice}>
+//                 Total: ₹{selectedBoxes.reduce((acc, box) => acc + box.basket.reduce((sum, item) => sum + item.productId.price * item.quantity, 0), 0)}
+//               </p>
+//               <button
+//                 className={styles.confirmOrderButton}
+//                 onClick={handleConfirmOrder}
+//                 disabled={loading}
+//               >
+//                 {loading ? "Submitting..." : "Confirm and Save"}
+//               </button>
+//             </div>
+//           </>
+//         )}
+//       </div>
+
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default PreviewScreen;

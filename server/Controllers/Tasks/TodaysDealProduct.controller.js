@@ -207,15 +207,31 @@ exports.getUpcomingDeals = async (req, res) => {
 };
 
 
-exports.getExpiredDeals = async (req, res) => {
-  try {
-      const expiredDeals = await Deal.find({ type: "expired" });
 
-      res.status(200).json({ success: true, expiredDeals });
-  } catch (error) {
-      console.error("Error fetching expired deals:", error);
-      res.status(500).json({ success: false, message: "Server error." });
-  }
+exports.getTomorrowDeals = async (req, res) => {
+    try {
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+
+        const startOfTomorrow = new Date(tomorrow.setHours(0, 0, 0, 0));
+        const endOfTomorrow = new Date(tomorrow.setHours(23, 59, 59, 999));
+
+        console.log("Fetching deals between:", startOfTomorrow, "and", endOfTomorrow);
+
+        const tomorrowDeals = await Deal.find({
+            type: "upcoming", // Ensuring only upcoming deals are fetched
+            startTime: { $gte: startOfTomorrow, $lt: endOfTomorrow }
+        });
+
+        console.log("Deals found:", tomorrowDeals);
+
+        res.status(200).json({ success: true, deals: tomorrowDeals });
+    } catch (error) {
+        console.error("Error fetching tomorrow's deals:", error);
+        res.status(500).json({ success: false, message: "Server error." });
+    }
 };
 
 // Update Deal (Edit)

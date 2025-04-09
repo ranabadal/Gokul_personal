@@ -256,7 +256,22 @@
         background: darkred;
       }
      
-    
+    .addBoxButton{
+      background: #E31E24;
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Inter';
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+
+    }
+
+    .addBoxButton:hover {
+      background: darkred;
+    }
   
   
       /* Responsive Design */

@@ -58,6 +58,7 @@ const GiftBoxAndBulkTemplate = ({
                 </div>
 
                 <div className={styles.hall_details_left_descption}>{description}</div>
+                <div>{size}</div>
 
                 <div className={styles.hall_details_left_cards}>
                     {images.slice(0, 4).map((image, index) => (

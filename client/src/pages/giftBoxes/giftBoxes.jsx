@@ -243,6 +243,9 @@ const GiftBoxes = () => {
         fetchGiftBoxes();
     }, []);
 
+
+
+
     const handleImageClick = (boxId, image) => {
         setGiftBoxes((prevGiftBoxes) =>
             prevGiftBoxes.map((box) =>
@@ -349,6 +352,7 @@ const GiftBoxes = () => {
                                     name={box.title}
                                     price={`₹ ${box.price}`}
                                     description={box.description}
+                                    size={box.size}
                                     selectedImage={box.selectedImage}
                                     images={box.images.map(
                                         (img) => `data:${img.contentType};base64,${img.data}`
