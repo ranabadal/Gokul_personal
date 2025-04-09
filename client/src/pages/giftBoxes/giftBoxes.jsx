@@ -210,6 +210,8 @@ const GiftBoxes = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [currentFilter, setCurrentFilter] = useState("All");
+const [selectedGiftBoxQuantity, setSelectedGiftBoxQuantity] = useState(1);
+
 
     const setToast = useToaster();
     const navigate = useNavigate();
@@ -294,7 +296,7 @@ const GiftBoxes = () => {
             };
 
             console.log("Selected Order Details:", selectedOrderDetails);
-            navigate("/giftboxCart", { state: selectedOrderDetails });
+            navigate("/giftboxCart", { state: selectedOrderDetails },selectedGiftBoxQuantity );
         } catch (error) {
             console.error("Error in handleClick:", error);
             setToast('An unexpected error occurred!', 'error');

@@ -193,13 +193,6 @@ const GiftBoxCartLeft = ({ filters, basket, addToCart, removeFromCart, size }) =
     };
 
     const handleAddAnotherBox = () => {
-      const currentBox = {
-        size,
-        basket,
-      };
-      const storedBoxes = JSON.parse(localStorage.getItem("selectedBoxes")) || [];
-      const updatedBoxes = [...storedBoxes, currentBox];
-      localStorage.setItem("selectedBoxes", JSON.stringify(updatedBoxes));
       navigate("/giftbox"); // Redirect to GiftBox Main Page
     };
   
