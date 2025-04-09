@@ -229,8 +229,10 @@ const HeroSection = () => {
                     <div
                         key={index}
                         className={`${styles.hero_section_bottom_dot} ${currentSlide === index ? styles.active : ""}`}
-                        onClick={() => setCurrentSlide(index)}
-                    ></div>
+                        onClick={() => setCurrentSlide(index)}>
+
+                    </div>
+
                 ))}
             </div>
         </div>
