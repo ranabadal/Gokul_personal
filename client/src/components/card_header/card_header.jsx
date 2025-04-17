@@ -1,7 +1,6 @@
 // import React from "react";
 // import styles from "./card_header.module.css";  
 // import right_arro from "./assets/arrow.svg";
-
 // const CardHeader = () => {
 //     return (
 //         <div className={styles.card_header}>
@@ -17,7 +16,6 @@
 //         </div>
 //     )
 // };  
-
 // export default CardHeader
 
 import React from "react";
@@ -40,6 +38,6 @@ const navigate = useNavigate();
             </div>
         </div>
     );
-};  
+};
 
 export default CardHeader;
