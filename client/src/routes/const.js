@@ -29,8 +29,8 @@ import BulkOrder from "../pages/bulkOrders/bulkOrders";
 import BulkOrderCart from "../pages/bulkOrders/bulkOrderCart/bulkOrderCart";
 import PreviewScreen from '../pages/bulkOrders/PreviewScreen/previewScreen'
 import Title from "../pages/about/Title/title"
-
-
+import BulkOrderNew from "../pages/bulkOrders/BulkOrder/bulkOrderNew";
+import BulkOrderNewCards from "../pages/bulkOrders/BulkOrder/BulkOrderNewCards/bulkOrderNewCards";
 const routes = [
     {
       path: '/',
@@ -115,6 +115,14 @@ const routes = [
     {
         path:'/bulkOrders',
         element : <BulkOrder />
+    },
+    {
+        path:'/bulkOrdersNew',
+        element : <BulkOrderNew />
+    },
+    {
+        path:'/bulkOrdersNewCards',
+        element : <BulkOrderNewCards /> 
     },
     {
         path:'/bulkOrderCart',
