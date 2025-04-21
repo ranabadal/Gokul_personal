@@ -388,7 +388,7 @@ const GiftBoxes = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentFilter, setCurrentFilter] = useState("All");
-  const [refreshSummaryForm, setRefreshSummaryForm] = useState(false);
+  const [refreshSummaryForm, setRefreshSummaryForm] = useState(true);
 
   const [selectedGiftBox, setSelectedGiftBox] = useState(null);
   const [selectedSweets, setSelectedSweets] = useState([]);
