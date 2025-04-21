@@ -306,15 +306,15 @@ const BulkOrders = () => {
       <AboveHeader />
       <Header />
       <div className={styles.gokul_heading}>
-        <div>Bulk Order</div>
+        <div>Coming soon</div>
       </div>
-
+{/* 
       {isLoading && <Loader>Loading bulk order data...</Loader>}
 
-      {!isLoading && error && <div className={styles.error}>Error: {error}</div>}
+      {!isLoading && error && <div className={styles.error}>Error: {error}</div>} */}
 
       {/* Filter Section */}
-      {!isLoading && !error && (
+      {/* {!isLoading && !error && (
         <div className={styles.filtersection}>
           <div className={styles.filters}>
             <FilterChip
@@ -339,10 +339,10 @@ const BulkOrders = () => {
             />
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Display filtered orders */}
-      {!isLoading && !error && filteredOrders.map((order) => (
+      {/* {!isLoading && !error && filteredOrders.map((order) => (
         <div key={order._id} className={styles.hall_details}>
           <GiftBoxAndBulkTemplate
             name={order.title}
@@ -358,7 +358,7 @@ const BulkOrders = () => {
             onClick={() => handleClick(order)}
           />
         </div>
-      ))}
+      ))} */}
 
       <Footer />
     </div>
