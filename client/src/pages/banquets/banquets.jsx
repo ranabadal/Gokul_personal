@@ -97,6 +97,7 @@ const Banquets = () => {
         {/* <AboveHeader /> */}
       </div>
       <div className={styles.header}>
+        <AboveHeader />
         <Header />
       </div>
       <div >
