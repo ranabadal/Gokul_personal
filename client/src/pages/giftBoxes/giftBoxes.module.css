@@ -16,7 +16,7 @@
 flex-direction: row;
   
     /* margin-left: 10%; */
-    margin: 50px;
+    /* margin: 50px; */
     /* width: 941px; */
     padding-top: 48px;
     padding-bottom: 48px;
@@ -93,4 +93,9 @@ flex-direction: row;
     width:500px;
     display: flex;
     gap:12px;
+}
+
+.gokul_heading{
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
