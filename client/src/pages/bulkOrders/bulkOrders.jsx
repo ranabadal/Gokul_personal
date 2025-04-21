@@ -307,8 +307,8 @@ const BulkOrders = () => {
     <div className={styles.bulkOrders}>
       <AboveHeader />
       <Header />
-      <div className={styles.gokul_img}>
-       <img src={bulkOrderPic} alt="bulk order pic"/>
+      <div >
+       <img className={styles.gokul_img} src={bulkOrderPic} alt="bulk order pic"/>
 
       </div>
 {/* 
