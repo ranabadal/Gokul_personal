@@ -29,11 +29,13 @@ export default function OrderSummary({
 //   }, []);
 
 
+// useEffect(() => {
+//     setStoredSelections(JSON.parse(localStorage.getItem("giftBoxSelections")) || []);
+//   }, [storedSelections]); // ✅ Re-render when selections change
+
 useEffect(() => {
     setStoredSelections(JSON.parse(localStorage.getItem("giftBoxSelections")) || []);
-  }, [storedSelections]); // ✅ Re-render when selections change
-
-
+  }, []); // ✅ Add an empty dependency array to prevent endless re-renders
 //   useEffect(() => {
 //     const updateSelections = () => {
 //       const selections = JSON.parse(localStorage.getItem("giftBoxSelections")) || [];
