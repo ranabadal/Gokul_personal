@@ -202,6 +202,8 @@ import star from "../../components/hall_details/assets/star.svg";
 import FilterChip from "../../components/GiftBoxAndBulkPageFilter/filter";
 import { useToaster } from "../../utils";
 import Loader from "../../components/Loader/loader2/loader2";
+import bulkOrderPic from "./Assets/bulk_pic.png";
+
 
 const BulkOrders = () => {
   const [bulkOrders, setBulkOrders] = useState([]);
@@ -306,7 +308,8 @@ const BulkOrders = () => {
       <AboveHeader />
       <Header />
       <div className={styles.gokul_heading}>
-        <div>Coming soon</div>
+       <img src={bulkOrderPic} alt="bulk order pic"/>
+
       </div>
 {/* 
       {isLoading && <Loader>Loading bulk order data...</Loader>}
