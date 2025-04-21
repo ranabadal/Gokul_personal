@@ -26,6 +26,7 @@ flex-direction: row;
   .leftSection {
 
     max-width: 70%;
+    min-width: 70%;
     padding: 1rem;
     border-right: 1px solid #ccc;
   }
