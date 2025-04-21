@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -142,9 +140,10 @@ const CateringFormLeft = ({
             required
           />
           <img src={people} alt="Guests Icon" className={styles.icon} />
+          {error && <div className={styles.error}>{error}</div>}
         </div>
 
-        {error && <div className={styles.error}>{error}</div>}
+        {/* {error && <div className={styles.error}>{error}</div>} */}
       </div>
 
       {/* Menu Cart Section */}
@@ -173,44 +172,55 @@ const CateringFormLeft = ({
         </div>
         {/* Display inline error if no menu is selected */}
         {!selectedCart && (
-          <p className={styles.error}>Please select a buffet plan And Cutomize it as per your Requirements.</p>
+          <p className={styles.error}>
+            Please select a buffet plan And Cutomize it as per your
+            Requirements.
+          </p>
         )}
-        <button className={styles.heroSecButton} onClick={handleMenuCustomization}>
+        <button
+          className={styles.heroSecButton}
+          onClick={handleMenuCustomization}
+        >
           Customize
         </button>
       </div>
 
       {/* Calendar Section */}
       <div className={styles.eventTimeAndDate}>
-        <div className={styles.calendar}>
-          <Calendar
-           className={styles.customCalendar} 
-            onChange={handleDateChange}
-            tileDisabled={({ date }) => isDateDisabled(date)}
-          />
-        </div>
+        <div className={styles.eventTimeAndDateContainer}>
+          <div className={styles.calendar}>
+            <Calendar
+              className={styles.customCalendar}
+              onChange={handleDateChange}
+              tileDisabled={({ date }) => isDateDisabled(date)}
+            />
+          </div>
 
-
-        <div className={styles.timeOptions}>
-          {["Morning", "Afternoon", "Evening", "All Day"].map((timeSlot) => (
-            <label key={timeSlot}>
-              <input
-                type="checkbox"
-                value={timeSlot}
-                checked={preferredTimings.includes(timeSlot)}
-                onChange={handlePreferredTimingsChange}
-              />
-              {timeSlot}
-            </label>
-          ))}
+          <div className={styles.timeOptions}>
+            {["Morning", "Afternoon", "Evening", "All Day"].map((timeSlot) => (
+              <label key={timeSlot}>
+                <input
+                  type="checkbox"
+                  value={timeSlot}
+                  checked={preferredTimings.includes(timeSlot)}
+                  onChange={handlePreferredTimingsChange}
+                />
+                {timeSlot}
+              </label>
+            ))}
+          </div>
         </div>
-        {/* Required validation for dates and timings */}
-        {selectedDates.length === 0 && (
-          <p className={styles.error}>Please select at least one date.</p>
-        )}
-        {preferredTimings.length === 0 && (
-          <p className={styles.error}>Please select at least one preferred timing.</p>
-        )}
+        <div className={styles.errorContainer}>
+          {/* Required validation for dates and timings */}
+          {selectedDates.length === 0 && (
+            <p className={styles.error}>Please select at least one date.</p>
+          )}
+          {preferredTimings.length === 0 && (
+            <p className={styles.error}>
+              Please select at least one preferred timing.
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Comments Section (Optional) */}

@@ -8,6 +8,21 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.disabledButton {
+  background-color: #ccc; /* Light gray to indicate it's inactive */
+  color: #666; /* Darker gray text */
+  cursor: not-allowed; /* Shows a "not-allowed" cursor */
+  opacity: 0.6; /* Makes it visually faded */
+  border: 1px solid #aaa; /* Subtle border */
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.disabledButton:hover {
+  background-color: #ccc; /* Prevent hover effects */
+}
 
 .wishlistHeader {
   padding: 10px 12px;

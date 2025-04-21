@@ -18,7 +18,7 @@
 
   .error {
     display: flex;
-    
+    flex-direction: column;
     color: red;
     font-size: 0.9rem;
     margin-top: 0.5rem;
@@ -158,9 +158,14 @@
   }
   
   .heroSecButton:hover {
-    color: #ffffff;
+    color: #E31E24;
     outline: 1px solid #E31E24;
+    background-color: #FFE9E9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02); /* Slightly enlarge the button on hover */
+
   }
+
   
   /* Calendar Styling */
   
@@ -173,9 +178,9 @@
     max-width: 852px;
     max-height: 453px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
-    justify-content: center;
+ 
     /* text-align: center; */
     border-radius: 18px;
     background-color: #FFF3F5;
@@ -183,6 +188,13 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
   }
   
+
+  .eventTimeAndDateContainer{
+    display: flex;
+    gap: 50px;
+    justify-content: space-evenly;
+    flex-direction: row;
+  }
   
   .calendarHeading {
     font-family: 'Inter';
@@ -216,6 +228,12 @@
     background: #E31E24;
     color: #E31E24;
     border-radius: 50%;
+  }
+
+  .errorContainer{
+display: flex;
+justify-content: space-evenly;
+flex-direction: row;
   }
   
   .bookedDate::before, .bookedDate::after {

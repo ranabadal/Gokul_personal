@@ -185,7 +185,7 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.above_header_container}>
-        <AboveHeader />
+     
       </div>
       <Header />
 

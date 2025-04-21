@@ -4,6 +4,41 @@
     box-sizing: border-box;
 }
 
+.giftBoxPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  
+  .mainContainer {
+    display: flex;
+flex-direction: row;
+  
+    /* margin-left: 10%; */
+    margin: 50px;
+    /* width: 941px; */
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 12px;
+  }
+  
+  .leftSection {
+
+    max-width: 70%;
+    padding: 1rem;
+    border-right: 1px solid #ccc;
+  }
+  
+  .rightSection {
+
+    padding: 1rem;
+  }
+  
+  .error {
+    color: red;
+  }
+
 .hall_details{
     display: flex;
     flex-direction: column;

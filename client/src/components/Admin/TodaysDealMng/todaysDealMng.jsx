@@ -105,7 +105,7 @@ const TodaysDealManagement = () => {
         <input type="datetime-local" name="endTime" value={formData.endTime} onChange={handleInputChange} required />
         <input type="file" accept="image/*" onChange={handleFileChange} />
         <button type="submit">{editDealId ? "Update Deal" : "Add Deal"}</button>
-        {editDealId && <button type="button" onClick={() => setEditDealId(null)}>Cancel</button>}
+        {editDealId && <button className={styles.button} type="button" onClick={() => setEditDealId(null)}>Cancel</button>}
       </form>
 
       <h3>Existing Deals</h3>
