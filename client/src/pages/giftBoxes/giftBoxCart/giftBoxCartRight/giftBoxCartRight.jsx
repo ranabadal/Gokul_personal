@@ -11,6 +11,8 @@ export default function OrderSummary({
     setSelectedSweets, 
     isViewingSelection, 
     setIsViewingSelection, 
+    refreshSummaryForm=true,
+    setRefreshSummaryForm,
     handleCheckout = () => {} 
   }) {
   const [promoCode, setPromoCode] = useState("");
@@ -34,8 +36,11 @@ export default function OrderSummary({
 //   }, [storedSelections]); // ✅ Re-render when selections change
 
 useEffect(() => {
-    setStoredSelections(JSON.parse(localStorage.getItem("giftBoxSelections")) || []);
-  }, []); // ✅ Add an empty dependency array to prevent endless re-renders
+    if(refreshSummaryForm){
+        setStoredSelections(JSON.parse(localStorage.getItem("giftBoxSelections")) || []);
+        setRefreshSummaryForm(false); // Reset the refresh flag
+    }
+  }, [refreshSummaryForm]); // ✅ Add an empty dependency array to prevent endless re-renders
 //   useEffect(() => {
 //     const updateSelections = () => {
 //       const selections = JSON.parse(localStorage.getItem("giftBoxSelections")) || [];

@@ -769,9 +769,9 @@ const getSweetsLimit = (size) => {
   // For example, a mapping could be:
   // "500 gm" => 3 sweets, "1 Kg" => 5 sweets, "2 Kg" => 8 sweets.
   const mapping = {
-    "500 gm": 1,
+    "500 gm": 2,
     "1 kg": 2,  // Note: Changed to lowercase to match your filter in GiftBoxes component
-    "2 kg": 3,  // Note: Changed to lowercase to match your filter in GiftBoxes component
+    "2 kg": 6,  // Note: Changed to lowercase to match your filter in GiftBoxes component
   };
   return mapping[size] || 5;
 };
@@ -814,6 +814,8 @@ const FestiveSweet = ({ product, addToCart, removeFromCart, basket = [] }) => {
 const GiftBoxCartLeft = ({
   setStoredSelections,
   selectedGiftBox,
+  refreshSummaryForm=false,
+  setRefreshSummaryForm,
   onFinalize,    // Callback when user clicks "Add"
   onBack         // Callback when user clicks "Back"
 }) => {
@@ -1015,6 +1017,7 @@ const GiftBoxCartLeft = ({
     
     // ✅ Update UI immediately
     setStoredSelections([...selections]);
+    setRefreshSummaryForm(true)
   
     console.log("Updated gift box selections:", selections);
     onBack();
