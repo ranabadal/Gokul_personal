@@ -388,6 +388,7 @@ const GiftBoxes = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentFilter, setCurrentFilter] = useState("All");
+  const [refreshSummaryForm, setRefreshSummaryForm] = useState(false);
 
   const [selectedGiftBox, setSelectedGiftBox] = useState(null);
   const [selectedSweets, setSelectedSweets] = useState([]);
@@ -530,6 +531,8 @@ const handleClick = (box) => {
             {selectedGiftBox ? (
           <GiftBoxCartLeft
           basket={[]} 
+          setRefreshSummaryForm={setRefreshSummaryForm}
+          refreshSummaryForm={refreshSummaryForm}
           size={selectedGiftBox?.size}
           selectedGiftBox={selectedGiftBox}
           onFinalize={handleFinalizeSelection}
@@ -598,9 +601,11 @@ const handleClick = (box) => {
   selectedGiftBox={selectedGiftBox}
   setSelectedGiftBox={setSelectedGiftBox}
   selectedSweets={selectedSweets}
+  setRefreshSummaryForm={setRefreshSummaryForm}
   setSelectedSweets={setSelectedSweets}
   isViewingSelection={isViewingSelection}
   setIsViewingSelection={setIsViewingSelection}
+  refreshSummaryForm={refreshSummaryForm}
 />
           </div>
         </div>

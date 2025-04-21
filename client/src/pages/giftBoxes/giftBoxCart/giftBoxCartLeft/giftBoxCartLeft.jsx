@@ -814,6 +814,8 @@ const FestiveSweet = ({ product, addToCart, removeFromCart, basket = [] }) => {
 const GiftBoxCartLeft = ({
   setStoredSelections,
   selectedGiftBox,
+  refreshSummaryForm=false,
+  setRefreshSummaryForm,
   onFinalize,    // Callback when user clicks "Add"
   onBack         // Callback when user clicks "Back"
 }) => {
@@ -1015,6 +1017,7 @@ const GiftBoxCartLeft = ({
     
     // ✅ Update UI immediately
     setStoredSelections([...selections]);
+    setRefreshSummaryForm(true)
   
     console.log("Updated gift box selections:", selections);
     onBack();
