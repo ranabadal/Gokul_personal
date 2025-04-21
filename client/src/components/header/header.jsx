@@ -111,12 +111,12 @@ const Header = () => {
 
         {user && (
           <>
-            <div
+            {/* <div
               className={styles.right_downarrow}
               onClick={() => navigate("/profile")}
             >
               <img src={downarrow} alt="downarrow" />
-            </div>
+            </div> */}
             <div className={styles.right_logout} onClick={handleLogout}>
               <img src={logoutIcon} alt="Logout" />
               <span className={styles.logout_text}>Logout</span>

@@ -187,6 +187,7 @@ const Home = () => {
       <div className={styles.above_header_container}>
      
       </div>
+      <AboveHeader/>
       <Header />
 
       <div className={styles.hero_section_container}>
