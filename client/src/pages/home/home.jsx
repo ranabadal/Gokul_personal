@@ -19,9 +19,6 @@ import Loader from "../../components/Loader/loader3/loader3";
 import axios from "axios"; // Using axios for cleaner API calls
 
 import { useToaster } from '../../utils';
-
-
-
 const Home = () => {
   const navigate = useNavigate();
  const setToast = useToaster();
