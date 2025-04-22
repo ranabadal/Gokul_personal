@@ -7,9 +7,9 @@ import order from "./assets/order.svg";
 import sweetbox from "./assets/sweetbox.svg";
 import { useNavigate } from "react-router-dom";
 const Hover = () => {  
-    const navigate = useNavigate();
-  return (
-    <div className={styles.hover}>
+const navigate = useNavigate();
+return (
+<div className={styles.hover}>
       <div className={styles.hover_content} >
         <div className={styles.hover_content_logo} >
           <div className={styles.hover_content_logoo} onClick={() => navigate("/todaysDeal")} >

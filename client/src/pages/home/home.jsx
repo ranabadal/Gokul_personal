@@ -185,11 +185,9 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.above_header_container}>
-     
       </div>
       <AboveHeader/>
       <Header />
-
       <div className={styles.hero_section_container}>
         <HeroSection />
       </div>
@@ -201,7 +199,7 @@ const Home = () => {
       <div className={styles.card_header_container}>
         <CardHeader />
       </div>
-     
+      
       {/* Render Sweet Products Dynamically */}
       <div className={styles.card_section_container}>
       {isLoading && <p>Loading...</p>}
