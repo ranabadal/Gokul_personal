@@ -74,8 +74,6 @@
 
 // export default Footer;
 
-
-
 // import React from "react";
 // import styles from "./footer.module.css";
 // import gokul from "./assets/gokul.svg";
@@ -148,12 +146,10 @@
 //                             <p>Upcoming Products</p> 
 //                     </div>
 //                 </div>
-
 //             </div>
 //         </div>
 //     );
 // };
-
 // export default Footer;
 
 import React from "react";
@@ -161,7 +157,6 @@ import styles from "./footer.module.css";
 import gokul from "./assets/gokul.svg";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
 const Footer = () => {
     const navigate = useNavigate();
 
@@ -200,9 +195,7 @@ const Footer = () => {
                         </div> 
                     </div>
                 </div>
-
                 {/* Newsletter section is commented out */}
-
                 <div className={styles.footer_content_bottom}>
                     <div className={styles.footer_content_bottom_line}>
                         <span className={styles.footer_content_bottom_line_title}>Policy Info</span>
@@ -230,5 +223,4 @@ const Footer = () => {
         </div>
     );
 };
-
 export default Footer;

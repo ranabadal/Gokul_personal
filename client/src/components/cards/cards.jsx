@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./cards.module.css";
-// import laddu from "./assets/laddu.svg";
-// import pedaa from "./assets/pedaa.svg";
+
 import heart from "./assets/heart.svg";
 import star from "./assets/Star 1.svg";
 
