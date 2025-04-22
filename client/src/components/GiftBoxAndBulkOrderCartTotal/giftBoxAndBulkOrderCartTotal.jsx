@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./giftBoxAndBulkOrderCartTotal.module.css";
@@ -52,7 +45,6 @@ const OrderCard = ({ item, bulkQuantity, size }) => {
   );
 };
 
-
 export default function OrderSummary({
   cartItems = [],
   addresses,
@@ -74,12 +66,9 @@ export default function OrderSummary({
     calculateTotal();
   }, [cartItems, discount, additionalCharges, deliveryCharges, quantity]);
 
-
-
   const calculateTotal = () => {
     // Count the number of checked items
     const checkedItems = cartItems.filter((item) => item.checked);
-  
     // Calculate the total price for checked items
     const total = checkedItems.reduce((total, item) => {
       // Adjust price based on size
@@ -92,7 +81,6 @@ export default function OrderSummary({
   
       // Use quantity for each individual item
       const itemQuantity = showQuantityInput ? quantity : item.quantity;
-  
       return total + adjustedPrice * itemQuantity;
     }, 0);
   
