@@ -148,7 +148,6 @@ export default function OrderSummary({
             />
           </div>
         )}
-        
             <div className={styles.promoContainer}>
         <p className={styles.promoAppliedText}>Promo Code Applied</p>
         <div className={styles.promoSection}>
