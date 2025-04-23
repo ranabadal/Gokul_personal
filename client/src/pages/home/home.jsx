@@ -137,27 +137,24 @@ const Home = () => {
 
       if (!token) {
         setToast('Please log in first!', 'error');
-        return;
-      }
-
-      const productIdStr = productId.toString(); // Ensure productId is a string
-
-      const response = await axios.post("http://localhost:8080/api/wishlist", { productId: productIdStr }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      if (response.data.success) {
-        setToast('Product added to wishlist successfully!', 'success');
-      } else {
-        alert(`Error adding to wishlist: ${response.data.message}`);
-      }
-    } catch (error) {
-      console.error("Error adding to wishlist:", error);
-      setToast('An error occurred while adding the product to the wishlist.', 'error');
-    }
-  };
+return;
+}
+const productIdStr = productId.toString(); // Ensure productId is a string
+const response = await axios.post("http://localhost:8080/api/wishlist", { productId: productIdStr }, {
+headers: {
+Authorization: `Bearer ${token}`
+}
+});
+if (response.data.success) {
+setToast('Product added to wishlist successfully!', 'success');
+}else{
+alert(`Error adding to wishlist: ${response.data.message}`);
+}
+} catch (error) {
+console.error("Error adding to wishlist:", error);
+setToast('An error occurred while adding the product to the wishlist.', 'error');
+}
+};
 
   // Fetch Sweets from API
   useEffect(() => {
