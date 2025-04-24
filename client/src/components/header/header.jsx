@@ -10,7 +10,6 @@ import userIcon from "./assets/images/userIcon.svg";
 import logoutIcon from "./assets/images/exit.png";
 import dropdown from "./assets/images/dropdown.svg";
 import cx from "classnames";
-
 const Header = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // Use user context
@@ -106,9 +105,8 @@ const Header = () => {
         </div>
         <div className={styles.right_user} onClick={handleUserClick}>
           {user ? user.name : "Login"}
-          
-        </div>
 
+        </div>
         {user && (
           <>
             {/* <div
@@ -117,10 +115,13 @@ const Header = () => {
             >
               <img src={downarrow} alt="downarrow" />
             </div> */}
-            <div className={styles.right_logout} onClick={handleLogout}>
-              <img src={logoutIcon} alt="Logout" />
-              <span className={styles.logout_text}>Logout</span>
-            </div>
+    <div className={styles.right_logout} onClick={handleLogout}>
+
+            <img src={logoutIcon} alt="Logout" />
+            <span className={styles.logout_text}>Logout</span>
+
+    </div>
+           
           </>
         )}
       </div>

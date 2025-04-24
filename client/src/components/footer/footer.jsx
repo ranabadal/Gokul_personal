@@ -180,7 +180,7 @@ const Footer = () => {
                                 {/* <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                                     <FaTwitter />
                                 </a> */}
-                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                <a href="https://www.instagram.com/new_gokulsweets?igsh=OGQyZWh2ZDkzM2c2" target="_blank" rel="noopener noreferrer">
                                     <FaInstagram />
                                 </a>
                                 {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
