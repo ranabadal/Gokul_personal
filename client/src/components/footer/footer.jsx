@@ -177,15 +177,15 @@ const Footer = () => {
                                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                                     <FaFacebook />
                                 </a>
-                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                                {/* <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                                     <FaTwitter />
-                                </a>
+                                </a> */}
                                 <a href="#" target="_blank" rel="noopener noreferrer">
                                     <FaInstagram />
                                 </a>
-                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                                {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
                                     <FaLinkedin />
-                                </a>
+                                </a> */}
                             </div>
                         </span>
                     </div>
@@ -202,11 +202,11 @@ const Footer = () => {
                         <p>Terms & Conditions</p>
                         <p>Privacy policy</p>
                         <p>Terms of Use</p>
-                        <p>Disclaimer</p>
+                        {/* <p>Disclaimer</p> */}
                     </div>
                     <div className={styles.footer_content_bottom_line}>
                         <span className={styles.footer_content_bottom_line_title}>Business</span>
-                        <p>Franchise</p>
+                        {/* <p>Franchise</p> */}
                         <p>Stores</p>
                         <p>Decorations Service</p>
                         <p>Gifts</p>
@@ -215,7 +215,7 @@ const Footer = () => {
                         <span className={styles.footer_content_bottom_line_title} onClick={() => handleMenuItemClick("/about")}>About Us</span>
                         <p onClick={() => handleMenuItemClick("/about")}>About Us</p>
                         <p>Our Teams</p>
-                        <p>Testimonials</p>
+                        {/* <p>Testimonials</p> */}
                         <p>Upcoming Products</p> 
                     </div>
                 </div>

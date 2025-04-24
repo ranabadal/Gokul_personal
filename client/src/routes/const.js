@@ -31,6 +31,7 @@ import PreviewScreen from '../pages/bulkOrders/PreviewScreen/previewScreen'
 import Title from "../pages/about/Title/title"
 import BulkOrderNew from "../pages/bulkOrders/BulkOrder/bulkOrderNew";
 import BulkOrderNewCards from "../pages/bulkOrders/BulkOrder/BulkOrderNewCards/bulkOrderNewCards";
+// import TermsAndConditions from "../pages/TermandCondition/t&c"
 const routes = [
     {
       path: '/',
@@ -136,7 +137,15 @@ const routes = [
 {
     path:'/previewScreen',
     element : <PreviewScreen />
-}
+},
+{
+    path:'/previewScreen',
+    element : <PreviewScreen />
+},
+// {
+//     path:'/TermsAndConditions',
+//     element : <TermsAndConditions/>
+// }
 
     
    
