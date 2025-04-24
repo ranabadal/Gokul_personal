@@ -1,7 +1,6 @@
 // import React from "react";
 // import styles from "./footer.module.css";
 // import logo from "./assets/gokul logo.svg";
-
 // const Footer = () => {
 //   return (
 //     <div className={styles.footer}>
@@ -28,7 +27,6 @@
 //             </div>
 //           </div>
 //         </div>
-
 //         <div className={styles.footer_content_serachbar}>
 //           <div className={styles.footer_content_serachbar_input}>
 //             <input type="text" placeholder="Your email address" />
@@ -37,7 +35,6 @@
 //             <button>SUBSCRIBE</button>
 //           </div>
 //         </div>
-
 //         <div className={styles.footer_content_bottom}>
 //           <div className={styles.footer_content_bottom_line}>
 //             <span className={styles.footer_content_bottom_line_title}>
@@ -71,7 +68,6 @@
 //     </div>
 //   );
 // };
-
 // export default Footer;
 
 // import React from "react";
@@ -81,9 +77,9 @@
 // import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
 // const Footer = () => {
-//     const navigate = useNavigate();
-//     return (
-//         <div className={styles.footer}>
+// const navigate = useNavigate();
+// return (
+// <div className={styles.footer}>
 //             <div className={styles.footer_content}>
 //                 <div className={styles.footer_content_top}>
 //                     <div className={styles.footer_content_top_left}>
@@ -159,9 +155,8 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 const Footer = () => {
     const navigate = useNavigate();
-
     const handleMenuItemClick = (path) => {
-        navigate(path);
+    navigate(path);
     };
 
     return (
@@ -207,9 +202,9 @@ const Footer = () => {
                     <div className={styles.footer_content_bottom_line}>
                         <span className={styles.footer_content_bottom_line_title}>Business</span>
                         {/* <p>Franchise</p> */}
-                        <p>Stores</p>
-                        <p>Decorations Service</p>
-                        <p>Gifts</p>
+                    <p>Stores</p>
+                <p>Decorations Service</p>
+                    <p>Gifts</p>
                     </div>
                     <div className={styles.footer_content_bottom_line}>
                         <span className={styles.footer_content_bottom_line_title} onClick={() => handleMenuItemClick("/about")}>About Us</span>
