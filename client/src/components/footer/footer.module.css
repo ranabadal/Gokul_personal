@@ -409,7 +409,6 @@
 
 }
 
-
 @media  (min-width: 440px) and (max-width: 768px) {
     .footer {
         width: 100%;
@@ -417,12 +416,10 @@
         padding: 1rem;
 
     }
-
     .footer_content {    
         width: 100%;
         height: auto;
     }
-
     .footer_content_top {
         width: 100%;
         height: auto;
