@@ -8,7 +8,7 @@
     flex-direction: column;
     align-items: center;
     /* border: 1px solid black; */
-
+    
 }
 
 .footer_content {
@@ -505,7 +505,6 @@
     .footer_content_bottom_line:hover {
         color: aliceblue;
         cursor: pointer;
-
     } 
 
     
