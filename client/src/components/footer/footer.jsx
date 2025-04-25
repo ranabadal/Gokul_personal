@@ -148,16 +148,17 @@
 // };
 // export default Footer;
 
-import React from "react";
-import styles from "./footer.module.css";
-import gokul from "./assets/gokul.svg";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-const Footer = () => {
-    const navigate = useNavigate();
-    const handleMenuItemClick = (path) => {
-    navigate(path);
-    };
+                                                                                                                                                                                                                                        import React from "react";
+            import styles from "./footer.module.css";
+import                                                                                                           gokul from                                                                 "./assets/gokul.svg";
+                            import                                                                                                                                                                                                                                                               { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { useNavigate } from                                                                                                                 "react-router-dom";
+
+const Footer = (                                                                                                                                        ) => {
+const navigate =                                                                                                                                                                        useNavigate();
+const handleMenuItemClick = (path) => {
+navigate(path);
+};
 
     return (
         <div className={styles.footer}>
@@ -166,7 +167,7 @@ const Footer = () => {
                     <div className={styles.footer_content_top_left}>
                         <span className={styles.footer_content_top_left_text}>
                             <span className={styles.footer_content_top_left_text_title}>
-                                Connect with us on social media
+Connect with us on social media
                             </span>
                             <div className={styles.footer_content_top_left_icons}>
                                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
@@ -176,7 +177,7 @@ const Footer = () => {
                                     <FaTwitter />
                                 </a> */}
                                 <a href="https://www.instagram.com/new_gokulsweets?igsh=OGQyZWh2ZDkzM2c2" target="_blank" rel="noopener noreferrer">
-                                    <FaInstagram />
+<FaInstagram />
                                 </a>
                                 {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
                                     <FaLinkedin />
@@ -185,11 +186,11 @@ const Footer = () => {
                         </span>
                     </div>
                     <div className={styles.footer_content_top_right}>
-                        <div className={styles.footer_content_top_right_logo}>
-                            <img src={gokul} alt="logo" />
-                        </div> 
-                    </div>
-                </div>
+        <div className={styles.footer_content_top_right_logo}>
+<img src={gokul} alt="logo" />
+         </div> 
+             </div>
+        </div>
                 {/* Newsletter section is commented out */}
                 <div className={styles.footer_content_bottom}>
                     <div className={styles.footer_content_bottom_line}>
@@ -202,20 +203,20 @@ const Footer = () => {
                     <div className={styles.footer_content_bottom_line}>
                         <span className={styles.footer_content_bottom_line_title}>Business</span>
                         {/* <p>Franchise</p> */}
-                    <p>Stores</p>
-                <p>Decorations Service</p>
-                    <p>Gifts</p>
+<p>Stores</p>
+<p>Decorations Service</p>
+<p>Gifts</p>
                     </div>
-                    <div className={styles.footer_content_bottom_line}>
-                        <span className={styles.footer_content_bottom_line_title} onClick={() => handleMenuItemClick("/about")}>About Us</span>
-                        <p onClick={() => handleMenuItemClick("/about")}>About Us</p>
-                        <p>Our Teams</p>
+<div className={styles.footer_content_bottom_line}>
+<span className={styles.footer_content_bottom_line_title} onClick={() => handleMenuItemClick("/about")}>About Us</span>
+<p onClick={() => handleMenuItemClick("/about")}>About Us</p>
+                            <p>Our Teams</p>
                         {/* <p>Testimonials</p> */}
-                        <p>Upcoming Products</p> 
-                    </div>
+                 <p>Upcoming Products</p> 
+     </div>
                 </div>
             </div>
         </div>
     );
 };
-export default Footer;
+                               export default Footer;
