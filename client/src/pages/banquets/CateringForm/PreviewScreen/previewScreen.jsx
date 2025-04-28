@@ -1,135 +1,15 @@
-// import React from "react";
-// import styles from "./previewScreen.module.css";
-
-// const PreviewScreen = ({
-//   hallTitle,
-//   hallImage,
-//   occasion,
-//   guestCount,
-//   selectedCart,
-//   selectedDates,
-//   preferredTimings,
-//   comments,
-//   menuPreferences,
-//   totalCost, // New prop for total pricing
-// }) => {
-//   return (
-//     <div className={styles.previewContainer}>
-//       <h2 className={styles.heading}>Preview of Your Selections</h2>
-//       <div className={styles.details}>
-//         <p><strong>Hall Name:</strong> {hallTitle || "No Hall Selected"}</p>
-//         {hallImage && <img src={hallImage} alt="Hall Preview" className={styles.hallImage} />}
-//         <p><strong>Occasion:</strong> {occasion || "Not Specified"}</p>
-//         <p><strong>Number of Guests:</strong> {guestCount || 0}</p>
-//         <p><strong>Selected Menu:</strong> {selectedCart || "No Menu Selected"}</p>
-//         <p>
-//           <strong>Selected Dates:</strong> {selectedDates.length > 0
-//             ? selectedDates.map((date) => date.toDateString()).join(", ")
-//             : "No Dates Selected"}
-//         </p>
-//         <p>
-//           <strong>Preferred Timings:</strong> {preferredTimings.length > 0
-//             ? preferredTimings.join(", ")
-//             : "Not Specified"}
-//         </p>
-//         <p><strong>Additional Comments:</strong> {comments || "None"}</p>
-//         <p><strong>Total Cost:</strong> ₹{totalCost || 0}</p>
-//         {menuPreferences && Object.keys(menuPreferences).length > 0 && (
-//           <>
-//             <h3>Menu Preferences</h3>
-//             <ul>
-//               {Object.entries(menuPreferences).map(([key, value]) => (
-//                 <li key={key}>
-//                   <strong>{key}:</strong>{" "}
-//                   {Array.isArray(value) ? value.join(", ") : value || ""}
-//                 </li>
-//               ))}
-//             </ul>
-//           </>
-//         )}
-//       </div>
-//       <button className={styles.backButton} onClick={() => window.history.back()}>
-//         Back
-//       </button>
-//       <button className={styles.confirmButton}>
-//         Confirm and Proceed
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default PreviewScreen;
-
-
-// import React from "react";
-// import styles from "./previewScreen.module.css";
-
-// const PreviewScreen = ({
-//   hallTitle,
-//   hallImage,
-//   occasion,
-//   guestCount,
-//   selectedCart,
-//   selectedDates,
-//   preferredTimings,
-//   comments,
-//   menuPreferences,
-//   totalCost, // Total pricing
-//   onBack, // Callback for navigation
-// }) => {
-//   return (
-//     <div className={styles.previewContainer}>
-//       <h2 className={styles.heading}>Preview of Your Selections</h2>
-//       <div className={styles.details}>
-//         <p><strong>Hall Name:</strong> {hallTitle || "No Hall Selected"}</p>
-//         {hallImage && <img src={hallImage} alt="Hall Preview" className={styles.hallImage} />}
-//         <p><strong>Occasion:</strong> {occasion || "Not Specified"}</p>
-//         <p><strong>Number of Guests:</strong> {guestCount || 0}</p>
-//         <p><strong>Selected Menu:</strong> {selectedCart || "No Menu Selected"}</p>
-//         <p>
-//           <strong>Selected Dates:</strong> {selectedDates.length > 0
-//             ? selectedDates.map((date) => date.toDateString()).join(", ")
-//             : "No Dates Selected"}
-//         </p>
-//         <p>
-//           <strong>Preferred Timings:</strong> {preferredTimings.length > 0
-//             ? preferredTimings.join(", ")
-//             : "Not Specified"}
-//         </p>
-//         <p><strong>Additional Comments:</strong> {comments || "None"}</p>
-//         <p><strong>Total Cost:</strong> ₹{totalCost || 0}</p>
-//         {menuPreferences && Object.keys(menuPreferences).length > 0 && (
-//           <>
-//             <h3>Menu Preferences</h3>
-//             <ul>
-//               {Object.entries(menuPreferences).map(([key, value]) => (
-//                 <li key={key}>
-//                   <strong>{key}:</strong>{" "}
-//                   {Array.isArray(value) ? value.join(", ") : value || ""}
-//                 </li>
-//               ))}
-//             </ul>
-//           </>
-//         )}
-//       </div>
-//       <button className={styles.backButton} onClick={onBack}>
-//         Back
-//       </button>
-//       <button className={styles.confirmButton}>Confirm and Proceed</button>
-//     </div>
-//   );
-// };
-
-// export default PreviewScreen;
 
 
 
 // import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 // import styles from "./previewScreen.module.css";
+// import { useToaster } from '../../../../utils';
 
 // const PreviewScreen = ({
+//   hallPrice,
 //   hallTitle,
-//   hallImage,
+//   hallImages,
 //   occasion,
 //   guestCount,
 //   selectedCart,
@@ -144,6 +24,10 @@
 //   const [successMessage, setSuccessMessage] = useState(null); // Success message
 //   const [errorMessage, setErrorMessage] = useState(null); // Error message
 
+//   // useNavigate hook for routing
+//   const navigate = useNavigate();
+
+//   const setToast = useToaster();
 //   // Function to handle the data submission
 //   const handleSaveQuery = async () => {
 //     try {
@@ -151,9 +35,7 @@
 //       setErrorMessage(null); // Clear error state
 //       setSuccessMessage(null); // Clear success state
 
-//       const token = localStorage.getItem("jwtToken"); 
-     
-//       // Retrieve the JWT token
+//       const token = localStorage.getItem("jwtToken");
 //       const response = await fetch("http://localhost:8080/api/queries/", {
 //         method: "POST",
 //         headers: {
@@ -176,10 +58,12 @@
 
 //       if (response.ok) {
 //         const data = await response.json();
-//         setSuccessMessage("Your banquet query has been submitted successfully!");
+//         setToast("Your banquet query has been submitted successfully!");
 //         setLoading(false);
 
-//         // Optionally, redirect to a thank-you page or clear form
+//         // Route to the Banquet Hall page after successful submission.
+//         // Change "/banquet-hall" to the desired route.
+//         navigate("/banquets");
 //       } else {
 //         const errorData = await response.json();
 //         setErrorMessage(errorData.error || "Failed to submit query. Please try again.");
@@ -196,23 +80,39 @@
 //     <div className={styles.previewContainer}>
 //       <h2 className={styles.heading}>Preview of Your Selections</h2>
 //       <div className={styles.details}>
-//         <p><strong>Hall Name:</strong> {hallTitle || "No Hall Selected"}</p>
-//         {hallImage && <img src={hallImage} alt="Hall Preview" className={styles.hallImage} />}
-//         <p><strong>Occasion:</strong> {occasion || "Not Specified"}</p>
-//         <p><strong>Number of Guests:</strong> {guestCount || 0}</p>
-//         <p><strong>Selected Menu:</strong> {selectedCart || "No Menu Selected"}</p>
 //         <p>
-//           <strong>Selected Dates:</strong> {selectedDates.length > 0
-//             ? selectedDates.map((date) => date.toDateString()).join(", ")
+//           <strong>Hall Name:</strong> {hallTitle || "No Hall Selected"}
+//         </p>
+//         {hallImage && <img src={hallImage} alt="Hall Preview" className={styles.hallImage} />}
+//         <p>
+//           <strong>Occasion:</strong> {occasion || "Not Specified"}
+//         </p>
+//         <p>
+//           <strong>Number of Guests:</strong> {guestCount || 0}
+//         </p>
+//         <p>
+//           <strong>Selected Menu:</strong> {selectedCart || "No Menu Selected"}
+//         </p>
+//         <p>
+//           <strong>Selected Dates:</strong>{" "}
+//           {selectedDates.length > 0
+//             ? selectedDates.map((date) => new Date(date).toDateString()).join(", ")
 //             : "No Dates Selected"}
 //         </p>
 //         <p>
-//           <strong>Preferred Timings:</strong> {preferredTimings.length > 0
-//             ? preferredTimings.join(", ")
-//             : "Not Specified"}
+//   <strong>Preferred Timings:</strong>{" "}
+//   {preferredTimings.start && preferredTimings.end
+//     ? `${new Date(`1970-01-01T${preferredTimings.start}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })} 
+//        to 
+//        ${new Date(`1970-01-01T${preferredTimings.end}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })}`
+//     : "Not Specified"}
+// </p>
+//         <p>
+//           <strong>Additional Comments:</strong> {comments || "None"}
 //         </p>
-//         <p><strong>Additional Comments:</strong> {comments || "None"}</p>
-//         <p><strong>Total Cost:</strong> ₹{totalCost || 0}</p>
+//         <p>
+//           <strong>Total Estimated Cost:</strong> ₹{totalCost || hallPrice}
+//         </p>
 //         {menuPreferences && Object.keys(menuPreferences).length > 0 && (
 //           <>
 //             <h3>Menu Preferences</h3>
@@ -230,7 +130,6 @@
 //       {/* Success and Error Messages */}
 //       {successMessage && <p className={styles.success}>{successMessage}</p>}
 //       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-
 //       {/* Action Buttons */}
 //       <button className={styles.backButton} onClick={onBack}>
 //         Back
@@ -249,14 +148,55 @@
 // export default PreviewScreen;
 
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./previewScreen.module.css";
 import { useToaster } from '../../../../utils';
 
+// ✅ Image Slider Component
+const ImageSlider = ({ images = [] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length === 0) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // 3 seconds per slide
+
+    return () => clearInterval(interval); // Cleanup
+  }, [images]);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  if (images.length === 0) return null;
+
+  return (
+    <div className={styles.imageSlider}>
+      <img
+        src={images[currentIndex]}
+        alt="Hall Preview"
+        className={styles.sliderImage}
+      />
+      <div className={styles.navigationButtons}>
+        <button onClick={goToPrevious} className={styles.prevButton}>◀</button>
+        <button onClick={goToNext} className={styles.nextButton}>▶</button>
+      </div>
+    </div>
+  );
+};
+
 const PreviewScreen = ({
+  hallPrice,
   hallTitle,
-  hallImage,
+  hallImages = [],
   occasion,
   guestCount,
   selectedCart,
@@ -267,31 +207,29 @@ const PreviewScreen = ({
   totalCost,
   onBack,
 }) => {
-  const [loading, setLoading] = useState(false); // Manage loading state
-  const [successMessage, setSuccessMessage] = useState(null); // Success message
-  const [errorMessage, setErrorMessage] = useState(null); // Error message
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  // useNavigate hook for routing
   const navigate = useNavigate();
-
   const setToast = useToaster();
-  // Function to handle the data submission
+
   const handleSaveQuery = async () => {
     try {
-      setLoading(true); // Enable loading state
-      setErrorMessage(null); // Clear error state
-      setSuccessMessage(null); // Clear success state
+      setLoading(true);
+      setErrorMessage(null);
+      setSuccessMessage(null);
 
       const token = localStorage.getItem("jwtToken");
       const response = await fetch("http://localhost:8080/api/queries/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Send token for authentication
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           hallTitle,
-          hallImage,
+          hallImages, // send hallImages array
           occasion,
           guestCount,
           selectedCart,
@@ -307,9 +245,6 @@ const PreviewScreen = ({
         const data = await response.json();
         setToast("Your banquet query has been submitted successfully!");
         setLoading(false);
-
-        // Route to the Banquet Hall page after successful submission.
-        // Change "/banquet-hall" to the desired route.
         navigate("/banquets");
       } else {
         const errorData = await response.json();
@@ -326,64 +261,65 @@ const PreviewScreen = ({
   return (
     <div className={styles.previewContainer}>
       <h2 className={styles.heading}>Preview of Your Selections</h2>
+
       <div className={styles.details}>
-        <p>
-          <strong>Hall Name:</strong> {hallTitle || "No Hall Selected"}
-        </p>
-        {hallImage && <img src={hallImage} alt="Hall Preview" className={styles.hallImage} />}
-        <p>
-          <strong>Occasion:</strong> {occasion || "Not Specified"}
-        </p>
-        <p>
-          <strong>Number of Guests:</strong> {guestCount || 0}
-        </p>
-        <p>
-          <strong>Selected Menu:</strong> {selectedCart || "No Menu Selected"}
-        </p>
-        <p>
-          <strong>Selected Dates:</strong>{" "}
+        <p><strong>Hall Name:</strong> {hallTitle || "No Hall Selected"}</p>
+
+        {/* ✅ Use Image Slider */}
+        {hallImages.length > 0 ? (
+          <ImageSlider images={hallImages} />
+        ) : (
+          <p>No hall images available.</p>
+        )}
+
+        <p><strong>Occasion:</strong> {occasion || "Not Specified"}</p>
+        <p><strong>Number of Guests:</strong> {guestCount || 0}</p>
+        <p><strong>Selected Menu:</strong> {selectedCart || "No Menu Selected"}</p>
+
+        <p><strong>Selected Dates:</strong>{" "}
           {selectedDates.length > 0
             ? selectedDates.map((date) => new Date(date).toDateString()).join(", ")
             : "No Dates Selected"}
         </p>
-        <p>
-          <strong>Preferred Timings:</strong>{" "}
-          {preferredTimings.length > 0 ? preferredTimings.join(", ") : "Not Specified"}
+
+        <p><strong>Preferred Timings:</strong>{" "}
+          {preferredTimings.start && preferredTimings.end
+            ? `${new Date(`1970-01-01T${preferredTimings.start}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })} to ${new Date(`1970-01-01T${preferredTimings.end}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })}`
+            : "Not Specified"}
         </p>
-        <p>
-          <strong>Additional Comments:</strong> {comments || "None"}
-        </p>
-        <p>
-          <strong>Total Cost:</strong> ₹{totalCost || 0}
-        </p>
+
+        <p><strong>Additional Comments:</strong> {comments || "None"}</p>
+        <p><strong>Total Estimated Cost:</strong> ₹{totalCost || hallPrice}</p>
+
         {menuPreferences && Object.keys(menuPreferences).length > 0 && (
           <>
             <h3>Menu Preferences</h3>
             <ul>
               {Object.entries(menuPreferences).map(([key, value]) => (
                 <li key={key}>
-                  <strong>{key}:</strong>{" "}
-                  {Array.isArray(value) ? value.join(", ") : value || ""}
+                  <strong>{key}:</strong> {Array.isArray(value) ? value.join(", ") : value || ""}
                 </li>
               ))}
             </ul>
           </>
         )}
       </div>
-      {/* Success and Error Messages */}
+
+      {/* Messages */}
       {successMessage && <p className={styles.success}>{successMessage}</p>}
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-      {/* Action Buttons */}
-      <button className={styles.backButton} onClick={onBack}>
-        Back
-      </button>
-      <button
-        className={styles.confirmButton}
-        onClick={handleSaveQuery}
-        disabled={loading}
-      >
-        {loading ? "Submitting..." : "Confirm and Save"}
-      </button>
+
+      {/* Buttons */}
+      <div className={styles.buttonContainer}>
+        <button className={styles.backButton} onClick={onBack}>Back</button>
+        <button
+          className={styles.confirmButton}
+          onClick={handleSaveQuery}
+          disabled={loading}
+        >
+          {loading ? "Submitting..." : "Confirm and Save"}
+        </button>
+      </div>
     </div>
   );
 };

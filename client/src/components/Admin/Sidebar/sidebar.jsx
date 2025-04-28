@@ -66,6 +66,9 @@ const Sidebar = () => {
             <NavLink to="/admin/dashboard" activeClassName={styles.active}>Dashboard</NavLink>
           </li>
           <li>
+          <NavLink to="/admin/takeAwayOrders" activeClassName={styles.active}>TakeAway Orders Management</NavLink>
+          </li>
+          <li>
             <NavLink to="/admin/products" activeClassName={styles.active}>Products Management</NavLink>
           </li>
           <li>
@@ -147,7 +150,7 @@ const Sidebar = () => {
             <NavLink to="/admin/menu" activeClassName={styles.active}>Menu Management</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/restaurentNav" activeClassName={styles.active}>Product <i class="fas fa-pagelines    "></i> Navbar Management</NavLink>
+            <NavLink to="/admin/restaurentNav" activeClassName={styles.active}>TakeAway <i class="fas fa-pagelines    "></i> Navbar Management</NavLink>
           </li>
           <li>
             <NavLink to="/admin/todaysDeal" activeClassName={styles.active}>Todays Deal Products Management</NavLink>

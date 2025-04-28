@@ -67,6 +67,7 @@ import MenuMng from './MenuMng/menuMng';
 import RestaurtentNavbar from './RestaurentNavMng/restaurentNavMng'
 
 import TodaysDealMng from './TodaysDealMng/todaysDealMng';
+import TakeAwayOrders from './TakeAwayOrderMng/takeAwayOrdersMng';
 
 const Admin = () => {
   const location = useLocation();
@@ -99,6 +100,8 @@ const Admin = () => {
                     return <RestaurtentNavbar />;
                     case '/admin/todaysDeal':
                       return <TodaysDealMng />;
+                      case '/admin/takeAwayOrders':
+                        return <TakeAwayOrders />;
       default:
         return <UsersManagement />; // Default to Users Management
     }

@@ -18,7 +18,7 @@ const Cart = () => {
 
   useEffect(() => {
     fetchCartItems();
-    fetchAddresses();
+
   }, []);
 
   const fetchCartItems = async () => {
@@ -39,23 +39,23 @@ const Cart = () => {
     }
   };
 
-  const fetchAddresses = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/addresses", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-        },
-      });
+  // const fetchAddresses = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:8080/addresses", {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+  //       },
+  //     });
 
-      if (response.data.success) {
-        setAddresses(response.data.data);
-      } else {
-        console.error("Failed to fetch addresses");
-      }
-    } catch (error) {
-      console.error("Error fetching addresses:", error.message || error);
-    }
-  };
+  //     if (response.data.success) {
+  //       setAddresses(response.data.data);
+  //     } else {
+  //       console.error("Failed to fetch addresses");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching addresses:", error.message || error);
+  //   }
+  // };
 
   return (
     <>
@@ -67,6 +67,7 @@ const Cart = () => {
         </div>
         <div className={styles.rightSection}>
   <BasketRight
+  updateCartItems={setCartItems}
     cartItems={cartItems}
     addresses={addresses}
     showQuantityInput={false} // Do not show the quantity input in Basket page

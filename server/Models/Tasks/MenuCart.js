@@ -4,7 +4,7 @@ const MenuSchema = new mongoose.Schema({
   menuName: { type: String, required: true },
   description: { type: String },
   price: { type: Number, required: true },
-  menuImage: { type: String }, // Storing image URL
+  menuImage: { type: String,required: true }, // Storing image URL
   isAvailable: { type: Boolean, default: true }
 });
 

@@ -158,8 +158,10 @@ const sendNotificationEmail = async (userEmail, subject, queryDetails) => {
       ? queryDetails.selectedDates.map((date) => new Date(date).toDateString()).join(", ")
       : "No Dates Selected";
 
-    const formattedPreferredTimings = queryDetails.preferredTimings?.length > 0
-      ? queryDetails.preferredTimings.join(", ")
+      const formattedPreferredTimings = queryDetails.preferredTimings?.start && queryDetails.preferredTimings?.end
+      ? `${new Date(`1970-01-01T${queryDetails.preferredTimings.start}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })} 
+         to 
+         ${new Date(`1970-01-01T${queryDetails.preferredTimings.end}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })}`
       : "Not Specified";
 
     const formattedMenuPreferences = queryDetails.menuPreferences
@@ -217,8 +219,10 @@ const sendAdminNotificationEmail = async (userEmail, subject, queryDetails) => {
       ? queryDetails.selectedDates.map((date) => new Date(date).toDateString()).join(", ")
       : "No Dates Selected";
 
-    const formattedPreferredTimings = queryDetails.preferredTimings?.length > 0
-      ? queryDetails.preferredTimings.join(", ")
+      const formattedPreferredTimings = queryDetails.preferredTimings?.start && queryDetails.preferredTimings?.end
+      ? `${new Date(`1970-01-01T${queryDetails.preferredTimings.start}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })} 
+         to 
+         ${new Date(`1970-01-01T${queryDetails.preferredTimings.end}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })}`
       : "Not Specified";
 
     const formattedMenuPreferences = queryDetails.menuPreferences

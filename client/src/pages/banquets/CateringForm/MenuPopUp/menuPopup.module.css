@@ -67,7 +67,7 @@
 .sectionTitle {
   font-size: 1.2em;
   margin-bottom: 10px;
-  color: #444;
+  color: #E31E24;
 }
 
 /* Input Containers and Generic Controls */
@@ -82,9 +82,9 @@
   align-items: center;
   gap: 8px;
   padding: 5px 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #E31E24;
   border-radius: 4px;
-  background: #f9f9f9;
+  background: #ffff;
   cursor: pointer;
   transition: background 0.2s ease;
 }

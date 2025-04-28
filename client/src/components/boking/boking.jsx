@@ -562,7 +562,14 @@ const Boking = () => {
                             <p><strong>Guests:</strong> {selectedQuery.guestCount}</p>
                             <p><strong>Menu:</strong> {selectedQuery.selectedCart}</p>
                             <p><strong>Dates:</strong> {selectedQuery.selectedDates?.join(", ") || "N/A"}</p>
-                            <p><strong>Timings:</strong> {selectedQuery.preferredTimings?.join(", ") || "N/A"}</p>
+                            <p>
+  <strong>Timings:</strong>{" "}
+  {selectedQuery.preferredTimings?.start && selectedQuery.preferredTimings?.end
+    ? `${new Date(`1970-01-01T${selectedQuery.preferredTimings.start}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })} 
+       to 
+       ${new Date(`1970-01-01T${selectedQuery.preferredTimings.end}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })}`
+    : "N/A"}
+</p>
                             <p><strong>Menu Preferences:</strong> {selectedQuery.menuPreferences ? JSON.stringify(selectedQuery.menuPreferences) : "N/A"}</p>
                             <p><strong>Comments:</strong> {selectedQuery.comments || "None"}</p>
                             <p><strong>Total Cost:</strong> ₹{selectedQuery.totalCost || 0}</p>

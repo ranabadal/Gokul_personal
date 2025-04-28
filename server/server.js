@@ -195,7 +195,7 @@ const bulkOrderQueryRoutes = require('./Routes/Tasks/bulkOrderQueryRoutes');
 const GiftBoxOrderQueryRoutes = require('./Routes/Tasks/GiftBoxOrderQueryRoutes');
 const RestaurentNavbar = require('./Routes/Tasks/restaurentNavbarRoutes');
 const RestaurentProducts = require("./Routes/Tasks/restaurentProductsRoutes");
-
+const TakeawayOrderRoutes = require("./Routes/Tasks/takeawayRoutes");
 
 app.use(bodyParser.json({ limit: '50mb' })); // Increase the limit to handle large base64 images
 app.use(cors());
@@ -231,6 +231,7 @@ app.use("/api/menuCart", menuCartRoutes); // Use menu cart routes
 app.use('/api/navbar', RestaurentNavbar); // Use gift box routes
 app.use('/api/restaurentProducts', RestaurentProducts);
 app.use('/api/giftBoxOrderQueries',GiftBoxOrderQueryRoutes);
+app.use('/api/takeawayOrders', TakeawayOrderRoutes); // Use takeaway order routes
 
 
 app.use(express.static(path.join(__dirname, '../client/build')));

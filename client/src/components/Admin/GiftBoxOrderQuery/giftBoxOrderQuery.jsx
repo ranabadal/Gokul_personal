@@ -222,6 +222,7 @@
 
 // export default BulkOrderQuery;
 
+
 import React, { useState, useEffect } from "react";
 import styles from "./giftBoxOrderQuery.module.css";
 import EditQueryModal from "./EditQueryModal/editQueryModal"; // Modal for editing
@@ -264,7 +265,21 @@ const GiftBoxOrderQueryPage = () => {
   }, []);
 
   // Approve a query
-  const handleApprove = async (queryId) => {
+  const handleApprove = async (queryId,orderStatus) => {
+
+
+        
+    if (orderStatus === "Approved") {
+      alert("This order has already been Approved.");
+      return;
+    }
+
+    if (orderStatus === "Canceled") {
+      alert("This order has been canceled. Now you cant Approve it");
+      return;
+    }
+
+
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${queryId}/approve`, {
@@ -350,74 +365,76 @@ const GiftBoxOrderQueryPage = () => {
 
   if (loading) return <p>Loading...</p>;
   if (errorMessage) return <p className={styles.error}>{errorMessage}</p>;
-
-  return (
-    <div className={styles.queryContainer}>
-      <h2>Admin - Bulk Order Queries</h2>
-
-      {selectedQuery ? (
-        <EditQueryModal
-          query={selectedQuery}
-          onSave={handleSaveEdit}
-          onCancel={() => setSelectedQuery(null)}
-        />
-      ) : (
-        <table className={styles.queryTable}>
-          <thead>
-            <tr>
-              <th>User Name</th>
-              <th>Phone Number</th>
-              <th>Email</th>
-              <th>Box Name</th>
-              <th>Box Size</th>
-              <th>Products</th>
-              <th>Total</th>
-              <th>Address</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {queries.map((query) => (
-              <tr key={query._id}>
-                <td>{query.user?.name || "N/A"}</td>
-                <td>{query.user ? query.user.number : "N/A"}</td>
-                <td>{query.user ? query.user.email : "N/A"}</td>
-                <td>{query.boxName || "N/A"}</td>
-                <td>{query.boxSize || "N/A"}</td>
-                <td>
-                  {/* Render multiple products */}
-                  {query.products.map((product, index) => (
-                    <div key={index}>
-                      {product.productName} - ₹{product.productPrice} x {product.quantity}
-                    </div>
-                  ))}
-                </td>
-                <td>₹{query.totalCost || 0}</td>
-                <td>
-                  {query.address
-                    ? `${query.address.province}, ${query.address.city}, ${query.address.area}, ${query.address.landmark}`
-                    : "N/A"}
-                </td>
-                <td>{query.status || "Pending"}</td>
-                <td>
-                  <button className={styles.first} onClick={() => handleApprove(query._id)}>
-                    Approve
-                  </button>
-                  <button className={styles.second} onClick={() => handleDelete(query._id)}>
-                    Delete
-                  </button>
-                  <button className={styles.third} onClick={() => handleEdit(query)}>
-                    Edit
-                  </button>
-                </td>
+ 
+  
+    return (
+      <div className={styles.queryContainer}>
+        <h2>Admin - Gift Box Orders</h2>
+  
+        {selectedQuery ? (
+          <EditQueryModal query={selectedQuery} onSave={handleSaveEdit} onCancel={() => setSelectedQuery(null)} />
+        ) : (
+          <table className={styles.queryTable}>
+            <thead>
+              <tr>
+                <th>User Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Box Name</th>
+                <th>Box Size</th>
+                <th>Products</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Address</th>
+                <th>Custom Message</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
-};
-
-export default GiftBoxOrderQueryPage;
+            </thead>
+            <tbody>
+              {queries.map((query) =>
+                query.orders.map((box, boxIndex) => (
+                  <tr key={`${query._id}-${boxIndex}`}>
+                    {boxIndex === 0 && (
+                      <>
+                        <td rowSpan={query.orders.length}>{query.user?.name || "N/A"}</td>
+                        <td rowSpan={query.orders.length}>{query.user?.number || "N/A"}</td>
+                        <td rowSpan={query.orders.length}>{query.user?.email || "N/A"}</td>
+                      </>
+                    )}
+                    <td>{box.boxName || "N/A"}</td>
+                    <td>{box.boxSize || "N/A"}</td>
+                    <td>
+                      {box.sweets.map((sweet, sweetIndex) => (
+                        <div key={sweetIndex}>
+                          {sweet.productName} - ₹{sweet.productPrice}
+                        </div>
+                      ))}
+                    </td>
+                    <td>{box.quantity}</td>
+                    <td>₹{box.totalCost}</td>
+                    <td>
+                      {box.address ? `${box.address.province}, ${box.address.city}, ${box.address.area}, ${box.address.landmark}` : "N/A"}
+                    </td>
+                    <td>{box.customMessage || "N/A"}</td>
+                    {boxIndex === 0 && (
+                      <>
+                        <td rowSpan={query.orders.length}>{query.status || "Pending"}</td>
+                        <td rowSpan={query.orders.length}>
+                          <button className={styles.first} onClick={() => handleApprove(query._id,query.status)}>Approve</button>
+                          <button className={styles.second} onClick={() => handleDelete(query._id)}>Delete</button>
+                          <button className={styles.third} onClick={() => handleEdit(query)}>Edit</button>
+                        </td>
+                      </>
+                    )}
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        )}
+      </div>
+    );
+  };
+  
+  export default GiftBoxOrderQueryPage;

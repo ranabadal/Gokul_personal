@@ -1,12 +1,16 @@
 .hall_details {
-  width: 100%;
+  width: max-content;
   height: max-content;
-  padding: 3rem 6rem;
+  /* padding: 3rem 6rem; */
+  padding: 10px;
   display: flex;
   justify-content: center;
   gap: 3rem;
   flex-direction: row-reverse;
   overflow: hidden;
+  border: 1px solid #E31E24;  
+  border-radius: 16px;
+  margin-top: 20px;
 }
 
 /* Left Section */

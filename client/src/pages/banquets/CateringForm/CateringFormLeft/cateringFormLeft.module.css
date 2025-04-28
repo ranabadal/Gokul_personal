@@ -108,7 +108,21 @@
     border-radius: 18px; /* Adds rounded corners */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for better depth */
   }
+
+  .activeMenu {
+    opacity: 1;
+    cursor: pointer;
+    filter: none;
+  }
   
+  .inactiveMenu {
+    opacity: 0.3; /* ✅ Slightly more visible than 0.1 */
+    cursor: not-allowed;
+    background-color: #ccc; /* ✅ Light gray background */
+    color: #777; /* ✅ Dimmed text */
+    filter: grayscale(100%); /* ✅ Convert inactive images to black & white */
+    pointer-events: none; /* ✅ Prevent clicks */
+  }
   .carts {
     display: flex;
     flex-direction: row;

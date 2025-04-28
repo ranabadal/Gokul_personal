@@ -72,7 +72,9 @@ const TodaysDeal = () => {
       {!isLoading && deal ? (
         <>
           <div className={styles.imageContainer}>
-            <img src={`data:image/png;base64,${deal.image}`} alt={deal.title} />
+         <div className={styles.image}>
+         <img src={`data:image/png;base64,${deal.image}`} alt={deal.title} />
+         </div>
             <div className={styles.description}>{deal.description}</div>
             <div className={styles.OfferEndDate}>
               Valid Through: {new Date(deal.endTime).toLocaleDateString()}
@@ -87,7 +89,9 @@ const TodaysDeal = () => {
           </div>
         </>
       ) : (
-        !isLoading && <img src={noDeal} className={styles.noDeal} />
+        !isLoading && <div className={styles.noDeal}>
+           <img src={noDeal}   />
+        </div>
       )}
     </div>
   );

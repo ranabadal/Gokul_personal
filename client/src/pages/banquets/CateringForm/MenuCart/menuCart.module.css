@@ -1,3 +1,6 @@
+
+
+
 .body{
     margin: 5px;
     display: flex;
@@ -26,7 +29,7 @@
 .image{
     /* max-width: 185px; */
     width: 100%;
-    max-height: 283px;
+    height: 150px;
 }
 
 /* .content{
@@ -70,11 +73,92 @@
 }
 
 /* Selected State */
-.selected .selectedContent {
+/* .selected .selectedContent {
   
     background-color: #E31E24;
     padding-top: -5px;
-}
+} */
+ .selected .content {
+    /* background-color: #E31E24; */
+   
+} 
+
+/* ✅ Active menu styles */
+.activeMenu {
+    opacity: 1;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+  }
+  
+ 
+  
+
+  
+  /* ✅ Selected menu styles */
+  .selected {
+    /* border: 2px solid #ff6600; */
+    box-shadow: 0px 0px 10px rgba(255, 102, 0, 0.5);
+  }
+  .popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* ✅ Dark background to prevent transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* ✅ Ensures it's above inactive menus */
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .popupContent {
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 1001; /* ✅ Ensures the content is above the overlay */
+    animation: zoomIn 0.3s ease-in-out;
+  }
+  
+  .popupImage {
+    background: #ffffff; /* ✅ Solid background instead of transparent */
+    max-width: 500px;
+    max-height: 500px;
+    display: block; /* ✅ Ensures image isn't affected by flex */
+  }
+  
+  .inactiveMenu {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(100%) blur(2px);
+    pointer-events: none; /* ✅ Prevents any interactions */
+  }
+  
+  /* ✅ Close Button */
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  /* ✅ Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes zoomIn {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
+  }
 
 
 .selected {
@@ -85,5 +169,7 @@
 .selected .menuName,
 .selected .description,
 .selected .price {
-    color: white;
+    /* color: white; */
 }
+
+ 

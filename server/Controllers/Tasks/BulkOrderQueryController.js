@@ -13,11 +13,21 @@ const sendConfirmationEmail = async (userEmail, queryDetails) => {
       },
     });
 
-    // Format the address properly
+    // Format address properly
     const formattedAddress = queryDetails.address
       ? `${queryDetails.address.province || "N/A"}, ${queryDetails.address.city || "N/A"}, 
          ${queryDetails.address.area || "N/A"}, ${queryDetails.address.landmark || "N/A"}`
       : "Address not provided";
+
+    // Format bulk orders
+    const orderDetails = queryDetails.orders
+      .map(
+        (order) =>
+          `Box Name: ${order.boxName}\nBox Size: ${order.boxSize}\nQuantity: ${order.quantity}\nTotal Cost: ₹${order.totalCost}\nSweets:\n${order.sweets
+            .map((sweet) => `  - ${sweet.productName} (₹${sweet.productPrice})`)
+            .join("\n")}`
+      )
+      .join("\n\n");
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -25,19 +35,17 @@ const sendConfirmationEmail = async (userEmail, queryDetails) => {
       subject: "Order Confirmation - Bulk Order Boxes",
       text: `Dear ${queryDetails.userName},
 
-      Thank you for your order! Here are your order details:
+Thank you for your order! Here are your order details:
 
-      Box Name: ${queryDetails.boxName}
-      Box Size: ${queryDetails.boxSize}
-      Sweet Selected: ${queryDetails.productName}
-      Quantity Selected: ${queryDetails.quantity}
-      Address Selected: ${formattedAddress}
-      Total Cost: ₹${queryDetails.totalCost}
+${orderDetails}
 
-      We will notify you once your order is processed.
+Delivery Address:
+${formattedAddress}
 
-      Best regards,
-      Gokuls`,
+We will notify you once your order is processed.
+
+Best regards,
+Gokuls`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -46,8 +54,7 @@ const sendConfirmationEmail = async (userEmail, queryDetails) => {
     console.error("Error sending email:", error);
   }
 };
-
-const sendAdminNotificationEmail = async (userEmail, subject, queryDetails) => {
+const sendAdminNotificationEmail = async (adminEmail, subject, queryDetails) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
@@ -57,41 +64,53 @@ const sendAdminNotificationEmail = async (userEmail, subject, queryDetails) => {
       },
     });
 
-    // Format the address properly
+    // Format address properly
     const formattedAddress = queryDetails.address
       ? `${queryDetails.address.province || "N/A"}, ${queryDetails.address.city || "N/A"}, 
          ${queryDetails.address.area || "N/A"}, ${queryDetails.address.landmark || "N/A"}`
       : "Address not provided";
 
+    // Format bulk orders
+    const orderDetails = queryDetails.orders
+      .map(
+        (order) =>
+          `Box Name: ${order.boxName}\nBox Size: ${order.boxSize}\nQuantity: ${order.quantity}\nTotal Cost: ₹${order.totalCost}\nSweets:\n${order.sweets
+            .map((sweet) => `  - ${sweet.productName} (₹${sweet.productPrice})`)
+            .join("\n")}`
+      )
+      .join("\n\n");
+
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: userEmail,
+      to: adminEmail,
       subject: subject,
       text: `Dear Admin,
 
-       Here are the order details:
+A new bulk order has been placed. Here are the order details:
 
-      User Name: ${queryDetails.userName}
-      User Number: ${queryDetails.userNumber}
-      User Email: ${queryDetails.userEmail}
-      Box Name: ${queryDetails.boxName}
-      Box Size: ${queryDetails.boxSize}
-      Sweet Selected: ${queryDetails.productName}
-      Quantity Selected: ${queryDetails.quantity}
-      Total Cost: ₹${queryDetails.totalCost}
+User Name: ${queryDetails.userName}
+User Number: ${queryDetails.userNumber}
+User Email: ${queryDetails.userEmail}
 
-      To view the order, please log in to the admin panel.
+${orderDetails}
 
-      Best regards,
-      Gokuls`,
+Delivery Address:
+${formattedAddress}
+
+To view the order, please log in to the admin panel.
+
+Best regards,
+Gokuls`,
     };
 
     await transporter.sendMail(mailOptions);
-    console.log("Confirmation email sent!");
+    console.log("Admin notification email sent!");
   } catch (error) {
     console.error("Error sending email:", error);
   }
 };
+
+
 
 
 // Create a new bulk order query
@@ -247,34 +266,40 @@ exports.deleteQuery = async (req, res) => {
   }
 };
 
-
-const sendApprovalEmail = async (userEmail,subject, queryDetails) => {
+const sendApprovalEmail = async (userEmail, subject, queryDetails) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        user: process.env.EMAIL_USER, // Use environment variables for email credentials
+        user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
 
+    // Format bulk orders
+    const orderDetails = queryDetails.orders
+      .map(
+        (order) =>
+          `Box Name: ${order.boxName}\nBox Size: ${order.boxSize}\nQuantity: ${order.quantity}\nTotal Cost: ₹${order.totalCost}\nSweets:\n${order.sweets
+            .map((sweet) => `  - ${sweet.productName} (₹${sweet.productPrice})`)
+            .join("\n")}`
+      )
+      .join("\n\n");
+
     const mailOptions = {
-      from: process.env.EMAIL_USER, // Sender email
-      to: userEmail, // Recipient email
+      from: process.env.EMAIL_USER,
+      to: userEmail,
       subject: subject,
-        text: `Dear ${queryDetails.userName},
+      text: `Dear ${queryDetails.userName},
 
-    Here are your order details:
-      Box Name: ${queryDetails.boxName}
-      Box Size: ${queryDetails.boxSize}
-      Sweet Selected:  ${queryDetails.productName}
-      Quantity Selected: ${queryDetails.quantity}
-      Total Cost: ₹${queryDetails.totalCost}
+Your bulk order has been approved! Here are your order details:
 
-      Thank you,
+${orderDetails}
 
-      Best regards,
-      Gokuls`,
+Thank you for your purchase.
+
+Best regards,
+Gokuls`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -283,6 +308,8 @@ const sendApprovalEmail = async (userEmail,subject, queryDetails) => {
     console.error("Error sending approval email:", error);
   }
 };
+
+
 
 exports.approveQuery = async (req, res) => {
   try {
@@ -372,6 +399,67 @@ exports.approveQuery = async (req, res) => {
 // };
 
 
+// exports.cancelUserOrder = async (req, res) => {
+//   try {
+//     const orderId = req.params.id; // Extract order ID
+//     console.log("Canceling Order ID:", orderId);
+
+//     // Find the order and update its status to "Canceled"
+//     const order = await BulkOrderQuery.findByIdAndUpdate(
+//       orderId,
+//       { status: "Canceled" },
+//       { new: true }
+//     ).populate({
+//       path: "user",
+//       model: "users",
+//       select: "name number email",
+//     });
+
+//     if (!order) {
+//       return res.status(404).json({ error: "Order not found" });
+//     }
+
+//     console.log("Order after cancellation:", order);
+
+//     // Check if user exists before sending emails
+//     if (!order.user || !order.user.email) {
+//       console.error("Error: User data is missing in order.");
+//       return res.status(500).json({ error: "User information unavailable." });
+//     }
+
+  
+
+//     res.status(200).json({ message: "Order canceled successfully", order });
+
+//     await sendApprovalEmail(order.user.email, "Order Canceled - Bulk Order Boxes", {
+//       userName: order.user.name,
+//       boxName: order.boxName,
+//       boxSize: order.boxSize,
+//       productName: order.productName,
+//       productPrice: order.productPrice,
+//       quantity: order.quantity,
+//       totalCost: order.totalCost,
+//     });
+
+//     await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, "User Cancelled Order - Bulk Order Boxes", {
+//       userName: order.user.name,
+//       userNumber: order.user.number,
+//       userEmail: order.user.email,
+//       boxName: order.boxName,
+//       boxSize: order.boxSize,
+//       productName: order.productName,
+//       productPrice: order.productPrice,
+//       quantity: order.quantity,
+//       totalCost: order.totalCost,
+//     });
+
+//   } catch (error) {
+//     console.error("Error canceling order:", error.message);
+//     res.status(500).json({ error: "Failed to cancel order" });
+//   }
+// };
+
+
 exports.cancelUserOrder = async (req, res) => {
   try {
     const orderId = req.params.id; // Extract order ID
@@ -400,30 +488,39 @@ exports.cancelUserOrder = async (req, res) => {
       return res.status(500).json({ error: "User information unavailable." });
     }
 
-  
-
     res.status(200).json({ message: "Order canceled successfully", order });
 
+    // Format bulk orders properly for the email
+    const orderDetails = order.orders
+      .map(
+        (box) =>
+          `Box Name: ${box.boxName}\nBox Size: ${box.boxSize}\nQuantity: ${box.quantity}\nTotal Cost: ₹${box.totalCost}\nSweets:\n${box.sweets
+            .map((sweet) => `  - ${sweet.productName} (₹${sweet.productPrice})`)
+            .join("\n")}`
+      )
+      .join("\n\n");
+
+    const formattedAddress = order.address
+      ? `${order.address.province || "N/A"}, ${order.address.city || "N/A"}, 
+         ${order.address.area || "N/A"}, ${order.address.landmark || "N/A"}`
+      : "Address not provided";
+
+    // Send cancellation confirmation to user
     await sendApprovalEmail(order.user.email, "Order Canceled - Bulk Order Boxes", {
       userName: order.user.name,
-      boxName: order.boxName,
-      boxSize: order.boxSize,
-      productName: order.productName,
-      productPrice: order.productPrice,
-      quantity: order.quantity,
-      totalCost: order.totalCost,
+      orderDetails,
+      formattedAddress,
+      status: "Canceled",
     });
 
+    // Notify admin about user cancellation
     await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, "User Cancelled Order - Bulk Order Boxes", {
       userName: order.user.name,
       userNumber: order.user.number,
       userEmail: order.user.email,
-      boxName: order.boxName,
-      boxSize: order.boxSize,
-      productName: order.productName,
-      productPrice: order.productPrice,
-      quantity: order.quantity,
-      totalCost: order.totalCost,
+      orderDetails,
+      formattedAddress,
+      status: "Canceled",
     });
 
   } catch (error) {

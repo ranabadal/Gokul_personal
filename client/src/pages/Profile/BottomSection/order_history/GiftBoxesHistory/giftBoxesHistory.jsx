@@ -58,17 +58,9 @@ const GiftBoxesHistory = () => {
       if (response.ok) {
         alert("Order canceled successfully!");
 
-        const updatedResponse = await fetch("http://localhost:8080/api/giftBoxOrderQueries/user", {
-          method: "GET",
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (updatedResponse.ok) {
-          const updatedData = await updatedResponse.json();
-          setOrders(updatedData);
-        } else {
-          alert("Failed to refresh orders. Please try again.");
-        }
+        setOrders((prevOrders) =>
+          prevOrders.map((order) => (order._id === orderId ? { ...order, status: "Canceled" } : order))
+        );
       } else {
         alert("Failed to cancel order.");
       }
@@ -86,42 +78,49 @@ const GiftBoxesHistory = () => {
   </>
 
   return (
-    <div className={styles.orderContainer}>
-      {/* <h2>Gift Boxes Order History</h2> */}
+<div className={styles.orderContainer}>
       <div className={styles.orderTableContainer}>
         <table className={styles.orderTable}>
           <thead>
             <tr>
               <th>Box Name</th>
               <th>Products</th>
+              <th>Quantity</th>
               <th>Total Cost</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order.boxName || "N/A"}</td>
-                <td>
-                  {order.products?.map((product, index) => (
-                    <div key={index}>
-                      {product.productName} - ₹{product.productPrice} x {product.quantity}
-                    </div>
-                  )) || "N/A"}
-                </td>
-                <td>₹{order.totalCost || 0}</td>
-                <td>{order.status || "Pending"}</td>
-                <td>
-                  <button className={styles.cancel} onClick={() => handleCancelOrder(order._id, order.status)}>
-                    Cancel
-                  </button>
-                  <button className={styles.view} onClick={() => setSelectedOrder(order)}>
-                    View Details
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {orders.map((order) =>
+              order.orders.map((box, index) => (
+                <tr key={`${order._id}-${index}`}>
+                  <td>{box.boxName || "N/A"}</td>
+                  <td>
+                    {box.sweets.map((sweet, sweetIndex) => (
+                      <div key={sweetIndex}>
+                        {sweet.productName} - ₹{sweet.productPrice}
+                      </div>
+                    ))}
+                  </td>
+                  <td>{box.quantity || "N/A"}</td>
+                  <td>₹{box.totalCost || 0}</td>
+                  {index === 0 && (
+                    <>
+                      <td rowSpan={order.orders.length}>{order.status || "Pending"}</td>
+                      <td rowSpan={order.orders.length}>
+                        <button className={styles.cancel} onClick={() => handleCancelOrder(order._id, order.status)}>
+                          Cancel
+                        </button>
+                        <button className={styles.view} onClick={() => setSelectedOrder(order)}>
+                          View Details
+                        </button>
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

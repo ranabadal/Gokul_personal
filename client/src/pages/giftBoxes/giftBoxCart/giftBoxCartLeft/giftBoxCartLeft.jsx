@@ -812,7 +812,11 @@ const FestiveSweet = ({ product, addToCart, removeFromCart, basket = [] }) => {
 };
 
 const GiftBoxCartLeft = ({
+  customMessage,
+  setCustomMessage,
   setStoredSelections,
+  setselectedQuantity,
+  selectedQuantity,
   selectedGiftBox,
   refreshSummaryForm=false,
   setRefreshSummaryForm,
@@ -885,28 +889,6 @@ const GiftBoxCartLeft = ({
     });
   };
   
-  // const handleAddToCart = (product) => {
-  //   setSelectedSweets((prev) => {
-  //     // Prevent duplicate selections
-  //     if (prev.some((p) => p._id === product._id)) return prev;
-  
-  //     const updatedSweets = [...prev, product]; // ✅ Append new sweet instead of replacing
-  
-  //     // ✅ Update local storage while preserving existing selections
-  //     const selections = JSON.parse(localStorage.getItem("giftBoxSelections")) || [];
-  //     const editingIndex = localStorage.getItem("editingBoxIndex");
-  
-  //     if (editingIndex !== null) {
-  //       const index = parseInt(editingIndex, 10);
-  //       if (!isNaN(index) && index >= 0 && index < selections.length) {
-  //         selections[index].selectedSweets = [...selections[index].selectedSweets, product]; // ✅ Merge existing sweets and new one
-  //         localStorage.setItem("giftBoxSelections", JSON.stringify(selections));
-  //       }
-  //     }
-  
-  //     return updatedSweets;
-  //   });
-  // };
 
 
   const handleAddToCart = (product) => {
@@ -919,55 +901,6 @@ const GiftBoxCartLeft = ({
 
 
 
-  // const handleFinalizeSelection = () => {
-  //   const sweetsLimit = getSweetsLimit(selectedGiftBox.size);
-  
-  //   if (selectedSweets.length > sweetsLimit) {
-  //     setToast(`You can only select up to ${sweetsLimit} sweets.`, "error");
-  //     return;
-  //   }
-  
-  //   if (selectedSweets.length === 0) {
-  //     setToast("Please select at least one sweet.", "error");
-  //     return;
-  //   }
-  
-  //   let selections = JSON.parse(localStorage.getItem("giftBoxSelections")) || [];
-  //   const editingIndex = localStorage.getItem("editingBoxIndex");
-  
-  //   if (editingIndex !== null && selections.length > 0) {
-  //     const index = parseInt(editingIndex, 10);
-  //     if (!isNaN(index) && index >= 0 && index < selections.length) {
-  //       // ✅ Correctly update an existing box
-  //       const existingSweets = selections[index].selectedSweets;
-        
-  //       const mergedSweets = [...existingSweets, ...selectedSweets].filter(
-  //         (sweet, idx, self) =>
-  //           self.findIndex((s) => s.name === sweet.name && s.price === sweet.price) === idx
-  //       );
-  
-  //       selections[index].selectedSweets = mergedSweets;
-  //       localStorage.removeItem("editingBoxIndex"); // Clear editing mode after update
-  //     }
-  //   } else {
-  //     // ✅ If no editing index exists, properly add a new box instead of showing an error
-  //     selections.push({
-  //       selectedGiftBox: {
-  //         title: selectedGiftBox.title,
-  //         size: selectedGiftBox.size,
-  //         price: selectedGiftBox.price,
-  //       },
-  //       selectedSweets: selectedSweets.map(sweet => ({
-  //         name: sweet.name,
-  //         price: sweet.price,
-  //       })),
-  //     });
-  //   }
-  
-  //   localStorage.setItem("giftBoxSelections", JSON.stringify(selections));
-  //   console.log("Updated gift box selections:", selections);
-  //   onBack();
-  // };
   const handleFinalizeSelection = () => {
     const sweetsLimit = getSweetsLimit(selectedGiftBox.size);
   
@@ -1010,6 +943,7 @@ const GiftBoxCartLeft = ({
           name: sweet.name,
           price: sweet.price,
         })),
+        quantity: selectedQuantity,
       });
     }
   
@@ -1032,7 +966,7 @@ const GiftBoxCartLeft = ({
   return (
     <div className={styles.giftBoxCartLeft}>
       <div className={styles.container}>
-        {loading && <p>Loading...</p>}
+        {/* {loading && <p>Loading...</p>} */}
         <div className={styles.header}>
           <div className={styles.backButton}>
             <img src={backIcon} alt="back" className={styles.backIcon} />
@@ -1054,6 +988,7 @@ const GiftBoxCartLeft = ({
             </div>
           </div>
         </div>
+        {/* {loading && <p>Loading...</p>} */}
         <div className={styles.grid}>
           {sweets.map((sweet) => (
             <FestiveSweet
@@ -1083,8 +1018,38 @@ const GiftBoxCartLeft = ({
         {!loading && sweets.length === 0 && (
           <p className={styles.noItems}>No sweets available</p>
         )}
-        
-        {/* "Add" button finalizes the sweet selection */}
+
+
+          <div className={styles.quantityWrapper}>
+                  <div>Select the Quantity:</div>
+                  <input
+                    type="number"
+                    min="1"
+                    max="500"
+                    defaultValue="1"
+                    className={styles.quantityInput}
+                    value={selectedQuantity}
+                    onChange={
+                      (e) => {
+                        setselectedQuantity(Number(e.target.value));
+                      }
+                    }
+                  />
+                </div>
+
+                
+        <div>If any other requirements please mention below</div>
+     <div>
+             <div className={styles.textareaLabel}>Write your message here:</div>
+             <textarea
+               className={styles.textarea}
+               rows="4"
+               cols="50"
+               placeholder="Type your message here..."
+               value={customMessage}
+               onChange={(e) => setCustomMessage(e.target.value)}
+             ></textarea>
+           </div>
         <div className={styles.addButton}>
           <button 
             className={styles.add} 

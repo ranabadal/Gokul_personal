@@ -29,7 +29,18 @@ exports.getMenuById = async (req, res) => {
 exports.createMenu = async (req, res) => {
   try {
     const { menuName, description, price, menuImage } = req.body;
-    const newMenu = new Menu({ menuName, description, price,  menuImage: menuImage ? { data: menuImage.split(',')[1], contentType: image.split(',')[0].split(':')[1].split(';')[0] } : null, });
+    const newMenu = new Menu({
+      menuName,
+      description,
+      price,
+      // menuImage: menuImage
+      //   ? {
+      //       data: menuImage.split(",")[1],
+      //       contentType: image.split(",")[0].split(":")[1].split(";")[0],
+      //     }
+      //   : null,
+      menuImage,
+    });
 
     await newMenu.save();
     res.status(201).json(newMenu);
@@ -42,13 +53,12 @@ exports.createMenu = async (req, res) => {
 // Update menu item
 exports.updateMenu = async (req, res) => {
   try {
-    const updatedMenu = await Menu.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const updatedMenu = await Menu.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
 
-    if (!updatedMenu) return res.status(404).json({ error: "Menu item not found" });
+    if (!updatedMenu)
+      return res.status(404).json({ error: "Menu item not found" });
 
     res.status(200).json(updatedMenu);
   } catch (error) {
@@ -61,7 +71,8 @@ exports.updateMenu = async (req, res) => {
 exports.deleteMenu = async (req, res) => {
   try {
     const deletedMenu = await Menu.findByIdAndDelete(req.params.id);
-    if (!deletedMenu) return res.status(404).json({ error: "Menu item not found" });
+    if (!deletedMenu)
+      return res.status(404).json({ error: "Menu item not found" });
 
     res.status(200).json({ message: "Menu item deleted successfully" });
   } catch (error) {

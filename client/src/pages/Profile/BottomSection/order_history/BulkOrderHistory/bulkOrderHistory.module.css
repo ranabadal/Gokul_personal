@@ -48,6 +48,10 @@
 .orderTable tr {
     height: 4rem;
 }
+
+
+/* Add hover effect */
+
 .noOrders {
     text-align: center;
     font-size: 1.4rem;
@@ -62,4 +66,13 @@
     color: #E31E24;
     text-align: center;
     font-family: "Madimi One";
+}
+
+
+.cancel:hover {
+    background-color: #FFB3B3;
+}
+
+.view:hover {
+    background-color: #D6D6D6;
 }

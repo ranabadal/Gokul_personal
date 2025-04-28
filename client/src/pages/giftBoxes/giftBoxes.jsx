@@ -377,6 +377,8 @@ import Footer from "../../components/footer/footer";
 import FilterChip from "../../components/GiftBoxAndBulkPageFilter/filter";
 import Loader from "../../components/Loader/loader1/sweetLoader";
 import { useToaster } from "../../utils";
+import PreviewScreen from "./PreviewScreen/previewScreen";
+
 
 // Import the two new components
 import GiftBoxCartRight from "./giftBoxCart/giftBoxCartRight/giftBoxCartRight";
@@ -394,6 +396,10 @@ const GiftBoxes = () => {
   const [selectedSweets, setSelectedSweets] = useState([]);
   const [isViewingSelection, setIsViewingSelection] = useState(false);
   const [storedSelections, setStoredSelections] = useState([]);
+const [selectedQuantity, setselectedQuantity] = useState(1); // New state for quantity
+const [showPreview, setShowPreview] = useState(false);
+const [customMessage, setCustomMessage] = useState(""); // Store the user's message
+
 
   const setToast = useToaster();
   const navigate = useNavigate();
@@ -502,6 +508,13 @@ const handleClick = (box) => {
       setSelectedSweets(sweets); // Store selected sweets when the user clicks "Add"
     };
 
+    const  orderConfirmed = () => {
+      setShowPreview(false); // Close preview when order is confirmed
+    };
+
+    const handleCheckoutClick = () => {
+      setShowPreview(true); // ✅ Only trigger preview when checkout is clicked
+    };
 
     const handleBack = () => {
       setSelectedGiftBox(null); // ✅ Clear selection
@@ -526,10 +539,25 @@ const handleClick = (box) => {
 
       {!isLoading && !error && (
         <div className={styles.mainContainer}>
+
+            {showPreview ? (
+                  <PreviewScreen
+                  customMessage={customMessage}
+                    showPreview={showPreview}
+                    setShowPreview={setShowPreview}
+                    onBack={() => setShowPreview(false)}
+                    orderConfirmed={orderConfirmed}
+                  //  onBack={(navigate(-1))}
+                  />
+                ) : (
+                  <>
           {/* Left side: conditionally render GiftBoxCartLeft or the gift boxes grid */}
           <div className={styles.leftSection}>
             {selectedGiftBox ? (
           <GiftBoxCartLeft
+          customMessage={customMessage}
+          setCustomMessage=
+          {setCustomMessage}
           basket={[]} 
           setRefreshSummaryForm={setRefreshSummaryForm}
           refreshSummaryForm={refreshSummaryForm}
@@ -537,6 +565,8 @@ const handleClick = (box) => {
           selectedGiftBox={selectedGiftBox}
           onFinalize={handleFinalizeSelection}
           onBack={handleBack}
+          setselectedQuantity={setselectedQuantity}
+          selectedQuantity={selectedQuantity} 
           setStoredSelections={setStoredSelections} // ✅ Pass it down
         />
             ) : (
@@ -596,6 +626,7 @@ const handleClick = (box) => {
           {/* Right side: permanently visible order summary */}
           <div className={styles.rightSection}>
           <GiftBoxCartRight 
+               handleCheckout={handleCheckoutClick} 
   storedSelections={storedSelections} // ✅ Use updated state
   setStoredSelections={setStoredSelections} // ✅ Pass setter
   selectedGiftBox={selectedGiftBox}
@@ -606,8 +637,12 @@ const handleClick = (box) => {
   isViewingSelection={isViewingSelection}
   setIsViewingSelection={setIsViewingSelection}
   refreshSummaryForm={refreshSummaryForm}
+  selectedQuantity={selectedQuantity}
+  setselectedQuantity={setselectedQuantity}
 />
           </div>
+        </>
+                )}
         </div>
       )}
 

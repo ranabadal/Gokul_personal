@@ -47,6 +47,8 @@ const menuSchema = new mongoose.Schema({
     paneerSnack: String,
     mainCourse: String,
   },
+
+  menuPdf: { type: String , default:""}, // Storing PDF URL
   createdAt: { type: Date, default: Date.now },
 });
 
