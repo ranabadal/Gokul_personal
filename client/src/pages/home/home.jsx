@@ -19,9 +19,6 @@ import Loader from "../../components/Loader/loader3/loader3";
 import axios from "axios"; // Using axios for cleaner API calls
 
 import { useToaster } from '../../utils';
-
-
-
 const Home = () => {
   const navigate = useNavigate();
  const setToast = useToaster();
@@ -140,27 +137,24 @@ const Home = () => {
 
       if (!token) {
         setToast('Please log in first!', 'error');
-        return;
-      }
-
-      const productIdStr = productId.toString(); // Ensure productId is a string
-
-      const response = await axios.post("http://localhost:8080/api/wishlist", { productId: productIdStr }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      if (response.data.success) {
-        setToast('Product added to wishlist successfully!', 'success');
-      } else {
-        alert(`Error adding to wishlist: ${response.data.message}`);
-      }
-    } catch (error) {
-      console.error("Error adding to wishlist:", error);
-      setToast('An error occurred while adding the product to the wishlist.', 'error');
-    }
-  };
+return;
+}
+const productIdStr = productId.toString(); // Ensure productId is a string
+const response = await axios.post("http://localhost:8080/api/wishlist", { productId: productIdStr }, {
+headers: {
+Authorization: `Bearer ${token}`
+}
+});
+if (response.data.success) {
+setToast('Product added to wishlist successfully!', 'success');
+}else{
+alert(`Error adding to wishlist: ${response.data.message}`);
+}
+} catch (error) {
+console.error("Error adding to wishlist:", error);
+setToast('An error occurred while adding the product to the wishlist.', 'error');
+}
+};
 
   // Fetch Sweets from API
   useEffect(() => {
@@ -185,11 +179,9 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.above_header_container}>
-     
       </div>
       <AboveHeader/>
       <Header />
-
       <div className={styles.hero_section_container}>
         <HeroSection />
       </div>
@@ -201,7 +193,7 @@ const Home = () => {
       <div className={styles.card_header_container}>
         <CardHeader />
       </div>
-     
+      
       {/* Render Sweet Products Dynamically */}
       <div className={styles.card_section_container}>
       {isLoading && <p>Loading...</p>}

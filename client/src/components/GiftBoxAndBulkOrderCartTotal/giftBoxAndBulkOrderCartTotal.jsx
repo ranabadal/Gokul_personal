@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./giftBoxAndBulkOrderCartTotal.module.css";
@@ -52,7 +45,6 @@ const OrderCard = ({ item, bulkQuantity, size }) => {
   );
 };
 
-
 export default function OrderSummary({
   cartItems = [],
   addresses,
@@ -74,12 +66,9 @@ export default function OrderSummary({
     calculateTotal();
   }, [cartItems, discount, additionalCharges, deliveryCharges, quantity]);
 
-
-
   const calculateTotal = () => {
     // Count the number of checked items
     const checkedItems = cartItems.filter((item) => item.checked);
-  
     // Calculate the total price for checked items
     const total = checkedItems.reduce((total, item) => {
       // Adjust price based on size
@@ -92,16 +81,13 @@ export default function OrderSummary({
   
       // Use quantity for each individual item
       const itemQuantity = showQuantityInput ? quantity : item.quantity;
-  
       return total + adjustedPrice * itemQuantity;
     }, 0);
-  
     // Calculate the average price if there is more than one checked item
     const averagePrice =
       checkedItems.length > 1 ? total / checkedItems.length : total;
-  
     // Apply additional charges, discounts, and delivery fees
-    const adjustedTotal =
+    const adjustedTotal = 
       averagePrice - discount + additionalCharges + deliveryCharges;
   
     setBasketTotal(Math.round(adjustedTotal));
@@ -121,7 +107,6 @@ export default function OrderSummary({
       alert("Please select at least one product before checkout!");
       return;
     }
-
     // Pass `quantity` and `basketTotal` to the `onCheckout` callback.
     onCheckout({ quantity, basketTotal });
   };
@@ -160,8 +145,7 @@ export default function OrderSummary({
             />
           </div>
         )}
-
-      <div className={styles.promoContainer}>
+            <div className={styles.promoContainer}>
         <p className={styles.promoAppliedText}>Promo Code Applied</p>
         <div className={styles.promoSection}>
           <input
@@ -217,15 +201,11 @@ export default function OrderSummary({
     </div>
   );
 }
-
-
 // import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 // import styles from "./giftBoxAndBulkOrderCartTotal.module.css";
-
 // const OrderCard = ({ item, bulkQuantity, size }) => {
 //   const quantity = bulkQuantity !== undefined ? bulkQuantity : item.quantity;
-
 //   // Adjust price based on size
 //   const adjustedPrice = (() => {
 //     if (size === "500 gm") {
@@ -235,7 +215,6 @@ export default function OrderSummary({
 //     }
 //     return item.productId.price; // Default price for 1 kg
 //   })();
-
 //   return (
 //     <div className={styles.orderItem}>
 //       <img src={item.productId.image} alt={item.productId.name} className={styles.itemImage} />
@@ -247,18 +226,15 @@ export default function OrderSummary({
 //     </div>
 //   );
 // };
-
 // export default function GiftBoxCartRight({ onCheckout }) {
 //   const [selectedBoxes, setSelectedBoxes] = useState([]);
 //   const [basketTotal, setBasketTotal] = useState(0);
 //   const navigate = useNavigate();
-
 //   useEffect(() => {
 //     const storedBoxes = JSON.parse(localStorage.getItem("selectedBoxes")) || [];
 //     setSelectedBoxes(storedBoxes);
 //     calculateTotal(storedBoxes);
 //   }, []);
-
 //   const calculateTotal = (boxes) => {
 //     const total = boxes.reduce((acc, box) => {
 //       const boxTotal = box.basket.reduce((subTotal, item) => {
@@ -268,16 +244,13 @@ export default function OrderSummary({
 //     }, 0);
 //     setBasketTotal(total);
 //   };
-
 //   const handleCheckout = () => {
 //     if (selectedBoxes.length === 0) {
 //       alert("Please select at least one box before checkout!");
 //       return;
 //     }
-
 //     navigate("/previewScreen", { state: { selectedBoxes, totalPrice: basketTotal } });
 //   };
-
 //   return (
 //     <div className={styles.orderSummary}>
 //       <h2>Your Selected Boxes</h2>
