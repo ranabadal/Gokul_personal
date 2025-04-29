@@ -249,7 +249,7 @@ const Footer = () => {
               </span>
               <div className={styles.footer_content_top_left_icons}>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/merogokul/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -257,7 +257,7 @@ const Footer = () => {
                 </a>
                 {/* <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a> */}
                 <a
-                  href="https://www.instagram.com/new_gokulsweets?igsh=OGQyZWh2ZDkzM2c2"
+                  href="https://www.instagram.com/new_gokulsweets/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

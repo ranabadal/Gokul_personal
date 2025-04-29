@@ -25,12 +25,13 @@ import TodaysDeal from "../pages/Today'sDealUpdated/today'sDealUpdated";
 import CateringForm from "../pages/banquets/CateringForm/cateringForm"
 import GiftBoxes from "../pages/giftBoxes/giftBoxes";
 import GiftBoxCart from "../pages/giftBoxes/giftBoxCart/giftBoxCart"
-import BulkOrder from "../pages/bulkOrders/bulkOrders";
+import BulkOrder from "../pages/bulkOrders copy/bulkOrders";
 import BulkOrderCart from "../pages/bulkOrders/bulkOrderCart/bulkOrderCart";
 import PreviewScreen from '../pages/bulkOrders/PreviewScreen/previewScreen'
 import Title from "../pages/about/Title/title"
 import BulkOrderNew from "../pages/bulkOrders/BulkOrder/bulkOrderNew";
 import BulkOrderNewCards from "../pages/bulkOrders/BulkOrder/BulkOrderNewCards/bulkOrderNewCards";
+import BulkOrdercartLeft from "../pages/bulkOrders copy/bulkOrderCart/BulkOrderCartLeft/bulkOrderCartLeft";
 // import TermsAndConditions from "../pages/TermandCondition/t&c"
 const routes = [
     {
@@ -142,6 +143,10 @@ const routes = [
     path:'/previewScreen',
     element : <PreviewScreen />
 },
+{
+    path: 'bulkOrdercartLeft',
+    element: <BulkOrdercartLeft/>
+}
 // {
 //     path:'/TermsAndConditions',
 //     element : <TermsAndConditions/>

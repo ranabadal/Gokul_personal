@@ -71,7 +71,7 @@ const Header = () => {
           Bulk Order
         </span>
         <span className={styles.contact} onClick={() => navigate("/contact")}>
-          Contact
+          Contact Us
         </span>
       </div>
 
