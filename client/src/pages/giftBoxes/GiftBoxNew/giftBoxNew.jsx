@@ -15,11 +15,7 @@ const GiftBoxNew = () => {
 <div className={styles.content}>
 
 <div className={styles.hero}>
-<div>
-
-
-
-</div>
+     
 </div>
         
 <div className={styles.cards}>
