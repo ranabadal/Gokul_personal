@@ -1,0 +1,182 @@
+.container {
+    background-color: #fff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+
+  
+  .titleText {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0 20px;
+    color: #8b0000; /* deep red */
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .cards {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .card1 {
+    background-color: #fff0f0; /* soft reddish background */
+    border: 1px solid #ffcccc;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .boxImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .cardDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .boxTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #b22222;
+  }
+  
+  .boxDesc {
+    font-size: 0.95rem;
+    color: #444;
+  }
+  
+  .designsRow {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .designImage {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .actionRow {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .selectDropdown {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .selectButton {
+    padding: 6px 15px;
+    background-color: #b22222;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .selectButton:hover {
+    background-color: #8b0000;
+  }
+  
+  /* Sidebar (Your Selection) */
+  .selectionPanel {
+    flex: 1.2;
+    background-color: #fff8f8;
+    border: 1px solid #ffdddd;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 280px;
+  }
+  
+  .selectionTitle {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #b22222;
+  }
+  
+  .selectionBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .selectionImg {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  
+  .commentInput {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .priceSummary {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .checkoutButton {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #b22222;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .checkoutButton:hover {
+    background-color: #a31b1b;
+  }
+  
