@@ -12,11 +12,13 @@ const GiftBoxNew = () => {
         <Header />
     </div>   
 
-<div className={styles.content}>
+    <div className={styles.Title}>
+    <p className={styles.titleText}>
+        Gift Boxes
+    </p>
+    </div>
 
-<div className={styles.hero}>
-     
-</div>
+<div className={styles.content}>
         
 <div className={styles.cards}>
 
