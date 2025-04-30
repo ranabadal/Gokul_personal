@@ -14,8 +14,14 @@ const GiftBoxNew = () => {
 
 <div className={styles.content}>
 
+<div className={styles.hero}>
 
+</div>
         
+<div className={styles.cards}>
+
+</div>
+
 </div>
 
 

@@ -33,6 +33,9 @@ import BulkOrderNew from "../pages/bulkOrders/BulkOrder/bulkOrderNew";
 import BulkOrderNewCards from "../pages/bulkOrders/BulkOrder/BulkOrderNewCards/bulkOrderNewCards";
 import BulkOrdercartLeft from "../pages/bulkOrders copy/bulkOrderCart/BulkOrderCartLeft/bulkOrderCartLeft";
 // import TermsAndConditions from "../pages/TermandCondition/t&c"
+import GiftBoxNew from "../pages/giftBoxes/GiftBoxNew/giftBoxNew";
+
+
 const routes = [
     {
       path: '/',
@@ -146,7 +149,13 @@ const routes = [
 {
     path: 'bulkOrdercartLeft',
     element: <BulkOrdercartLeft/>
-}
+},
+
+{
+    path:'/giftBoxNew',
+    element : <GiftBoxNew />
+},
+
 // {
 //     path:'/TermsAndConditions',
 //     element : <TermsAndConditions/>
