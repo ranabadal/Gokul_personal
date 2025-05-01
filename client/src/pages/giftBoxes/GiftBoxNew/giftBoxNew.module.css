@@ -18,7 +18,7 @@
 .titleText {
   font-size: 32px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #E31E24;
 }
 
 .content {
@@ -112,7 +112,7 @@ select {
 .card button {
   padding: 8px 12px;
   border-radius: 6px;
-  background-color: #1a1a1a;
+  background-color:#E31E24;
   color: white;
   border: none;
   cursor: pointer;
@@ -151,7 +151,7 @@ select {
 .selectedBox p {
   margin: 2px 0;
   font-size: 14px;
-  color: #333;
+  color:#E31E24;
 }
 
 .selectedBox button {
@@ -183,7 +183,7 @@ textarea {
   width: 100%;
   margin-top: 12px;
   padding: 12px;
-  background-color: #444;
+  background-color: #E31E24;
   color: white;
   border: none;
   border-radius: 8px;
@@ -193,5 +193,5 @@ textarea {
 }
 
 .checkoutButton:hover {
-  background-color: #000;
+  background-color: #d11a20;
 }
