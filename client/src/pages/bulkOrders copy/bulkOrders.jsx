@@ -37,7 +37,6 @@
 // export default BulkOrder;
 
 
-
 import React, { useEffect, useState } from "react";
 import styles from "./bulkOrders.module.css";
 import Header from "../../components/header/header";
@@ -52,7 +51,7 @@ const BulkOrder = () => {
   const [selectedType, setSelectedType] = useState("Gift Box");
   const [selectedItems, setSelectedItems] = useState({});
   const [selectedSizes, setSelectedSizes] = useState({});
-  const [comments, setComments] = useState("");
+  const [comments, setComments] = useState(""); // ✅ Comment section
   const [sweets, setSweets] = useState([]);
   const [snacks, setSnacks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -101,34 +100,62 @@ const BulkOrder = () => {
           <h2 className={styles.heading}>Place Bulk Order</h2>
 
           {/* Box Selection */}
-          <div className={styles.boxSelection}>
-            <button className={selectedBox === "Sweet Box" ? styles.active : ""} onClick={() => setSelectedBox("Sweet Box")}>
-              <img src={Sweets} alt="Sweet Box" className={styles.boxImage} />
-              <span>Sweet Box</span>
-            </button>
-            <button className={selectedBox === "Snacks Box" ? styles.active : ""} onClick={() => setSelectedBox("Snacks Box")}>
-              <img src={Snacks} alt="Snacks Box" className={styles.boxImage} />
-              <span>Snacks Box</span>
-            </button>
-          </div>
+     {/* Box Selection */}
+<div className={styles.boxSelection}>
+  <button 
+    className={selectedBox === "Sweet Box" ? styles.active : ""} 
+    onClick={() => setSelectedBox("Sweet Box")}
+  >
+    <img src={Sweets} alt="Sweets" className={styles.boxImage} />
+    <span>Sweets</span> {/* ✅ Changed from "Sweet Box" to "Sweets" */}
+  </button>
+  
+  <button 
+    className={selectedBox === "Snacks Box" ? styles.active : ""} 
+    onClick={() => setSelectedBox("Snacks Box")}
+  >
+    <img src={Snacks} alt="Snacks" className={styles.boxImage} />
+    <span>Snacks</span> {/* ✅ Changed from "Snacks Box" to "Snacks" */}
+  </button>
+</div>
 
           {/* Item Selection */}
           {loading ? (
             <p>Loading items...</p>
+            
           ) : (
-            <div className={styles.selectionGrid}>
-              {(selectedBox === "Sweet Box" ? sweets : snacks).map((item) => (
-                <div key={item._id} className={styles.item}>
-                  <img src={item.image} alt={item.name} className={styles.image} />
-                  <div className={styles.name}>{item.name}</div>
-                  <div className={styles.controls}>
-                    <button onClick={() => handleQuantityChange(item.name, "decrease")}>-</button>
-                    <span>{selectedItems[item.name] || 0}</span>
-                    <button onClick={() => handleQuantityChange(item.name, "increase")}>+</button>
-                  </div>
-                </div>
-              ))}
-            </div>
+            
+        <div>
+  <h3 className={styles.sectionHeading}>
+    {selectedBox === "Sweet Box" ? "Select Sweets" : "Select Snacks"}
+  </h3> {/* Dynamically changes based on selection */}
+  <div className={styles.selectionGrid}>
+    {(selectedBox === "Sweet Box" ? sweets : snacks).map((item) => (
+     <div key={item._id} className={styles.item}>
+     {/* Full-height image on the left */}
+     <div className={styles.imageContainer}>
+       <img src={item.image} alt={item.name} className={styles.image} />
+     </div>
+   
+     {/* Right side - Details */}
+     <div className={styles.detailsContainer}>
+       {/* Item name */}
+       <div className={styles.name}>{item.name}</div>
+   
+       {/* Item price */}
+       <div className={styles.price}>{item.price}/- kg</div>
+   
+       {/* Quantity Selector (Bottom) */}
+       <div className={styles.controls}>
+         <button onClick={() => handleQuantityChange(item.name, "decrease")}>-</button>
+         <span>{selectedItems[item.name] || 0}</span>
+         <button onClick={() => handleQuantityChange(item.name, "increase")}>+</button>
+       </div>
+     </div>
+   </div>
+    ))}
+  </div>
+</div>
           )}
 
           {/* Box Type Selection */}
@@ -140,6 +167,17 @@ const BulkOrder = () => {
               Gift Box
             </button>
           </div>
+
+          {/* ✅ Comments Section */}
+          <div className={styles.commentsSection}>
+            <label className={styles.commentsLabel}>Add special requests:</label>
+            <textarea
+              className={styles.comments}
+              placeholder="Write your custom message..."
+              value={comments}
+              onChange={(e) => setComments(e.target.value)}
+            ></textarea>
+          </div>
         </div>
 
         {/* Right Section - Order Summary */}
@@ -148,9 +186,7 @@ const BulkOrder = () => {
             <h3>Box Order Summary</h3>
             <p>{selectedType === "Gift Box" ? "Gift Box Selected" : "Regular Box Selected"}</p>
             {Object.keys(selectedSizes).length > 0 && (
-              <p>
-                {selectedType} x {Object.values(selectedSizes).reduce((sum, qty) => sum + qty, 0)}
-              </p>
+              <p>{selectedType} x {Object.values(selectedSizes).reduce((sum, qty) => sum + qty, 0)}</p>
             )}
           </div>
 
