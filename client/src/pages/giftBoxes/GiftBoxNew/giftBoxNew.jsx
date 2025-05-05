@@ -15,12 +15,14 @@ const GiftBoxNew = () => {
       price: 50,
       image:  giftboximg,
       description: "Includes assorted mithai and more",
-      designs: [
-        giftboximg,
-        giftboximg,
-        giftboximg,
+      designs: 
+      [
+      giftboximg,
+      giftboximg,
+      giftboximg,
       ],
     },
+
     {
       id: 2,
       name: "Birthday Box",
@@ -29,6 +31,7 @@ const GiftBoxNew = () => {
       description: "Includes a plush toy and treats",
       designs: [],
     },
+
     {
       id: 3,
       name: "Baby Box",
@@ -38,8 +41,8 @@ const GiftBoxNew = () => {
       designs: [],
     },
   ];
-
-  const addBox = (box, quantity) => {
+  
+    const addBox = (box, quantity) => {
     const updatedBoxes = [...selectedBoxes];
     const existing = updatedBoxes.find((b) => b.id === box.id);
     if (existing) {
@@ -126,8 +129,8 @@ const GiftBoxNew = () => {
           <textarea
             placeholder="Add a comment..."
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          ></textarea>
+            onChange={(e) => setComment(e.target.value)}>
+          </textarea>
 
           <div className={styles.totalSection}>
             <p>Total: ${totalPrice.toFixed(2)}</p>
