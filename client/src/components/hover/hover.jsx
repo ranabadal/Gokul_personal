@@ -10,9 +10,9 @@ const Hover = () => {
 const navigate = useNavigate();
 return (
 <div className={styles.hover}>
-      <div className={styles.hover_content} >
+      <div className={styles.hover_content}onClick={() => navigate("/todaysDeal")} >
         <div className={styles.hover_content_logo} >
-          <div className={styles.hover_content_logoo} onClick={() => navigate("/todaysDeal")} >
+          <div className={styles.hover_content_logoo}  >
             <svg
               className={styles.svg1}
               width="121"
@@ -30,9 +30,9 @@ return (
         </div>
         <div className={styles.hover_content_edits}>Today’sDeal</div>
       </div>
-      <div className={styles.hover_content}>
+      <div className={styles.hover_content} onClick={() => navigate("/products")}>
         <div className={styles.hover_content_logo}>
-          <div className={styles.hover_content_logoo} onClick={() => navigate("/products")}>
+          <div className={styles.hover_content_logoo} >
             <svg
               className={styles.svg2}
               width="121"
@@ -50,9 +50,9 @@ return (
         </div>
         <div className={styles.hover_content_edits}>Takeaways</div>
       </div>
-      <div className={styles.hover_content}>
+      <div className={styles.hover_content} onClick={() => navigate("/banquets")}>
         <div className={styles.hover_content_logo}>
-          <div className={styles.hover_content_logoo}  onClick={() => navigate("/banquets")}>
+          <div className={styles.hover_content_logoo}  >
             <svg
               className={styles.svg3}
               width="121"
@@ -69,9 +69,9 @@ return (
         </div>
         <div className={styles.hover_content_edits}>BanquetHalls</div>
       </div>
-      <div className={styles.hover_content}>
+      <div className={styles.hover_content} onClick={() => navigate("/bulkOrders")}>
         <div className={styles.hover_content_logo}>
-          <div className={styles.hover_content_logoo} onClick={() => navigate("/bulkOrders")}>
+          <div className={styles.hover_content_logoo} >
             <svg
               className={styles.svg4}
               width="130"
@@ -88,9 +88,9 @@ return (
         </div>
         <div className={styles.hover_content_edits}>Bulk Order</div>
       </div>
-      <div className={styles.hover_content}>
+      <div className={styles.hover_content}  onClick={() => navigate("/giftbox")}>
         <div className={styles.hover_content_logo}>
-          <div className={styles.hover_content_logoo} onClick={() => navigate("/giftbox")}>
+          <div className={styles.hover_content_logoo}>
             <svg
               className={styles.svg5}
               width="121"
