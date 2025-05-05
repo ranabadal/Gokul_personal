@@ -7,7 +7,6 @@ import giftboximg from "./img/Giftbox3.jpeg";
 const GiftBoxNew = () => {
   const [selectedBoxes, setSelectedBoxes] = useState([]);
   const [comment, setComment] = useState("");
-
   const giftBoxes = [
     {
       id: 1,
@@ -22,16 +21,14 @@ const GiftBoxNew = () => {
       giftboximg,
       ],
     },
-
     {
-      id: 2,
-      name: "Birthday Box",
-      price: 35,
-      image:  giftboximg,
-      description: "Includes a plush toy and treats",
-      designs: [],
+    id: 2,
+    name: "Birthday Box",
+    price: 35,
+    image:  giftboximg,
+    description: "Includes a plush toy and treats",
+    designs: [],
     },
-
     {
       id: 3,
       name: "Baby Box",
@@ -60,7 +57,7 @@ const GiftBoxNew = () => {
   const totalPrice = selectedBoxes.reduce(
     (acc, box) => acc + box.price * box.quantity,
     0
-  );
+);
 
   return (
     <div className={styles.container}>
@@ -82,24 +79,25 @@ const GiftBoxNew = () => {
             <button>Thank You</button>
           </div>
 
-          <div className={styles.cards}>
+            <div className={styles.cards}>
             {giftBoxes.map((box) => (
-                <div key={box.id} className={styles.card}>
-                <img src={box.image} alt={box.name} className={styles.boxImage} />
-                <h3>{box.name}</h3>
-                <p>{box.description}</p>
-                <p><strong>${box.price.toFixed(2)}</strong></p>
-                {box.designs.length > 0 && (
-                  <div className={styles.designs}>
-                    {box.designs.map((design, index) => (
-                      <img
-                        key={index}
-                        src={design}
-                        alt={`design-${index}`}
-                        className={styles.designImage}
-                      />
-                    ))}
-                  </div>
+            <div key={box.id} className={styles.card}>
+            <img src={box.image} alt={box.name} className={styles.boxImage} />
+            <h3>{box.name}</h3>
+            <p>{box.description}</p>
+            <p><strong>${box.price.toFixed(2)}</strong></p>
+            {box.designs.length > 0 && (
+            <div className={styles.designs}>
+            {box.designs.map((design, index) => (
+            <img
+            key={index}
+            src={design}
+            alt={`design-${index}`}
+            className={styles.designImage}
+            />
+            ))}
+            </div>
+
 )
 }
 <select onChange={(e) => addBox(box, Number(e.target.value))}>                  
@@ -112,17 +110,18 @@ const GiftBoxNew = () => {
 )
 )
 }
+
           </div>
         </div>
         <div className={styles.sidebar}>
           <h3>Your Selection</h3>
           {selectedBoxes.map((box) => (
             <div key={box.id} className={styles.selectedBox}>
-              <img src={box.image} alt={box.name} />
-              <div>
-                <p>{box.name}</p>
-                <p>Qty: {box.quantity}</p>
-                <p>Total: ${box.price * box.quantity}</p>
+            <img src={box.image} alt={box.name} />
+           <div>
+           <p>{box.name}</p>
+            <p>Qty: {box.quantity}</p>
+             <p>Total: ${box.price * box.quantity}</p>
               </div>
               <button onClick={() => removeBox(box.id)}>Remove</button>
             </div>
@@ -130,24 +129,22 @@ const GiftBoxNew = () => {
           )
           }
 
-          <textarea
-            placeholder="Add a comment..."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}>
-          </textarea>
-
-          <div className={styles.totalSection}>
-            <p>Total: ${totalPrice.toFixed(2)}</p>
-            <button className={styles.checkoutButton}>Checkout</button>
-          </div>
+        <textarea
+        placeholder="Add a comment..."
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}>
+        </textarea>
+        <div className={styles.totalSection}>
+        <p>Total: ${totalPrice.toFixed(2)}</p>
+        <button className={styles.checkoutButton}>Checkout</button>
         </div>
-      </div>
-
-      <div className={styles.footer}>
+        </div>
+        </div>
+        <div className={styles.footer}>
         <Footer />
-      </div>
-    </div>
-  );
-};
-
-export default GiftBoxNew;
+        </div>
+        </div>
+        );
+        };
+              
+        export default GiftBoxNew;
