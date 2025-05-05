@@ -539,7 +539,6 @@ const handleClick = (box) => {
 
       {!isLoading && !error && (
         <div className={styles.mainContainer}>
-
             {showPreview ? (
                   <PreviewScreen
                   customMessage={customMessage}
