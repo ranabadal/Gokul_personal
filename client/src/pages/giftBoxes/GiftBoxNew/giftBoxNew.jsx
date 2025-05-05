@@ -84,7 +84,7 @@ const GiftBoxNew = () => {
 
           <div className={styles.cards}>
             {giftBoxes.map((box) => (
-              <div key={box.id} className={styles.card}>
+                <div key={box.id} className={styles.card}>
                 <img src={box.image} alt={box.name} className={styles.boxImage} />
                 <h3>{box.name}</h3>
                 <p>{box.description}</p>
@@ -100,18 +100,20 @@ const GiftBoxNew = () => {
                       />
                     ))}
                   </div>
-                )}
-                <select onChange={(e) => addBox(box, Number(e.target.value))}>
-                  {[1, 2, 3, 4, 5].map((q) => (
-                    <option key={q} value={q}>{q}</option>
-                  ))}
-                </select>
-                <button onClick={() => addBox(box, 1)}>Select</button>
-              </div>
-            ))}
+)
+}
+<select onChange={(e) => addBox(box, Number(e.target.value))}>                  
+{[1, 2, 3, 4, 5].map((q) => (
+<option key={q} value={q}>{q}</option>
+))}
+</select>
+<button onClick={() => addBox(box, 1)}>Select</button>
+</div>              
+)
+)
+}
           </div>
         </div>
-
         <div className={styles.sidebar}>
           <h3>Your Selection</h3>
           {selectedBoxes.map((box) => (
@@ -124,7 +126,9 @@ const GiftBoxNew = () => {
               </div>
               <button onClick={() => removeBox(box.id)}>Remove</button>
             </div>
-          ))}
+          )
+          )
+          }
 
           <textarea
             placeholder="Add a comment..."
