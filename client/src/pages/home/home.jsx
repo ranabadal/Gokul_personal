@@ -254,7 +254,6 @@ setToast('An error occurred while adding the product to the wishlist.', 'error')
 
       <div className={styles.footer_container}>
         <Footer />
-
       </div>
     </div>
   );
