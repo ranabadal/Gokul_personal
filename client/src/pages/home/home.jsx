@@ -196,7 +196,7 @@ setToast('An error occurred while adding the product to the wishlist.', 'error')
       
       {/* Render Sweet Products Dynamically */}
       <div className={styles.card_section_container}>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p> Loading.... </p>}
         {sweets.map((sweet) => (
           <FestiveSweet key={sweet._id} product={sweet}  addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
