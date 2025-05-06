@@ -58,7 +58,7 @@ import Header from './Header/header';
 import Sidebar from './Sidebar/sidebar';
 import BanquetManagement from './BanquetBookingMng/banquetBookingMng';
 import MenuCartManagement from './MenuCartMng/menuCartMng';
-import BulkOrderManagement from './BulkOrderMng/bulkOrderMng';
+import GiftBoxesForBulkOrder from './BulkOrderMng/GiftBoxesForBulkOrderMng/GiftBoxesForBulkOrder.mng';
 import GiftBoxManagement from './GiftBoxMng/giftBoxMng';
 import BanquetQueryPage from './BanquetQueryMng/banquetQueryMng';
 import BulkOrderQuery from './BulkOrderQuery/bulkOrderQuery'
@@ -68,6 +68,11 @@ import RestaurtentNavbar from './RestaurentNavMng/restaurentNavMng'
 
 import TodaysDealMng from './TodaysDealMng/todaysDealMng';
 import TakeAwayOrders from './TakeAwayOrderMng/takeAwayOrdersMng';
+import RegularBoxesMng from './BulkOrderMng/RegularBoxesMng/RegularBoxesMng';
+
+
+
+
 
 const Admin = () => {
   const location = useLocation();
@@ -84,8 +89,8 @@ const Admin = () => {
           return <BanquetManagement />;
           case '/admin/menuCart':
             return <MenuCartManagement />;
-            case '/admin/bulkOrder':
-              return <BulkOrderManagement />;
+            // case '/admin/bulkOrder':
+            //   return <BulkOrderManagement />;
               case '/admin/giftBox':
                 return <GiftBoxManagement />;
                 case '/admin/banquetQuery':
@@ -102,6 +107,11 @@ const Admin = () => {
                       return <TodaysDealMng />;
                       case '/admin/takeAwayOrders':
                         return <TakeAwayOrders />;
+                        case '/admin/GiftBoxesForBulkOrders':
+                          return <GiftBoxesForBulkOrder/>
+                          case '/admin/regularBoxes':
+                            return <RegularBoxesMng />;
+
       default:
         return <UsersManagement />; // Default to Users Management
     }

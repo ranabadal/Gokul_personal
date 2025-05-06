@@ -1,3 +1,6 @@
+/* bulkOrders.module.css */
+
+/* Bulk Order Container */
 .bulkOrderContainer {
   display: flex;
   justify-content: space-between;
@@ -48,13 +51,7 @@
   font-size: 16px;
 }
 
-/* Item Details */
-.itemDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
+/* Generic Container */
 .container {
   background: #fff;
   padding: 20px;
@@ -69,7 +66,7 @@
   color: #E31E24;
 }
 
-/* Box Selection */
+/* Box Selection & Box Type Selector */
 .boxSelection,
 .boxType {
   display: flex;
@@ -95,8 +92,8 @@
   color: white;
 }
 
+/* Box Selection (Icon + Text) */
 .boxSelection {
-  display: flex;
   gap: 20px;
   justify-content: center;
 }
@@ -138,7 +135,7 @@
   border-radius: 10px;
 }
 
-/* Individual Item */
+/* Individual Item Card */
 .item {
   display: flex;
   align-items: center;
@@ -149,7 +146,7 @@
   height: 120px;
 }
 
-/* Item Image (Full-height left side) */
+/* Image Container (left side) */
 .imageContainer {
   flex: 1;
   width: 30%;
@@ -163,10 +160,10 @@
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px 0 0 10px;
 }
 
-/* Item Details (Right side) */
+/* Details Container (right side) */
 .detailsContainer {
   flex: 1;
   display: flex;
@@ -186,7 +183,7 @@
   color: #333;
 }
 
-/* Quantity Selector */
+/* Quantity Controls */
 .controls {
   display: flex;
   align-items: center;
@@ -242,3 +239,258 @@
 .placeOrder:hover {
   background: #D11A1F;
 }
+
+/* Modal Overlay (Full Screen) */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content (Centered) */
+.modalContent {
+  background: white;
+  padding: 20px;
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Close Button for Modals */
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+/* Utility: Hide Bulk Order Content When a Modal is Active */
+.hidden {
+  display: none;
+}
+
+
+.deleteButton {
+  background: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+.deleteButton:hover {
+  color: darkred;
+}
+
+.placeOrderButton {
+  padding: 12px 20px;
+  background: #E31E24;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.placeOrderButton:hover {
+  background: #C21A1F;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------- Regular Box Modal Styles -------------------- */
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modalContent {
+  background: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 900px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Close Button */
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.closeButton:hover {
+  background: #E31E24;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50%;
+}
+
+/* Regular Box Header */
+.modalContent h3 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #E31E24;
+  margin-bottom: 15px;
+}
+
+/* Container for Size Options */
+.sizeOptionsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Individual Size Option */
+.sizeOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  transition: background 0.3s ease;
+}
+
+.sizeOption:hover {
+  background: #eaeaea;
+}
+
+/* Size Checkbox */
+.sizeCheckbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Size Label */
+.sizeOption label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+/* Quantity Selector */
+.quantitySelector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantitySelector button {
+  width: 30px;
+  height: 30px;
+  background: #E31E24;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.quantitySelector button:hover {
+  background: #C21A1F;
+}
+
+/* Final Selection Box */
+.finalSelection {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Final Selection Header */
+.finalSelection h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #E31E24;
+  margin-bottom: 10px;
+}
+
+/* Final Selection Items */
+.finalSelection p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Select Button */
+.selectButton {
+  padding: 12px 20px;
+  background: #E31E24;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.selectButton:hover {
+  background: #C21A1F;
+}
+
+
+
+
+
+
