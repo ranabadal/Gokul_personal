@@ -110,7 +110,10 @@ const Sidebar = () => {
             {showBulkOrderDropdown && (
               <ul className={styles.dropdown}>
                 <li>
-                  <NavLink to="/admin/bulkOrder" activeClassName={styles.active}>Bulk Order Details Management</NavLink>
+                  <NavLink to="/admin/GiftBoxesForBulkOrders" activeClassName={styles.active}>Gift Boxes For Bulk Order Management</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/admin/regularBoxes" activeClassName={styles.active}>Regular Boxes For Bulk Order Management</NavLink>
                 </li>
                 <li>
                   <NavLink to="/admin/bulkOrderQuery" activeClassName={styles.active}>Bulk Order Query Management</NavLink>
