@@ -16,7 +16,7 @@ import DealsTimer from "../../components/deals_timer/deals_timer";
 import heart from "../../components/hall_details/assets/red heart.svg";
 import star from "../../components/hall_details/assets/star.svg";
 import { useToaster } from "../../utils";
-import Loader from "../../components/Loader/loader3/loader3"; // Assuming you have a Loader component
+import Loader from "../../components/Loader/loader1/sweetLoader"; // Assuming you have a Loader component
 
 const Banquets = () => {
   const [banquets, setBanquets] = useState([]);

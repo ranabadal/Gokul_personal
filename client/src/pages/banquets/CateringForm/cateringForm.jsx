@@ -203,8 +203,8 @@ import Popup from "./MenuPopUp/menuPopup";
 
 const CateringForm = () => {
   const location = useLocation();
-  const { hallTitle, hallImages, seatingCapacity, hallPrice } = location.state || {};
-
+  // const { hallTitle, hallImages, seatingCapacity, hallPrice } = location.state || {};
+  const { hallTitle, hallImages = [], seatingCapacity, hallPrice } = location.state || {};
   // Form states
   const [occasion, setOccasion] = useState("");
   const [guestCount, setGuestCount] = useState("");

@@ -383,52 +383,87 @@ const handleSubmit = async (e) => {
   
 
 
+// const handleProfilePicChange = async (e) => {
+//     const file = e.target.files[0];
+//     if (!file) return;
+  
+//     // Convert file to base64
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onloadend = async () => {
+//       const base64String = reader.result;
+//       console.log(`Base64 string length: ${base64String.length}`);
+  
+//       // Update profile picture in the backend
+//       const formData = new FormData();
+//       formData.append('profilePic', file);
+  
+//       try {
+//         const token = localStorage.getItem('jwtToken');
+//         if (!token) {
+//           console.error('No token found');
+//           return;
+//         }
+//         const response = await fetch('http://localhost:8080/profile/profile-pic', {
+//           method: 'POST',
+//           headers: {
+//             'Authorization': `Bearer ${token}`
+//           },
+//           body: formData
+//         });
+//         const result = await response.json();
+//         if (result.success) {
+//           setProfileData({
+//             ...profileData,
+//             profilePic: base64String // Set the base64 string to the state
+//           });
+//           setToast('Profile picture updated successfully', 'success');
+//           setUser({ ...user, profilePic: base64String }); // Update user context
+//           localStorage.setItem('user', JSON.stringify({ ...user, profilePic: base64String })); // Update localStorage
+//         } else {
+//           console.error(result.message);
+//         }
+//       } catch (error) {
+//         console.error('Error updating profile picture:', error);
+//       }
+//     };
+//   };
+  
+
+
 const handleProfilePicChange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-  
-    // Convert file to base64
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = async () => {
-      const base64String = reader.result;
-      console.log(`Base64 string length: ${base64String.length}`);
-  
-      // Update profile picture in the backend
-      const formData = new FormData();
-      formData.append('profilePic', file);
-  
-      try {
-        const token = localStorage.getItem('jwtToken');
-        if (!token) {
-          console.error('No token found');
-          return;
-        }
-        const response = await fetch('http://localhost:8080/profile/profile-pic', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          },
-          body: formData
-        });
-        const result = await response.json();
-        if (result.success) {
-          setProfileData({
-            ...profileData,
-            profilePic: base64String // Set the base64 string to the state
-          });
-          setToast('Profile picture updated successfully', 'success');
-          setUser({ ...user, profilePic: base64String }); // Update user context
-          localStorage.setItem('user', JSON.stringify({ ...user, profilePic: base64String })); // Update localStorage
-        } else {
-          console.error(result.message);
-        }
-      } catch (error) {
-        console.error('Error updating profile picture:', error);
-      }
-    };
-  };
-  
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("profilePic", file);
+
+  try {
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+      console.error("No token found");
+      return;
+    }
+
+    const response = await fetch("http://localhost:8080/profile/profile-pic", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${token}` }, // ✅ REMOVE 'Content-Type': 'application/json'
+      body: formData,
+    });
+
+    const result = await response.json();
+    if (result.success) {
+      setProfileData({ ...profileData, profilePic: result.profilePicUrl }); // ✅ Assume backend returns a URL
+      setToast("Profile picture updated successfully", "success");
+      setUser({ ...user, profilePic: result.profilePicUrl }); // ✅ Update user context
+      localStorage.setItem("user", JSON.stringify({ ...user, profilePic: result.profilePicUrl })); // ✅ Save URL instead of base64
+    } else {
+      console.error(result.message);
+    }
+  } catch (error) {
+    console.error("Error updating profile picture:", error);
+  }
+};
 
 
 const handleProfilePicClick = () => {
@@ -500,3 +535,7 @@ return (
 };
 
 export default UpdateProfile;
+
+
+
+

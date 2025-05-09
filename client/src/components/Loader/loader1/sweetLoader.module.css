@@ -7,7 +7,7 @@
     margin: 0;
 } */
 
-
+/* 
 .loader {
   margin: 100px 0;
     width: 120px;
@@ -42,4 +42,20 @@
     66.67% {-webkit-mask:conic-gradient(#0000 240deg,#000 0)}
     83.33% {-webkit-mask:conic-gradient(#0000 300deg,#000 0)}
     100%   {-webkit-mask:conic-gradient(#0000 360deg,#000 0)}
+  } */
+
+
+
+  .loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full-screen loader */
+    background-color: #f9f9f9; /* Adjust based on your design */
+  }
+  
+  .loaderVideo {
+    width: 350px; /* Adjust size as needed */
+    height: auto;
+    background: none;
   }
