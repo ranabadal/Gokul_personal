@@ -1,296 +1,173 @@
-// import React, { useState } from "react";
-// import styles from "./editQueryModal.module.css";
-
-// const EditQueryModal = ({ query, onSave, onCancel }) => {
-//   const [formData, setFormData] = useState(query);
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     onSave(formData); // Pass updated query to parent
-//   };
-
-//   return (
-//     <div className={styles.modalOverlay}>
-//       <form className={styles.modalContent} onSubmit={handleSubmit}>
-//         <h3>Edit Query</h3>
-//         <label>Box Name:</label>
-//         <input type="text" name="boxName" value={formData.boxName} onChange={handleChange} />
-
-//         <label>Box Size:</label>
-//         <input type="text" name="boxSize" value={formData.boxSize} onChange={handleChange} />
-
-//         <label>Product Name:</label>
-//         <input
-//           type="text"
-//           name="productName"
-//           value={formData.productName}
-//           onChange={handleChange}
-//         />
-
-//         <label>Quantity:</label>
-//         <input type="number" name="quantity" value={formData.quantity} onChange={handleChange} />
-
-//         <label>Price:</label>
-//         <input type="number" name="productPrice" value={formData.productPrice} onChange={handleChange} />
-
-//         <label>Status:</label>
-//         <select name="status" value={formData.status} onChange={handleChange}>
-//           <option value="Pending">Pending</option>
-//           <option value="Approved">Approved</option>
-//           <option value="Rejected">Rejected</option>
-//         </select>
-
-//         <button type="submit" className={styles.first}>Save</button>
-//         <button type="button" className={styles.second} onClick={onCancel}>Cancel</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default EditQueryModal;
-
-
-// import React, { useState } from "react";
-// import styles from "./editQueryModal.module.css";
-
-// const EditQueryModal = ({ query, onSave, onCancel }) => {
-//   const [formData, setFormData] = useState(query);
-
-//   // Handle changes within the orders array
-//   const handleOrderChange = (index, field, value) => {
-//     const updatedOrders = formData.orders.map((order, i) =>
-//       i === index ? { ...order, [field]: value } : order
-//     );
-//     setFormData({ ...formData, orders: updatedOrders });
-//   };
-
-//   // Handle sweet edits inside each order
-//   const handleSweetChange = (orderIndex, sweetIndex, field, value) => {
-//     const updatedSweets = formData.orders[orderIndex].sweets.map((sweet, i) =>
-//       i === sweetIndex ? { ...sweet, [field]: value } : sweet
-//     );
-//     const updatedOrders = formData.orders.map((order, i) =>
-//       i === orderIndex ? { ...order, sweets: updatedSweets } : order
-//     );
-//     setFormData({ ...formData, orders: updatedOrders });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     onSave(formData);
-//   };
-
-//   return (
-//     <div className={styles.modalOverlay}>
-//       <form className={styles.modalContent} onSubmit={handleSubmit}>
-//         <h3>Edit Bulk Order Query</h3>
-
-//         {formData.orders.map((order, orderIndex) => (
-//           <div key={orderIndex} className={styles.orderSection}>
-//             <h4>Box {orderIndex + 1}</h4>
-
-//             <label>Box Name:</label>
-//             <input
-//               type="text"
-//               name="boxName"
-//               value={order.boxName}
-//               onChange={(e) => handleOrderChange(orderIndex, "boxName", e.target.value)}
-//             />
-
-//             <label>Box Size:</label>
-//             <input
-//               type="text"
-//               name="boxSize"
-//               value={order.boxSize}
-//               onChange={(e) => handleOrderChange(orderIndex, "boxSize", e.target.value)}
-//             />
-
-//             <label>Quantity:</label>
-//             <input
-//               type="number"
-//               name="quantity"
-//               value={order.quantity}
-//               onChange={(e) => handleOrderChange(orderIndex, "quantity", e.target.value)}
-//             />
-
-//             <label>Total Cost:</label>
-//             <input
-//               type="number"
-//               name="totalCost"
-//               value={order.totalCost}
-//               onChange={(e) => handleOrderChange(orderIndex, "totalCost", e.target.value)}
-//             />
-
-//             <h4>Sweets</h4>
-//             {order.sweets.map((sweet, sweetIndex) => (
-//               <div key={sweetIndex} className={styles.sweetSection}>
-//                 <label>Product Name:</label>
-//                 <input
-//                   type="text"
-//                   name="productName"
-//                   value={sweet.productName}
-//                   onChange={(e) =>
-//                     handleSweetChange(orderIndex, sweetIndex, "productName", e.target.value)
-//                   }
-//                 />
-
-//                 <label>Price:</label>
-//                 <input
-//                   type="number"
-//                   name="productPrice"
-//                   value={sweet.productPrice}
-//                   onChange={(e) =>
-//                     handleSweetChange(orderIndex, sweetIndex, "productPrice", e.target.value)
-//                   }
-//                 />
-//               </div>
-//             ))}
-//           </div>
-//         ))}
-
-//         <label>Status:</label>
-//         <select name="status" value={formData.status} onChange={(e) => setFormData({ ...formData, status: e.target.value })}>
-//           <option value="Pending">Pending</option>
-//           <option value="Approved">Approved</option>
-//           <option value="Rejected">Rejected</option>
-//         </select>
-
-//         <button type="submit" className={styles.first}>Save</button>
-//         <button type="button" className={styles.second} onClick={onCancel}>Cancel</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default EditQueryModal;
-
-
 import React, { useState } from "react";
-import styles from "./editQueryModal.module.css";
+import styles from "./editQueryModal.module.css"; // Modal Styles
 
-const EditQueryModal = ({ query, onSave, onCancel }) => {
-  const [formData, setFormData] = useState(query);
+const EditOrderModal = ({ order, onSave, onCancel }) => {
+  const [updatedOrder, setUpdatedOrder] = useState(order);
 
-  // Handle changes within the orders array
-  const handleOrderChange = (index, field, value) => {
-    const updatedOrders = formData.orders.map((order, i) =>
-      i === index ? { ...order, [field]: value } : order
-    );
-    setFormData({ ...formData, orders: updatedOrders });
+  // Handle input changes
+  const handleChange = (event, field) => {
+    setUpdatedOrder({ ...updatedOrder, [field]: event.target.value });
   };
 
-  // Handle sweet edits inside each order
-  const handleSweetChange = (orderIndex, sweetIndex, field, value) => {
-    const updatedSweets = formData.orders[orderIndex].sweets.map((sweet, i) =>
-      i === sweetIndex ? { ...sweet, [field]: value } : sweet
-    );
-    const updatedOrders = formData.orders.map((order, i) =>
-      i === orderIndex ? { ...order, sweets: updatedSweets } : order
-    );
-    setFormData({ ...formData, orders: updatedOrders });
+  // Handle nested updates for selected items
+  const handleItemChange = (itemName, value) => {
+    setUpdatedOrder((prevOrder) => ({
+      ...prevOrder,
+      selectedItems: { ...prevOrder.selectedItems, [itemName]: value },
+    }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(formData);
+  // Handle nested updates for gift boxes
+  const handleGiftBoxChange = (index, field, value) => {
+    setUpdatedOrder((prevOrder) => {
+      const updatedGiftBoxes = [...prevOrder.giftBoxes];
+      updatedGiftBoxes[index] = { ...updatedGiftBoxes[index], [field]: value };
+      return { ...prevOrder, giftBoxes: updatedGiftBoxes };
+    });
+  };
+
+  // Handle nested updates for regular boxes
+  const handleRegularBoxChange = (index, field, value) => {
+    setUpdatedOrder((prevOrder) => {
+      const updatedRegularBoxes = [...prevOrder.selectedRegularBoxes];
+      updatedRegularBoxes[index] = { ...updatedRegularBoxes[index], [field]: value };
+      return { ...prevOrder, selectedRegularBoxes: updatedRegularBoxes };
+    });
+  };
+
+  // Save edited order
+  const handleSave = () => {
+    onSave(updatedOrder);
   };
 
   return (
     <div className={styles.modalOverlay}>
-      <form className={styles.modalContent} onSubmit={handleSubmit}>
-        <h3>Edit Bulk Order Query</h3>
+      <div className={styles.modalContent}>
+        <h2>Edit Bulk Order</h2>
 
-        {formData.orders.map((order, orderIndex) => (
-          <div key={orderIndex} className={styles.orderSection}>
-            <h4>Box {orderIndex + 1}</h4>
+        {/* User Details */}
+        <label>User Name</label>
+        <input
+          type="text"
+          value={updatedOrder.userName}
+          onChange={(e) => handleChange(e, "userName")}
+          className={styles.inputField}
+        />
 
-            <label>Box Name:</label>
-            <input
-              type="text"
-              name="boxName"
-              value={order.boxName}
-              onChange={(e) => handleOrderChange(orderIndex, "boxName", e.target.value)}
-            />
+        <label>Email</label>
+        <input
+          type="email"
+          value={updatedOrder.userEmail}
+          onChange={(e) => handleChange(e, "userEmail")}
+          className={styles.inputField}
+        />
 
-            <label>Box Size:</label>
-            <input
-              type="text"
-              name="boxSize"
-              value={order.boxSize}
-              onChange={(e) => handleOrderChange(orderIndex, "boxSize", e.target.value)}
-            />
+        <label>Mobile</label>
+        <input
+          type="text"
+          value={updatedOrder.userNumber}
+          onChange={(e) => handleChange(e, "userNumber")}
+          className={styles.inputField}
+        />
 
-            <label>Quantity:</label>
+        {/* Selected Items */}
+        <h3>Selected Items</h3>
+        {Object.entries(updatedOrder.selectedItems).map(([itemName, qty], idx) => (
+          <div key={idx} className={styles.itemRow}>
+            <label>{itemName}</label>
             <input
               type="number"
-              name="quantity"
-              value={order.quantity}
-              onChange={(e) => handleOrderChange(orderIndex, "quantity", e.target.value)}
-            />
-
-            <label>Total Cost:</label>
-            <input
-              type="number"
-              name="totalCost"
-              value={order.totalCost}
-              onChange={(e) => handleOrderChange(orderIndex, "totalCost", e.target.value)}
-            />
-
-            <h4>Sweets</h4>
-            {order.sweets.map((sweet, sweetIndex) => (
-              <div key={sweetIndex} className={styles.sweetSection}>
-                <label>Product Name:</label>
-                <input
-                  type="text"
-                  name="productName"
-                  value={sweet.productName}
-                  onChange={(e) =>
-                    handleSweetChange(orderIndex, sweetIndex, "productName", e.target.value)
-                  }
-                />
-
-                <label>Price:</label>
-                <input
-                  type="number"
-                  name="productPrice"
-                  value={sweet.productPrice}
-                  onChange={(e) =>
-                    handleSweetChange(orderIndex, sweetIndex, "productPrice", e.target.value)
-                  }
-                />
-              </div>
-            ))}
-
-            {/* ✅ New Custom Message Input */}
-            <label>Custom Message:</label>
-            <textarea
-              name="customMessage"
-              rows="3"
-              value={order.customMessage || ""}
-              onChange={(e) => handleOrderChange(orderIndex, "customMessage", e.target.value)}
-              placeholder="Enter a special message for your loved ones..."
-              className={styles.customMessageInput}
+              value={qty}
+              onChange={(e) => handleItemChange(itemName, Number(e.target.value))}
+              className={styles.inputField}
             />
           </div>
         ))}
 
-        <label>Status:</label>
-        <select name="status" value={formData.status} onChange={(e) => setFormData({ ...formData, status: e.target.value })}>
+        {/* Gift Boxes */}
+        <h3>Gift Boxes</h3>
+        {updatedOrder.giftBoxes.map((box, idx) => (
+          <div key={idx} className={styles.itemRow}>
+            <label>Box Name</label>
+            <input
+              type="text"
+              value={box.name}
+              onChange={(e) => handleGiftBoxChange(idx, "name", e.target.value)}
+              className={styles.inputField}
+            />
+            <label>Quantity</label>
+            <input
+              type="number"
+              value={box.quantity}
+              onChange={(e) => handleGiftBoxChange(idx, "quantity", Number(e.target.value))}
+              className={styles.inputField}
+            />
+            <label>Price</label>
+            <input
+              type="number"
+              value={box.price}
+              onChange={(e) => handleGiftBoxChange(idx, "price", Number(e.target.value))}
+              className={styles.inputField}
+            />
+          </div>
+        ))}
+
+        {/* Regular Boxes */}
+        <h3>Regular Boxes</h3>
+        {updatedOrder.selectedRegularBoxes.map((box, idx) => (
+          <div key={idx} className={styles.itemRow}>
+            <label>Box Label</label>
+            <input
+              type="text"
+              value={box.label}
+              onChange={(e) => handleRegularBoxChange(idx, "label", e.target.value)}
+              className={styles.inputField}
+            />
+            <label>Quantity</label>
+            <input
+              type="number"
+              value={box.quantity}
+              onChange={(e) => handleRegularBoxChange(idx, "quantity", Number(e.target.value))}
+              className={styles.inputField}
+            />
+          </div>
+        ))}
+
+        {/* Order Status */}
+        <label>Status</label>
+        <select
+          value={updatedOrder.status}
+          onChange={(e) => handleChange(e, "status")}
+          className={styles.selectField}
+        >
           <option value="Pending">Pending</option>
           <option value="Approved">Approved</option>
           <option value="Rejected">Rejected</option>
+          <option value="Canceled">Canceled</option>
+          <option value="Completed">Completed</option>
         </select>
 
-        <button type="submit" className={styles.first}>Save</button>
-        <button type="button" className={styles.second} onClick={onCancel}>Cancel</button>
-      </form>
+        {/* Total Cost */}
+        <label>Total Cost</label>
+        <input
+          type="number"
+          value={updatedOrder.totalCost}
+          onChange={(e) => handleChange(e, "totalCost")}
+          className={styles.inputField}
+        />
+
+        {/* Modal Actions */}
+        <div className={styles.modalActions}>
+          <button className={styles.cancelButton} onClick={onCancel}>
+            Cancel
+          </button>
+          <button className={styles.saveButton} onClick={handleSave}>
+            Save Changes
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default EditQueryModal;
+export default EditOrderModal;

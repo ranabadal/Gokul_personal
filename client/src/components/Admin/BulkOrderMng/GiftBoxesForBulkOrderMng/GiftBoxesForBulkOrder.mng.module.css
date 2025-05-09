@@ -1,101 +1,143 @@
+
+
+
 .adminContainer {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .formContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px;
-    background: #f4f4f4;
-    border-radius: 8px;
-  }
-  
-  .listContainer ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .listContainer li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  button {
-    margin-left: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
 
+.formContainer {
+  margin-bottom: 40px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
 
-  .adminContainer {
-    max-width: 90%;
-    margin: auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1, h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .table th, .table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-  
-  .table th {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .previewImage {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .edit , .delete {
-    padding: 8px 12px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 5px;
-    margin: 5px;
-  }
-  
-  .edit:hover , .delete:hover{
-    opacity: 0.8;
-  }
-  
-  .edit {
-    background-color: #28a745;
-  }
-  
-  .delete {
-    background-color: #dc3545;
-  }
+.selectionContainer {
+  margin-bottom: 20px;
+}
+.selectionContainer label {
+  font-weight: bold;
+  font-size: 16px;
+}
+.selectionContainer select {
+  padding: 5px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.formSection {
+  margin-bottom: 20px;
+}
+.formSection h3,
+.formSection h4 {
+  margin-top: 0;
+}
+.formSection input[type="text"],
+.formSection input[type="number"] {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  margin: 5px 0 10px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.formSection button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 5px;
+}
+.formSection button:hover {
+  background-color: #0056b3;
+}
+.matchingHandbagContainer {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px dashed #ccc;
+  border-radius: 3px;
+  background-color: #fafafa;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+.table th {
+  background-color: #f2f2f2;
+}
+.previewImage {
+  width: 50px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.edit,
+.delete {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-right: 5px;
+}
+.edit {
+  background-color: #ffc107;
+  color: #000;
+}
+.delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+.edit:hover {
+  background-color: #e0a800;
+}
+.delete:hover {
+  background-color: #c82333;
+}
+
+/* New classes for image preview in edit mode */
+.imagePreviewContainer {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.imagePreviewContainer img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.imageDeleteButton {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.imageDeleteButton:hover {
+  background: #c82333;
+}

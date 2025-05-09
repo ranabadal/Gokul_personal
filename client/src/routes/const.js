@@ -23,7 +23,7 @@ import Admin from "../components/Admin/admin";
 import Basket from "../components/basket/basket/basket";
 import TodaysDeal from "../pages/Today'sDealUpdated/today'sDealUpdated";
 import CateringForm from "../pages/banquets/CateringForm/cateringForm"
-import GiftBoxes from "../pages/giftBoxes/giftBoxes";
+import GiftBoxes from "../pages/giftBoxes copy/giftBoxes";
 import GiftBoxCart from "../pages/giftBoxes/giftBoxCart/giftBoxCart"
 import BulkOrder from "../pages/bulkOrders copy/bulkOrders";
 import BulkOrderCart from "../pages/bulkOrders/bulkOrderCart/bulkOrderCart";

@@ -123,9 +123,6 @@
 
 // export default RegularBoxModal;
 
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./bulkOrders.module.css";
@@ -133,22 +130,35 @@ import styles from "./bulkOrders.module.css";
 const RegularBoxModal = ({ onClose, onSelect }) => {
   // State that will hold the Regular Box options fetched from the backend.
   const [sizeOptions, setSizeOptions] = useState([]);
-  
-  // Object mapping option id to its selected quantity.
-  // When a size is unchecked, it is removed from the state.
+
+  // Initialize selectedSizes from local storage, cleaning any old format.
   const [selectedSizes, setSelectedSizes] = useState(() => {
-    return JSON.parse(localStorage.getItem("RegularBoxSelection")) || {};
+    const stored = JSON.parse(localStorage.getItem("RegularBoxSelection"));
+    if (stored && typeof stored === "object") {
+      const cleaned = {};
+      Object.keys(stored).forEach((key) => {
+        const val = stored[key];
+        // If the stored value is an object with a quantity, extract it.
+        if (val && typeof val === "object" && "quantity" in val) {
+          cleaned[key] = val.quantity;
+        } else {
+          cleaned[key] = val;
+        }
+      });
+      return cleaned;
+    }
+    return {};
   });
 
-  // Fetch available regular boxes from backend on mount.
+  // Fetch available regular boxes from the backend on mount.
   useEffect(() => {
     const fetchOptions = async () => {
       try {
         const res = await axios.get("http://localhost:8080/api/regularBoxes");
         // Map each box to the expected structure.
         const options = res.data.map((box) => ({
-          id: box._id, // Using the unique _id from MongoDB
-          label: `${box.boxName} (${box.size})`, // e.g. "2 Laddoo Box (2lb)"
+          id: box._id, // Using the unique _id from MongoDB.
+          label: `${box.boxName} (${box.size})`, // e.g. "2 Laddoo Box (2lb)".
           minOrder: box.minOrder,
         }));
         setSizeOptions(options);
@@ -163,16 +173,16 @@ const RegularBoxModal = ({ onClose, onSelect }) => {
     fetchOptions();
   }, []);
 
-  // Toggle option selection (add or remove from state)
+  // Toggle option selection (add or remove from state).
   const toggleOption = (option) => {
     setSelectedSizes((prev) => {
       let updated;
       if (prev[option.id] !== undefined) {
-        // Remove if unchecked by creating a new object without that option.
+        // Remove if unchecked.
         updated = { ...prev };
         delete updated[option.id];
       } else {
-        // Add if checked with default minOrder
+        // Add if checked with default minOrder value.
         updated = { ...prev, [option.id]: option.minOrder };
       }
       localStorage.setItem("RegularBoxSelection", JSON.stringify(updated));
@@ -193,28 +203,23 @@ const RegularBoxModal = ({ onClose, onSelect }) => {
     });
   };
 
-  // Build the final selection data structure as an array of objects.
+  // Build the final selection data structure as an array of objects and pass it upward.
   const handleFinalSelect = () => {
-    // Retrieve existing selection from Local Storage
-    const existingSelection =
-      JSON.parse(localStorage.getItem("RegularBoxSelection")) || {};
-
-    // Merge old selections with new selections, ensuring labels are included
-    const updatedSelection = { ...existingSelection };
-
+    // Instead of re-reading localStorage, we work with the cleaned state from selectedSizes.
+    const updatedSelection = {};
     sizeOptions.forEach((option) => {
       if (selectedSizes[option.id] !== undefined) {
         updatedSelection[option.id] = {
-          label: option.label, // Store the label
+          label: option.label,
           quantity: selectedSizes[option.id],
         };
       }
     });
 
-    // Save updated selection in Local Storage
+    // Save the updated (final) selection structure in local storage.
     localStorage.setItem("RegularBoxSelection", JSON.stringify(updatedSelection));
 
-    // Update BulkOrder state immediately
+    // Pass an array of objects upward.
     onSelect(
       Object.entries(updatedSelection).map(([id, data]) => ({
         id,
@@ -232,7 +237,7 @@ const RegularBoxModal = ({ onClose, onSelect }) => {
       .filter((option) => selectedSizes[option.id] !== undefined)
       .map((option) => (
         <p key={option.id}>
-          <strong>{option.label}:</strong> Quantity: {selectedSizes[option.id]}
+          <strong>{option.label}</strong>: Quantity: {selectedSizes[option.id]}
         </p>
       ));
   };
@@ -259,13 +264,9 @@ const RegularBoxModal = ({ onClose, onSelect }) => {
               </label>
               {isSelected && (
                 <div className={styles.quantitySelector}>
-                  <button onClick={() => updateQuantity(option, "decrease")}>
-                    -
-                  </button>
+                  <button onClick={() => updateQuantity(option, "decrease")}>-</button>
                   <span>{selectedSizes[option.id]}</span>
-                  <button onClick={() => updateQuantity(option, "increase")}>
-                    +
-                  </button>
+                  <button onClick={() => updateQuantity(option, "increase")}>+</button>
                 </div>
               )}
             </div>

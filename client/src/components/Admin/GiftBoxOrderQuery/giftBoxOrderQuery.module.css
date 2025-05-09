@@ -1,87 +1,71 @@
-.queryContainer {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .queryContainer h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .queryTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .queryTable th,
-  .queryTable td {
-    padding: 10px 15px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  .queryTable th {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .queryTable tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .queryTable tr:hover {
-    background-color: #f1f5ff;
-  }
-  
-  .queryTable td button {
-    margin: 5px 0;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .queryTable td button:first-child {
-    background-color: #28a745;
-    color: #fff;
-  }
-  
-  .queryTable td button:first-child:hover {
-    background-color: #218838;
-  }
-  
-  .queryTable td button:nth-child(2) {
-    background-color: #dc3545;
-    color: #fff;
-  }
-  
-  .queryTable td button:nth-child(2):hover {
-    background-color: #c82333;
-  }
-  
-  .queryTable td button:nth-child(3) {
-    background-color: #ffc107;
-    color: #212529;
-  }
-  
-  .queryTable td button:nth-child(3):hover {
-    background-color: #e0a800;
-  }
-  
-  .error {
-    color: #dc3545;
-    text-align: center;
-    font-size: 16px;
-    margin: 20px 0;
-  }
-  
-  .loading {
-    text-align: center;
-    font-size: 18px;
-    color: #007bff;
-  }
+/* Admin Panel Container */
+.orderAdminContainer {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+/* Table Styling */
+.orderTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.orderTable th,
+.orderTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.orderTable th {
+  background-color: #333;
+  color: white;
+}
+
+/* Status Button Styles */
+.approveBtn,
+.rejectBtn,
+.completeBtn,
+.editBtn {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 4px;
+  border-radius: 4px;
+}
+
+.approveBtn {
+  background-color: #28a745;
+  color: white;
+}
+
+.rejectBtn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.completeBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+.editBtn {
+  background-color: #ffc107;
+  color: black;
+}
+
+.approveBtn:hover,
+.rejectBtn:hover,
+.completeBtn:hover,
+.editBtn:hover {
+  opacity: 0.85;
+}
+
+/* Error Message */
+.error {
+  color: red;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}

@@ -53,31 +53,17 @@
 // };
 
 // export default EditQueryModal;
-
-
 import React, { useState } from "react";
 import styles from "./editQueryModal.module.css";
 
-const EditQueryModal = ({ query, onSave, onCancel }) => {
-  const [formData, setFormData] = useState(query);
+const EditOrderModal = ({ order, onSave, onCancel }) => {
+  const [formData, setFormData] = useState(order);
 
-  // Handle box updates
-  const handleBoxChange = (index, field, value) => {
-    const updatedOrders = formData.orders.map((order, i) =>
-      i === index ? { ...order, [field]: value } : order
+  const handleItemChange = (index, field, value) => {
+    const updatedItems = formData.cartItems.map((item, i) =>
+      i === index ? { ...item.details, [field]: value } : item
     );
-    setFormData({ ...formData, orders: updatedOrders });
-  };
-
-  // Handle sweet updates
-  const handleSweetChange = (orderIndex, sweetIndex, field, value) => {
-    const updatedSweets = formData.orders[orderIndex].sweets.map((sweet, i) =>
-      i === sweetIndex ? { ...sweet, [field]: value } : sweet
-    );
-    const updatedOrders = formData.orders.map((order, i) =>
-      i === orderIndex ? { ...order, sweets: updatedSweets } : order
-    );
-    setFormData({ ...formData, orders: updatedOrders });
+    setFormData({ ...formData, cartItems: updatedItems });
   };
 
   const handleSubmit = (e) => {
@@ -88,72 +74,18 @@ const EditQueryModal = ({ query, onSave, onCancel }) => {
   return (
     <div className={styles.modalOverlay}>
       <form className={styles.modalContent} onSubmit={handleSubmit}>
-        <h3>Edit Bulk Order Query</h3>
+        <h3>Edit Order</h3>
 
-        {formData.orders.map((order, orderIndex) => (
-          <div key={orderIndex} className={styles.orderSection}>
-            <h4>Box {orderIndex + 1}</h4>
+        {formData.cartItems.map((item, index) => (
+          <div key={index} className={styles.itemSection}>
+            <label>Name:</label>
+            <input type="text" value={item.details.name} onChange={(e) => handleItemChange(index, "name", e.target.value)} />
 
-            <label>Box Name:</label>
-            <input
-              type="text"
-              value={order.boxName}
-              onChange={(e) => handleBoxChange(orderIndex, "boxName", e.target.value)}
-            />
-
-            <label>Box Size:</label>
-            <input
-              type="text"
-              value={order.boxSize}
-              onChange={(e) => handleBoxChange(orderIndex, "boxSize", e.target.value)}
-            />
+            <label>Price:</label>
+            <input type="number" value={item.details.price} onChange={(e) => handleItemChange(index, "price", e.target.value)} />
 
             <label>Quantity:</label>
-            <input
-              type="number"
-              value={order.quantity}
-              onChange={(e) => handleBoxChange(orderIndex, "quantity", e.target.value)}
-            />
-
-            <label>Total Cost:</label>
-            <input
-              type="number"
-              value={order.totalCost}
-              onChange={(e) => handleBoxChange(orderIndex, "totalCost", e.target.value)}
-            />
-
-            <h4>Sweets</h4>
-            {order.sweets.map((sweet, sweetIndex) => (
-              <div key={sweetIndex} className={styles.sweetSection}>
-                <label>Product Name:</label>
-                <input
-                  type="text"
-                  value={sweet.productName}
-                  onChange={(e) =>
-                    handleSweetChange(orderIndex, sweetIndex, "productName", e.target.value)
-                  }
-                />
-
-                <label>Price:</label>
-                <input
-                  type="number"
-                  value={sweet.productPrice}
-                  onChange={(e) =>
-                    handleSweetChange(orderIndex, sweetIndex, "productPrice", e.target.value)
-                  }
-                />
-              </div>
-            ))}
-
-            {/* ✅ New Custom Message Input */}
-            <label>Custom Message:</label>
-            <textarea
-              rows="3"
-              value={order.customMessage || ""}
-              onChange={(e) => handleBoxChange(orderIndex, "customMessage", e.target.value)}
-              placeholder="Enter a special message for your loved ones..."
-              className={styles.customMessageInput}
-            />
+            <input type="number" value={item.details.quantity} onChange={(e) => handleItemChange(index, "quantity", e.target.value)} />
           </div>
         ))}
 
@@ -162,13 +94,14 @@ const EditQueryModal = ({ query, onSave, onCancel }) => {
           <option value="Pending">Pending</option>
           <option value="Approved">Approved</option>
           <option value="Rejected">Rejected</option>
+          <option value="Completed">Completed</option>
         </select>
 
-        <button type="submit" className={styles.first}>Save</button>
-        <button type="button" className={styles.second} onClick={onCancel}>Cancel</button>
+        <button type="submit" className={styles.saveBtn}>Save</button>
+        <button type="button" className={styles.cancelBtn} onClick={onCancel}>Cancel</button>
       </form>
     </div>
   );
 };
 
-export default EditQueryModal;
+export default EditOrderModal;

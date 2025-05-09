@@ -51,6 +51,8 @@ router.put("/:id",isAuthenticated, bulkOrderController.updateQuery);
 // Delete a bulk order query (admin)
 router.delete("/:id", bulkOrderController.deleteQuery);
 
+router.put("/:id/cancel", isAuthenticated, bulkOrderController.cancelQuery);
+
 // Admin actions: Approve a bulk order query
 router.put("/:id/approve", bulkOrderController.approveQuery);
 

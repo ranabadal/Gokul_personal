@@ -43,7 +43,7 @@ const mongoose = require("mongoose");
 
 const BulkOrderQuerySchema = new mongoose.Schema({
   // Link order to user (reference) plus additional details directly stored.
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
   userName: { type: String, required: true },
   userNumber: { type: String, required: true },
   userEmail: { type: String, required: true },

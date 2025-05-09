@@ -8,6 +8,7 @@ const GiftBoxesHistory = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  // Fetch user orders from the backend
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -18,14 +19,14 @@ const GiftBoxesHistory = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (response.ok) {
-          const data = await response.json();
-          setOrders(data);
-        } else {
-          setErrorMessage("Failed to fetch gift box orders.");
-        }
+        const data = await response.json();
+        console.log("API Response:", data); // ✅ Debugging output
+
+        if (!response.ok || !Array.isArray(data)) throw new Error("Invalid response format");
+
+        setOrders(data);
       } catch (error) {
-        console.error("Error fetching gift box orders:", error);
+        console.error("Error fetching orders:", error);
         setErrorMessage("An error occurred while fetching orders.");
       } finally {
         setLoading(false);
@@ -35,17 +36,21 @@ const GiftBoxesHistory = () => {
     fetchOrders();
   }, []);
 
+  // Cancel Order Function
   const handleCancelOrder = async (orderId, orderStatus) => {
     if (orderStatus === "Approved") {
       alert("You cannot cancel an order once it has been approved.");
       return;
     }
 
+    if (orderStatus === "Rejected") {
+      alert("You cannot cancel an order once it has been rejected.");
+      return;
+    }
     if (orderStatus === "Canceled") {
       alert("This order has already been canceled.");
       return;
     }
-
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
 
     try {
@@ -57,7 +62,6 @@ const GiftBoxesHistory = () => {
 
       if (response.ok) {
         alert("Order canceled successfully!");
-
         setOrders((prevOrders) =>
           prevOrders.map((order) => (order._id === orderId ? { ...order, status: "Canceled" } : order))
         );
@@ -72,55 +76,60 @@ const GiftBoxesHistory = () => {
 
   if (loading) return <p>Loading...</p>;
   if (errorMessage) return <p className={styles.error}>{errorMessage}</p>;
-  if (orders.length === 0) return <>
-    <div className={styles.heading}>Gift Boxes Order History</div>
-     <p className={styles.noOrders}>🎁 No gift box orders yet! Start shopping now!</p>
-  </>
+  if (!orders || orders.length === 0)
+    return (
+      <>
+        <div className={styles.heading}>Gift Boxes Order History</div>
+        <p className={styles.noOrders}>🎁 No gift box orders yet! Start shopping now!</p>
+      </>
+    );
 
   return (
-<div className={styles.orderContainer}>
+    <div className={styles.orderContainer}>
       <div className={styles.orderTableContainer}>
         <table className={styles.orderTable}>
           <thead>
             <tr>
-              <th>Box Name</th>
-              <th>Products</th>
-              <th>Quantity</th>
-              <th>Total Cost</th>
+              <th>Items</th>
+              <th>Matching Handbags</th>
+              <th>Total Price</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) =>
-              order.orders.map((box, index) => (
-                <tr key={`${order._id}-${index}`}>
-                  <td>{box.boxName || "N/A"}</td>
-                  <td>
-                    {box.sweets.map((sweet, sweetIndex) => (
-                      <div key={sweetIndex}>
-                        {sweet.productName} - ₹{sweet.productPrice}
-                      </div>
-                    ))}
-                  </td>
-                  <td>{box.quantity || "N/A"}</td>
-                  <td>₹{box.totalCost || 0}</td>
-                  {index === 0 && (
-                    <>
-                      <td rowSpan={order.orders.length}>{order.status || "Pending"}</td>
-                      <td rowSpan={order.orders.length}>
-                        <button className={styles.cancel} onClick={() => handleCancelOrder(order._id, order.status)}>
-                          Cancel
-                        </button>
-                        <button className={styles.view} onClick={() => setSelectedOrder(order)}>
-                          View Details
-                        </button>
-                      </td>
-                    </>
+            {orders.map((order) => (
+              <tr key={order._id}>
+                <td>
+                  {order.cartItems.map((item, idx) => (
+                    <div key={idx}>
+                      {item.details.name} - ₹{item.details.price} x {item.details.quantity}
+                    </div>
+                  ))}
+                </td>
+                <td>
+                  {order.cartItems.map((item) =>
+                    item.matchingHandbags?.length > 0 ? (
+                      item.matchingHandbags.map((handbag, hIdx) => (
+                        <div key={hIdx}>{handbag.name} - ₹{handbag.price} x {handbag.quantity}</div>
+                      ))
+                    ) : (
+                      <div>No matching handbags</div>
+                    )
                   )}
-                </tr>
-              ))
-            )}
+                </td>
+                <td>₹{order.totalPrice}</td>
+                <td>{order.status}</td>
+                <td>
+                  <button className={styles.cancel} onClick={() => handleCancelOrder(order._id, order.status)}>
+                    Cancel
+                  </button>
+                  <button className={styles.view} onClick={() => setSelectedOrder(order)}>
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

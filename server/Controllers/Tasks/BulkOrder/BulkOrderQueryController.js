@@ -629,11 +629,12 @@ exports.createQuery = async (req, res) => {
 // ✅ Get all bulk order queries (Admin)
 exports.getAllQueries = async (req, res) => {
   try {
-    const queries = await BulkOrderQuery.find().populate("user", "name number email");
-    res.status(200).json(queries);
+    const orders = await BulkOrderQuery.find().populate("user", "name email number");
+    console.log("Orders from DB:", orders); // ✅ Debugging output
+    res.status(200).json({ success: true, orders });
   } catch (error) {
-    console.error("❌ Error fetching bulk orders:", error.message);
-    res.status(500).json({ error: "Failed to fetch bulk orders" });
+    console.error("Error fetching bulk orders:", error.message);
+    res.status(500).json({ success: false, message: "Error fetching bulk orders" });
   }
 };
 
@@ -775,5 +776,58 @@ exports.approveQuery = async (req, res) => {
   } catch (error) {
     console.error("❌ Error approving query:", error.message);
     res.status(500).json({ error: "Failed to approve bulk order query" });
+  }
+};
+
+
+// Cancel Bulk Order Query (User)
+exports.cancelQuery = async (req, res) => {
+  try {
+    const queryId = req.params.id;
+    const query = await BulkOrderQuery.findById(queryId).populate("user", "email name");
+
+    if (!query) return res.status(404).json({ error: "Bulk order query not found" });
+
+    // Prevent canceling approved or completed orders.
+    if (query.status === "Approved" || query.status === "Completed") {
+      return res.status(400).json({ error: "Cannot cancel an approved or completed order" });
+    }
+
+    query.status = "Canceled";
+    await query.save();
+
+    // Send cancellation email to user.
+    if (query.user?.email) {
+      await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, queryData);
+      await sendConfirmationEmail(query.user.email, "Bulk Order Canceled", `Dear ${query.user.name},\n\nYour bulk order has been canceled.\n\nBest regards,\nGokuls`);
+    }
+
+    res.status(200).json({ message: "Bulk order query canceled successfully", query });
+  } catch (error) {
+    console.error("❌ Error canceling query:", error.message);
+    res.status(500).json({ error: "Failed to cancel bulk order query" });
+  }
+};
+
+// Reject Bulk Order Query (Admin)
+exports.rejectQuery = async (req, res) => {
+  try {
+    const queryId = req.params.id;
+    const query = await BulkOrderQuery.findById(queryId).populate("user", "email name");
+
+    if (!query) return res.status(404).json({ error: "Bulk order query not found" });
+
+    query.status = "Rejected";
+    await query.save();
+
+    // Send rejection email to user.
+    if (query.user?.email) {
+      await sendEmail(query.user.email, "Bulk Order Rejected", `Dear ${query.user.name},\n\nYour bulk order has been rejected.\n\nBest regards,\nGokuls`);
+    }
+
+    res.status(200).json({ message: "Bulk order query rejected successfully", query });
+  } catch (error) {
+    console.error("❌ Error rejecting query:", error.message);
+    res.status(500).json({ error: "Failed to reject bulk order query" });
   }
 };

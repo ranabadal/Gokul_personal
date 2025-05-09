@@ -66,24 +66,82 @@ exports.getAllGiftBoxes = async (req, res) => {
     }
   };
   
-// ✅ Create a New Gift Box (With Base64 Image)
+// // ✅ Create a New Gift Box (With Base64 Image)
+// exports.createGiftBox = async (req, res) => {
+//   try {
+//     const { categoryId, name, image, description, price, minOrderQuantity, matchingHandbags } = req.body;
+//     const category = await GiftBoxCategory.findById(categoryId);
+//     if (!category) return res.status(400).json({ message: "Invalid category" });
+
+//     if (!image.startsWith("data:image/")) {
+//       return res.status(400).json({ message: "Invalid image format" });
+//     }
+
+//     const giftBox = new GiftBoxesForBulkOrder({ category: categoryId, name, image, description, price, minOrderQuantity, matchingHandbags });
+//     await giftBox.save();
+//     res.status(201).json(giftBox);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
+
 exports.createGiftBox = async (req, res) => {
   try {
-    const { categoryId, name, image, description, price, minOrderQuantity, matchingHandbags } = req.body;
-    const category = await GiftBoxCategory.findById(categoryId);
-    if (!category) return res.status(400).json({ message: "Invalid category" });
+    // Expect the frontend to send:
+    // category: the category _id,
+    // name, image, description, price, minOrderQuantity,
+    // and an optional matchingHandbags array.
+    const { category, name, image, description, price, minOrderQuantity, matchingHandbags } = req.body;
 
-    if (!image.startsWith("data:image/")) {
+    // Validate all required fields are provided
+    if (!category || !name || !image || !description || !price || !minOrderQuantity) {
+      return res.status(400).json({ message: "Please provide all required fields." });
+    }
+
+    // Find the category using the provided ID in 'category'
+    const categoryFound = await GiftBoxCategory.findById(category);
+    if (!categoryFound) {
+      return res.status(400).json({ message: "Invalid category" });
+    }
+
+    // Validate that the main image is in Base64 format
+    if (typeof image !== "string" || !image.startsWith("data:image/")) {
       return res.status(400).json({ message: "Invalid image format" });
     }
 
-    const giftBox = new GiftBoxesForBulkOrder({ category: categoryId, name, image, description, price, minOrderQuantity, matchingHandbags });
+    // Validate matchingHandbags if provided:
+    if (matchingHandbags) {
+      if (!Array.isArray(matchingHandbags)) {
+        return res.status(400).json({ message: "Matching handbags must be an array." });
+      }
+      for (let i = 0; i < matchingHandbags.length; i++) {
+        const mh = matchingHandbags[i];
+        // If an image field is provided in a matching handbag, validate its Base64 format
+        if (mh.image && (typeof mh.image !== "string" || !mh.image.startsWith("data:image/"))) {
+          return res.status(400).json({ message: "Invalid matching handbag image format" });
+        }
+      }
+    }
+
+    // Create and save the new Gift Box
+    const giftBox = new GiftBoxesForBulkOrder({
+      category,  // using the 'category' field from request
+      name,
+      image,
+      description,
+      price,
+      minOrderQuantity,
+      matchingHandbags: matchingHandbags || []
+    });
+
     await giftBox.save();
     res.status(201).json(giftBox);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 // ✅ Get All General Handbags
 exports.getAllGeneralHandbags = async (req, res) => {
@@ -93,21 +151,40 @@ exports.getAllGeneralHandbags = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
+};// ✅ Create a General Handbag (With Base64 Image)
 
-// ✅ Create a General Handbag (With Base64 Image)
+
 exports.createGeneralHandbag = async (req, res) => {
   try {
-    const { categoryId, name, image, price, minOrderQuantity } = req.body;
-    const category = await GiftBoxCategory.findById(categoryId);
-    if (!category) return res.status(400).json({ message: "Invalid category" });
+    // Expecting the frontend to send a field named `category`
+    const { category, name, image, price, minOrderQuantity } = req.body;
 
-    if (!image.startsWith("data:image/")) {
+    // Validate all required fields are provided
+    if (!category || !name || !image || !price || !minOrderQuantity) {
+      return res.status(400).json({ message: "Please provide all required fields." });
+    }
+
+    // Find the category using the provided ID in `category`
+    const categoryFound = await GiftBoxCategory.findById(category);
+    if (!categoryFound) {
+      return res.status(400).json({ message: "Invalid category" });
+    }
+
+    // Validate that the image is in Base64 format
+    if (typeof image !== "string" || !image.startsWith("data:image/")) {
       return res.status(400).json({ message: "Invalid image format" });
     }
 
-    const handbag = new GeneralHandbag({ category: categoryId, name, image, price, minOrderQuantity });
+    // Create and save the new General Handbag
+    const handbag = new GeneralHandbag({
+      category, // using the 'category' field from the request
+      name,
+      image,
+      price,
+      minOrderQuantity,
+    });
     await handbag.save();
+
     res.status(201).json(handbag);
   } catch (error) {
     res.status(400).json({ error: error.message });

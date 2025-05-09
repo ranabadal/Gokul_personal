@@ -223,218 +223,408 @@
 // export default BulkOrderQuery;
 
 
+// import React, { useState, useEffect } from "react";
+// import styles from "./giftBoxOrderQuery.module.css";
+// import EditQueryModal from "./EditQueryModal/editQueryModal"; // Modal for editing
+
+// const GiftBoxOrderQueryPage = () => {
+//   const [queries, setQueries] = useState([]);
+//   const [selectedQuery, setSelectedQuery] = useState(null); // For editing
+//   const [loading, setLoading] = useState(false); // Loading state
+//   const [errorMessage, setErrorMessage] = useState(null); // Error handling
+
+//   // Fetch all bulk order queries on mount
+//   useEffect(() => {
+//     const fetchQueries = async () => {
+//       try {
+//         setLoading(true);
+//         const token = localStorage.getItem("jwtToken");
+
+//         const response = await fetch("http://localhost:8080/api/giftBoxOrderQueries", {
+//           method: "GET",
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         });
+
+//         if (response.ok) {
+//           const data = await response.json();
+//           setQueries(data);
+//         } else {
+//           setErrorMessage("Failed to fetch queries.");
+//         }
+//       } catch (error) {
+//         console.error("Error fetching queries:", error);
+//         setErrorMessage("An error occurred while fetching queries.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchQueries();
+//   }, []);
+
+//   // Approve a query
+//   const handleApprove = async (queryId,orderStatus) => {
+
+
+        
+//     if (orderStatus === "Approved") {
+//       alert("This order has already been Approved.");
+//       return;
+//     }
+
+//     if (orderStatus === "Canceled") {
+//       alert("This order has been canceled. Now you cant Approve it");
+//       return;
+//     }
+
+
+//     try {
+//       const token = localStorage.getItem("jwtToken");
+//       const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${queryId}/approve`, {
+//         method: "PUT",
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
+
+//       if (response.ok) {
+//         alert("Query approved successfully!");
+//         const updatedQueries = queries.map((query) =>
+//           query._id === queryId ? { ...query, status: "Approved" } : query
+//         );
+//         setQueries(updatedQueries);
+//       } else {
+//         alert("Failed to approve query.");
+//       }
+//     } catch (error) {
+//       console.error("Error approving query:", error);
+//       alert("An error occurred. Please try again later.");
+//     }
+//   };
+
+//   // Delete a query
+//   const handleDelete = async (queryId) => {
+//     if (!window.confirm("Are you sure you want to delete this query?")) return;
+
+//     try {
+//       const token = localStorage.getItem("jwtToken");
+//       const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${queryId}`, {
+//         method: "DELETE",
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
+
+//       if (response.ok) {
+//         alert("Query deleted successfully!");
+//         setQueries(queries.filter((query) => query._id !== queryId));
+//       } else {
+//         alert("Failed to delete query.");
+//       }
+//     } catch (error) {
+//       console.error("Error deleting query:", error);
+//       alert("An error occurred. Please try again later.");
+//     }
+//   };
+
+//   // Edit a query
+//   const handleEdit = (query) => {
+//     setSelectedQuery(query);
+//   };
+
+//   // Save the edited query
+//   const handleSaveEdit = async (updatedQuery) => {
+//     try {
+//       const token = localStorage.getItem("jwtToken");
+//       const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${updatedQuery._id}`, {
+//         method: "PUT",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
+//         body: JSON.stringify(updatedQuery),
+//       });
+
+//       if (response.ok) {
+//         alert("Query updated successfully!");
+//         const updatedQueries = queries.map((query) =>
+//           query._id === updatedQuery._id ? updatedQuery : query
+//         );
+//         setQueries(updatedQueries);
+//         setSelectedQuery(null);
+//       } else {
+//         alert("Failed to update query.");
+//       }
+//     } catch (error) {
+//       console.error("Error updating query:", error);
+//       alert("An error occurred. Please try again later.");
+//     }
+//   };
+
+//   if (loading) return <p>Loading...</p>;
+//   if (errorMessage) return <p className={styles.error}>{errorMessage}</p>;
+ 
+  
+//     return (
+//       <div className={styles.queryContainer}>
+//         <h2>Admin - Gift Box Orders</h2>
+  
+//         {selectedQuery ? (
+//           <EditQueryModal query={selectedQuery} onSave={handleSaveEdit} onCancel={() => setSelectedQuery(null)} />
+//         ) : (
+//           <table className={styles.queryTable}>
+//             <thead>
+//               <tr>
+//                 <th>User Name</th>
+//                 <th>Phone Number</th>
+//                 <th>Email</th>
+//                 <th>Box Name</th>
+//                 <th>Box Size</th>
+//                 <th>Products</th>
+//                 <th>Quantity</th>
+//                 <th>Total</th>
+//                 <th>Address</th>
+//                 <th>Custom Message</th>
+//                 <th>Status</th>
+//                 <th>Actions</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {queries.map((query) =>
+//                 query.orders.map((box, boxIndex) => (
+//                   <tr key={`${query._id}-${boxIndex}`}>
+//                     {boxIndex === 0 && (
+//                       <>
+//                         <td rowSpan={query.orders.length}>{query.user?.name || "N/A"}</td>
+//                         <td rowSpan={query.orders.length}>{query.user?.number || "N/A"}</td>
+//                         <td rowSpan={query.orders.length}>{query.user?.email || "N/A"}</td>
+//                       </>
+//                     )}
+//                     <td>{box.boxName || "N/A"}</td>
+//                     <td>{box.boxSize || "N/A"}</td>
+//                     <td>
+//                       {box.sweets.map((sweet, sweetIndex) => (
+//                         <div key={sweetIndex}>
+//                           {sweet.productName} - ₹{sweet.productPrice}
+//                         </div>
+//                       ))}
+//                     </td>
+//                     <td>{box.quantity}</td>
+//                     <td>₹{box.totalCost}</td>
+//                     <td>
+//                       {box.address ? `${box.address.province}, ${box.address.city}, ${box.address.area}, ${box.address.landmark}` : "N/A"}
+//                     </td>
+//                     <td>{box.customMessage || "N/A"}</td>
+//                     {boxIndex === 0 && (
+//                       <>
+//                         <td rowSpan={query.orders.length}>{query.status || "Pending"}</td>
+//                         <td rowSpan={query.orders.length}>
+//                           <button className={styles.first} onClick={() => handleApprove(query._id,query.status)}>Approve</button>
+//                           <button className={styles.second} onClick={() => handleDelete(query._id)}>Delete</button>
+//                           <button className={styles.third} onClick={() => handleEdit(query)}>Edit</button>
+//                         </td>
+//                       </>
+//                     )}
+//                   </tr>
+//                 ))
+//               )}
+//             </tbody>
+//           </table>
+//         )}
+//       </div>
+//     );
+//   };
+  
+//   export default GiftBoxOrderQueryPage;
+
+
 import React, { useState, useEffect } from "react";
+import EditOrderModal from "./EditQueryModal/editQueryModal"; // Modal for editing orders
 import styles from "./giftBoxOrderQuery.module.css";
-import EditQueryModal from "./EditQueryModal/editQueryModal"; // Modal for editing
 
-const GiftBoxOrderQueryPage = () => {
-  const [queries, setQueries] = useState([]);
-  const [selectedQuery, setSelectedQuery] = useState(null); // For editing
-  const [loading, setLoading] = useState(false); // Loading state
-  const [errorMessage, setErrorMessage] = useState(null); // Error handling
+const GiftBoxOrderAdmin = () => {
+  const [orders, setOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // Fetch all bulk order queries on mount
+  // Fetch orders from backend
   useEffect(() => {
-    const fetchQueries = async () => {
+    const fetchOrders = async () => {
       try {
-        setLoading(true);
         const token = localStorage.getItem("jwtToken");
-
-        const response = await fetch("http://localhost:8080/api/giftBoxOrderQueries", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await fetch("http://localhost:8080/api/giftBoxOrderQueries/", {
+          headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (response.ok) {
-          const data = await response.json();
-          setQueries(data);
-        } else {
-          setErrorMessage("Failed to fetch queries.");
-        }
+        const data = await response.json();
+        console.log("API Response:", data); // ✅ Debugging output
+
+        if (!response.ok || !data.orders) throw new Error("Failed to fetch orders");
+
+        setOrders(Array.isArray(data.orders) ? data.orders : []);
       } catch (error) {
-        console.error("Error fetching queries:", error);
-        setErrorMessage("An error occurred while fetching queries.");
+        setErrorMessage(error.message || "Error fetching orders.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchQueries();
+    fetchOrders();
   }, []);
 
-  // Approve a query
-  const handleApprove = async (queryId,orderStatus) => {
-
-
-        
-    if (orderStatus === "Approved") {
-      alert("This order has already been Approved.");
-      return;
+  const handleStatusUpdate = async (orderId, currentStatus, newStatus) => {
+    if (currentStatus === "Cancelled") {
+      alert("This order has been canceled and cannot be updated.");
+      return; // ✅ Stops execution before making API request
     }
-
-    if (orderStatus === "Canceled") {
-      alert("This order has been canceled. Now you cant Approve it");
-      return;
-    }
-
-
+  
+    if (!window.confirm(`Mark this order as ${newStatus}?`)) return;
+  
     try {
       const token = localStorage.getItem("jwtToken");
-      const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${queryId}/approve`, {
+      const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${orderId}`, {
         method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ status: newStatus }),
       });
-
-      if (response.ok) {
-        alert("Query approved successfully!");
-        const updatedQueries = queries.map((query) =>
-          query._id === queryId ? { ...query, status: "Approved" } : query
-        );
-        setQueries(updatedQueries);
-      } else {
-        alert("Failed to approve query.");
-      }
+  
+      const responseData = await response.json();
+      if (!response.ok) throw new Error(responseData.message || "Failed to update status");
+  
+      alert(`Order marked as ${newStatus}`);
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order._id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
     } catch (error) {
-      console.error("Error approving query:", error);
-      alert("An error occurred. Please try again later.");
+      alert(`Error updating status: ${error.message}`);
     }
   };
 
-  // Delete a query
-  const handleDelete = async (queryId) => {
-    if (!window.confirm("Are you sure you want to delete this query?")) return;
 
-    try {
-      const token = localStorage.getItem("jwtToken");
-      const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${queryId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        alert("Query deleted successfully!");
-        setQueries(queries.filter((query) => query._id !== queryId));
-      } else {
-        alert("Failed to delete query.");
-      }
-    } catch (error) {
-      console.error("Error deleting query:", error);
-      alert("An error occurred. Please try again later.");
-    }
+  // Open Edit Modal
+  const handleEditOrder = (order) => {
+    setSelectedOrder(order);
   };
 
-  // Edit a query
-  const handleEdit = (query) => {
-    setSelectedQuery(query);
-  };
-
-  // Save the edited query
-  const handleSaveEdit = async (updatedQuery) => {
+  // Save Edited Order
+  const handleSaveEdit = async (updatedOrder) => {
     try {
       const token = localStorage.getItem("jwtToken");
-      const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${updatedQuery._id}`, {
+      const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${updatedOrder._id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(updatedQuery),
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify(updatedOrder),
       });
 
-      if (response.ok) {
-        alert("Query updated successfully!");
-        const updatedQueries = queries.map((query) =>
-          query._id === updatedQuery._id ? updatedQuery : query
-        );
-        setQueries(updatedQueries);
-        setSelectedQuery(null);
-      } else {
-        alert("Failed to update query.");
-      }
+      if (!response.ok) throw new Error("Failed to update order");
+
+      alert("Order updated successfully!");
+      setOrders((prevOrders) =>
+        prevOrders.map((order) => (order._id === updatedOrder._id ? updatedOrder : order))
+      );
+      setSelectedOrder(null);
     } catch (error) {
-      console.error("Error updating query:", error);
-      alert("An error occurred. Please try again later.");
+      alert(`Error updating order: ${error.message}`);
     }
   };
 
   if (loading) return <p>Loading...</p>;
   if (errorMessage) return <p className={styles.error}>{errorMessage}</p>;
- 
-  
-    return (
-      <div className={styles.queryContainer}>
-        <h2>Admin - Gift Box Orders</h2>
-  
-        {selectedQuery ? (
-          <EditQueryModal query={selectedQuery} onSave={handleSaveEdit} onCancel={() => setSelectedQuery(null)} />
-        ) : (
-          <table className={styles.queryTable}>
-            <thead>
+
+  return (
+    <div className={styles.orderAdminContainer}>
+      <h2>Gift Box Orders - Admin Panel</h2>
+
+      {selectedOrder ? (
+        <EditOrderModal order={selectedOrder} onSave={handleSaveEdit} onCancel={() => setSelectedOrder(null)} />
+      ) : (
+        <table className={styles.orderTable}>
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Items</th>
+              <th>Matching Handbags</th>
+              <th>Address</th>
+              <th>Total Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order.userName}</td>
+                  <td>{order.userEmail}</td>
+                  <td>{order.userMobile}</td>
+                  <td>
+                    {order.cartItems.map((item, idx) => (
+                      <div key={idx}>
+                        {item.details.name} - ₹{item.details.price} x {item.details.quantity}
+                      </div>
+                    ))}
+                  </td>
+                  <td>
+                    {order.cartItems.map((item) =>
+                      item.matchingHandbags && item.matchingHandbags.length > 0 ? (
+                        item.matchingHandbags.map((handbag, hIdx) => (
+                          <div key={hIdx}>
+                            {handbag.name} - ₹{handbag.price} x {handbag.quantity}
+                          </div>
+                        ))
+                      ) : (
+                        <div>No matching handbags</div>
+                      )
+                    )}
+                  </td>
+                  <td>
+                    {order.address.province}, {order.address.city}, {order.address.area}, {order.address.landmark}
+                  </td>
+                  <td>₹{order.totalPrice}</td>
+                  <td>{order.status}</td>
+                  <td>
+                  <button
+  className={styles.approveBtn}
+  onClick={() => handleStatusUpdate(order._id, order.status, "Approved")}
+ // ✅ Prevents action if canceled
+>
+  Approve
+</button>
+<button
+  className={styles.rejectBtn}
+  onClick={() => handleStatusUpdate(order._id, order.status, "Rejected")}
+  // ✅ Prevents action if canceled
+>
+  Reject
+</button>
+<button
+  className={styles.completeBtn}
+  onClick={() => handleStatusUpdate(order._id, order.status, "Completed")}
+ // ✅ Prevents action if canceled
+>
+  Complete
+</button>
+                    <button className={styles.editBtn} onClick={() => handleEditOrder(order)}>Edit</button>
+                  </td>
+                </tr>
+              ))
+            ) : (
               <tr>
-                <th>User Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Box Name</th>
-                <th>Box Size</th>
-                <th>Products</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Address</th>
-                <th>Custom Message</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <td colSpan="9">No orders found.</td>
               </tr>
-            </thead>
-            <tbody>
-              {queries.map((query) =>
-                query.orders.map((box, boxIndex) => (
-                  <tr key={`${query._id}-${boxIndex}`}>
-                    {boxIndex === 0 && (
-                      <>
-                        <td rowSpan={query.orders.length}>{query.user?.name || "N/A"}</td>
-                        <td rowSpan={query.orders.length}>{query.user?.number || "N/A"}</td>
-                        <td rowSpan={query.orders.length}>{query.user?.email || "N/A"}</td>
-                      </>
-                    )}
-                    <td>{box.boxName || "N/A"}</td>
-                    <td>{box.boxSize || "N/A"}</td>
-                    <td>
-                      {box.sweets.map((sweet, sweetIndex) => (
-                        <div key={sweetIndex}>
-                          {sweet.productName} - ₹{sweet.productPrice}
-                        </div>
-                      ))}
-                    </td>
-                    <td>{box.quantity}</td>
-                    <td>₹{box.totalCost}</td>
-                    <td>
-                      {box.address ? `${box.address.province}, ${box.address.city}, ${box.address.area}, ${box.address.landmark}` : "N/A"}
-                    </td>
-                    <td>{box.customMessage || "N/A"}</td>
-                    {boxIndex === 0 && (
-                      <>
-                        <td rowSpan={query.orders.length}>{query.status || "Pending"}</td>
-                        <td rowSpan={query.orders.length}>
-                          <button className={styles.first} onClick={() => handleApprove(query._id,query.status)}>Approve</button>
-                          <button className={styles.second} onClick={() => handleDelete(query._id)}>Delete</button>
-                          <button className={styles.third} onClick={() => handleEdit(query)}>Edit</button>
-                        </td>
-                      </>
-                    )}
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        )}
-      </div>
-    );
-  };
-  
-  export default GiftBoxOrderQueryPage;
+            )}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+};
+
+export default GiftBoxOrderAdmin;

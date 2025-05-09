@@ -189,16 +189,16 @@ const banquetHallRoutes = require('./Routes/Tasks/BanquetHall.routes');
 const menuRoutes = require("./Routes/Tasks/menuRoutes");
 const menuCartRoutes = require("./Routes/Tasks/menuCartRoutes");
 const bulkOrderRoutes = require("./Routes/Tasks/BulkOrder/regularBox.routes");
-const giftBoxRoutes = require("./Routes/Tasks/GiftBox.routes");
+
 const banquetQueryRoutes = require('./Routes/Tasks/banquetQueryRoutes');
 const GiftBoxesForBulkOrder = require('./Routes/Tasks/BulkOrder/GiftBoxesForBulkOrder.routes');
-const GiftBoxOrderQueryRoutes = require('./Routes/Tasks/GiftBoxOrderQueryRoutes');
+const GiftBoxOrderQueryRoutes = require('./Routes/Tasks/GiftBoxes/GiftBoxOrderQueryRoutes');
 const RestaurentNavbar = require('./Routes/Tasks/restaurentNavbarRoutes');
 const RestaurentProducts = require("./Routes/Tasks/restaurentProductsRoutes");
 const TakeawayOrderRoutes = require("./Routes/Tasks/takeawayRoutes");
 const RegularBoxRoutes = require("./Routes/Tasks/BulkOrder/regularBox.routes");
 const bulkOrderQueryRoutes = require("./Routes/Tasks/BulkOrder/bulkOrderQueryRoutes");
-
+const GiftBoxesRoutes = require('./Routes/Tasks/GiftBoxes/GiftBoxes.routes');
 
 app.use(bodyParser.json({ limit: '50mb' })); // Increase the limit to handle large base64 images
 app.use(cors());
@@ -229,7 +229,7 @@ app.use("/api/menus", menuRoutes);
 app.use('/api/bulkorders', GiftBoxesForBulkOrder);
 app.use('/api/regularBoxes', RegularBoxRoutes); // Use regular box routes
 app.use('/api/bulkOrder', bulkOrderRoutes); // Use bulk order routes
-app.use("/api", giftBoxRoutes);
+app.use('/api/giftboxpage', GiftBoxesRoutes); // Use gift boxes routes
 app.use("/api/queries", banquetQueryRoutes);
 app.use('/api/bulkOrderQueries',bulkOrderQueryRoutes);
 app.use("/api/menuCart", menuCartRoutes); // Use menu cart routes

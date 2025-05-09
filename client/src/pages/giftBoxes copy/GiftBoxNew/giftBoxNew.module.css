@@ -1,0 +1,197 @@
+/* giftBoxNew.module.css */
+
+.container {
+  font-family: "Inter", sans-serif;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.titleSection {
+  text-align: center;
+  margin: 30px 0 10px;
+}
+
+.titleText {
+  font-size: 32px;
+  font-weight: 700;
+  color: #E31E24;
+}
+
+.content {
+  display: flex;
+  padding: 0 40px;
+  gap: 20px;
+}
+
+.mainSection {
+  flex: 3;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  background-color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease;
+}
+
+.filters button:hover {
+  background-color: #f0f0f0;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.boxImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+.card p {
+  margin: 4px 0;
+  color: #444;
+}
+
+.card strong {
+  font-size: 18px;
+}
+
+.designs {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.designImage {
+  width: 35px;
+  height: 35px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+select {
+  margin: 10px 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.card button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color:#E31E24;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.sidebar {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  height: fit-content;
+}
+
+.sidebar h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.selectedBox {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.selectedBox img {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.selectedBox p {
+  margin: 2px 0;
+  font-size: 14px;
+  color:#E31E24;
+}
+
+.selectedBox button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  resize: none;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.totalSection {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.checkoutButton {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  background-color: #E31E24;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.checkoutButton:hover {
+  background-color: #d11a20;
+}
