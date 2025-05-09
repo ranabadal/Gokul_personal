@@ -1289,8 +1289,10 @@ const BulkOrder = () => {
       setLoading(true);
       try {
         const response = await axios.get("http://localhost:8080/api/products");
+  
         setSweets(response.data.products.filter((p) => p.category === "Sweets"));
-        setSnacks(response.data.products.filter((p) => p.category === "Restaurant"));
+        setSnacks(response.data.products.filter((p) => p.category === "Restaurant" && p.bulkOrderAvailable === true));
+  
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {

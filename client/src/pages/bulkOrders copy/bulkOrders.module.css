@@ -144,6 +144,7 @@
   overflow: hidden;
   padding: 10px;
   height: 120px;
+  max-width: fit-content;
 }
 
 /* Image Container (left side) */

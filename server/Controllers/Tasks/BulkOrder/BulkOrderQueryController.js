@@ -415,108 +415,673 @@
 //   }
 // };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const BulkOrderQuery = require("../../../Models/Tasks/BulkOrder/BulkOrderQuery");
+// const User = require("../../../Models/Auth/Auth.model");
+// const nodemailer = require("nodemailer");
+// const mongoose = require("mongoose");
+
+
+
+// const sendConfirmationEmail = async (userEmail, queryDetails) => {
+//     try {
+//       const transporter = nodemailer.createTransport({
+//         service: "Gmail",
+//         auth: {
+//           user: process.env.EMAIL_USER,
+//           pass: process.env.EMAIL_PASS,
+//         },
+//       });
+  
+//       // ✅ Format Address
+//       const formattedAddress =
+//         queryDetails.address && Object.values(queryDetails.address).some((value) => value)
+//           ? `${queryDetails.address.province || "N/A"}, ${queryDetails.address.city || "N/A"}, 
+//              ${queryDetails.address.area || "N/A"}, ${queryDetails.address.landmark || "N/A"}`
+//           : "**Delivery address not provided**";
+  
+//       // ✅ Format Selected Regular Boxes
+//       const regularBoxDetails =
+//         queryDetails.selectedRegularBoxes.length > 0
+//           ? queryDetails.selectedRegularBoxes
+//               .map((box) => `- ${box.label}: Quantity ${box.quantity}`)
+//               .join("\n")
+//           : "**No regular boxes selected**";
+  
+//       // ✅ Format Bulk Order Details
+//       const giftBoxesDetails =
+//         queryDetails.giftBoxes.length > 0
+//           ? queryDetails.giftBoxes.map(
+//               (box) =>
+//                 `- ${box.name} (${box.quantity} units) ₹${box.price * box.quantity}${
+//                   box.matchingHandbags?.length
+//                     ? `\n  Matching Handbags:\n${box.matchingHandbags
+//                         .map((handbag) => `    - ${handbag.name} (${handbag.quantity}) ₹${handbag.price * handbag.quantity}`)
+//                         .join("\n")}`
+//                     : ""
+//                 }`
+//             ).join("\n")
+//           : "**No gift boxes selected**";
+  
+//       const generalHandbagsDetails =
+//         queryDetails.generalHandbags.length > 0
+//           ? queryDetails.generalHandbags
+//               .map((handbag) => `- ${handbag.name} (${handbag.quantity} units) ₹${handbag.price * handbag.quantity}`)
+//               .join("\n")
+//           : "**No general handbags selected**";
+  
+//       const selectedItemsDetails =
+//         Object.keys(queryDetails.selectedItems).length > 0
+//           ? Object.entries(queryDetails.selectedItems)
+//               .map(([item, qty]) => `- ${item}: ${qty} kg`)
+//               .join("\n")
+//           : "**No items selected**";
+  
+//       const totalCost =
+//         queryDetails.totalCost > 0 ? `₹${queryDetails.totalCost}` : "**Total cost calculation error**";
+  
+//       const mailOptions = {
+//         from: process.env.EMAIL_USER,
+//         to: userEmail,
+//         subject: "Order Confirmation - Bulk Order Boxes",
+//         text: `Dear ${queryDetails.userName},
+  
+//   Thank you for your order! Here are your order details:
+  
+//   Gift Boxes:
+//   ${giftBoxesDetails}
+  
+//   General Handbags:
+//   ${generalHandbagsDetails}
+  
+//   Regular Boxes:
+//   ${regularBoxDetails}
+  
+//   Selected Items:
+//   ${selectedItemsDetails}
+  
+//   Total Cost: ${totalCost}
+  
+//   Delivery Address:
+//   ${formattedAddress}
+  
+//   We will notify you once your order is processed.
+  
+//   Best regards,
+//   Gokuls`,
+//       };
+  
+//       await transporter.sendMail(mailOptions);
+//       console.log("✅ Confirmation email sent!");
+//     } catch (error) {
+//       console.error("❌ Error sending confirmation email:", error.message);
+//     }
+//   };
+// // ✅ Function to send admin notification email
+// const sendAdminNotificationEmail = async (adminEmail, queryDetails) => {
+//   try {
+//     const transporter = nodemailer.createTransport({
+//       service: "Gmail",
+//       auth: {
+//         user: process.env.EMAIL_USER,
+//         pass: process.env.EMAIL_PASS,
+//       },
+//     });
+
+//     const formattedAddress = queryDetails.address
+//       ? `${queryDetails.address.province || "N/A"}, ${queryDetails.address.city || "N/A"}, ${queryDetails.address.area || "N/A"}, ${queryDetails.address.landmark || "N/A"}`
+//       : "Address not provided";
+
+//     const orderDetails =
+//       queryDetails.giftBoxes.length > 0 || queryDetails.generalHandbags.length > 0 || Object.keys(queryDetails.selectedItems).length > 0
+//         ? `
+// Gift Boxes:
+// ${queryDetails.giftBoxes.map((box) =>
+//           `- ${box.name} (${box.quantity} units) ₹${box.price * box.quantity}`
+//         ).join("\n")}
+
+// General Handbags:
+// ${queryDetails.generalHandbags.map((handbag) =>
+//           `- ${handbag.name} (${handbag.quantity} units) ₹${handbag.price * handbag.quantity}`
+//         ).join("\n")}
+
+// Selected Items:
+// ${Object.entries(queryDetails.selectedItems).map(([item, qty]) =>
+//           `- ${item}: ${qty} kg`
+//         ).join("\n")}
+
+// Total Cost: ₹${queryDetails.totalCost}
+// `
+//         : "No order details available.";
+
+//     const mailOptions = {
+//       from: process.env.EMAIL_USER,
+//       to: adminEmail,
+//       subject: "New Bulk Order Received",
+//       text: `Dear Admin,
+
+// A new bulk order has been placed. Here are the order details:
+
+// User Name: ${queryDetails.userName}
+// User Number: ${queryDetails.userNumber}
+// User Email: ${queryDetails.userEmail}
+
+// ${orderDetails}
+
+// Delivery Address:
+// ${formattedAddress}
+
+// Best regards,
+// Gokuls`,
+//     };
+
+//     await transporter.sendMail(mailOptions);
+//     console.log("✅ Admin notification email sent!");
+//   } catch (error) {
+//     console.error("❌ Error sending admin notification email:", error.message);
+//   }
+// };
+// // ✅ Create a new bulk order query with total cost from frontend
+// exports.createQuery = async (req, res) => {
+//     try {
+//       const userId = req.user?.id;
+//       if (!userId) {
+//         return res.status(401).json({ error: "User authentication required" });
+//       }
+  
+//       const user = await User.findById(userId);
+//       if (!user) {
+//         return res.status(404).json({ error: "User not found" });
+//       }
+  
+//       // ✅ Ensure totalCost is passed from the frontend
+//       if (!req.body.totalCost || req.body.totalCost <= 0) {
+//         return res.status(400).json({ error: "Invalid total cost. Must be provided from frontend." });
+//       }
+  
+//       const queryData = {
+//         ...req.body,
+//         user: new mongoose.Types.ObjectId(userId),
+//         userName: user.name,
+//         userNumber: user.number,
+//         userEmail: user.email,
+//         totalCost: req.body.totalCost, // ✅ Fetch total cost from frontend
+//       };
+  
+//       console.log("📦 Final Query Data:", queryData);
+  
+//       const newQuery = new BulkOrderQuery(queryData);
+//       await newQuery.save();
+  
+//       res.status(201).json({
+//         message: "Bulk order query created successfully",
+//         query: newQuery,
+//         user: { name: user.name, number: user.number, email: user.email },
+//       });
+  
+//       await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, queryData);
+//       await sendConfirmationEmail(user.email, queryData);
+//     } catch (error) {
+//       console.error("❌ Error creating bulk order query:", error.message);
+//       res.status(500).json({ error: "Failed to create bulk order query" });
+//     }
+//   };
+
+// // ✅ Get all bulk order queries (Admin)
+// exports.getAllQueries = async (req, res) => {
+//   try {
+//     const orders = await BulkOrderQuery.find().populate("user", "name email number");
+//     console.log("Orders from DB:", orders); // ✅ Debugging output
+//     res.status(200).json({ success: true, orders });
+//   } catch (error) {
+//     console.error("Error fetching bulk orders:", error.message);
+//     res.status(500).json({ success: false, message: "Error fetching bulk orders" });
+//   }
+// };
+
+// // ✅ Get a specific bulk order query by ID
+// exports.getBulkQueryById = async (req, res) => {
+//   try {
+//     const query = await BulkOrderQuery.findById(req.params.id).populate("user", "name number email");
+//     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
+//     res.status(200).json(query);
+//   } catch (error) {
+//     console.error("❌ Error fetching query:", error.message);
+//     res.status(500).json({ error: "Failed to fetch bulk order query" });
+//   }
+// };
+
+// // ✅ Delete a bulk order query (Admin)
+// exports.deleteQuery = async (req, res) => {
+//   try {
+//     const query = await BulkOrderQuery.findByIdAndDelete(req.params.id);
+//     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
+//     res.status(200).json({ message: "Bulk order query deleted successfully" });
+//   } catch (error) {
+//     console.error("❌ Error deleting query:", error.message);
+//     res.status(500).json({ error: "Failed to delete bulk order query" });
+//   }
+// };
+
+
+
+// // ✅ Get bulk orders for the logged-in user
+// exports.getUserBulkOrders = async (req, res) => {
+//   try {
+//     const userId = req.user?.id;
+//     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+//       return res.status(400).json({ error: "Invalid User ID" });
+//     }
+
+//     const orders = await BulkOrderQuery.find({ user: userId }).sort({ createdAt: -1 });
+//     res.status(200).json(orders);
+//   } catch (error) {
+//     console.error("❌ Error fetching user bulk orders:", error.message);
+//     res.status(500).json({ error: "Failed to fetch bulk orders" });
+//   }
+// };
+
+// // ✅ Update a bulk order query (Admin)
+// exports.updateQuery = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const updatedData = req.body;
+
+//     const query = await BulkOrderQuery.findByIdAndUpdate(queryId, updatedData, {
+//       new: true,
+//       runValidators: true,
+//     });
+
+//     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
+
+//     res.status(200).json({ message: "Bulk order query updated successfully", query });
+//   } catch (error) {
+//     console.error("❌ Error updating query:", error.message);
+//     res.status(500).json({ error: "Failed to update bulk order query" });
+//   }
+// };
+
+// // ✅ Function to send approval email
+// const sendApprovalEmail = async (userEmail, queryDetails) => {
+//   try {
+//     const transporter = nodemailer.createTransport({
+//       service: "Gmail",
+//       auth: {
+//         user: process.env.EMAIL_USER,
+//         pass: process.env.EMAIL_PASS,
+//       },
+//     });
+
+//     const orderDetails =
+//       queryDetails.giftBoxes.length > 0 || queryDetails.generalHandbags.length > 0 || Object.keys(queryDetails.selectedItems).length > 0
+//         ? `
+// Gift Boxes:
+// ${queryDetails.giftBoxes.map((box) =>
+//           `- ${box.name} (${box.quantity} units) ₹${box.price * box.quantity}`
+//         ).join("\n")}
+
+// General Handbags:
+// ${queryDetails.generalHandbags.map((handbag) =>
+//           `- ${handbag.name} (${handbag.quantity} units) ₹${handbag.price * handbag.quantity}`
+//         ).join("\n")}
+
+// Selected Items:
+// ${Object.entries(queryDetails.selectedItems).map(([item, qty]) =>
+//           `- ${item}: ${qty} kg`
+//         ).join("\n")}
+
+// Total Cost: ₹${queryDetails.totalCost}
+// `
+//         : "No order details available.";
+
+//     const mailOptions = {
+//       from: process.env.EMAIL_USER,
+//       to: userEmail,
+//       subject: "Order Approved - Bulk Order Boxes",
+//       text: `Dear ${queryDetails.userName},
+
+// Your bulk order has been approved! Here are your order details:
+
+// ${orderDetails}
+
+// Thank you for your purchase.
+
+// Best regards,
+// Gokuls`,
+//     };
+
+//     await transporter.sendMail(mailOptions);
+//     console.log("✅ Approval email sent!");
+//   } catch (error) {
+//     console.error("❌ Error sending approval email:", error.message);
+//   }
+// };
+
+// // ✅ Approve a bulk order query (Admin)
+// exports.approveQuery = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const query = await BulkOrderQuery.findById(queryId).populate("user", "email");
+
+//     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
+
+//     query.status = "Approved";
+//     await query.save();
+
+//     // ✅ Send approval email
+//     if (query.user?.email) {
+//       await sendApprovalEmail(query.user.email, query);
+//     }
+
+//     res.status(200).json({ message: "Bulk order query approved successfully", query });
+//   } catch (error) {
+//     console.error("❌ Error approving query:", error.message);
+//     res.status(500).json({ error: "Failed to approve bulk order query" });
+//   }
+// };
+
+
+// // Cancel Bulk Order Query (User)
+// exports.cancelQuery = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const query = await BulkOrderQuery.findById(queryId).populate("user", "email name");
+
+//     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
+
+//     // Prevent canceling approved or completed orders.
+//     if (query.status === "Approved" || query.status === "Completed") {
+//       return res.status(400).json({ error: "Cannot cancel an approved or completed order" });
+//     }
+
+//     query.status = "Canceled";
+//     await query.save();
+
+//     // Send cancellation email to user.
+//     if (query.user?.email) {
+//       await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, queryData);
+//       await sendConfirmationEmail(query.user.email, "Bulk Order Canceled", `Dear ${query.user.name},\n\nYour bulk order has been canceled.\n\nBest regards,\nGokuls`);
+//     }
+
+//     res.status(200).json({ message: "Bulk order query canceled successfully", query });
+//   } catch (error) {
+//     console.error("❌ Error canceling query:", error.message);
+//     res.status(500).json({ error: "Failed to cancel bulk order query" });
+//   }
+// };
+
+// // Reject Bulk Order Query (Admin)
+// exports.rejectQuery = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const query = await BulkOrderQuery.findById(queryId).populate("user", "email name");
+
+//     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
+
+//     query.status = "Rejected";
+//     await query.save();
+
+//     // Send rejection email to user.
+//     if (query.user?.email) {
+//       await sendEmail(query.user.email, "Bulk Order Rejected", `Dear ${query.user.name},\n\nYour bulk order has been rejected.\n\nBest regards,\nGokuls`);
+//     }
+
+//     res.status(200).json({ message: "Bulk order query rejected successfully", query });
+//   } catch (error) {
+//     console.error("❌ Error rejecting query:", error.message);
+//     res.status(500).json({ error: "Failed to reject bulk order query" });
+//   }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const BulkOrderQuery = require("../../../Models/Tasks/BulkOrder/BulkOrderQuery");
 const User = require("../../../Models/Auth/Auth.model");
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
 
+/**
+ * Helper function to compose an email body containing all order information.
+ * @param {Object} query - The bulk order query document.
+ * @param {String} statusMessage - A message to indicate the current order status.
+ */
 
+const composeOrderStatusEmailBody = (query, statusMessage) => {
+  // Extract selected items properly
+  const selectedItemsDetails =
+    query.selectedItems && Object.keys(query.selectedItems).length > 0
+      ? Object.entries(query.selectedItems)
+          .map(([item, qty]) => `- ${item}: ${qty} kg`)
+          .join("\n")
+      : "No selected items.";
 
-const sendConfirmationEmail = async (userEmail, queryDetails) => {
-    try {
-      const transporter = nodemailer.createTransport({
-        service: "Gmail",
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-  
-      // ✅ Format Address
-      const formattedAddress =
-        queryDetails.address && Object.values(queryDetails.address).some((value) => value)
-          ? `${queryDetails.address.province || "N/A"}, ${queryDetails.address.city || "N/A"}, 
-             ${queryDetails.address.area || "N/A"}, ${queryDetails.address.landmark || "N/A"}`
-          : "**Delivery address not provided**";
-  
-      // ✅ Format Selected Regular Boxes
-      const regularBoxDetails =
-        queryDetails.selectedRegularBoxes.length > 0
-          ? queryDetails.selectedRegularBoxes
-              .map((box) => `- ${box.label}: Quantity ${box.quantity}`)
-              .join("\n")
-          : "**No regular boxes selected**";
-  
-      // ✅ Format Bulk Order Details
-      const giftBoxesDetails =
-        queryDetails.giftBoxes.length > 0
-          ? queryDetails.giftBoxes.map(
-              (box) =>
-                `- ${box.name} (${box.quantity} units) ₹${box.price * box.quantity}${
-                  box.matchingHandbags?.length
-                    ? `\n  Matching Handbags:\n${box.matchingHandbags
-                        .map((handbag) => `    - ${handbag.name} (${handbag.quantity}) ₹${handbag.price * handbag.quantity}`)
-                        .join("\n")}`
-                    : ""
-                }`
-            ).join("\n")
-          : "**No gift boxes selected**";
-  
-      const generalHandbagsDetails =
-        queryDetails.generalHandbags.length > 0
-          ? queryDetails.generalHandbags
-              .map((handbag) => `- ${handbag.name} (${handbag.quantity} units) ₹${handbag.price * handbag.quantity}`)
-              .join("\n")
-          : "**No general handbags selected**";
-  
-      const selectedItemsDetails =
-        Object.keys(queryDetails.selectedItems).length > 0
-          ? Object.entries(queryDetails.selectedItems)
-              .map(([item, qty]) => `- ${item}: ${qty} kg`)
-              .join("\n")
-          : "**No items selected**";
-  
-      const totalCost =
-        queryDetails.totalCost > 0 ? `₹${queryDetails.totalCost}` : "**Total cost calculation error**";
-  
-      const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: userEmail,
-        subject: "Order Confirmation - Bulk Order Boxes",
-        text: `Dear ${queryDetails.userName},
-  
-  Thank you for your order! Here are your order details:
-  
-  Gift Boxes:
-  ${giftBoxesDetails}
-  
-  General Handbags:
-  ${generalHandbagsDetails}
-  
-  Regular Boxes:
-  ${regularBoxDetails}
-  
-  Selected Items:
-  ${selectedItemsDetails}
-  
-  Total Cost: ${totalCost}
-  
-  Delivery Address:
-  ${formattedAddress}
-  
-  We will notify you once your order is processed.
-  
-  Best regards,
-  Gokuls`,
-      };
-  
-      await transporter.sendMail(mailOptions);
-      console.log("✅ Confirmation email sent!");
-    } catch (error) {
-      console.error("❌ Error sending confirmation email:", error.message);
-    }
+  // Properly extract other order details
+  const giftBoxesDetails =
+    query.giftBoxes.length > 0
+      ? query.giftBoxes
+          .map(
+            (box) => `- ${box.name} (Qty: ${box.quantity}) ₹${box.price * box.quantity}`
+          )
+          .join("\n")
+      : "No gift boxes selected.";
+
+  const regularBoxDetails =
+    query.selectedRegularBoxes.length > 0
+      ? query.selectedRegularBoxes
+          .map((box) => `- ${box.label} (Qty: ${box.quantity})`)
+          .join("\n")
+      : "No regular boxes selected.";
+
+  const generalHandbagsDetails =
+    query.generalHandbags.length > 0
+      ? query.generalHandbags
+          .map((handbag) => `- ${handbag.name} (Qty: ${handbag.quantity}) ₹${handbag.price * handbag.quantity}`)
+          .join("\n")
+      : "No general handbags selected.";
+
+  // Format delivery address properly
+  const formattedAddress =
+    query.address && Object.values(query.address).some(value => value)
+      ? `${query.address.province || "N/A"}, ${query.address.city || "N/A"}, ${query.address.area || "N/A"}, ${query.address.landmark || "N/A"}`
+      : "Delivery address not provided.";
+
+  // Properly format the email body
+  return `Dear ${query.userName},
+
+${statusMessage}
+
+Order Details:
+
+Gift Boxes:
+${giftBoxesDetails}
+
+General Handbags:
+${generalHandbagsDetails}
+
+Regular Boxes:
+${regularBoxDetails}
+
+Selected Items:
+${selectedItemsDetails}
+
+Total Cost: ₹${query.totalCost}
+
+Delivery Address:
+${formattedAddress}
+
+Best regards,
+Gokuls`;
+};
+
+/**
+ * Generic email sender using nodemailer.
+ * @param {String} to - Recipient email address.
+ * @param {String} subject - Email subject.
+ * @param {String} text - Email text body.
+ */
+const sendEmailToRecipient = async (to, subject, text) => {
+  const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to,
+    subject,
+    text,
   };
-// ✅ Function to send admin notification email
+
+  await transporter.sendMail(mailOptions);
+};
+
+/**
+ * Send order confirmation email to the user after a successful order creation.
+ * This email includes detailed information on gift boxes, general handbags,
+ * regular boxes, selected items, total cost, and the delivery address.
+ * @param {String} userEmail - Recipient user's email.
+ * @param {Object} queryDetails - The order details.
+ */
+const sendConfirmationEmail = async (userEmail, queryDetails) => {
+  try {
+    const formattedAddress =
+      queryDetails.address && Object.values(queryDetails.address).some(value => value)
+        ? `${queryDetails.address.province || "N/A"}, ${queryDetails.address.city || "N/A"}, ${queryDetails.address.area || "N/A"}, ${queryDetails.address.landmark || "N/A"}`
+        : "**Delivery address not provided**";
+
+    const regularBoxDetails =
+      (queryDetails.selectedRegularBoxes && queryDetails.selectedRegularBoxes.length > 0)
+        ? queryDetails.selectedRegularBoxes
+            .map(box => `- ${box.label}: Quantity ${box.quantity}`)
+            .join("\n")
+        : "**No regular boxes selected**";
+
+    const giftBoxesDetails =
+      (queryDetails.giftBoxes && queryDetails.giftBoxes.length > 0)
+        ? queryDetails.giftBoxes
+            .map(box =>
+              `- ${box.name} (${box.quantity} units) ₹${box.price * box.quantity}${
+                box.matchingHandbags && box.matchingHandbags.length
+                  ? `\n  Matching Handbags:\n${box.matchingHandbags
+                      .map(handbag => `    - ${handbag.name} (${handbag.quantity}) ₹${handbag.price * handbag.quantity}`)
+                      .join("\n")}`
+                  : ""
+              }`
+            )
+            .join("\n")
+        : "**No gift boxes selected**";
+
+    const generalHandbagsDetails =
+      (queryDetails.generalHandbags && queryDetails.generalHandbags.length > 0)
+        ? queryDetails.generalHandbags
+            .map(handbag => `- ${handbag.name} (${handbag.quantity} units) ₹${handbag.price * handbag.quantity}`)
+            .join("\n")
+        : "**No general handbags selected**";
+
+    const selectedItemsDetails =
+      (queryDetails.selectedItems && Object.keys(queryDetails.selectedItems).length > 0)
+        ? Object.entries(queryDetails.selectedItems)
+            .map(([item, qty]) => `- ${item}: ${qty} kg`)
+            .join("\n")
+        : "**No items selected**";
+
+    const totalCost = queryDetails.totalCost && queryDetails.totalCost > 0
+      ? `₹${queryDetails.totalCost}`
+      : "**Total cost calculation error**";
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: userEmail,
+      subject: "Order Confirmation - Bulk Order Boxes",
+      text: `Dear ${queryDetails.userName},
+
+Thank you for your order! Here are your order details:
+
+Gift Boxes:
+${giftBoxesDetails}
+
+General Handbags:
+${generalHandbagsDetails}
+
+Regular Boxes:
+${regularBoxDetails}
+
+Selected Items:
+${selectedItemsDetails}
+
+Total Cost: ${totalCost}
+
+Delivery Address:
+${formattedAddress}
+
+We will notify you once your order is processed.
+
+Best regards,
+Gokuls`
+    };
+
+    // Create a transporter locally for this email
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Confirmation email sent!");
+  } catch (error) {
+    console.error("❌ Error sending confirmation email:", error.message);
+  }
+};
+
+/**
+ * Send a notification email to the admin when a new bulk order is placed.
+ * @param {String} adminEmail - Admin's email address.
+ * @param {Object} queryDetails - The order details.
+ */
 const sendAdminNotificationEmail = async (adminEmail, queryDetails) => {
   try {
     const transporter = nodemailer.createTransport({
@@ -532,22 +1097,18 @@ const sendAdminNotificationEmail = async (adminEmail, queryDetails) => {
       : "Address not provided";
 
     const orderDetails =
-      queryDetails.giftBoxes.length > 0 || queryDetails.generalHandbags.length > 0 || Object.keys(queryDetails.selectedItems).length > 0
+      (queryDetails.giftBoxes && queryDetails.giftBoxes.length > 0) ||
+      (queryDetails.generalHandbags && queryDetails.generalHandbags.length > 0) ||
+      (queryDetails.selectedItems && Object.keys(queryDetails.selectedItems).length > 0)
         ? `
 Gift Boxes:
-${queryDetails.giftBoxes.map((box) =>
-          `- ${box.name} (${box.quantity} units) ₹${box.price * box.quantity}`
-        ).join("\n")}
+${queryDetails.giftBoxes.map(box => `- ${box.name} (${box.quantity} units) ₹${box.price * box.quantity}`).join("\n")}
 
 General Handbags:
-${queryDetails.generalHandbags.map((handbag) =>
-          `- ${handbag.name} (${handbag.quantity} units) ₹${handbag.price * handbag.quantity}`
-        ).join("\n")}
+${queryDetails.generalHandbags.map(handbag => `- ${handbag.name} (${handbag.quantity} units) ₹${handbag.price * handbag.quantity}`).join("\n")}
 
 Selected Items:
-${Object.entries(queryDetails.selectedItems).map(([item, qty]) =>
-          `- ${item}: ${qty} kg`
-        ).join("\n")}
+${Object.entries(queryDetails.selectedItems).map(([item, qty]) => `- ${item}: ${qty} kg`).join("\n")}
 
 Total Cost: ₹${queryDetails.totalCost}
 `
@@ -571,7 +1132,7 @@ Delivery Address:
 ${formattedAddress}
 
 Best regards,
-Gokuls`,
+Gokuls`
     };
 
     await transporter.sendMail(mailOptions);
@@ -580,57 +1141,62 @@ Gokuls`,
     console.error("❌ Error sending admin notification email:", error.message);
   }
 };
-// ✅ Create a new bulk order query with total cost from frontend
-exports.createQuery = async (req, res) => {
-    try {
-      const userId = req.user?.id;
-      if (!userId) {
-        return res.status(401).json({ error: "User authentication required" });
-      }
-  
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
-      }
-  
-      // ✅ Ensure totalCost is passed from the frontend
-      if (!req.body.totalCost || req.body.totalCost <= 0) {
-        return res.status(400).json({ error: "Invalid total cost. Must be provided from frontend." });
-      }
-  
-      const queryData = {
-        ...req.body,
-        user: new mongoose.Types.ObjectId(userId),
-        userName: user.name,
-        userNumber: user.number,
-        userEmail: user.email,
-        totalCost: req.body.totalCost, // ✅ Fetch total cost from frontend
-      };
-  
-      console.log("📦 Final Query Data:", queryData);
-  
-      const newQuery = new BulkOrderQuery(queryData);
-      await newQuery.save();
-  
-      res.status(201).json({
-        message: "Bulk order query created successfully",
-        query: newQuery,
-        user: { name: user.name, number: user.number, email: user.email },
-      });
-  
-      await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, queryData);
-      await sendConfirmationEmail(user.email, queryData);
-    } catch (error) {
-      console.error("❌ Error creating bulk order query:", error.message);
-      res.status(500).json({ error: "Failed to create bulk order query" });
-    }
-  };
 
-// ✅ Get all bulk order queries (Admin)
+//
+// Controller Endpoints
+//
+
+// Create a new bulk order query
+exports.createQuery = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: "User authentication required" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (!req.body.totalCost || req.body.totalCost <= 0) {
+      return res.status(400).json({ error: "Invalid total cost. Must be provided from frontend." });
+    }
+
+    const queryData = {
+      ...req.body,
+      user: new mongoose.Types.ObjectId(userId),
+      userName: user.name,
+      userNumber: user.number,
+      userEmail: user.email,
+      totalCost: req.body.totalCost,
+    };
+
+    console.log("📦 Final Query Data:", queryData);
+
+    const newQuery = new BulkOrderQuery(queryData);
+    await newQuery.save();
+
+    res.status(201).json({
+      message: "Bulk order query created successfully",
+      query: newQuery,
+      user: { name: user.name, number: user.number, email: user.email },
+    });
+
+    // Send notification emails to admin and user
+    await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, queryData);
+    await sendConfirmationEmail(user.email, queryData);
+  } catch (error) {
+    console.error("❌ Error creating bulk order query:", error.message);
+    res.status(500).json({ error: "Failed to create bulk order query" });
+  }
+};
+
+// Get all bulk order queries (Admin)
 exports.getAllQueries = async (req, res) => {
   try {
     const orders = await BulkOrderQuery.find().populate("user", "name email number");
-    console.log("Orders from DB:", orders); // ✅ Debugging output
+    console.log("Orders from DB:", orders);
     res.status(200).json({ success: true, orders });
   } catch (error) {
     console.error("Error fetching bulk orders:", error.message);
@@ -638,7 +1204,7 @@ exports.getAllQueries = async (req, res) => {
   }
 };
 
-// ✅ Get a specific bulk order query by ID
+// Get a specific bulk order query by ID
 exports.getBulkQueryById = async (req, res) => {
   try {
     const query = await BulkOrderQuery.findById(req.params.id).populate("user", "name number email");
@@ -650,7 +1216,7 @@ exports.getBulkQueryById = async (req, res) => {
   }
 };
 
-// ✅ Delete a bulk order query (Admin)
+// Delete a bulk order query (Admin)
 exports.deleteQuery = async (req, res) => {
   try {
     const query = await BulkOrderQuery.findByIdAndDelete(req.params.id);
@@ -662,9 +1228,7 @@ exports.deleteQuery = async (req, res) => {
   }
 };
 
-
-
-// ✅ Get bulk orders for the logged-in user
+// Get bulk orders for the logged-in user
 exports.getUserBulkOrders = async (req, res) => {
   try {
     const userId = req.user?.id;
@@ -680,7 +1244,7 @@ exports.getUserBulkOrders = async (req, res) => {
   }
 };
 
-// ✅ Update a bulk order query (Admin)
+// Update a bulk order query (Admin)
 exports.updateQuery = async (req, res) => {
   try {
     const queryId = req.params.id;
@@ -700,77 +1264,22 @@ exports.updateQuery = async (req, res) => {
   }
 };
 
-// ✅ Function to send approval email
-const sendApprovalEmail = async (userEmail, queryDetails) => {
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    const orderDetails =
-      queryDetails.giftBoxes.length > 0 || queryDetails.generalHandbags.length > 0 || Object.keys(queryDetails.selectedItems).length > 0
-        ? `
-Gift Boxes:
-${queryDetails.giftBoxes.map((box) =>
-          `- ${box.name} (${box.quantity} units) ₹${box.price * box.quantity}`
-        ).join("\n")}
-
-General Handbags:
-${queryDetails.generalHandbags.map((handbag) =>
-          `- ${handbag.name} (${handbag.quantity} units) ₹${handbag.price * handbag.quantity}`
-        ).join("\n")}
-
-Selected Items:
-${Object.entries(queryDetails.selectedItems).map(([item, qty]) =>
-          `- ${item}: ${qty} kg`
-        ).join("\n")}
-
-Total Cost: ₹${queryDetails.totalCost}
-`
-        : "No order details available.";
-
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: userEmail,
-      subject: "Order Approved - Bulk Order Boxes",
-      text: `Dear ${queryDetails.userName},
-
-Your bulk order has been approved! Here are your order details:
-
-${orderDetails}
-
-Thank you for your purchase.
-
-Best regards,
-Gokuls`,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log("✅ Approval email sent!");
-  } catch (error) {
-    console.error("❌ Error sending approval email:", error.message);
-  }
-};
-
-// ✅ Approve a bulk order query (Admin)
+// Approve a bulk order query (Admin) and send full email notifications to both admin and user
 exports.approveQuery = async (req, res) => {
   try {
     const queryId = req.params.id;
-    const query = await BulkOrderQuery.findById(queryId).populate("user", "email");
-
+    const query = await BulkOrderQuery.findById(queryId).populate("user", "email name");
     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
 
     query.status = "Approved";
     await query.save();
 
-    // ✅ Send approval email
-    if (query.user?.email) {
-      await sendApprovalEmail(query.user.email, query);
-    }
+    const emailBody = composeOrderStatusEmailBody(query, "Your bulk order has been approved!");
+
+    await Promise.all([
+      sendEmailToRecipient(query.user.email, "Order Approved - Bulk Order Boxes", emailBody),
+      sendEmailToRecipient(process.env.ADMIN_EMAIL, "Order Approved - Bulk Order Boxes", emailBody)
+    ]);
 
     res.status(200).json({ message: "Bulk order query approved successfully", query });
   } catch (error) {
@@ -779,16 +1288,13 @@ exports.approveQuery = async (req, res) => {
   }
 };
 
-
-// Cancel Bulk Order Query (User)
+// Cancel Bulk Order Query (User) and send full email notifications to both admin and user
 exports.cancelQuery = async (req, res) => {
   try {
     const queryId = req.params.id;
     const query = await BulkOrderQuery.findById(queryId).populate("user", "email name");
-
     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
 
-    // Prevent canceling approved or completed orders.
     if (query.status === "Approved" || query.status === "Completed") {
       return res.status(400).json({ error: "Cannot cancel an approved or completed order" });
     }
@@ -796,11 +1302,12 @@ exports.cancelQuery = async (req, res) => {
     query.status = "Canceled";
     await query.save();
 
-    // Send cancellation email to user.
-    if (query.user?.email) {
-      await sendAdminNotificationEmail(process.env.ADMIN_EMAIL, queryData);
-      await sendConfirmationEmail(query.user.email, "Bulk Order Canceled", `Dear ${query.user.name},\n\nYour bulk order has been canceled.\n\nBest regards,\nGokuls`);
-    }
+    const emailBody = composeOrderStatusEmailBody(query, "Your bulk order has been canceled.");
+
+    await Promise.all([
+      sendEmailToRecipient(query.user.email, "Order Canceled - Bulk Order Boxes", emailBody),
+      sendEmailToRecipient(process.env.ADMIN_EMAIL, "Order Canceled - Bulk Order Boxes", emailBody)
+    ]);
 
     res.status(200).json({ message: "Bulk order query canceled successfully", query });
   } catch (error) {
@@ -809,21 +1316,22 @@ exports.cancelQuery = async (req, res) => {
   }
 };
 
-// Reject Bulk Order Query (Admin)
+// Reject Bulk Order Query (Admin) and send full email notifications to both admin and user
 exports.rejectQuery = async (req, res) => {
   try {
     const queryId = req.params.id;
     const query = await BulkOrderQuery.findById(queryId).populate("user", "email name");
-
     if (!query) return res.status(404).json({ error: "Bulk order query not found" });
 
     query.status = "Rejected";
     await query.save();
 
-    // Send rejection email to user.
-    if (query.user?.email) {
-      await sendEmail(query.user.email, "Bulk Order Rejected", `Dear ${query.user.name},\n\nYour bulk order has been rejected.\n\nBest regards,\nGokuls`);
-    }
+    const emailBody = composeOrderStatusEmailBody(query, "Your bulk order has been rejected.");
+
+    await Promise.all([
+      sendEmailToRecipient(query.user.email, "Order Rejected - Bulk Order Boxes", emailBody),
+      sendEmailToRecipient(process.env.ADMIN_EMAIL, "Order Rejected - Bulk Order Boxes", emailBody)
+    ]);
 
     res.status(200).json({ message: "Bulk order query rejected successfully", query });
   } catch (error) {
