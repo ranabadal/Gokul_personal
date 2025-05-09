@@ -23,11 +23,13 @@ const Home = () => {
   const navigate = useNavigate();
  const setToast = useToaster();
   // Card Data (Hardcoded)
-  const [cardData] = useState([
+  const [cardData] = useState(
+  [
     { name: "Lalmohan", img: require("../../components/cards/assets/laddu.svg") },
     { name: "Pedda", img: require("../../components/cards/assets/pedaa.svg") },
     { name: "Laddu", img: require("../../components/cards/assets/laddu.svg") },
-  ]);
+  ]
+);
 
   // State Management
   const [banquets, setBanquets] = useState([]);
