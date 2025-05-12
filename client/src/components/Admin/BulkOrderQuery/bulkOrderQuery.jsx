@@ -421,7 +421,7 @@ const BulkOrderAdmin = () => {
   // Using useCallback ensures that the function identity doesn’t change unnecessarily.
   const fetchOrders = useCallback(async () => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch("http://localhost:8080/api/bulkOrderQueries/", {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -456,7 +456,7 @@ const BulkOrderAdmin = () => {
     if (!window.confirm(`Mark this bulk order as ${newStatus}?`)) return;
 
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/bulkOrderQueries/${orderId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
@@ -484,7 +484,7 @@ const BulkOrderAdmin = () => {
   // Save edited order by re-fetching orders after a successful update.
   const handleSaveEdit = async (updatedOrder) => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/bulkOrderQueries/${updatedOrder._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },

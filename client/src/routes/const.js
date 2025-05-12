@@ -34,7 +34,7 @@ import BulkOrderNewCards from "../pages/bulkOrders/BulkOrder/BulkOrderNewCards/b
 import BulkOrdercartLeft from "../pages/bulkOrders copy/bulkOrderCart/BulkOrderCartLeft/bulkOrderCartLeft";
 // import TermsAndConditions from "../pages/TermandCondition/t&c"
 import GiftBoxNew from "../pages/giftBoxes/GiftBoxNew/giftBoxNew";
-
+import AdminLogin from "../components/Admin/AdminLogin";
 
 const routes = [
     {
@@ -96,6 +96,10 @@ const routes = [
     {
         path:'/admin/*',
         element : <Admin />
+    },
+    {
+        path:'/admin/login',
+        element : <AdminLogin />
     },
     {
         path:'/basket',

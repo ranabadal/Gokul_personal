@@ -301,3 +301,94 @@
     height: 100%;
     object-fit: contain;
   }
+
+
+  /* Responsive Code for Mobile Devices */
+@media (max-width: 768px) {
+  /* Admin Panel Container */
+  .adminPanel {
+    max-width: 100%;
+    padding: 10px;
+    margin: 10px auto;
+  }
+
+  /* Headings */
+  h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  /* Form Elements */
+  .form {
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  .input,
+  .textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .textarea {
+    height: auto;
+  }
+  .button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  input[type="file"] {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  /* Menu Items & Tables */
+  .menuItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px;
+  }
+  .menuImage,
+  .menuItem img,
+  .imageContainer img {
+    width: 80px;
+    height: 80px;
+  }
+  .actions button,
+  .editBtn,
+  .deleteBtn {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  .menuTable {
+    font-size: 14px;
+    display: block;
+    overflow-x: auto;
+  }
+  .menuTable th,
+  .menuTable td {
+    padding: 8px;
+  }
+
+  /* Query Container & Table */
+  .queryContainer {
+    padding: 10px;
+    max-width: 100%;
+    margin: 20px auto;
+  }
+  .queryTable {
+    font-size: 14px;
+    display: block;
+    overflow-x: auto;
+  }
+  .queryTable th,
+  .queryTable td {
+    padding: 8px;
+  }
+
+  /* Modal Adjustments */
+  .modalContent {
+    width: 90%;
+    height: auto;
+    padding: 15px;
+  }
+}

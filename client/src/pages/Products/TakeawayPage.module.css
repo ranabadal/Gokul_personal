@@ -114,6 +114,33 @@
   color: #333;
 }
 
+.viewAllButtonWrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content:  flex-end;
+  align-items: center;
+  margin-right: 40px;
+
+}
+
+.viewAllButton{
+  font-size: 18px;
+  color: #e31e24;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  border: #e31e24 solid 2px;
+}
+
+.viewAllButton:hover {
+  background-color: #e31e24;
+  color: #fff;
+  transition: background-color 0.3s ease-in-out;
+}
+
 .subcategories {
   display: flex;
   overflow-x: auto;
@@ -193,7 +220,7 @@
 
 .productImage {
   height: 180px;
-  width: 180px;
+  width: max-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -466,7 +493,7 @@
   .productCard {
     margin: 10px 0;
     max-width: 150px;
-    max-height: 360px;
+    /* max-height: 360px; */
   }
 
   .productImageWrapper {

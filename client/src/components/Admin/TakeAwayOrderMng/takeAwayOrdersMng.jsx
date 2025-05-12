@@ -159,6 +159,7 @@
 
 // export default TakeawayOrdersManagement;
 
+
 import React, { useState, useEffect } from "react";
 import styles from "./takeawayOrdersMng.module.css";
 
@@ -172,7 +173,7 @@ const TakeawayOrdersManagement = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem("jwtToken");
+        const token = localStorage.getItem("adminToken");
         const response = await fetch("http://localhost:8080/api/takeawayOrders/orders", {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
@@ -213,7 +214,7 @@ const TakeawayOrdersManagement = () => {
     }
 
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/takeawayOrders/orders/${orderId}/accept`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
@@ -247,7 +248,7 @@ const TakeawayOrdersManagement = () => {
     }
 
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/takeawayOrders/orders/${orderId}/reject`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },

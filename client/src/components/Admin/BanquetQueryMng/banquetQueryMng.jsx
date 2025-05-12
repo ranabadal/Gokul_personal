@@ -16,7 +16,7 @@ const BanquetQueryPage = () => {
     const fetchQueries = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem("jwtToken");
+        const token = localStorage.getItem("adminToken");
         const response = await fetch("http://localhost:8080/api/queries/", {
           method: "GET",
           headers: {
@@ -58,7 +58,7 @@ const BanquetQueryPage = () => {
 
 
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/queries/${queryId}/approve`, {
         method: "PUT",
         headers: {
@@ -84,7 +84,7 @@ const BanquetQueryPage = () => {
   // Handle deletion
   const handleDelete = async (queryId) => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/queries/${queryId}`, {
         method: "DELETE",
         headers: {
@@ -112,7 +112,7 @@ const BanquetQueryPage = () => {
   // Handle saving the edited query
   const handleSaveEdit = async (updatedQuery) => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/queries/${updatedQuery._id}`, {
         method: "PUT",
         headers: {
@@ -214,7 +214,8 @@ const BanquetQueryPage = () => {
       <td>{query.comments || "None"}</td>
       <td>₹{query.totalCost || 0}</td>
       <td>{query.status || "Pending"}</td>
-      <td>
+      <td className={styles.actionButtons}>
+        
         <button className={styles.first} onClick={() => handleApprove(query._id,query.status)}>
           Approve
         </button>

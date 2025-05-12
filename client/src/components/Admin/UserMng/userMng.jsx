@@ -10,7 +10,7 @@ const UsersManagement = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const token = localStorage.getItem('jwtToken');
+        const token = localStorage.getItem('adminToken');
         if (!token) {
           console.error('No token found');
           return;
@@ -50,7 +50,7 @@ const UsersManagement = () => {
 
   const handleSaveClick = async (userId) => {
     try {
-      const token = localStorage.getItem('jwtToken');
+      const token = localStorage.getItem('adminToken');
       if (!token) {
         console.error('No token found');
         return;
@@ -79,7 +79,7 @@ const UsersManagement = () => {
     if (!confirmDelete) return;
 
     try {
-      const token = localStorage.getItem('jwtToken');
+      const token = localStorage.getItem('adminToken');
       if (!token) {
         console.error('No token found');
         return;
