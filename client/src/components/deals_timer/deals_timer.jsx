@@ -96,9 +96,12 @@ const DealsTimer = () => {
             <img src={`data:image/png;base64,${deal.image}`} alt={deal.title} className={styles.dealImage} />
           </div>
         ) : (
+          // <div className={styles.noDealContainer}>
           <div className={styles.noDeal}>
             <img src={noDeal} alt="No Deal Today" />
           </div>
+          // </div>
+
         )}
       </div>
     </div>
