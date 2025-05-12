@@ -48,7 +48,7 @@ return (
             </svg>
           </div>
         </div>
-        <div className={styles.hover_content_edits}>Takeaways</div>
+        <div className={styles.hover_content_edits}>Takeaway</div>
       </div>
       <div className={styles.hover_content} onClick={() => navigate("/banquets")}>
         <div className={styles.hover_content_logo}>
@@ -67,7 +67,7 @@ return (
             </svg>
           </div>
         </div>
-        <div className={styles.hover_content_edits}>BanquetHalls</div>
+        <div className={styles.hover_content_edits}>Banquet</div>
       </div>
       <div className={styles.hover_content} onClick={() => navigate("/bulkOrders")}>
         <div className={styles.hover_content_logo}>
@@ -86,7 +86,7 @@ return (
             </svg>
           </div>
         </div>
-        <div className={styles.hover_content_edits}>Bulk Order</div>
+        <div className={styles.hover_content_edits}>BulkOrder</div>
       </div>
       <div className={styles.hover_content}  onClick={() => navigate("/giftbox")}>
         <div className={styles.hover_content_logo}>
@@ -104,7 +104,7 @@ return (
             </svg>
           </div>
         </div>
-        <div className={styles.hover_content_edits}>Gift Boxes</div>
+        <div className={styles.hover_content_edits}>GiftBoxes</div>
       </div>
     </div>
   );

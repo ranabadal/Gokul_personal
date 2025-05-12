@@ -75,15 +75,16 @@
   
   .noDeal img {
     width: 100%;
-    max-width: 250px;
-    max-height: 350px;
-    padding: auto;
-   
+    max-width: 200px;
+    max-height: 300px;
+    /* padding: auto; */
+    margin-right: 120px;
+   /* margin-bottom: 100px; */
   }
 
   .noDealMessage {
     font-size: 18px;
-    color: #555;
+    color: #FFFFFF;
     font-weight: bold;
   }
 
