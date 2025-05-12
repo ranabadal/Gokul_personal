@@ -104,7 +104,7 @@ return (
             </svg>
           </div>
         </div>
-        <div className={styles.hover_content_edits}>Gift Boxes</div>
+        <div className={styles.hover_content_edits}>GiftBoxes</div>
       </div>
     </div>
   );

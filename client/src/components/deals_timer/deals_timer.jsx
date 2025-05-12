@@ -36,7 +36,6 @@ import styles from "./deals_timer.module.css";
 import { CountdownTimer } from "../hero_section/hero_section";
 import noDeal from "./Assets/noDeal.png";
 import Loader from "../../components/Loader/loader5/loader5";
-
 const DealsTimer = () => {
   const [deal, setDeal] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -85,7 +84,7 @@ const DealsTimer = () => {
           {deal ? <CountdownTimer endTime={endTime} /> : <p className={styles.noDealMessage}>Check back later for new deals!</p>}
         </div>
         <div className={styles.deals_timer_button}>
-          <button disabled={!deal} onClick={handleCheckoutClick}>Check Out Now !!</button> {/* ✅ Add navigation */}
+          <button disabled={!deal} onClick={handleCheckoutClick} >Check Out Now !!</button> {/* ✅ Add navigation */}
         </div>
       </div>
 

@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./bulkorder.module.css";
 import sweet from "./assets/sweets.svg";
+import { useNavigate } from "react-router-dom";
 const BulkOrder = () => {
+const navigate = useNavigate();
 return (
 <div className={styles.bulk_order_container}>
 <div className={styles.bulk_order_container_left}>
@@ -10,10 +12,10 @@ Upto 30% off on Bulk Orders !
 </div>
 <div className={styles.bulk_order_container_left_btn}>
 <div className={styles.bulk_order_container_left_btn_left}>
-<button>Order Now</button>
+<button  onClick={() => navigate("/bulkOrders")}>Order Now</button>
 </div>
 <div className={styles.bulk_order_container_left_btn_right}>
-<button>Explore More</button>
+<button onClick={() => navigate("/products")}>Explore More</button>
 </div>
 </div>
 </div>
