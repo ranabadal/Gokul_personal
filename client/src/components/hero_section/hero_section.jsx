@@ -201,10 +201,10 @@ const HeroSection = () => {
                 <div className={styles.hero_section}>
                     <button className={styles.hero_section_bttn_left} onClick={prevSlide}><span>&larr;</span></button>
                     <div className={styles.hero_section_left}>
-                        <div className={styles.hero_section_left_div_1}>
+                        {/* <div className={styles.hero_section_left_div_1}>
                             <div className={styles.hero_section_left_top}>Baisakhi Offer Ends in</div>
                             {slides[currentSlide].timer}
-                        </div>
+                        </div> */}
                         <div className={styles.hero_section_left_bottom}>
                             <img src={slides[currentSlide].image} className={styles.image} alt="Offer Box" />
                         </div>

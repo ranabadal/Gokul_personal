@@ -182,7 +182,7 @@ setToast('An error occurred while adding the product to the wishlist.', 'error')
     <div className={styles.home}>
       <div className={styles.above_header_container}>
       </div>
-      <AboveHeader/>
+      {/* <AboveHeader/> */}
       <Header />
       <div className={styles.hero_section_container}>
         <HeroSection />
