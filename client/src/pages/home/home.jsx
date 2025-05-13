@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import heart from "../../components/hall_details/assets/red heart.svg";
 import star from "../../components/hall_details/assets/star.svg";
-
+import { BASE_URL } from "../../Const/Const";
 import Header from "../../components/header/header";
 import AboveHeader from "../../components/above_header/above_header";
 import HeroSection from "../../components/hero_section/hero_section";
@@ -84,7 +84,8 @@ const Home = () => {
       // Ensure productId is a simple string and not an object
       const flatProductId = (typeof productId === 'object' && productId._id) ? productId._id : productId;
   
-      const response = await fetch("http://localhost:8080/api/cart", {
+      const response = await fetch(`${BASE_URL}/api/cart`,
+         {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
