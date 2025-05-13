@@ -129,6 +129,7 @@ const WishlistLeftSec = () => {
                         }
                     }
                 );
+                
             } catch (err) {
                 console.error(`Error adding item ${item.name} to cart:`, err);
                 failedItems.push(item.name); // Collect failed items

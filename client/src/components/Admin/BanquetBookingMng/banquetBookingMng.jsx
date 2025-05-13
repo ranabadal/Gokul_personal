@@ -91,7 +91,6 @@ const BanquetManagement = () => {
       
           console.log('Sending Update Data:', updateData);
       
-          // const response = await axios.put(`${BASE_URL}/api/banquets/${editBanquetId}`, updateData);
                         const response = await axios.put(`${BASE_URL}/api/banquets/${editBanquetId}`, updateData);
 
 
