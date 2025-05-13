@@ -443,7 +443,7 @@
 import React, { useState, useEffect } from "react";
 import EditOrderModal from "./EditQueryModal/editQueryModal"; // Modal for editing orders
 import styles from "./giftBoxOrderQuery.module.css";
-
+import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
 const GiftBoxOrderAdmin = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -455,7 +455,7 @@ const GiftBoxOrderAdmin = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("adminToken");
-        const response = await fetch("http://localhost:8080/api/giftBoxOrderQueries/", {
+        const response = await fetch(`${BASE_URL}/api/giftBoxOrderQueries/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -485,7 +485,7 @@ const GiftBoxOrderAdmin = () => {
   
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${orderId}`, {
+      const response = await fetch(`${BASE_URL}/api/giftBoxOrderQueries/${orderId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ status: newStatus }),
@@ -515,7 +515,7 @@ const GiftBoxOrderAdmin = () => {
   const handleSaveEdit = async (updatedOrder) => {
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${updatedOrder._id}`, {
+      const response = await fetch(`${BASE_URL}/api/giftBoxOrderQueries/${updatedOrder._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(updatedOrder),

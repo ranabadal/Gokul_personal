@@ -410,7 +410,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import EditOrderModal from "./EditQueryModal/editQueryModal"; // Modal for editing bulk orders
 import styles from "./bulkOrderQuery.module.css"; // Admin Panel Styles
-
+import { BASE_URL } from "../../../Const/Const";
 const BulkOrderAdmin = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -422,7 +422,7 @@ const BulkOrderAdmin = () => {
   const fetchOrders = useCallback(async () => {
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch("http://localhost:8080/api/bulkOrderQueries/", {
+      const response = await fetch(`${BASE_URL}/api/bulkOrderQueries/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -457,7 +457,7 @@ const BulkOrderAdmin = () => {
 
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`http://localhost:8080/api/bulkOrderQueries/${orderId}`, {
+      const response = await fetch(`${BASE_URL}/api/bulkOrderQueries/${orderId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ status: newStatus }),
@@ -485,7 +485,7 @@ const BulkOrderAdmin = () => {
   const handleSaveEdit = async (updatedOrder) => {
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`http://localhost:8080/api/bulkOrderQueries/${updatedOrder._id}`, {
+      const response = await fetch(`${BASE_URL}/api/bulkOrderQueries/${updatedOrder._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(updatedOrder),

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./RegularBoxesMng.module.css";
-
+import { BASE_URL } from "../../../../Const/Const"; // Adjust the import path as necessary
 const RegularBoxAdmin = () => {
   const [boxes, setBoxes] = useState([]);
   const [formData, setFormData] = useState({
@@ -18,7 +18,7 @@ const RegularBoxAdmin = () => {
 
   const fetchBoxes = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/regularBoxes");
+      const res = await axios.get(`${BASE_URL}/api/regularBoxes`);
       setBoxes(res.data);
     } catch (error) {
       console.error("Error fetching boxes:", error.response?.data || error.message || error);
@@ -39,13 +39,13 @@ const RegularBoxAdmin = () => {
 
     try {
       if (formData.id) {
-        await axios.put(`http://localhost:8080/api/regularBoxes/${formData.id}`, {
+        await axios.put(`${BASE_URL}/api/regularBoxes/${formData.id}`, {
           boxName: formData.boxName,
           size: formData.size,
           minOrder: Number(formData.minOrder),
         });
       } else {
-        await axios.post("http://localhost:8080/api/regularBoxes", {
+        await axios.post(`${BASE_URL}/api/regularBoxes`, {
           boxName: formData.boxName,
           size: formData.size,
           minOrder: Number(formData.minOrder),
@@ -72,7 +72,7 @@ const RegularBoxAdmin = () => {
   // Delete a box by id
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/regularBoxes/${id}`);
+      await axios.delete(`${BASE_URL}/api/regularBoxes/${id}`);
       fetchBoxes();
     } catch (error) {
       console.error("Error deleting box:", error.response?.data || error.message || error);
