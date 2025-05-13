@@ -454,7 +454,7 @@ const GiftBoxOrderAdmin = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem("jwtToken");
+        const token = localStorage.getItem("adminToken");
         const response = await fetch("http://localhost:8080/api/giftBoxOrderQueries/", {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -484,7 +484,7 @@ const GiftBoxOrderAdmin = () => {
     if (!window.confirm(`Mark this order as ${newStatus}?`)) return;
   
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${orderId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
@@ -514,7 +514,7 @@ const GiftBoxOrderAdmin = () => {
   // Save Edited Order
   const handleSaveEdit = async (updatedOrder) => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${updatedOrder._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },

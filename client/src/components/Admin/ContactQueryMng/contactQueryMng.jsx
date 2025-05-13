@@ -10,7 +10,7 @@ const ContactQueriesManagement = () => {
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        const token = localStorage.getItem('jwtToken');
+        const token = localStorage.getItem('adminToken');
         if (!token) {
           console.error('No token found');
           return;

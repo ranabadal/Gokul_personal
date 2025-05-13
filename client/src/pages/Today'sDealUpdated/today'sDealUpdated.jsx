@@ -10,7 +10,7 @@ import Footer from '../../components/footer/footer';
 function TodaysDealUpdated() {
   return (
     <div>
-        <AboveHeader />
+        {/* <AboveHeader /> */}
         <Header />
       <TodaysDeal />
       <TommorowsDeal />

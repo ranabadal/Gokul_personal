@@ -137,9 +137,15 @@ const MainGiftBoxes = () => {
     console.log("Checkout with:", cartItems);
   };
 
-  if (loading) return <Loader />;
+  if (loading) return 
+  <>
+  <Header />
+  <Loader />
+  <Footer/>
 
-  return (
+    </>;
+
+    return (
     <div className={styles.mainContainer}>
       <Header />
     

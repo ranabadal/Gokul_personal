@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'; // 🔥 add this
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -10,4 +11,5 @@ root.render(
   </React.StrictMode>
 );
 
-
+// 🔥 Register the service worker
+serviceWorkerRegistration.register();

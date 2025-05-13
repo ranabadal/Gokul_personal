@@ -1,85 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
 .queryContainer {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    max-width: 1200px;
-    margin: 30px auto;
-    font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 1000px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+  overflow-x: auto; /* Enables horizontal scrolling if needed */
+}
+
+/* 📌 Table Styles */
+.queryTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 13px;
+  display: block;
+  overflow-y: auto;
+  max-height: 1000px; /* Limit height for large datasets */
+}
+
+.queryTable thead {
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4;
+  z-index: 2;
+}
+
+.queryTable th,
+.queryTable td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: center;
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+.queryTable th {
+  /* background-color: #007bff; */
+  color: white;
+  font-weight: bold;
+}
+
+.queryTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.queryTable tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.queryTable tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* 📌 Action Buttons */
+.actionButtons {
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButtons:hover {
+  opacity: 0.9;
+}
+
+.first {
+  background-color: #28a745; /* Approve */
+  color: white;
+}
+
+.second {
+  background-color: #dc3545; /* Delete */
+  color: white;
+}
+
+.third {
+  background-color: #007bff; /* Edit */
+  color: white;
+}
+
+/* 📌 Error Message */
+.error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 📌 Responsive Adjustments */
+@media (max-width: 768px) {
+  .queryContainer {
+    padding: 15px;
   }
-  
-  .queryContainer h2 {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
+
   .queryTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-size: 16px;
+    overflow-x: auto;
+    display: block;
   }
-  
+
   .queryTable th,
   .queryTable td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .queryTable th {
-    background-color: #f4f4f4;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .queryTable tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .queryTable tr:nth-child(odd) {
-    background-color: #fff;
-  }
-  
-  .queryTable tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-  }
-  
-  button {
-    padding: 8px 12px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 5px;
     font-size: 14px;
-    cursor: pointer;
+    padding: 8px;
   }
-  
-  button:hover {
-    opacity: 0.9;
+
+  button {
+    padding: 6px 10px;
+    font-size: 14px;
   }
-  
-  .first {
-    background-color: #28a745; /* Approve */
-    color: white;
-  }
-  
- .second {
-    background-color: #dc3545; /* Delete */
-    color: white;
-  }
-  
-  .third {
-    background-color: #007bff; /* Edit */
-    color: white;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-  }
+}

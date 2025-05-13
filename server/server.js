@@ -199,6 +199,8 @@ const TakeawayOrderRoutes = require("./Routes/Tasks/takeawayRoutes");
 const RegularBoxRoutes = require("./Routes/Tasks/BulkOrder/regularBox.routes");
 const bulkOrderQueryRoutes = require("./Routes/Tasks/BulkOrder/bulkOrderQueryRoutes");
 const GiftBoxesRoutes = require('./Routes/Tasks/GiftBoxes/GiftBoxes.routes');
+const AdminRoutes = require('./Routes/Tasks/admin.routes');
+
 
 app.use(bodyParser.json({ limit: '50mb' })); // Increase the limit to handle large base64 images
 app.use(cors());
@@ -236,7 +238,8 @@ app.use("/api/menuCart", menuCartRoutes); // Use menu cart routes
 app.use('/api/navbar', RestaurentNavbar); // Use gift box routes
 app.use('/api/restaurentProducts', RestaurentProducts);
 app.use('/api/giftBoxOrderQueries',GiftBoxOrderQueryRoutes);
-app.use('/api/takeawayOrders', TakeawayOrderRoutes); // Use takeaway order routes
+app.use('/api/takeawayOrders', TakeawayOrderRoutes);
+app.use('/api/admin', AdminRoutes); // Use admin routes
 
 
 app.use(express.static(path.join(__dirname, '../client/build')));

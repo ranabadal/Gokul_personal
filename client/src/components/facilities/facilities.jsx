@@ -15,7 +15,7 @@ const Facilities = () => {
                 </div>
                 <div className={styles.facilities_section_left_mid}>
                     <span>
-                    Free Delivery 
+                    Free Delivery within 20 km
                     </span>
                 </div>
                 <div className={styles.facilities_section_left_bottom}>
@@ -32,12 +32,12 @@ const Facilities = () => {
                 </div>
                 <div className={styles.facilities_section_middle_mid}>
                     <span>
-                    100% Money back guarantee
+                     Best Quality guarantee
                     </span>
                 </div>
                 <div className={styles.facilities_section_middle_bottom}>
                     <span>
-                    Don't worry about that<br/>you will have money back
+                    Don't worry about quality<br/>We provide best quality to you
                     </span>
                 </div>
 
