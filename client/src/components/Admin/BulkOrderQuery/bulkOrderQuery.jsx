@@ -410,8 +410,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import EditOrderModal from "./EditQueryModal/editQueryModal"; // Modal for editing bulk orders
 import styles from "./bulkOrderQuery.module.css"; // Admin Panel Styles
-import {BASE_URL} from "../../../Const/Const"; // Base URL for API requests
-
+import { BASE_URL } from "../../../Const/Const";
 const BulkOrderAdmin = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);

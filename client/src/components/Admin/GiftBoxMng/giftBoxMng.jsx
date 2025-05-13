@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./giftBoxMng.module.css";
 import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
-
 const AdminDashboard = () => {
   // Data lists
   const [categories, setCategories] = useState([]);
@@ -50,9 +49,9 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       const [categoryRes, giftBoxRes, handbagRes] = await Promise.all([
-        axios.get("http://localhost:8080/api/giftboxpage/categories"),
-        axios.get("http://localhost:8080/api/giftboxpage/giftBoxes"),
-        axios.get("http://localhost:8080/api/giftboxpage/generalHandbags"),
+        axios.get(`${BASE_URL}/api/giftboxpage/categories`),
+        axios.get(`${BASE_URL}/api/giftboxpage/giftBoxes`),
+        axios.get(`${BASE_URL}/api/giftboxpage/generalHandbags`),
       ]);
       setCategories(categoryRes.data);
       setGiftBoxes(giftBoxRes.data);
@@ -88,7 +87,7 @@ const AdminDashboard = () => {
   
     // Deletion and Edit remain unchanged
     const handleDelete = async (id, type) => {
-      const endpoint = `http://localhost:8080/api/giftboxpage/${type}/${id}`;
+      const endpoint = `${BASE_URL}/api/giftboxpage/${type}/${id}`;
       try {
         await axios.delete(endpoint);
         fetchData();
@@ -138,7 +137,7 @@ const AdminDashboard = () => {
 
   const handleAddCategory = async () => {
     try {
-      await axios.post("http://localhost:8080/api/giftboxpage/categories", newCategory);
+      await axios.post(`${BASE_URL}/api/giftboxpage/categories`, newCategory);
       setNewCategory({ name: "", image: "" });
       fetchData();
     } catch (error) {
@@ -163,7 +162,7 @@ const AdminDashboard = () => {
   
       console.log("Payload being sent:", payload);
   
-      await axios.post("http://localhost:8080/api/giftboxpage/giftBoxes", payload);
+      await axios.post(`${BASE_URL}/api/giftboxpage/giftBoxes`, payload);
   
       // Reset the form state after a successful submission.
       setNewGiftBox({
@@ -184,7 +183,7 @@ const AdminDashboard = () => {
 
   const handleAddHandbag = async () => {
     try {
-      await axios.post("http://localhost:8080/api/giftboxpage/generalHandbags", newHandbag);
+      await axios.post(`${BASE_URL}/api/giftboxpage/generalHandbags`, newHandbag);
       setNewHandbag({ name: "", category: "", image: "", price: "", minOrderQuantity: "" });
       fetchData();
     } catch (error) {
@@ -196,7 +195,7 @@ const AdminDashboard = () => {
 
   const handleUpdateCategory = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/giftboxpage/categories/${editId}`, newCategory);
+      await axios.put(`${BASE_URL}/api/giftboxpage/categories/${editId}`, newCategory);
       setNewCategory({ name: "", image: "" });
       setEditMode(false);
       setEditType("");
@@ -209,7 +208,7 @@ const AdminDashboard = () => {
 
   const handleUpdateGiftBox = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/giftboxpage/giftBoxes/${editId}`, newGiftBox);
+      await axios.put(`${BASE_URL}/api/giftboxpage/giftBoxes/${editId}`, newGiftBox);
       setNewGiftBox({
         name: "",
         description: "",
@@ -231,7 +230,7 @@ const AdminDashboard = () => {
 
   const handleUpdateHandbag = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/giftboxpage/generalHandbags/${editId}`, newHandbag);
+      await axios.put(`${BASE_URL}/api/giftboxpage/generalHandbags/${editId}`, newHandbag);
       setNewHandbag({ name: "", category: "", image: "", price: "", minOrderQuantity: "" });
       setEditMode(false);
       setEditType("");

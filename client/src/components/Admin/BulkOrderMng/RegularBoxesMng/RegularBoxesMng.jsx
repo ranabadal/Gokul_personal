@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./RegularBoxesMng.module.css";
-import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
+import { BASE_URL } from "../../../../Const/Const"; // Adjust the import path as necessary
+
 const RegularBoxAdmin = () => {
   const [boxes, setBoxes] = useState([]);
   const [formData, setFormData] = useState({
@@ -18,7 +19,6 @@ const RegularBoxAdmin = () => {
 
   const fetchBoxes = async () => {
     try {
-                  // await axios.post(`${BASE_URL}/api/bulkorders/giftBoxes`, payload);
       const res = await axios.get(`${BASE_URL}/api/regularBoxes`);
       setBoxes(res.data);
     } catch (error) {
