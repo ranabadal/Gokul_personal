@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from '../../../components/Context/userContext'; // Adjust the path as necessary
 import styles from "./loginPopup.module.css";
 import { useToaster } from '../../../utils';
-
+import { BASE_URL } from "../../../Const/Const";
 const LoginSignupPopup = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [loginData, setLoginData] = useState({ email: '', password: '' });

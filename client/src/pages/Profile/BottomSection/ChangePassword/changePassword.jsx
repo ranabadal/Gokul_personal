@@ -6,7 +6,7 @@ import Button from '../../../../components/ButtonNew/button';
 import styles from './changePassword.module.css';
 import { useToaster } from '../../../../utils';
 import PasswordIcon from './Assets/password.svg';
-
+import { BASE_URL } from '../../../../Const/Const';
 const ChangePassword = () => {
   const [showPassword, setShowPassword] = useState({
     oldPassword: false,
