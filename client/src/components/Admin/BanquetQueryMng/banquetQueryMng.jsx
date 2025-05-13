@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./banquetQueryMng.module.css";
 import EditQueryForm from "./EditQueryForm/editQueryForm";
-
+import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
 const BanquetQueryPage = () => {
   const [queries, setQueries] = useState([]);
   const [selectedQuery, setSelectedQuery] = useState(null); // Track the query being edited
