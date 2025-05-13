@@ -9,7 +9,7 @@ import Background from "./Assets/bg1.png";
 import { useToaster } from "../../utils";
 import { FiSearch } from "react-icons/fi";
 import Loader from "../../components/Loader/loader5/loader5"; // Import the loader
-
+import { BASE_URL } from "../../Const/Const";
 export default function TakeawayPage() {
   const [selectedCategory, setSelectedCategory] = useState("Restaurant");
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
@@ -51,7 +51,7 @@ export default function TakeawayPage() {
         return;
       }
 
-      const response = await fetch("http://localhost:8080/api/cart", {
+      const response = await fetch(`${BASE_URL}/api/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export default function TakeawayPage() {
         return;
       }
 
-      await axios.delete(`http://localhost:8080/api/cart/${productId}`, {
+      await axios.delete(`${BASE_URL}/api/cart/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -104,7 +104,7 @@ export default function TakeawayPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/navbar")
+      .get(`${BASE_URL}/api/navbar`)
       .then((response) => {
         console.log("Navbar API Response:", response.data); // Debugging
         setSubcategories(
@@ -123,7 +123,7 @@ export default function TakeawayPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/products")
+      .get(`${BASE_URL}/api/products`)
       .then((response) => {
         console.log("Products API Response:", response.data); // Debugging
         setProducts(response.data.products || []); // ✅ Extract only the products array

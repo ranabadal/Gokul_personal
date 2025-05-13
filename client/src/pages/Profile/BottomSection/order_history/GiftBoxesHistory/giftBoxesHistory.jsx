@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./giftBoxesHistory.module.css";
 import OrderDetailsModal from "./OrderDetailsModal/orderDetailsModal"; // Modal Component
-
+import { BASE_URL } from "../../../../../Const/Const";
 const GiftBoxesHistory = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -14,7 +14,7 @@ const GiftBoxesHistory = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("jwtToken");
-        const response = await fetch("http://localhost:8080/api/giftBoxOrderQueries/user", {
+        const response = await fetch(`${BASE_URL}/api/giftBoxOrderQueries/user`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -55,7 +55,7 @@ const GiftBoxesHistory = () => {
 
     try {
       const token = localStorage.getItem("jwtToken");
-      const response = await fetch(`http://localhost:8080/api/giftBoxOrderQueries/${orderId}/cancel`, {
+      const response = await fetch(`${BASE_URL}/api/giftBoxOrderQueries/${orderId}/cancel`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });

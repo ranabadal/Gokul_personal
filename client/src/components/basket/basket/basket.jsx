@@ -11,7 +11,7 @@ import Header from "../../../components/header/header";
 import Footer from "../../../components/footer/footer";
 import Basket from "./basketLeftSec/basketLeftSec";
 import BasketRight from "./basketRhtSec/basketRhtSec";
-
+import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [addresses, setAddresses] = useState([]);
@@ -23,7 +23,7 @@ const Cart = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/cart", {
+      const response = await axios.get(`${BASE_URL}/api/cart`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
         },
@@ -81,87 +81,5 @@ const Cart = () => {
 };
 
 export default Cart;
-
-
-
-
-
-// import React, { useState, useEffect } from "react";
-// import axios from 'axios';
-// import styles from "./basket.module.css";
-// import AboveHeader from "../../../components/above_header/above_header";
-// import Header from "../../../components/header/header";
-// import Footer from "../../../components/footer/footer";
-// import Basket from "./basketLeftSec/basketLeftSec";
-// import OrderSummary from "./basketRhtSec/basketRhtSec"; // Adjust import path accordingly
-
-// const Cart = () => {
-//   const [cartItems, setCartItems] = useState([]);
-
-//   useEffect(() => {
-//     fetchCartItems();
-//   }, []);
-
-
-//   const fetchCartItems = async () => {
-//     try {
-//       const response = await axios.get('http://localhost:8080/api/cart', {
-//         headers: {
-//           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
-//         }
-//       });
-
-//       if (response.data) {
-//         setCartItems(response.data);
-//       } else {
-//         console.error('Response does not contain data');
-//       }
-//     } catch (error) {
-//       console.error('Error fetching cart items:', error.message || error);
-//       if (error.response) {
-//         console.error('Response data:', error.response.data);
-//       } else if (error.request) {
-//         console.error('Request data:', error.request);
-//       }
-//     }
-//   };
-
-//   const updateCartItems = async (updatedCartItems) => {
-//     setCartItems(updatedCartItems);
-//     try {
-//       await axios.put(`http://localhost:8080/api/cart`, { cartItems: updatedCartItems }, {
-//         headers: { 
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
-//         }
-//       });
-//     } catch (error) {
-//       console.error("Error updating cart:", error);
-//       if (error.response) {
-//         console.error('Response data:', error.response.data);
-//       } else if (error.request) {
-//         console.error('Request data:', error.request);
-//       }
-//     }
-//   };
-
-//   return (
-//     <>
-//       <AboveHeader />
-//       <Header />
-//       <div className={styles.container}>
-//         <div className={styles.leftSection}>
-//           <Basket cartItems={cartItems} updateCartItems={updateCartItems} />
-//         </div>
-//         <div className={styles.rightSection}>
-//           <OrderSummary cartItems={cartItems} />
-//         </div>
-//       </div>
-//       <Footer />
-//     </>
-//   );
-// };
-
-// export default Cart;
 
 

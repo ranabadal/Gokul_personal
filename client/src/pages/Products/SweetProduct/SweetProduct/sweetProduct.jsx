@@ -1,162 +1,3 @@
-// import React from "react";
-// import styles from "./sweetProduct.module.css";
-// import laddu from './imgs/laddu.svg';
-// import star from './imgs/star.svg';
-// import heart from './imgs/wishlist.svg';
-
-// const FestiveSweet = ({ name, image, price, rating, reviews }) => {
-//   return (
-//     <div className={styles.card}>
-//       <img src={image} alt={name} className={styles.image} />
-//       <div className={styles.content}>
-//         <div className={styles.content1}>
-//           <h2 className={styles.title}>{name}</h2>
-//           <a href="#">
-//             <img src={heart} alt="Heart Icon" className={styles.heartIcon} />
-//           </a>
-//         </div>
-//         <div className={styles.ratingContainer}>
-//           <span className={styles.rating}>
-//             <img src={star} alt="Star Icon" className={styles.starIcon} /> {rating}
-//           </span>
-//           <span className={styles.reviews}>({reviews} Reviews)</span>
-//         </div>
-//         <p className={styles.description}>
-//           Dummy text of the printing and typesetting industry. Lorem Ipsum has
-//           been the industry’s standard dummy text ever since the 1500s.
-//         </p>
-//         <div className={styles.footer}>
-//           <span className={styles.price}>₹{price}</span>
-//           <button className={styles.button}>ADD TO BASKET</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const FestSweet = () => {
-//   const sweets = [
-//     { name: "Lalmohan", image: laddu, price: "1499", rating: "4.8", reviews: "1102" },
-//     { name: "Pedaa", image: laddu, price: "1499", rating: "4.8", reviews: "1102" },
-//     { name: "Laddu", image: laddu, price: "1499", rating: "4.8", reviews: "1102" },
-//     { name: "Lalmohan", image: laddu, price: "1499", rating: "4.8", reviews: "1102" },
-//         { name: "Pedaa", image: laddu, price: "1499", rating: "4.8", reviews: "1102" },
-//         { name: "Laddu", image: laddu, price: "1499", rating: "4.8", reviews: "1102" },
-//   ];
-
-//   return (
-//     <div className={styles.container} >
-//         <div className={styles.header}>
-//         <h1 className={styles.titleMain}>Festive Sweet</h1>
-//         </div>
-//        <div className={styles.grid}>
-//         {sweets.map((sweet, index) => (
-//           <FestiveSweet key={index + "top"} {...sweet} />
-//         ))}
-//       </div>
-
-
-//       <div>
-//          <a href="#">
-//         <p className= {styles.viewMoreContainer}>
-//           View More
-//         </p>
-//         </a>
-//       </div>
-     
-     
-//     </div>
-//   );
-  
-// };
-
-// export default FestSweet;
-
-
-// import React, { useEffect, useState } from "react";
-// import styles from "./sweetProduct.module.css";
-// import axios from "axios";
-// import laddu from './imgs/laddu.svg';
-// import star from './imgs/star.svg';
-// import heart from './imgs/wishlist.svg';
-
-// const FestiveSweet = ({ name, image, price, rating, reviewCount, description }) => {
-//   return (
-//     <div className={styles.card}>
-//       <img src={`data:${image.contentType};base64,${image.data}`} alt={name} className={styles.image} />
-//       <div className={styles.content}>
-//         <div className={styles.content1}>
-//           <h2 className={styles.title}>{name}</h2>
-//           <a href="#">
-//             <img src={heart} alt="Heart Icon" className={styles.heartIcon} />
-//           </a>
-//         </div>
-//         <div className={styles.ratingContainer}>
-//           <span className={styles.rating}>
-//             <img src={star} alt="Star Icon" className={styles.starIcon} /> {rating}
-//           </span>
-//           <span className={styles.reviews}>({reviewCount} Reviews)</span>
-//         </div>
-//         <p className={styles.description}>{description}</p>
-//         <div className={styles.footer}>
-//           <span className={styles.price}>₹{price}</span>
-//           <button className={styles.button}>ADD TO BASKET</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const FestSweet = ({ filters }) => {
-//   const [sweets, setSweets] = useState([]);
-//   const [page, setPage] = useState(1);
-
-//   const fetchProducts = async () => {
-//     try {
-//       const response = await axios.get('http://localhost:8080/api/products', {
-//         params: { ...filters, page }
-//       });
-//       const fetchedProducts = response.data.products;
-
-//       // Remove duplicate products
-//       setSweets(prev => {
-//         const existingProductIds = new Set(prev.map(p => p._id));
-//         const newProducts = fetchedProducts.filter(p => !existingProductIds.has(p._id));
-//         return [...prev, ...newProducts];
-//       });
-//     } catch (error) {
-//       console.error("Error fetching products:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchProducts();
-//   }, [filters, page]);
-
-//   return (
-//     <div className={styles.container}>
-//       <div className={styles.header}>
-//         <h1 className={styles.titleMain}>Festive Sweet</h1>
-//       </div>
-//       <div className={styles.grid}>
-//         {sweets.map((sweet, index) => (
-//           <FestiveSweet key={index} {...sweet} />
-//         ))}
-//       </div>
-//       <div>
-//         <a href="#" onClick={() => setPage((prev) => prev + 1)}>
-//           <p className={styles.viewMoreContainer}>View More</p>
-//         </a>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default FestSweet;
-
-
-//for wishlist backend
-
 
 
 import React, { useEffect, useState } from "react";
@@ -165,7 +6,7 @@ import axios from "axios";
 import star from "./imgs/star.svg";
 import heart from "./imgs/wishlist.svg";
 import { useToaster } from '../../../../utils';
-
+import { BASE_URL } from "../../../../Const/Const";
 const FestiveSweet = ({ product, addToCart, removeFromCart, addToWishlist, isInBasket }) => {
 
      
@@ -231,7 +72,7 @@ const FestSweet = ({ filters }) => {
     const fetchProducts = async () => {
       setLoading(true); // Set loading to true before fetching data
       try {
-        const response = await axios.get("http://localhost:8080/api/products", { params: { ...filters, page, isTodaysDeal: false  } });
+        const response = await axios.get(`${BASE_URL}/api/products`, { params: { ...filters, page, isTodaysDeal: false  } });
         setSweets(response.data.products);
         setLoading(false); // Set loading to false after fetching data
       } catch (error) {
@@ -256,7 +97,7 @@ const FestSweet = ({ filters }) => {
       // Ensure productId is a simple string and not an object
       const flatProductId = (typeof productId === 'object' && productId._id) ? productId._id : productId;
   
-      const response = await fetch("http://localhost:8080/api/cart", {
+      const response = await fetch(`${BASE_URL}/api/cart`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -290,7 +131,7 @@ const FestSweet = ({ filters }) => {
         return;
       }
 
-      await axios.delete(`http://localhost:8080/api/cart/${productId}`, {
+      await axios.delete(`${BASE_URL}/api/cart/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -316,7 +157,7 @@ const FestSweet = ({ filters }) => {
 
       const productIdStr = productId.toString(); // Ensure productId is a string
 
-      const response = await axios.post("http://localhost:8080/api/wishlist", { productId: productIdStr }, {
+      const response = await axios.post(`${BASE_URL}/api/wishlist`, { productId: productIdStr }, {
         headers: {
           Authorization: `Bearer ${token}`
         }

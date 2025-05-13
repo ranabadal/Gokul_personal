@@ -9,7 +9,7 @@ import Loader from "../../components/Loader/loader1/sweetLoader";
 import GiftBoxAndBulkTemplate from "../../components/GiftBoxAndBulkTemplate/giftBoxAndBulkTemplate";
 import GiftBoxCartRight from "./giftBoxCart/giftBoxCartRight/giftBoxCartRight";
 import styles from "./giftBoxes.module.css";
-
+import { BASE_URL } from "../../Const/Const";
 const MainGiftBoxes = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -45,7 +45,7 @@ const MainGiftBoxes = () => {
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:8080/api/giftboxpage/categories");
+      const res = await axios.get(`${BASE_URL}/api/giftboxpage/categories`);
       setCategories(res.data);
       if (res.data.length > 0) setSelectedCategory(res.data[0]._id);
     } catch (error) {
@@ -58,8 +58,8 @@ const MainGiftBoxes = () => {
     setLoading(true);
     try {
       const [giftBoxRes, handbagRes] = await Promise.all([
-        axios.get("http://localhost:8080/api/giftboxpage/giftBoxes"),
-        axios.get("http://localhost:8080/api/giftboxpage/generalHandbags"),
+        axios.get(`${BASE_URL}/api/giftboxpage/giftBoxes`),
+        axios.get(`${BASE_URL}/api/giftboxpage/generalHandbags`),
       ]);
       setGiftBoxes(giftBoxRes.data);
       setHandbags(handbagRes.data);

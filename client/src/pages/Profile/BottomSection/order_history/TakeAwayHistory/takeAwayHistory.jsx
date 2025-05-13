@@ -16,7 +16,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./takeAwayHistory.module.css";
 import OrderDetailsModal from "./OrderDetailsModal/orderDetailsModal"; // Modal Component
-
+import { BASE_URL } from "../../../../../Const/Const";
 const TakeawayOrdersHistory = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -28,7 +28,7 @@ const TakeawayOrdersHistory = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("jwtToken");
-        const response = await fetch("http://localhost:8080/api/takeawayOrders/orders/user", {
+        const response = await fetch(`${BASE_URL}/api/takeawayOrders/orders/user`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -70,7 +70,7 @@ const TakeawayOrdersHistory = () => {
 
     try {
       const token = localStorage.getItem("jwtToken");
-      const response = await fetch(`http://localhost:8080/api/takeawayOrders/${orderId}/cancel`, {
+      const response = await fetch(`${BASE_URL}/api/takeawayOrders/${orderId}/cancel`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });

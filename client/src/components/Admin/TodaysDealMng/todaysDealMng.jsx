@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./todaysDealMng.module.css";
-
+import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
 const TodaysDealManagement = () => {
   const [deals, setDeals] = useState([]);
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const TodaysDealManagement = () => {
   useEffect(() => {
     const fetchDeals = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/deals/all");
+        const response = await fetch(`${BASE_URL}deals/all`);
         const data = await response.json();
 
         if (data.success) {
@@ -49,7 +49,7 @@ const TodaysDealManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const method = editDealId ? "PUT" : "POST";
-    const url = editDealId ? `http://localhost:8080/api/deals/${editDealId}` : "http://localhost:8080/api/deals/add";
+    const url = editDealId ? `${BASE_URL}/api/deals/${editDealId}` : `${BASE_URL}/api/deals/add`;
 
     try {
       const response = await fetch(url, {
@@ -79,7 +79,7 @@ const TodaysDealManagement = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/deals/${id}`, { method: "DELETE" });
+      const response = await fetch(`${BASE_URL}/api/deals/${id}`, { method: "DELETE" });
       if (response.ok) {
         setDeals(deals.filter(deal => deal._id !== id));
       } else {

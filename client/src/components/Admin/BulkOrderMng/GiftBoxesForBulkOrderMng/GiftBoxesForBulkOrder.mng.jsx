@@ -50,9 +50,7 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       const [categoryRes, giftBoxRes, handbagRes] = await Promise.all([
-        // axios.get("http://localhost:8080/api/bulkorders/categories"),
-        // axios.get("http://localhost:8080/api/bulkorders/giftBoxes"),
-        // axios.get("http://localhost:8080/api/bulkorders/generalHandbags"),
+ 
          axios.get(`${BASE_URL}/api/bulkorders/categories`),
         axios.get(`${BASE_URL}/api/bulkorders/giftBoxes`),
         axios.get(`${BASE_URL}/api/bulkorders/generalHandbags`),
@@ -91,7 +89,6 @@ const AdminDashboard = () => {
   
     // Deletion and Edit remain unchanged
     const handleDelete = async (id, type) => {
-      // const endpoint = `http://localhost:8080/api/bulkorders/${type}/${id}`;
             const endpoint = `${BASE_URL}/api/bulkorders/${type}/${id}`;
 
       try {
@@ -143,7 +140,6 @@ const AdminDashboard = () => {
 
   const handleAddCategory = async () => {
     try {
-      // await axios.post("http://localhost:8080/api/bulkorders/categories", newCategory);
             await axios.post(`${BASE_URL}/api/bulkorders/categories`, newCategory);
 
       setNewCategory({ name: "", image: "" });
@@ -170,7 +166,6 @@ const AdminDashboard = () => {
   
       console.log("Payload being sent:", payload);
   
-      // await axios.post("http://localhost:8080/api/bulkorders/giftBoxes", payload);
             await axios.post(`${BASE_URL}/api/bulkorders/giftBoxes`, payload);
 
   
@@ -205,7 +200,6 @@ const AdminDashboard = () => {
 
   const handleUpdateCategory = async () => {
     try {
-      // await axios.put(`http://localhost:8080/api/bulkorders/categories/${editId}`, newCategory);
             await axios.put(`${BASE_URL}/api/bulkorders/categories/${editId}`, newCategory);
 
       setNewCategory({ name: "", image: "" });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./menuMng.module.css";
-
+import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
 const MenuMng = () => {
   const [menus, setMenus] = useState([]);
   const [formData, setFormData] = useState({ menuName: "", description: "", price: "", image: "" });
@@ -12,7 +12,7 @@ const MenuMng = () => {
   }, []);
 
   const fetchMenus = async () => {
-    const response = await axios.get("http://localhost:8080/api/menuCart");
+    const response = await axios.get(`${BASE_URL}/api/menuCart`);
     setMenus(response.data);
   };
 
@@ -31,17 +31,7 @@ const MenuMng = () => {
     }
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     if (editMenuId) {
-//       await axios.put(`http://localhost:8080/api/menuCart/${editMenuId}`, formData);
-//       setEditMenuId(null);
-//     } else {
-//       await axios.post("http://localhost:8080/api/menuCart", formData);
-//     }
-//     setFormData({ menuName: "", description: "", price: "", image: "" });
-//     fetchMenus();
-//   };
+
 
 
 const handleSubmit = async (e) => {
@@ -60,10 +50,10 @@ const handleSubmit = async (e) => {
     };
   
     if (editMenuId) {
-      await axios.put(`http://localhost:8080/api/menuCart/${editMenuId}`, requestData);
+      await axios.put(`${BASE_URL}/api/menuCart/${editMenuId}`, requestData);
       setEditMenuId(null);
     } else {
-      await axios.post("http://localhost:8080/api/menuCart", requestData);
+      await axios.post(`${BASE_URL}/api/menuCart`, requestData);
     }
   
     setFormData({ menuName: "", description: "", price: "", image: "" });
@@ -72,7 +62,7 @@ const handleSubmit = async (e) => {
 
   
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:8080/api/menuCart/${id}`);
+    await axios.delete(`${BASE_URL}/api/menuCart/${id}`);
     fetchMenus();
   };
 

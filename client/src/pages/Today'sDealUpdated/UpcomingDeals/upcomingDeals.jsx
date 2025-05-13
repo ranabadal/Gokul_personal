@@ -49,7 +49,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./upcomingDeals.module.css";
 import DealCard from "../DealCard/dealCard"; // Adjust the import path
 import Loader from "../../../components/Loader/loader5/loader5"; // Import the loader
-
+import { BASE_URL } from "../../../Const/Const";
 const UpcomingDeals = () => {
   const [upcomingDeals, setUpcomingDeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
@@ -59,7 +59,7 @@ const UpcomingDeals = () => {
   useEffect(() => {
     const fetchDeals = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/deals/upcoming");
+        const response = await fetch(`${BASE_URL}/api/deals/upcoming`);
         const data = await response.json();
 
         if (data.success && Array.isArray(data.upcomingDeals)) {

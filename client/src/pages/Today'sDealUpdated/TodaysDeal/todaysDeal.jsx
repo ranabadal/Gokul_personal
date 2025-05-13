@@ -36,7 +36,7 @@ import styles from "./todaysDeal.module.css";
 import CountdownTimer from "../CountdownTimer/countdownTimer"; // Adjust the path
 import noDeal from "../Assets/noDeal.png"; // Adjust the path
 import Loader from "../../../components/Loader/loader5/loader5"; // Import your loader component
-
+import { BASE_URL } from "../../../Const/Const";
 const TodaysDeal = () => {
   const [deal, setDeal] = useState(null);
   const [isLoading, setIsLoading] = useState(true); // Loading state
@@ -44,7 +44,7 @@ const TodaysDeal = () => {
   useEffect(() => {
     const fetchDeal = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/deals/active");
+        const response = await fetch(`${BASE_URL}/api/deals/active`);
         const data = await response.json();
 
         if (data.success && data.todayDeal) {

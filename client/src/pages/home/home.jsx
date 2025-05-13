@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import heart from "../../components/hall_details/assets/red heart.svg";
 import star from "../../components/hall_details/assets/star.svg";
-import { BASE_URL } from "../../Const/Const";
 import Header from "../../components/header/header";
 import AboveHeader from "../../components/above_header/above_header";
 import HeroSection from "../../components/hero_section/hero_section";
@@ -17,7 +16,7 @@ import HallDetails from "../../components/hall_details/hall_details";
 import FestiveSweet from "../Products/SweetProduct/FestiveSweet"; // Sweet Product Component
 import Loader from "../../components/Loader/loader3/loader3";
 import axios from "axios"; // Using axios for cleaner API calls
-
+import { BASE_URL } from "../../Const/Const";
 import { useToaster } from '../../utils';
 const Home = () => {
   const navigate = useNavigate();
@@ -42,7 +41,6 @@ const Home = () => {
   useEffect(() => {
     const fetchBanquets = async () => {
       try {
-        // const response = await fetch("http://localhost:8080/api/banquets");
             const response = await fetch(`${BASE_URL}/api/banquets`);
 
         if (!response.ok) throw new Error("Failed to fetch banquet data.");
@@ -121,7 +119,7 @@ const Home = () => {
         return;
       }
 
-      await axios.delete(`http://localhost:8080/api/cart/${productId}`, {
+      await axios.delete(`${BASE_URL}/api/cart/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -145,7 +143,7 @@ const Home = () => {
 return;
 }
 const productIdStr = productId.toString(); // Ensure productId is a string
-const response = await axios.post("http://localhost:8080/api/wishlist", { productId: productIdStr }, {
+const response = await axios.post(`${BASE_URL}/api/wishlist`, { productId: productIdStr }, {
 headers: {
 Authorization: `Bearer ${token}`
 }
@@ -165,7 +163,7 @@ setToast('An error occurred while adding the product to the wishlist.', 'error')
   useEffect(() => {
     const fetchSweets = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/products");
+        const response = await axios.get(`${BASE_URL}/api/products`);
         
         // Filter only "Sweets" category and limit to 3 items
         const filteredSweets = response.data.products

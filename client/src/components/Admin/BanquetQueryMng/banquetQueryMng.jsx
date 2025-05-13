@@ -17,7 +17,6 @@ const BanquetQueryPage = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("adminToken");
-        // const response = await fetch("http://localhost:8080/api/queries/", {
                 const response = await fetch(`${BASE_URL}/api/queries/`, {
 
           method: "GET",
@@ -61,7 +60,6 @@ const BanquetQueryPage = () => {
 
     try {
       const token = localStorage.getItem("adminToken");
-      // const response = await fetch(`http://localhost:8080/api/queries/${queryId}/approve`, {
             const response = await fetch(`${BASE_URL}/api/queries/${queryId}/approve`, {
 
         method: "PUT",
@@ -89,7 +87,6 @@ const BanquetQueryPage = () => {
   const handleDelete = async (queryId) => {
     try {
       const token = localStorage.getItem("adminToken");
-      // const response = await fetch(`http://localhost:8080/api/queries/${queryId}`, {
             const response = await fetch(`${BASE_URL}/api/queries/${queryId}`, {
 
         method: "DELETE",
@@ -119,7 +116,6 @@ const BanquetQueryPage = () => {
   const handleSaveEdit = async (updatedQuery) => {
     try {
       const token = localStorage.getItem("adminToken");
-      // const response = await fetch(`http://localhost:8080/api/queries/${updatedQuery._id}`, {
             const response = await fetch(`${BASE_URL}/api/queries/${updatedQuery._id}`, {
 
         method: "PUT",
