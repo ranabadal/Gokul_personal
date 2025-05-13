@@ -6,6 +6,7 @@ import styles from "./basketLeftSec.module.css";
 import deleteIcon from "./Assets/deleteIcon.svg";
 import star from "./Assets/Star.svg";
 import axios from "axios";
+import { BASE_URL } from "../../../../Const/Const"; // Adjust the import path as necessary
 
 const Basket = ({ cartItems, updateCartItems }) => {
   console.log("Cart Items Data:", cartItems); // Debug received cartItems
@@ -26,7 +27,7 @@ const Basket = ({ cartItems, updateCartItems }) => {
   // Update cart item in the database
   const updateCartItemInDB = async (productId, updateData) => {
     try {
-      await axios.put(`http://localhost:8080/api/cart`, { productId, ...updateData }, {
+      await axios.put(`${BASE_URL}/api/cart`, { productId, ...updateData }, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
@@ -61,7 +62,7 @@ const Basket = ({ cartItems, updateCartItems }) => {
       updateCartItems(prev => prev.filter(item => item.productId?._id !== id));
 
       // Remove item from backend/database
-      await axios.delete(`http://localhost:8080/api/cart/${id}`, {
+      await axios.delete(`${BASE_URL}/api/cart/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
         }

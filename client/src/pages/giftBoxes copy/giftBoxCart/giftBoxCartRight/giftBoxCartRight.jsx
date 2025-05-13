@@ -161,7 +161,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./giftBoxCartRight.module.css";
-
+import { BASE_URL } from "../../../../Const/Const";
 const GiftBoxCartRight = ({
   cartItems,         // Array of items: { type, details, quantity, matchingHandbags }
   basketTotal,       // Total price calculated from cart items
@@ -200,54 +200,6 @@ const GiftBoxCartRight = ({
   //     return;
   //   }
   
-  //   // Ensure every cart item has `details.quantity`
-  //   const formattedCartItems = cartItems.map((item) => ({
-  //     type: item.type,
-  //     details: {
-  //       name: item.details.name,
-  //       price: item.details.price,
-  //       quantity: item.quantity || 1, // ✅ Ensure quantity is included
-  //       image: item.details.image,
-  //     },
-  //     matchingHandbags: item.matchingHandbags.map((mh) => ({
-  //       name: mh.name,
-  //       price: mh.price,
-  //       quantity: mh.quantity || 1, // ✅ Ensure quantity is included for handbags
-  //       image: mh.image,
-  //     })),
-  //   }));
-  
-  //   const orderData = {
-  //     user: localStorage.getItem("userId"),
-  //     cartItems: formattedCartItems,
-  //     totalPrice: basketTotal,
-  //     additionalCharges,
-  //     deliveryCharges,
-  //     discount,
-  //     promoCode,
-  //     address: selectedAddress,
-  //   };
-  
-  //   try {
-     
-  //     const token = localStorage.getItem("jwtToken");
-  //     const response = await axios.post("http://localhost:8080/api/giftBoxOrderQueries/", orderData, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
-  
-  //     if (response.data.success) {
-  //       alert("Order placed successfully!");
-  //       setShowAddressModal(false);
-
-  //     } else {
-  //       throw new Error(response.data.message || "Failed to create order");
-  //     }
-  //   } catch (error) {
-  //     alert(`Error creating order: ${error.message || "Something went wrong"}`);
-  //   } 
-  // };
-
-
 
 
   const handleConfirmOrder = async () => {
@@ -287,7 +239,7 @@ const GiftBoxCartRight = ({
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await axios.post(
-        "http://localhost:8080/api/giftBoxOrderQueries/",
+        `${BASE_URL}/api/giftBoxOrderQueries/`,
         orderData,
         {
           headers: { Authorization: `Bearer ${token}` },

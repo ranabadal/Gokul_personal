@@ -7,7 +7,7 @@ import styles from "./giftBoxesForBulkPage.module.css";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import axios from "axios";
 import pic from "../Assets/snacks.png";
-
+import { BASE_URL } from "../../../Const/Const";
 const GiftBox = ({ setFinalSelection }) => {
   // ----- Dynamic Data States -----
   // These replace your static data for categories, gift boxes, and handbags.
@@ -22,9 +22,9 @@ const GiftBox = ({ setFinalSelection }) => {
   const fetchData = async () => {
     try {
       const [catRes, giftBoxRes, handbagRes] = await Promise.all([
-        axios.get("http://localhost:8080/api/bulkorders/categories"),
-        axios.get("http://localhost:8080/api/bulkorders/giftBoxes"),
-        axios.get("http://localhost:8080/api/bulkorders/generalHandbags"),
+        axios.get(`${BASE_URL}/api/bulkorders/categories`),
+        axios.get(`${BASE_URL}/api/bulkorders/giftBoxes`),
+        axios.get(`${BASE_URL}/api/bulkorders/generalHandbags`),
       ]);
 
       // Store the fetched categories.

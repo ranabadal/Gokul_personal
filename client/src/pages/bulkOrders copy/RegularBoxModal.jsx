@@ -126,7 +126,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./bulkOrders.module.css";
-
+import { BASE_URL } from "../../Const/Const";
 const RegularBoxModal = ({ onClose, onSelect }) => {
   // State that will hold the Regular Box options fetched from the backend.
   const [sizeOptions, setSizeOptions] = useState([]);
@@ -154,7 +154,7 @@ const RegularBoxModal = ({ onClose, onSelect }) => {
   useEffect(() => {
     const fetchOptions = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/regularBoxes");
+        const res = await axios.get(`${BASE_URL}/api/regularBoxes`);
         // Map each box to the expected structure.
         const options = res.data.map((box) => ({
           id: box._id, // Using the unique _id from MongoDB.

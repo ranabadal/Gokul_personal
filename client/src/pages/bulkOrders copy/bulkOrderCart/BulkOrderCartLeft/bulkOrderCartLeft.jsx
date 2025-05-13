@@ -6,7 +6,7 @@ import { useToaster } from "../../../../utils";
 import backIcon from "../../../giftBoxes/giftBoxCart/giftBoxCartLeft/Assets/backIcon.svg";
 import Header from "../../../../components/header/header";
 import Footer from "../../../../components/footer/footer";
-
+import { BASE_URL } from "../../../../Const/Const";
 const GiftBoxCartLeft = ({ customMessage, setCustomMessage, setStoredSelections, selectedGiftBox, setselectedQuantity, selectedQuantity, refreshSummaryForm = false, setRefreshSummaryForm }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const GiftBoxCartLeft = ({ customMessage, setCustomMessage, setStoredSelections,
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:8080/api/products");
+        const response = await axios.get(`${BASE_URL}/api/products`);
         const filteredProducts = response.data?.products?.filter((product) => product.category === category) || [];
         setItems(filteredProducts);
       } catch (error) {
