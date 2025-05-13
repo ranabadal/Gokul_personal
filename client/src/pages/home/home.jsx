@@ -17,22 +17,23 @@ import FestiveSweet from "../Products/SweetProduct/FestiveSweet"; // Sweet Produ
 import Loader from "../../components/Loader/loader3/loader3";
 import axios from "axios"; // Using axios for cleaner API calls
 import { BASE_URL } from "../../Const/Const";
-import { useToaster } from '../../utils';
+import { useToaster } from "../../utils";
 const Home = () => {
   const navigate = useNavigate();
- const setToast = useToaster();
+  const setToast = useToaster();
   // Card Data (Hardcoded)
-  const [cardData] = useState(
-  [
-    { name: "Lalmohan", img: require("../../components/cards/assets/laddu.svg") },
+  const [cardData] = useState([
+    {
+      name: "Lalmohan",
+      img: require("../../components/cards/assets/laddu.svg"),
+    },
     { name: "Pedda", img: require("../../components/cards/assets/pedaa.svg") },
     { name: "Laddu", img: require("../../components/cards/assets/laddu.svg") },
-  ]
-);
+  ]);
 
   // State Management
   const [banquets, setBanquets] = useState([]);
-    const [basket, setBasket] = useState([]);
+  const [basket, setBasket] = useState([]);
   const [sweets, setSweets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,7 +42,7 @@ const Home = () => {
   useEffect(() => {
     const fetchBanquets = async () => {
       try {
-            const response = await fetch(`${BASE_URL}/api/banquets`);
+        const response = await fetch(`${BASE_URL}/api/banquets`);
 
         if (!response.ok) throw new Error("Failed to fetch banquet data.");
 
@@ -49,10 +50,9 @@ const Home = () => {
         if (data.success) {
           const updatedBanquets = data.banquets.map((banquet) => ({
             ...banquet,
-            selectedImage:
-              banquet.images[0]?.data
-                ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
-                : null,
+            selectedImage: banquet.images[0]?.data
+              ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
+              : null,
           }));
           setBanquets(updatedBanquets);
         } else {
@@ -69,44 +69,48 @@ const Home = () => {
     fetchBanquets();
   }, []);
 
-
   const handleAddToCart = async (productId) => {
-    console.log('Product ID before sending:', typeof productId, productId); // Log the type and value
-  
+    console.log("Product ID before sending:", typeof productId, productId); // Log the type and value
+
     try {
       const token = localStorage.getItem("jwtToken");
-  
+
       if (!token) {
-        setToast('Please log in first!', 'error');
+        setToast("Please log in first!", "error");
         return;
       }
-  
+
       // Ensure productId is a simple string and not an object
-      const flatProductId = (typeof productId === 'object' && productId._id) ? productId._id : productId;
-  
-      const response = await fetch(`${BASE_URL}/api/cart`,
-         {
+      const flatProductId =
+        typeof productId === "object" && productId._id
+          ? productId._id
+          : productId;
+
+      const response = await fetch(`${BASE_URL}/api/cart`, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           productId: flatProductId.toString(), // Ensure productId is a string
-          quantity: 1
-        })
+          quantity: 1,
+        }),
       });
-  
+
       const data = await response.json();
       if (data.success) {
-        setToast('Product added to cart successfully!', 'success');
+        setToast("Product added to cart successfully!", "success");
         setBasket([...basket, flatProductId]);
       } else {
         alert(`Error adding to cart: ${data.message}`);
       }
     } catch (error) {
       console.error("Error adding to cart:", error);
-      setToast('An error occurred while adding the product to the cart.', 'error');
+      setToast(
+        "An error occurred while adding the product to the cart.",
+        "error"
+      );
     }
   };
 
@@ -115,74 +119,83 @@ const Home = () => {
       const token = localStorage.getItem("jwtToken");
 
       if (!token) {
-        setToast('Please log in first!', 'error');
+        setToast("Please log in first!", "error");
         return;
       }
 
       await axios.delete(`${BASE_URL}/api/cart/${productId}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
-      setBasket(basket.filter(id => id !== productId));
-      setToast('Product removed from cart successfully!', 'error');
+      setBasket(basket.filter((id) => id !== productId));
+      setToast("Product removed from cart successfully!", "error");
     } catch (error) {
       console.error("Error removing from cart:", error);
-      setToast('An error occurred while removing the product to the cart.', 'error');
+      setToast(
+        "An error occurred while removing the product to the cart.",
+        "error"
+      );
     }
   };
 
   const handleAddToWishlist = async (productId) => {
-    console.log("Wishlist click detected for product ID:", productId); 
+    console.log("Wishlist click detected for product ID:", productId);
     try {
       const token = localStorage.getItem("jwtToken");
 
       if (!token) {
-        setToast('Please log in first!', 'error');
-return;
-}
-const productIdStr = productId.toString(); // Ensure productId is a string
-const response = await axios.post(`${BASE_URL}/api/wishlist`, { productId: productIdStr }, {
-headers: {
-Authorization: `Bearer ${token}`
-}
-});
-if (response.data.success) {
-setToast('Product added to wishlist successfully!', 'success');
-}else{
-alert(`Error adding to wishlist: ${response.data.message}`);
-}
-} catch (error) {
-console.error("Error adding to wishlist:", error);
-setToast('An error occurred while adding the product to the wishlist.', 'error');
-}
-};
+        setToast("Please log in first!", "error");
+        return;
+      }
+      const productIdStr = productId.toString(); // Ensure productId is a string
+      const response = await axios.post(
+        `${BASE_URL}/api/wishlist`,
+        { productId: productIdStr },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.success) {
+        setToast("Product added to wishlist successfully!", "success");
+      } else {
+        alert(`Error adding to wishlist: ${response.data.message}`);
+      }
+    } catch (error) {
+      console.error("Error adding to wishlist:", error);
+      setToast(
+        "An error occurred while adding the product to the wishlist.",
+        "error"
+      );
+    }
+  };
 
   // Fetch Sweets from API
   useEffect(() => {
     const fetchSweets = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/api/products`);
-        
+
         // Filter only "Sweets" category and limit to 3 items
         const filteredSweets = response.data.products
           .filter((product) => product.category.toLowerCase() === "sweets")
           .slice(0, 3);
-  
+
         setSweets(filteredSweets);
       } catch (err) {
         console.error("Error fetching sweets:", err);
       }
     };
-  
+
     fetchSweets();
   }, []);
 
   return (
     <div className={styles.home}>
-      <div className={styles.above_header_container}>
-      </div>
+      <div className={styles.above_header_container}></div>
       {/* <AboveHeader/> */}
       <Header />
       <div className={styles.hero_section_container}>
@@ -196,14 +209,18 @@ setToast('An error occurred while adding the product to the wishlist.', 'error')
       <div className={styles.card_header_container}>
         <CardHeader />
       </div>
-      
+
       {/* Render Sweet Products Dynamically */}
       <div className={styles.card_section_container}>
-      {isLoading && <p> Loading.... </p>}
+        {isLoading && <p> Loading.... </p>}
         {sweets.map((sweet) => (
-          <FestiveSweet key={sweet._id} product={sweet}  addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
-          addToWishlist={handleAddToWishlist}/>
+          <FestiveSweet
+            key={sweet._id}
+            product={sweet}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+            addToWishlist={handleAddToWishlist}
+          />
         ))}
       </div>
 
@@ -228,11 +245,15 @@ setToast('An error occurred while adding the product to the wishlist.', 'error')
               description={banquet.description}
               rating={banquet.rating}
               icons={{ heart, star }}
-              images={banquet.images.map((img) => `data:${img.contentType};base64,${img.data}`)}
+              images={banquet.images.map(
+                (img) => `data:${img.contentType};base64,${img.data}`
+              )}
               selectedImage={banquet.selectedImage}
               onImageClick={(image) =>
                 setBanquets((prevBanquets) =>
-                  prevBanquets.map((b) => (b._id === banquet._id ? { ...b, selectedImage: image } : b))
+                  prevBanquets.map((b) =>
+                    b._id === banquet._id ? { ...b, selectedImage: image } : b
+                  )
                 )
               }
               onCheckAvailability={() =>
