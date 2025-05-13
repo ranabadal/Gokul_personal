@@ -56,7 +56,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', AuthRouter);
+app.use('/api/auth', AuthRouter);
 app.use('/api/contact', contactRoutes); // Update path for contact queries
 app.use('/api/profile', profileRoutes);
 app.use('/api/addresses', addressRoutes);
