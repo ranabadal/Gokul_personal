@@ -57,12 +57,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', AuthRouter);
-app.use('/contact', contactRoutes); // Update path for contact queries
-app.use('/profile', profileRoutes);
-app.use('/addresses', addressRoutes);
-app.use('/reviews', reviewRoutes); 
+app.use('/api/contact', contactRoutes); // Update path for contact queries
+app.use('/api/profile', profileRoutes);
+app.use('/api/addresses', addressRoutes);
+app.use('/api/reviews', reviewRoutes); 
 app.use("/api", productRoutes);
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api', cartRoutes); // Use cart routes
 app.use('/api', wishlistRoutes); // Use wishlist routes
 app.use('/api',todaysDealRoutes);

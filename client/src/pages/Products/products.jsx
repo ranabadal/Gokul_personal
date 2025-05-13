@@ -209,6 +209,19 @@ export default function TakeawayPage() {
         </span>
       </div>
 
+         <div className={styles.viewAllButtonWrapper}>
+  
+         <button 
+                    className={styles.viewAllButton} 
+                    onClick={() => { 
+                     
+                      setSelectedSubcategory('');
+                     
+                    }}
+                  >
+                    View All
+                  </button>
+</div>
 
       {/* Display Based on Filter */}
       {/* Display Based on Filter */}
@@ -249,8 +262,8 @@ export default function TakeawayPage() {
             />
           </div>
 
-
-{/* <div className={styles.viewAllButtonWrapper}>
+{/* 
+<div className={styles.viewAllButtonWrapper}>
   
          <button 
                     className={styles.viewAllButton} 
@@ -262,7 +275,7 @@ export default function TakeawayPage() {
                   >
                     View All
                   </button>
-</div> */}
+</div>  */}
          
 
           {/* Product Grid for Sweets */}
@@ -365,7 +378,7 @@ export default function TakeawayPage() {
 
 
 
-          <div className={styles.viewAllButtonWrapper}>
+          {/* <div className={styles.viewAllButtonWrapper}>
   
          <button 
                     className={styles.viewAllButton} 
@@ -377,7 +390,7 @@ export default function TakeawayPage() {
                   >
                     View All
                   </button>
-</div>
+</div> */}
 
           {/* Product Grid */}
           <div className={styles.productGrid}>
