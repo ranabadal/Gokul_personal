@@ -16,7 +16,9 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      const { data } = await axios.post('http://localhost:8080/api/admin/login', credentials);
+      // const { data } = await axios.post('http://localhost:8080/api/admin/login', credentials);
+            const { data } = await axios.post(`${BASE_URL}api/admin/login`, credentials);
+
       localStorage.setItem('adminToken', data.token);
       navigate('/admin');
     } catch (error) {

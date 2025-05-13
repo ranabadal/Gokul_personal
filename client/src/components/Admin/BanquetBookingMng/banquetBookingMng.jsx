@@ -209,7 +209,9 @@ const BanquetManagement = () => {
     useEffect(() => {
       const fetchBanquets = async () => {
         try {
-          const response = await axios.get('http://localhost:8080/api/banquets');
+          // const response = await axios.get('http://localhost:8080/api/banquets');
+              const response = await axios.get(`${BASE_URL}/api/banquets`);
+
           setBanquets(response.data.banquets);
         } catch (error) {
           console.error('Error fetching banquets:', error);
@@ -243,7 +245,9 @@ const BanquetManagement = () => {
     const handleAddBanquet = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('http://localhost:8080/api/banquets', formData);
+        // const response = await axios.post('http://localhost:8080/api/banquets', formData);
+            const response = await axios.post(`${BASE_URL}/api/banquets`, formData);
+
         setBanquets([...banquets, response.data.banquet]);
         resetFormData();
       } catch (error) {
@@ -274,7 +278,10 @@ const BanquetManagement = () => {
       
           console.log('Sending Update Data:', updateData);
       
-          const response = await axios.put(`http://localhost:8080/api/banquets/${editBanquetId}`, updateData);
+          // const response = await axios.put(`${BASE_URL}/api/banquets/${editBanquetId}`, updateData);
+                        const response = await axios.put(`${BASE_URL}/api/banquets/${editBanquetId}`, updateData);
+
+
       
           if (response.data.success) {
             setBanquets(banquets.map(banquet => (banquet._id === editBanquetId ? response.data.banquet : banquet)));
@@ -291,7 +298,9 @@ const BanquetManagement = () => {
 
       const handleDeleteBanquet = async (banquetId) => {
       try {
-        await axios.delete(`http://localhost:8080/api/banquets/${banquetId}`);
+        // await axios.delete(`http://localhost:8080/api/banquets/${banquetId}`);
+            await axios.delete(`${BASE_URL}/api/banquets/${banquetId}`);
+
         setBanquets(banquets.filter(banquet => banquet._id !== banquetId));
       } catch (error) {
         console.error('Error deleting banquet:', error);
@@ -315,7 +324,10 @@ const BanquetManagement = () => {
     const handleDeleteImage = async (index) => {
         if (editBanquetId) {
           try {
-            const response = await axios.delete(`http://localhost:8080/api/banquets/${editBanquetId}/images/${index}`);
+            // const response = await axios.delete(`http://localhost:8080/api/banquets/${editBanquetId}/images/${index}`);
+                            const response = await axios.delete(`${BASE_URL}/api/banquets/${editBanquetId}/images/${index}`);
+
+
             if (response.data.success) {
               setExistingImages(existingImages.filter((_, i) => i !== index));
             } else {

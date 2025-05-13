@@ -42,7 +42,9 @@ const Home = () => {
   useEffect(() => {
     const fetchBanquets = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/banquets");
+        // const response = await fetch("http://localhost:8080/api/banquets");
+            const response = await fetch(`${BASE_URL}/api/banquets`);
+
         if (!response.ok) throw new Error("Failed to fetch banquet data.");
 
         const data = await response.json();
