@@ -136,14 +136,12 @@ const MainGiftBoxes = () => {
   const handleCheckout = () => {
     console.log("Checkout with:", cartItems);
   };
-
-  if (loading) return 
-  <>
+if (loading) return;
+<>
   <Header />
   <Loader />
   <Footer/>
-
-    </>;
+</>;
 
     return (
     <div className={styles.mainContainer}>
