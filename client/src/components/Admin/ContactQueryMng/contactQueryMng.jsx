@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaEdit, FaTrashAlt, FaSave, FaTimes } from 'react-icons/fa';
 import styles from './contactQueryMng.module.css';
+import { BASE_URL } from '../../../Const/Const'; // Adjust the import path as necessary
 
 const ContactQueriesManagement = () => {
   const [queries, setQueries] = useState([]);
@@ -15,7 +16,7 @@ const ContactQueriesManagement = () => {
           console.error('No token found');
           return;
         }
-        const response = await fetch('http://localhost:8080/contact/queries', {
+        const response = await fetch(`${BASE_URL}/contact/queries`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -54,7 +55,7 @@ const ContactQueriesManagement = () => {
         console.error('No token found');
         return;
       }
-      const response = await fetch(`http://localhost:8080/contact/queries/${queryId}`, {
+      const response = await fetch(`${BASE_URL}/contact/queries/${queryId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ const ContactQueriesManagement = () => {
         console.error('No token found');
         return;
       }
-      const response = await fetch(`http://localhost:8080/contact/queries/${queryId}`, {
+      const response = await fetch(`${BASE_URL}/contact/queries/${queryId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

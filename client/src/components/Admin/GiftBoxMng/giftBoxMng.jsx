@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./giftBoxMng.module.css";
+import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
 
 const AdminDashboard = () => {
   // Data lists
