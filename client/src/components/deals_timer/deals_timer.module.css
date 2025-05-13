@@ -8,6 +8,7 @@
     align-items: center;
     background-color: #E31E24;
     flex-wrap: wrap; /* Allows elements to stack on smaller screens */
+
 }
 
 /* Left section */
@@ -18,6 +19,7 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
+
 }
 
 /* Heading */
