@@ -183,7 +183,7 @@ const GiftBoxCartRight = ({
     try {
       const token = localStorage.getItem("jwtToken");
       if (!token) return;
-      const response = await axios.get("http://localhost:8080/addresses", {
+      const response = await axios.get(`${BASE_URL}/api/addresses`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data.success) {

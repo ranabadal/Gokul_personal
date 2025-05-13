@@ -38,7 +38,7 @@ const PreviewScreen = ({ orderConfirmed,customMessage}) => {
       const token = localStorage.getItem("jwtToken");
       if (!token) return;
 
-      const response = await axios.get("http://localhost:8080/addresses", {
+      const response = await axios.get(`${BASE_URL}/api/addresses`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

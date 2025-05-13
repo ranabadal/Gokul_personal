@@ -153,7 +153,7 @@ import BulkOrderCartRight from "../../../components/GiftBoxAndBulkOrderCartTotal
 import PreviewScreen from "../PreviewScreen/previewScreen";
 import axios from "axios";
 import { useToaster } from "../../../utils";
-
+import { BASE_URL } from "../../../Const/Const"; // Adjust the import path as necessary
 // Load basket from localStorage immediately
 const initialBasket = JSON.parse(localStorage.getItem("basket")) || [];
 
@@ -189,7 +189,7 @@ const GiftBoxCart = () => {
 
   const fetchAddresses = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/addresses", {
+      const response = await axios.get(`${BASE_URL}/api/addresses`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
         },

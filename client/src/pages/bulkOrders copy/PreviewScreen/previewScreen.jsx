@@ -9,7 +9,7 @@ import styles from "./previewScreen.module.css";
 import Header from "../../../components/header/header";
 import AboveHeader from "../../../components/above_header/above_header";
 import Footer from "../../../components/footer/footer";
-
+import { BASE_URL } from "../../../Const/Const";
 const PreviewScreen = ({ orderConfirmed ,customMessage}) => {
   const [storedSelections, setStoredSelections] = useState([]);
   const [basketTotal, setBasketTotal] = useState(0);
@@ -40,7 +40,7 @@ const PreviewScreen = ({ orderConfirmed ,customMessage}) => {
       const token = localStorage.getItem("jwtToken");
       if (!token) return;
 
-      const response = await axios.get("http://localhost:8080/addresses", {
+      const response = await axios.get(`${BASE_URL}/api/addresses`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

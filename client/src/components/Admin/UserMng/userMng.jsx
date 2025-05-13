@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaEdit, FaTrashAlt, FaSave, FaTimes } from 'react-icons/fa';
 import styles from './userMng.module.css';
-
+import { BASE_URL } from '../../../Const/Const';
 const UsersManagement = () => {
   const [users, setUsers] = useState([]);
   const [editingUserId, setEditingUserId] = useState(null);
@@ -15,7 +15,7 @@ const UsersManagement = () => {
           console.error('No token found');
           return;
         }
-        const response = await fetch('http://localhost:8080/users', {
+        const response = await fetch(`${BASE_URL}/api/users`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -55,7 +55,7 @@ const UsersManagement = () => {
         console.error('No token found');
         return;
       }
-      const response = await fetch(`http://localhost:8080/users/${userId}`, {
+      const response = await fetch(`${BASE_URL}/api/users/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const UsersManagement = () => {
         console.error('No token found');
         return;
       }
-      const response = await fetch(`http://localhost:8080/users/${userId}`, {
+      const response = await fetch(`${BASE_URL}/api/users/${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

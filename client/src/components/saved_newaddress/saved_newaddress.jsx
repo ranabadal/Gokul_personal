@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./saved_newaddress.module.css";
-
+import { BASE_URL } from "../../Const/Const";
 const SavedNewAddress = () => {
     const [addresses, setAddresses] = useState([]);
     const [currentAddress, setCurrentAddress] = useState({ id: '', province: '', city: '', area: '', landmark: '' });
@@ -16,7 +16,7 @@ const SavedNewAddress = () => {
                     console.error('No token found');
                     return;
                 }
-                const response = await fetch('http://localhost:8080/addresses', {
+                const response = await fetch(`${BASE_URL}/api/addresses`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -53,7 +53,7 @@ const SavedNewAddress = () => {
                     console.error('No token found');
                     return;
                 }
-                const response = await fetch(`http://localhost:8080/addresses/${currentAddress._id}`, {
+                const response = await fetch(`${BASE_URL}/api/addresses/${currentAddress._id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const SavedNewAddress = () => {
                     console.error('No token found');
                     return;
                 }
-                const response = await fetch('http://localhost:8080/addresses/add', {
+                const response = await fetch(`${BASE_URL}/api/addresses/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ const SavedNewAddress = () => {
                 console.error('No token found');
                 return;
             }
-            const response = await fetch(`http://localhost:8080/addresses/${id}`, {
+            const response = await fetch(`${BASE_URL}/api/addresses/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

@@ -7,7 +7,7 @@ import SocialConnect from './SocialConnect/socialConnect';
 import InputField from '../../components/InputComponent/inputComp';
 import Button from '../../components/ButtonNew/button';
 import { useToaster } from '../../utils';
-
+import { BASE_URL } from '../../Const/Const';
 const Contact = () => {
     const setToast = useToaster();
     const [formData, setFormData] = useState({
@@ -65,7 +65,7 @@ const Contact = () => {
         }
 
         try {
-            const url = "http://localhost:8080/auth/contact";
+            const url = `${BASE_URL}/api/auth/contact`;
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
