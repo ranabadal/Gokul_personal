@@ -213,10 +213,15 @@ const HeroSection = () => {
                         <h2 className={styles.hero_section_right_title}>{slides[currentSlide].title}</h2>
                         <p className={styles.hero_section_right_description}>
                             {slides[currentSlide].description}
+                            
+
+                            
                         </p>
                     </div>
                     <button className={styles.hero_section_bttn_right} onClick={nextSlide}><span>&rarr;</span></button>
+                    
                 </div>
+                
             </div>
             
             <div className={styles.hero_section_right_buttons}>
