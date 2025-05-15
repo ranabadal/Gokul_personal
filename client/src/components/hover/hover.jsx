@@ -67,7 +67,7 @@ return (
             </svg>
           </div>
         </div>
-        <div className={styles.hover_content_edits}>Banquet</div>
+        <div className={styles.hover_content_edits}>Banquets</div>
       </div>
       <div className={styles.hover_content} onClick={() => navigate("/bulkOrders")}>
         <div className={styles.hover_content_logo}>
