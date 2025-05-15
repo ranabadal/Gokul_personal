@@ -88,21 +88,23 @@
 import React from "react";
 import styles from "./footer.module.css";
 import gokul from "./assets/gokul.svg";
-
+import { useNavigate } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaPinterestP } from "react-icons/fa";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <footer className={styles.footer}>
       <div className={styles.topSection}>
-        <div className={styles.left}>
-          {/* <h2 className={styles.logo}>Gokul</h2> */}
+      {/* <h2 className={styles.logo}>Gokul</h2> */}
    
 
           {/* <img  src={gokul} alt="logo" /> */}
+        <div className={styles.left}>
+    
 
           <ul className={styles.navLinks}>
-          <li>About Gokul</li>
+          <li onClick={() => navigate("/about")}>About Gokul</li>
           <li>      Policy Info
 </li>
           <li>Upcoming Products</li>
@@ -122,6 +124,8 @@ const Footer = () => {
           <p className={styles.copyright}>
             ©2025 Gokul, LLC. All Rights Reserved.
           </p>
+
+          
         </div>
         <div className={styles.socialIcons}>
           <FaYoutube />
@@ -130,6 +134,7 @@ const Footer = () => {
           <FaTwitter />
           <FaPinterestP />
         </div>
+     
       </div>
     </footer>
   );

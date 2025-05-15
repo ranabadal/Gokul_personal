@@ -226,9 +226,12 @@ const HeroSection = () => {
                     </div>
                     <button className={styles.hero_section_bttn_right} onClick={nextSlide}><span>&rarr;</span></button>
                 </div>
+
+                
                 
                 
             </div>
+            
             
             {/* <div className={styles.hero_section_right_buttons}>
                 <button className={styles.order_button} onClick={() => navigate("/products")}>Order Now</button>
