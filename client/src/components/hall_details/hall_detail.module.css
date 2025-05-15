@@ -188,7 +188,6 @@
   color: #FFF3F5;
 }
 
-
 /* Expanded Hall Details */
 .hall_details.expanded {
   height: auto; /* Allow height to expand dynamically */
@@ -215,4 +214,72 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hall_details {
+    width: 100%;
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+  }
+  
+  .hall_details_left,
+  .hall_details_right {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .hall_details_left_top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .hall_details_right {
+    height: auto;
+  }
+  
+  .hall_details_left_top_left_heading {
+    font-size: 2rem;
+  }
+  
+  .hall_details_left_top_price {
+    font-size: 24px;
+  }
+
+  .hall_details_right {
+  width: 400px;
+  height: 300px;
+}
+  
+  .hall_details_left_rating_star img {
+    width: 16px;
+    height: 16px;
+  }
+/* 
+  .hall_details_left_cards_left {
+  width: 80px;
+  height: 80px;
+} */
+
+}
+
+@media (max-width: 480px) {
+  .hall_details_left_top_left_heading {
+    font-size: 1.5rem;
+  }
+  
+  .hall_details_left_top_price {
+    font-size: 20px;
+  }
+  
+  .hall_details_left_rating_number {
+    font-size: 1rem;
+  }
+  
+  .hall_details_left_bottom_box_button {
+    height: 45px;
+    font-size: 0.9rem;
+  }
 }

@@ -65,20 +65,21 @@ const HallDetails = ({
                     </div>
                     <div className={styles.hall_details_left_top_line2}>
                         <div className={styles.hall_details_left_top_price}>{price}</div>
-                        <div className={styles.hall_details_left_rating}>
+                        {/* <div className={styles.hall_details_left_rating}>
                             {[...Array(5)].map((_, index) => (
                                 <div key={index} className={styles.hall_details_left_rating_star}>
                                     <img src={icons.star} alt="star" />
                                 </div>
                             ))}
                             <div className={styles.hall_details_left_rating_number}>{rating}</div>
-                        </div>
+                        </div> */}
                     </div>
+                     </div>
                     <div className={styles.hall_details_left_top_seating}>
                         <div className={styles.hall_details_left_top_seating_left}>{seating}</div>
                         {/* <div className={styles.hall_details_left_top_seating_right}>{platePrice}</div> */}
                     </div>
-                </div>
+               
 
                 <div className={styles.hall_details_left_descption}>{description}</div>
 
