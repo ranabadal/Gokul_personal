@@ -102,10 +102,11 @@ const Footer = () => {
           {/* <img  src={gokul} alt="logo" /> */}
 
           <ul className={styles.navLinks}>
-          <li>About Chobani®</li>
-          <li>Careers</li>
-          <li>Press</li>
-          <li>Customer care</li>
+          <li>About Gokul</li>
+          <li>      Policy Info
+</li>
+          <li>Upcoming Products</li>
+          <li>Gifts</li>
           <li>Foodservice</li>
           </ul>
         </div>
@@ -119,7 +120,7 @@ const Footer = () => {
             <li>CA Transparency in Supply Chains Act</li>
           </ul>
           <p className={styles.copyright}>
-            ©2018 Chobani, LLC. All Rights Reserved.
+            ©2025 Gokul, LLC. All Rights Reserved.
           </p>
         </div>
         <div className={styles.socialIcons}>
