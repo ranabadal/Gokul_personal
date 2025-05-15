@@ -54,6 +54,13 @@
     align-items: center;
 }
 
+.buttonsinhero{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 150px;
+}
+
 .hero_section_left_div_1 {
     display: flex;
     flex-direction: column;

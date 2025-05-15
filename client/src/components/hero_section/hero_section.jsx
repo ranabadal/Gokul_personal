@@ -217,17 +217,23 @@ const HeroSection = () => {
 
                             
                         </p>
-                    </div>
-                    <button className={styles.hero_section_bttn_right} onClick={nextSlide}><span>&rarr;</span></button>
-                    
-                </div>
-                
-            </div>
-            
-            <div className={styles.hero_section_right_buttons}>
+                        <div className={styles.buttonsinhero}>
+                          <div className={styles.hero_section_right_buttons}>
                 <button className={styles.order_button} onClick={() => navigate("/products")}>Order Now</button>
                 <button className={styles.explore_button} onClick={() => navigate("/about")}>Explore More</button>
             </div>
+            </div>
+                    </div>
+                    <button className={styles.hero_section_bttn_right} onClick={nextSlide}><span>&rarr;</span></button>
+                </div>
+                
+                
+            </div>
+            
+            {/* <div className={styles.hero_section_right_buttons}>
+                <button className={styles.order_button} onClick={() => navigate("/products")}>Order Now</button>
+                <button className={styles.explore_button} onClick={() => navigate("/about")}>Explore More</button>
+            </div> */}
 
             <div className={styles.hero_section_bottom_dots}>
                 {slides.map((_, index) => (

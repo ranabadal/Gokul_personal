@@ -15,12 +15,12 @@ const Facilities = () => {
                 </div>
                 <div className={styles.facilities_section_left_mid}>
                     <span>
-                    Free Delivery within 20 km
+                    Delivery
                     </span>
                 </div>
                 <div className={styles.facilities_section_left_bottom}>
                     <span>
-                    Explore our edit of everything that ships within 24 hours
+                    Explore our edit of everything that ships
                     </span>
                 </div>
 
@@ -32,7 +32,7 @@ const Facilities = () => {
                 </div>
                 <div className={styles.facilities_section_middle_mid}>
                     <span>
-                     Best Quality guarantee
+                     Best Quality
                     </span>
                 </div>
                 <div className={styles.facilities_section_middle_bottom}>
@@ -48,7 +48,7 @@ const Facilities = () => {
                 </div>
                 <div className={styles.facilities_section_right_mid}>
                     <span>
-                    24X7 Support
+                  Support
                     </span>
                 </div>
                 <div className={styles.facilities_section_right_bottom}>
