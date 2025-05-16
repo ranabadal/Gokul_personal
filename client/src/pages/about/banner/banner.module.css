@@ -19,7 +19,7 @@
 
 .containerRight {
     width: 50%; /* Adaptive scaling */
-    min-height: 27.56rem;
+    /* min-height: 27.56rem; */
 }
 
 .containerRight img {
@@ -70,10 +70,7 @@
         width: 100%;
         text-align: center;
     }
-    .containerRight {
-   
-  height:40px;
-}
+
 
     .containerLeftTag, .containerLeftContent {
         width: 90%;
