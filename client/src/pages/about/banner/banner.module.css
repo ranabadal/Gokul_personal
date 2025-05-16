@@ -62,12 +62,18 @@
     .container {
         flex-direction: column; /* Stack elements */
         align-items: center;
+
+        height: min-content;
     }
 
     .containerLeft, .containerRight {
         width: 100%;
         text-align: center;
     }
+    .containerRight {
+   
+  height:40px;
+}
 
     .containerLeftTag, .containerLeftContent {
         width: 90%;

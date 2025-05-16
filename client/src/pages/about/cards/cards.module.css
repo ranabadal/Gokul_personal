@@ -1,131 +1,162 @@
-/* General Container */
 .container {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+    width: 100%;
+    height: 42.375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-/* Card Container */
 .subcontainer {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
+    height: 36.375rem; 
+    display: flex;
+    gap: 2.125rem; 
 }
-
-/* Card Styles */
-.subcontainercard1,
-.subcontainercard2,
+.subcontainercard1 {
+    position: relative;
+    width: 23.25rem; 
+    height: 36.375rem; 
+    border-radius: 1.25rem; 
+    border: 0.08875rem solid #A0A0A0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem; 
+    background: url(./assets/cardImage.png);
+    background-size: cover;
+}
+.subcontainercard2 {
+    position: relative;
+    width: 23.25rem; 
+    height: 36.375rem; 
+    border-radius: 1.25rem; 
+    border: 0.08875rem solid #A0A0A0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem; 
+    background: url(./assets/cardImage2.png);
+    background-size: cover;
+}
 .subcontainercard3 {
-  position: relative;
-  width: 23rem;
-  height: 36rem;
-  border-radius: 1.25rem;
-  border: 1px solid #A0A0A0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    width: 23.25rem; 
+    height: 36.375rem; 
+    border-radius: 1.25rem; 
+    border: 0.08875rem solid #A0A0A0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem; 
+    background: url(./assets/cardImage3.png);
+    background-size: cover;
 }
 
-/* Background Images */
-.subcontainercard1 { background: url(./assets/cardImage.png); }
-.subcontainercard2 { background: url(./assets/cardImage2.png); }
-.subcontainercard3 { background: url(./assets/cardImage3.png); }
-
-/* Hover Effects */
-.subcontainercard1:hover,
-.subcontainercard2:hover,
-.subcontainercard3:hover {
-  background: linear-gradient(rgba(227, 30, 36, 0.6), rgba(227, 30, 36, 0.6)), url(./assets/cardImage.png);
-  background-size: cover;
-  transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.subcontainercardorder,
-.subcontainercardtitle {
-  position: absolute;
-  color: #FFFFFF;
-  font-weight: 600;
-  display: none;
-}
-
-.subcontainercardorder {
-  top: 11rem;
-  font-size: 2rem;
-}
-
-.subcontainercardtitle {
-  top: 14rem;
-  font-size: 3rem;
-}
-
-/* Show Elements on Hover */
 .subcontainercard1:hover .subcontainercardorder,
-.subcontainercard1:hover .subcontainercardtitle,
+.subcontainercard1:hover .subcontainercardtitle {
+    display: block;
+}
 .subcontainercard2:hover .subcontainercardorder,
-.subcontainercard2:hover .subcontainercardtitle,
+.subcontainercard2:hover .subcontainercardtitle {
+    display: block;
+}
 .subcontainercard3:hover .subcontainercardorder,
 .subcontainercard3:hover .subcontainercardtitle {
-  display: block;
+    display: block;
 }
-
-/* Button */
+.subcontainercard1:hover .subcontainercardimg{
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcontainercard2:hover .subcontainercardimg{
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcontainercard3:hover .subcontainercardimg{
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcontainercard1:hover {
+    background: linear-gradient(rgba(227, 30, 36, 0.6), rgba(227, 30, 36, 0.6)), 
+    url(./assets/cardImage.png);
+    background-size: cover;
+}
+.subcontainercard2:hover {
+    background: linear-gradient(rgba(227, 30, 36, 0.6), rgba(227, 30, 36, 0.6)), 
+    url(./assets/cardImage2.png);
+    background-size: cover;
+}
+.subcontainercard3:hover {
+    background: linear-gradient(rgba(227, 30, 36, 0.6), rgba(227, 30, 36, 0.6)), 
+    url(./assets/cardImage3.png);
+    background-size: cover;
+}
+.subcontainercardorder {
+    position: absolute;
+    top: 11.276rem; 
+    font-weight: 600;
+    font-size: 2rem; 
+    color: #FFFFFF;
+    display: none;
+}
+.subcontainercardtitle {
+    position: absolute;
+    top: 14.464rem; 
+    font-weight: 600;
+    font-size: 3rem; 
+    color: #FFFFFF;
+    display: none;
+}
 .subcontainercardimg {
-  position: absolute;
-  top: 18rem;
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
-  background-color: #FFFFFF;
-  display: none;
-  cursor: pointer;
+    position: absolute;
+    top: 18.839rem; 
+    width: 6.26rem; 
+    height: 6.26rem; 
+    border-radius: 3.13rem; 
+    background-color: #FFFFFF;
+    display: none;
+    cursor: pointer;
 }
 
-/* Show Button on Hover */
-.subcontainercard1:hover .subcontainercardimg,
-.subcontainercard2:hover .subcontainercardimg,
-.subcontainercard3:hover .subcontainercardimg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-/* 🔹 Responsive Design */
-@media (max-width: 1024px) { /* Tablets */
+
+@media (max-width: 1024px) {
+  .container {
+    height: auto; /* Adjust container height */
+    padding: 2rem;
+  }
+
   .subcontainer {
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center;
     gap: 1.5rem;
   }
 
   .subcontainercard1,
   .subcontainercard2,
   .subcontainercard3 {
-    width: 21rem;
-    height: 34rem;
+    width: 21rem; /* Adjust width */
+    height: 32rem; /* Reduce height */
   }
 
   .subcontainercardorder {
     font-size: 1.8rem;
+    top: 10rem;
   }
 
   .subcontainercardtitle {
     font-size: 2.5rem;
+    top: 13rem;
   }
 }
 
-@media (max-width: 768px) { /* Small Tablets & Mobile */
+@media (max-width: 768px) {
   .subcontainer {
-    flex-direction: column;
+    flex-direction: column; /* Stack cards vertically */
     align-items: center;
     gap: 1rem;
   }
@@ -134,47 +165,59 @@
   .subcontainercard2,
   .subcontainercard3 {
     width: 90%;
-    height: auto;
-    min-height: 30rem;
+    height: 28rem;
   }
 
   .subcontainercardorder {
-    top: 10rem;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    top: 8rem;
   }
 
   .subcontainercardtitle {
-    top: 13rem;
     font-size: 2rem;
+    top: 11rem;
   }
 
   .subcontainercardimg {
     width: 5rem;
     height: 5rem;
+    top: 15rem;
   }
 }
 
-@media (max-width: 480px) { /* Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+   
+  }
+
+  .subcontainer {
+    gap: 0.5rem;
+     display: flex;
+    height: auto; /* Adjust container height */
+    flex-direction: column; /* Stack cards vertically */
+  }
+
   .subcontainercard1,
   .subcontainercard2,
   .subcontainercard3 {
-    width: 100%;
-    height: auto;
-    min-height: 28rem;
+    width: 250px;
+    height: 20rem; /* Adjust height */
   }
 
   .subcontainercardorder {
-    top: 9rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    top: 7rem;
   }
 
   .subcontainercardtitle {
-    top: 12rem;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    top: 10rem;
   }
 
   .subcontainercardimg {
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 4rem;
+    height: 4rem;
+    top: 13rem;
   }
 }
