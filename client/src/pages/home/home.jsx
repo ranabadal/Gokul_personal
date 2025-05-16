@@ -153,6 +153,7 @@ const Home = () => {
       const response = await axios.post(
         `${BASE_URL}/api/wishlist`,
         { productId: productIdStr },
+       
         {
           headers: {
             Authorization: `Bearer ${token}`,

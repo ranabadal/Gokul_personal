@@ -225,11 +225,7 @@ const HeroSection = () => {
             </div>
                     </div>
                     <button className={styles.hero_section_bttn_right} onClick={nextSlide}><span>&rarr;</span></button>
-                </div>
-
-                
-                
-                
+                </div>                
             </div>
             
             

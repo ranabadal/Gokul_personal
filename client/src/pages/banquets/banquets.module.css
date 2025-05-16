@@ -20,9 +20,6 @@
     position: relative;
 } */
 
-.mainConatiner {
-     /* <- Push content below heading/image */
-}
 
 
 
@@ -57,9 +54,9 @@
     width: 100%;
 }
 
-.mainConatiner {
+/* .mainConatiner {
     padding-bottom: 100px;
-}
+} */
 
 /* Responsive Enhancements */
 @media (max-width: 1024px) {
