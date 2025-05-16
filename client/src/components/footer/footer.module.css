@@ -74,6 +74,7 @@
 .logo {
   width: 120px;
   height: auto;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

@@ -96,17 +96,17 @@ const Footer = () => {
   return (
    <footer className={styles.footer}>
   <div className={styles.logoContainer}>
-    <img src={gokul} alt="Gokul Logo" className={styles.logo} />
+    <img src={gokul} alt="Gokul Logo" className={styles.logo} onClick={() => navigate("/")}/>
   </div>
 
   <div className={styles.topSection}>
     <div className={styles.left}>
       <ul className={styles.navLinks}>
         <li onClick={() => navigate("/about")}>About Gokul</li>
-        <li>Policy Info</li>
-        <li>Contact us</li>
-        <li>Gifts</li>
-        <li>Foodservice</li>
+        <li onClick={() => navigate("/about")}>Policy Info</li>
+        <li onClick={() => navigate("/contact")}>Contact us</li>
+        <li onClick={() => navigate("/giftbox")}>Gifts</li>
+        <li onClick={() => navigate("/products")}>Foodservice</li>
       </ul>
     </div>
   </div>
