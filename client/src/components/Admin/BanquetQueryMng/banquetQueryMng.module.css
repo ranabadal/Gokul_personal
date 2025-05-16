@@ -117,7 +117,7 @@
     padding: 8px;
   }
 
-  button {
+  .first,.second, .third {
     padding: 6px 10px;
     font-size: 14px;
   }

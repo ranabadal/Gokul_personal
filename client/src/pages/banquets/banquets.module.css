@@ -1,3 +1,4 @@
+/* Original Code (Unchanged) */
 *{
     margin: 0;
     padding: 0;
@@ -9,9 +10,7 @@
     display: flex;
     flex-direction: column;
     gap: 17.25rem;
-    
 }
-
 
 /* .mainConatiner {
     background-size: cover;
@@ -19,44 +18,28 @@
     background-repeat: no-repeat;
     min-height: 100vh;
     position: relative;
+} */
 
-  } */
+.mainConatiner {
+     /* <- Push content below heading/image */
+}
 
-  .mainConatiner {
-    background-size:auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: auto;
-    position: relative;
-    padding-top: 400px; /* <- Push content below heading/image */
-  }
+
+
+.topRightHeading {
+   
   
+
   
-  .topRightImage {
-    position: absolute;
-    top: 20px;
-    right: 70px;
-    width: 390px; 
-    height: 490px;
-    z-index: 10;
-  }
-  
-  .topRightHeading {
-    position: absolute;
-    max-width: 1000px;
-    top: 150px;
-    left: 160px; /* adjust depending on your image width */
     font-size: 2rem;
     color: rgba(212, 175, 55, 1);
     font-weight: 400;
     font-size: 100px;
-    font-family: 'Madimi One';
-    z-index: 10;
+ 
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
-  }
-  
-  
-  .banquetsContainer {
+}
+
+.banquetsContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,18 +49,51 @@
     position: relative;
 }
 
-
- .hall_details {
-
-display: flex;
-justify-content: center;
-align-items: center;
-   
+.hall_details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 40px;
     width: 100%;
-} 
+}
 
 .mainConatiner {
     padding-bottom: 100px;
-  }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 1024px) {
+    .topRightHeading {
+        font-size: 80px;
+       
+    }
+    
+
+}
+
+@media (max-width: 768px) {
   
+
+    .topRightHeading {
+        font-size: 40px;
+    }
+
+
+    .banquetsContainer {
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainConatiner {
+        padding-top: 20px;
+    }
+
+    .topRightHeading {
+        font-size: 30px;
+       
+        text-align: center;
+    }
+
+  
+}

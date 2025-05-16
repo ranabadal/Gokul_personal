@@ -1,25 +1,34 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 .center {
     width: 100%;
-    /* height: 1476px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 24px;
-    padding: 48px 0px;
-    
+    gap: 2vw; /* Scales dynamically */
+    padding: 4vw 0; /* Adjusts padding based on viewport */
 }
 
-.title{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-    margin-left: 150px;
-    margin-top: 48px;
-
+.title {
+    margin-left: 10%; /* Scales well across screens */
+    margin-top: 4vw; /* Adjusts spacing for better responsiveness */
+    font-size: clamp(2rem, 5vw, 3rem); /* Ensures scalability */
 }
 
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+    .title {
+        margin-left: 5%;
+        text-align: center; /* Center aligns for smaller screens */
+    }
 
-
+    .center {
+        gap: 3vw; /* Adjust spacing */
+        padding: 6vw 0;
+    }
+}

@@ -47,7 +47,7 @@ const DealsTimer = () => {
   useEffect(() => {
     const fetchDeal = async () => {
       try {
-        const response = await fetch(`${BASE_URL}deals/active`);
+        const response = await fetch(`${BASE_URL}/api/deals/active`);
         const data = await response.json();
 
         if (data.success && data.todayDeal) {

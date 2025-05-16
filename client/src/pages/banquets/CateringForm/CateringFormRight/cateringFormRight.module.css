@@ -219,3 +219,145 @@
     background: darkred;
   }
   
+
+  /* Responsive Overrides – DO NOT CHANGE THE OLD CODE, ADD THIS BELOW */
+
+/* For devices up to 768px wide */
+@media (max-width: 768px) {
+  /* Order summary adjustments */
+  .orderSummary {
+    width: 90%; /* Use a fluid width */
+    padding: 16px; /* Reduce padding slightly */
+  }
+
+  /* Popup adjustments */
+  .popup {
+    width: 90%;
+    padding: 16px;
+  }
+
+  /* Image slider container */
+  .imageSlider {
+    height: 200px; /* Decrease height for smaller devices */
+    max-width: 90%;
+    margin: 20px auto;
+  }
+
+  /* Ensure slider images cover the container */
+  .sliderImage {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Order item adjustments */
+  .orderItem {
+    flex-direction: column; /* Stack content vertically */
+    align-items: flex-start;
+  }
+  
+  /* Header adjustments within order items */
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Adjust text sizes for order details */
+  .orderTitle,
+  .orderPrice {
+    font-size: 1rem;
+  }
+
+  /* Promo section stacked layout */
+  .promoSection {
+    flex-direction: column;
+  }
+
+  /* Adjust dropdown and button sizes */
+  .deliverySelect {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .checkoutButton {
+    padding: 10px;
+    font-size: 1rem;
+  }
+}
+
+/* For devices up to 480px wide */
+@media (max-width: 480px) {
+  .orderSummary {
+    padding: 12px;
+  }
+  
+  .popup {
+    padding: 12px;
+    width: 95%;
+  }
+  
+  .popupContent {
+    font-size: 0.9rem;
+  }
+  
+  .header {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .orderTitle {
+    font-size: 0.9rem;
+  }
+  
+  .orderPrice {
+    font-size: 1.1rem;
+  }
+  
+  .imageSlider {
+    height: 180px;
+  }
+  
+  .sliderImage {
+    object-fit: cover;
+  }
+  
+  .promoInput {
+    padding: 6px;
+  }
+  
+  .applyButton {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .deliverySelect {
+    font-size: 0.85rem;
+  }
+  
+  .chargeItem,
+  .chargeTotal {
+    font-size: 0.85rem;
+  }
+  
+  .checkoutButton {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+
+    .prevButton, .nextButton {
+    /* background: rgba(0, 0, 0, 0.5); */
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 10px;
+  }
+
+  .navigationButtons {
+    position: absolute;
+    top: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

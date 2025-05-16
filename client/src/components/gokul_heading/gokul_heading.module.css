@@ -1,16 +1,47 @@
 .gokul_heading {
     width: 100%;
-    height: 6.25rem; /* 100px → 6.25rem */
+    height: 6.25rem; /* Keeps original height */
     display: flex;
     align-items: center;
     justify-content: center;
     color: #E31E24;
     font-family: "Madimi One", sans-serif;
     font-weight: 400;
-    /* margin-top: 3rem; 48px → 3rem */
 }
 
+/* Heading Text */
 .gokul_heading span {
     color: #E31E24;
-    font-size: 4rem; /* 64px → 4rem */
+    font-size: 4rem; /* Keeps original size */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .gokul_heading span {
+        font-size: 3.5rem; /* Slightly smaller for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .gokul_heading {
+        height: auto;
+        padding: 1.5rem;
+    }
+
+    .gokul_heading span {
+        font-size: 3rem; /* Adapts for medium screens */
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .gokul_heading {
+        height: auto;
+        padding: 1rem;
+    }
+
+    .gokul_heading span {
+        font-size: 2.5rem; /* Optimized for mobile */
+        text-align: center;
+    }
 }

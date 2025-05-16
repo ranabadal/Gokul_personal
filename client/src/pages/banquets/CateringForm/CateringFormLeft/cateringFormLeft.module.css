@@ -2,6 +2,7 @@
 
 .cateringForm{
     margin: 10px 0;
+    height: max-content;
   }
   
   .mainHeading{
@@ -190,7 +191,7 @@
   
   .eventTimeAndDate{
     max-width: 852px;
-    max-height: 453px;
+    /* max-height: 453px; */
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -379,23 +380,78 @@ flex-direction: row;
     width: 856px;
     height: 138px;
   }
-  
-  /* Responsive Styling */
-  @media (max-width: 768px) {
-    .heroSec,
-    .calendarHeading,
-    .carts {
-        max-width: 100%;
-        padding: 10px;
-    }
-  
-    .heroSecButton {
-        font-size: 14px;
-        height: 45px;
-    }
-  
-    .carts {
-        gap: 12px; /* Reduce spacing for smaller screens */
-    }
+
+
+  /* Responsive Overrides - DO NOT CHANGE THE OLD CODE, ADD THIS BELOW */
+
+/* For devices up to 768px wide */
+@media (max-width: 768px) {
+  /* Adjust the overall form container */
+  .cateringForm {
+    max-width: 100%;
+    padding: 0 1rem;
   }
-  
+
+  /* Make the fields container flexible and stack items */
+  .fields {
+    width: 100%;
+    padding: 24px;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Ensure the input fields fill their container */
+  .input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Adjust hero section container */
+  .heroSec {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  /* Make event/time and comment sections fluid */
+  .eventTimeAndDate,
+  .comments,
+  .textarea {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* For time section elements */
+  .timeSection,
+  .time {
+    width: 100%;
+  }
+
+  /* Stack the event time and date container items vertically */
+  .eventTimeAndDateContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* For devices up to 480px wide */
+@media (max-width: 480px) {
+  /* Scale down heading fonts */
+  .mainHeading,
+  .heroSecHeading,
+  .calendarHeading,
+  .timeHeading,
+  .commentHeading {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  /* Slightly reduce button font size */
+  .heroSecButton {
+    font-size: 14px;
+  }
+
+  /* Further reduce padding on the fields container if needed */
+  .fields {
+    padding: 16px;
+  }
+}

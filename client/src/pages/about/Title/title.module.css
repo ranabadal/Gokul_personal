@@ -1,10 +1,17 @@
-.title{
+.title {
     display: flex;
-    width: 1184px;
-    height: 74px;
-    font-size: 48px;
+    width: 100%; /* Ensure flexibility */
+    max-width: 1184px; /* Maintain a limit on large screens */
+    height: auto; /* Adjust height dynamically */
+    font-size: 4vw; /* Scale text size relative to viewport width */
     color: #E31E24;
     font-weight: 600;
-    
+}
 
+/* Fine-tune for smaller screens */
+@media (max-width: 768px) {
+    .title {
+        font-size: 6vw; /* Increase font-size scaling for better readability */
+        text-align: center; /* Center align for mobile views */
+    }
 }

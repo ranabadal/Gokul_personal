@@ -265,21 +265,52 @@
 
 }
 
-@media (max-width: 480px) {
+@media (max-width: 432px) {
   .hall_details_left_top_left_heading {
-    font-size: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .hall_details{
+    max-width: 450px;
+    /* margin:10px; */
   }
   
   .hall_details_left_top_price {
-    font-size: 20px;
+    font-size: 16px;
   }
+
+    .hall_details_right {
+  width: 400px;
+  height: 250px;
+}
+
+.hall_details_left_descption {
   
+  font-size: 12px;
+
+}
+  
+
+  .hall_details_left_top_left_heading {
+    font-size: 1.1rem;
+  }
+
+
   .hall_details_left_rating_number {
-    font-size: 1rem;
+    font-size: 20px;
   }
   
   .hall_details_left_bottom_box_button {
     height: 45px;
     font-size: 0.9rem;
   }
+}
+
+
+@media (max-width: 395px) {
+
+      .hall_details_right {
+  width: 360px;
+  height: 250px;
+}
 }

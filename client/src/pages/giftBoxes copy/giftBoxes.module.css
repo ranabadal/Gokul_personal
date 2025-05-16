@@ -144,3 +144,126 @@
   font-size: 1.2rem;
   margin-top: 20px;
 }
+
+/* ---------------------------------
+   Responsive Overrides – DO NOT CHANGE OLD CODE
+--------------------------------- */
+
+/* For tablet screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .contentContainer {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+  }
+  .leftSection {
+    width: 100%; /* Allow left section to use full width */
+    padding: 15px;
+  }
+  .rightSection {
+    max-width: 100%;
+    width: 100%;
+    margin-top: 20px; /* Place Order Summary below left section */
+    justify-content: center;
+  }
+  .heading {
+    font-size: 1.5rem;
+  }
+  .subcategories {
+    width: 100%;
+    padding: 15px;
+    gap: 15px;
+  }
+  .subcategoryImage {
+    width: 100px;
+    height: 85px;
+  }
+  .categoryItem img {
+    width: 60px;
+    height: 60px;
+  }
+  .productsList {
+    gap: 15px;
+  }
+  .loadMore {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+/* For mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .heading {
+    font-size: 1.25rem;
+  }
+  .contentContainer {
+    padding: 10px;
+    gap: 10px;
+  }
+  .leftSection {
+    padding: 10px;
+  }
+  .subcategories {
+    gap: 10px;
+    padding: 8px;
+  }
+
+  
+.subcategoriesWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.arrow {
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  color: #e31e24;
+}
+.subcategories {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  gap: 10px;
+  padding: 10px;
+  width: 95%;
+}
+
+   .subcategoryName {
+    white-space: normal;       /* Allow the text to wrap */
+    word-break: break-word;     /* Break words if necessary */
+    overflow-wrap: break-word;  /* Support long words */
+    text-align: center;         /* Center align the text */
+    font-size: 16px;            /* Optionally reduce the font-size */
+  }
+
+  /* Optionally adjust card dimensions on mobile */
+  .subcategoryCard {
+    width: auto;              /* Let the card adjust its width */
+    padding: 5px;             /* Ensure no extra spacing causes overflow */
+  }
+
+
+  .subcategoryName{
+    font-size: 10px;
+  }
+  .subcategoryImage {
+    width: 50px;
+    height: 45px;
+  }
+  .categoryItem {
+    min-width: 80px;
+  }
+  .categoryItem img {
+    width: 50px;
+    height: 50px;
+  }
+  .productsList {
+    gap: 10px;
+  }
+  .loadMore {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
+}

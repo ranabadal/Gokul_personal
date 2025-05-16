@@ -1,52 +1,76 @@
 .container {
     width: 100%;
-    height: 27.56rem; 
+    min-height: 27.56rem; /* Allow height flexibility */
     display: flex;
     justify-content: space-between;
     background-color: #E31E24;
+    flex-wrap: wrap; /* Allows stacking on smaller screens */
+    padding: 2rem; /* Adaptive padding */
 }
+
 .containerLeft {
-    width: 42.69rem; 
-    height: 27.56rem; 
+    width: 45%; /* More adaptive */
+    min-height: 27.56rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding: 3rem 3rem 3rem 6rem; 
+    padding: 2rem;
 }
+
 .containerRight {
-    width: 45.81rem; 
-    height: 27.56rem; 
+    width: 50%; /* Adaptive scaling */
+    min-height: 27.56rem;
 }
+
 .containerRight img {
     width: 100%;
-    height: 100%;
+    height: auto; /* Maintain aspect ratio */
 }
+
 .containerLeftTag {
-    width: 33.69rem;
-    height: 7.88rem; 
+    width: 80%;
     font-weight: 400;
-    font-size: 3rem; 
+    font-size: clamp(2rem, 4vw, 3rem); /* Scales across screen sizes */
     color: #FFFFFF;
     text-align: left;
 }
+
 .containerLeftContent {
-    height: 5.81rem; 
-    font-weight: 500;
-    font-size: 1.63rem; 
+    font-size: clamp(1rem, 2vw, 1.63rem);
     color: #FFFFFF;
     text-align: left;
 }
+
 .containerLeftBtn {
-    width: 22.31rem; 
-    height: 4.5rem; 
+    width: clamp(15rem, 40%, 22.31rem);
+    height: clamp(3rem, 4vh, 4.5rem);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 1.13rem; 
+    border-radius: 1rem;
     background-color: #FFFFFF;
 }
+
 .containerLeftBtn span {
+    font-size: clamp(1rem, 2vw, 1.5rem);
     font-weight: 700;
-    font-size: 1.5rem; 
     color: #E31E24;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack elements */
+        align-items: center;
+    }
+
+    .containerLeft, .containerRight {
+        width: 100%;
+        text-align: center;
+    }
+
+    .containerLeftTag, .containerLeftContent {
+        width: 90%;
+        text-align: center;
+    }
 }

@@ -129,7 +129,7 @@ const CateringForm = () => {
 
   return (
     <>
-      <AboveHeader />
+
       <Header />
       {!showPreview ? (
         <div className={styles.container}>

@@ -290,6 +290,30 @@
     .hero_section_bottom_dots {
         display: none;
     }
+
+    
+.buttonsinhero{
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.order_button,
+.explore_button {
+    width: 18rem;
+    height: 4.5rem;
+    border-radius: 1.125rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.hero_section_right_buttons{
+    margin: 0;
+}
 }
 
 /* Small Mobile Devices */

@@ -256,3 +256,99 @@
   font-size: 1.2rem;
   border-radius: 50%;
 }
+
+
+
+/* ----------------------------------------
+   Responsive Overrides – DO NOT MODIFY OLD CODE
+   Append this to the end of your CSS
+---------------------------------------- */
+
+/* Tablet screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .product_details {
+    flex-direction: column;  /* Stack image and info vertically */
+    align-items: center;
+    padding: 8px;            /* Slightly reduce padding */
+    margin: 8px;             /* Adjust margin if needed */
+  }
+  
+  .product_image img {
+    width: 100%;             /* Allow image to fill container */
+    max-width: 100%;
+    height: auto;            /* Adaptive height */
+  }
+  
+  .product_info {
+    margin-left: 0;         /* Remove left margin */
+    text-align: center;      /* Center-align text */
+    margin-top: 15px;        /* Add some spacing between image & info */
+  }
+  
+  .product_name {
+    font-size: 28px;         /* Smaller font size on tablet */
+  }
+  
+  .product_description {
+    font-size: 16px;
+  }
+  
+  .product_price {
+    font-size: 18px;
+  }
+  
+  .product_min_order {
+    font-size: 16px;
+  }
+  
+  .select_button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .product_details {
+    max-width: 350px;
+    padding: 6px;
+    margin: 6px;
+  }
+
+    .product_image img {
+    width: fit-content;             /* Allow image to fill container */
+    /* max-width: 100%; */
+    height: auto;            /* Adaptive height */
+  }
+  
+  .product_name {
+    font-size: 24px;
+  }
+  
+  .product_description {
+    font-size: 14px;
+  }
+  
+  .product_price {
+    font-size: 16px;
+  }
+  
+  .product_min_order {
+    font-size: 14px;
+  }
+  
+  .select_button {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  
+  /* If needed, adjust other elements specifically for mobile */
+  .handbags_container {
+    gap: 0.5rem;
+  }
+  
+  .handbag_item {
+    padding: 0.5rem;
+    flex: 1 1 150px;
+  }
+}

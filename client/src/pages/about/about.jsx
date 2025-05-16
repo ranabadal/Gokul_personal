@@ -50,7 +50,7 @@ import Gokul from "../about/Assets/gokul.webp";
 function About() {
   return (
     <div className={styles.aboutContainer}>
-      <AboveHeader />
+
       <Header />
 
       {/* Pass Props Dynamically */}

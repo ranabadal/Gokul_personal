@@ -38,7 +38,7 @@
     resize: vertical;
   }
   
-  button {
+  .first, .sec {
     padding: 10px 15px;
     font-size: 14px;
     border: none;

@@ -1,15 +1,27 @@
-.container{
-
+/* ------------------------------
+   Default styles for computer screens
+   ------------------------------ */
+.container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
- padding: 48px 96px;
-
-  margin-right: 80px; 
-  padding: 25px 24px;
+  height: max-content;
+  padding: 48px 96px;
+  margin-right: 80px;
   box-sizing: border-box;
   border-radius: 20px;
-  box-shadow: 2px 1px 8px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 1px 8px 0px rgba(0, 0, 0, 0.1);
 }
 
+/* ------------------------------
+   Responsive overrides for mobile screens
+   (CateringFormLeft on top; OrderSummary below)
+   ------------------------------ */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 25px 24px;
+    margin-right: 0;
+  }
+}

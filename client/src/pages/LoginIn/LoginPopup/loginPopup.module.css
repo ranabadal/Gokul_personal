@@ -1,93 +1,147 @@
+/* General Styles */
 .popupContainer {
-  width: 635.04px;
-  height: 600px;
-  background-color: #FFF3F5;
-  border-radius: 10px;
-  padding: 20px;
+  width: 90%;
+  max-width: 400px;
   margin: auto;
-  margin-top: 5%;
-  outline: none;
-  border-radius: 18px;
-}
-
-.tabs {
-  display: flex;
-  justify-content: space-between;
-  font-size: 24px;
-  font-weight: 500;
-}
-
-.activeTab {
-  color: #E31E24 !important;
-  font-weight: 500 !important;
-  font-size: 24px;
-}
-
-.inactiveTab {
-  color: #888 !important;
-  font-size: 24px;
-}
-
-.formContainer {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.title {
-  font-size: 20px;
-  font-weight: 500;
-  margin: 20px 0;
+/* Toggle Buttons for Login & Signup */
+.toggleContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.activeToggle {
+  background-color: #E1353C;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.inactiveToggle {
+  background-color: white;
+  color: #E1353C;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #E1353C;
+  cursor: pointer;
+}
+
+/* Form Styling */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
 }
 
 .inputField {
-  width: 540px !important;
-  height: 72px !important;
-  margin-bottom: 10px !important;
+  width: 100%;
 }
 
 .forgotPassword {
-  font-size: 20px;
-  color: #555;
+  text-align: right;
+  color: #007bff;
   cursor: pointer;
-  align-self: flex-end;
-  margin-right: 15px;
-  font-weight: 500px;
 }
 
-.loginButton, .signupButton {
-  width: 539.04px !important;
-  height: 72px !important;
-  border-radius: 70px !important;
-  background-color: #E31E24 !important;
-  color: white !important;
-  font-size: 16px !important;
-  margin-top: 10px !important;
+/* Buttons */
+.loginButton,
+.signupButton {
+  background-color: #E1353C;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.orText {
-  margin: 20px 0;
-  color: #666;
-  font-size: 20px;
-  font-weight: 400;
+.loginButton:hover,
+.signupButton:hover {
+  background-color: #C13032;
 }
 
+/* Social Login */
 .socialButtons {
   display: flex;
   gap: 10px;
+  justify-content: center;
 }
 
 .socialButton {
-  width: 200px !important;
-  height: 50px !important;
-  border: 1px solid #ccc !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 16px !important;
-  text-transform: none !important;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
 }
 
 .icon {
-  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px) { /* Tablets */
+  .popupContainer {
+    width: 85%;
+    padding: 15px;
+  }
+
+  .toggleContainer {
+    flex-direction: row;
+  }
+
+  .formContainer {
+    gap: 12px;
+  }
+
+  .loginButton,
+  .signupButton {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .socialButtons {
+    flex-direction: row;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) { /* Mobile Devices */
+  .popupContainer {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .toggleContainer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .formContainer {
+    gap: 10px;
+  }
+
+  .loginButton,
+  .signupButton {
+    font-size: 14px;
+    padding: 9px;
+  }
+
+  .socialButtons {
+    flex-direction: column;
+  }
 }
