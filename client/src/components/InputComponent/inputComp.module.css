@@ -53,80 +53,88 @@
   cursor: pointer;
   color: #E31E24;
 }
-
 @media (max-width: 1024px) {
-  .input {
-    height: 40px;
+  .inputField {
+    height: auto; /* Allow flexibility */
+    margin-bottom: 10px;
   }
 
-  .inputField {
-    height: 50px;
-    margin: 0px 0;
+  .input {
+    height: 45px;
+    font-size: 18px; /* Adjust text size */
+    padding-left: 50px;
   }
 
   .inputIcon {
+    width: 25px;
+    height: 22px;
     left: 12px;
-    top: 34%;
-    width: 28px;
-    height: 24px;
   }
 
   .eyeIcon {
-    top: 25px;
+    right: 15px; /* Adjust positioning */
   }
 }
 
 @media (max-width: 768px) {
   .input {
-    height: 35px;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 40px;
   }
 
   .inputField {
-    height: 40px;
-    margin: 5px 0;
+    height: auto;
+    margin-bottom: 8px;
   }
 
   .inputIcon {
-    left: 12px;
-    top: 40%;
-    width: 25px;
-    height: 20px;
+    width: 20px;
+    height: 18px;
+    left: 10px;
   }
 
   .eyeIcon {
-    top: 40%;
-    right: 20px;
-    color: #005026;
+    right: 12px;
+    font-size: 14px;
+  }
+
+  .error {
+    font-size: 12px;
+    bottom: -20px;
   }
 }
 
 @media (max-width: 480px) {
   .input {
-    padding-left: 45px;
-    height: 32px;
-    font-size: 16px;
+    height: 35px;
+    font-size: 14px;
+    padding-left: 35px;
   }
 
   .inputField {
-    height: 25px;
-    margin: 12px 0;
+    height: auto;
+    margin-bottom: 5px;
   }
 
   .inputIcon {
-    left: 10px;
-    top: 22%;
-    width: 26px;
-    height: 18px;
-  }
-
-  .input::placeholder {
-    font-size: 14px;
-    padding-right: 20px;
+    width: 18px;
+    height: 16px;
+    left: 8px;
   }
 
   .eyeIcon {
-    top: 55%;
-    right: 10px;
-    color: #005026;
+    left: 110px;
+    font-size: 12px;
+  }
+
+  .input::placeholder {
+    font-size: 13px;
+    padding-right: 15px;
+  }
+
+  .error {
+    font-size: 10px;
+    bottom: -15px;
   }
 }

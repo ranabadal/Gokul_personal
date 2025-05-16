@@ -243,3 +243,95 @@ button:hover {
 .cancelBtn:hover {
     background-color: #B71C1C;
 }
+
+
+
+@media (max-width: 1024px) {
+  .boking_Container {
+    padding: 32px 64px; /* Reduce padding for smaller screens */
+  }
+
+  .boking_Container_main {
+    width: 90%; /* Adjust width */
+    max-width: 650px;
+  }
+
+  .Heading {
+    font-size: 1.6rem; /* Adjust heading size */
+  }
+
+  .pagination button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .boking_Container {
+    padding: 24px 48px;
+  }
+
+  .boking_Container_main {
+    width: 95%;
+    max-width: 500px; /* Further reduce size */
+    padding: 20px;
+  }
+
+  .bookingCard {
+    padding: 12px;
+  }
+
+  .Heading {
+    font-size: 1.4rem;
+  }
+
+  .pagination {
+    gap: 8px; /* Adjust spacing */
+  }
+
+  .pagination button {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .boking_Container {
+    padding: 16px;
+  }
+
+  .boking_Container_main {
+    width: 100%;
+    max-width: 380px; /* Mobile-friendly size */
+    padding: 16px;
+  }
+
+  .Heading {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  .bookingCard {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .pagination {
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .pagination button {
+    font-size: 0.8rem;
+    padding: 3px 6px;
+  }
+
+  .modalContent {
+    width: 90%;
+    padding: 1.5rem; /* Adjust modal padding */
+  }
+
+  .closeBtn {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+}

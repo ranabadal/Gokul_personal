@@ -6,6 +6,14 @@
     padding: 48px 96px;
 }
 
+.form > *{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 .profileContainer {
     width: 600px;
@@ -15,12 +23,13 @@
     box-shadow: 2px 1px 8px 0px rgba(0, 0, 0, 0.1);
   }
   
-  .form {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
+    .form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
   
+
   .header{
     display: flex;
     flex-direction: row;
@@ -34,7 +43,7 @@
     font-size: 32px;
     font-weight: 400;
     font-family: 'Inter';
-    color: #38613D;
+    
     /* margin-bottom: 20px; */
   }
   
@@ -100,4 +109,71 @@
     .uploadLabel {
       font-size: 16px;
     }
+  }
+
+  @media (max-width: 440px) {
+    .updateProfileMain {
+      padding: 16px; /* Reduced padding for smaller screens */
+    }
+    .profileContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 12px; /* Adjusted padding for better fit */
+    }
+    .form {
+      gap: 8px; /* Reduced gap for compact layout */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .form > div {
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%; /* Ensure full width for smaller screens */
+    }
+    .header {
+      gap: 6px; /* Adjusted gap for smaller screens */
+    }
+    .heading {
+      font-size: 18px; /* Further reduced font size for better readability */
+      text-align: center; /* Center-align heading for smaller screens */
+    }
+    .profilePic {
+      width: 50px; /* Smaller profile picture */
+      height: 50px;
+    }
+    .uploadLabel {
+      font-size: 12px; /* Smaller font size for labels */
+      margin-top: 6px; /* Adjusted margin */
+    }
+    .img {
+      width: 14px; /* Adjusted image size */
+    }
+    .profilePicContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px; /* Reduced margin */
+    }
+    .uploadInput {
+      margin-top: 6px; /* Adjusted margin */
+    }
+    Button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px; /* Reduced button font size */
+      /* padding: 8px 16px; Adjusted button padding */
+      width: 100%; /* Set button width to auto for smaller screens */
+      max-width: 18rem; /* Limit the maximum width of the button */
+    }
+
   }

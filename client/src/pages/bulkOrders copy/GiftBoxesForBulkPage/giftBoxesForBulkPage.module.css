@@ -344,3 +344,102 @@
   .closeButton:hover {
     background: #C21A1F;
   }
+
+
+
+
+
+
+  @media (max-width: 1024px) {
+  .selectedBoxMainContainer {
+    flex-direction: column; /* Stack selected boxes vertically */
+    align-items: center;
+  }
+
+  .selectedBoxContainer, .otherBoxes {
+    width: 90%; /* Adjust width */
+  }
+
+  .boxSelection {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Flexible grid */
+  }
+}
+
+@media (max-width: 768px) {
+  .giftBoxContainer {
+    padding: 15px;
+    max-height: 600px; /* Adjust max height */
+  }
+
+  .subcategories {
+    padding: 5px; /* Reduce padding */
+  }
+
+  .subcategoryImage {
+    width: 40px; /* Scale images */
+  }
+
+  .boxCard {
+    max-width: 250px;
+    max-height: 320px;
+  }
+
+  .handbagSelection {
+    gap: 10px; /* Reduce spacing */
+  }
+
+  .handbagCard {
+    padding: 8px;
+  }
+
+  .quantitySelector button {
+    width: 25px;
+    height: 25px;
+    font-size: 14px; /* Adjust button size */
+  }
+
+  .selectButton {
+    font-size: 14px;
+    padding: 8px 15px; /* Adjust button padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .giftBoxContainer {
+    padding: 10px;
+  }
+
+  .subcategoriesWrapper {
+    flex-direction: column; /* Stack categories */
+    align-items: center;
+  }
+
+  .boxSelection {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjust grid */
+  }
+
+  .boxCard {
+    max-width: 220px;
+    max-height: 280px;
+    padding: 10px;
+  }
+
+  .handbagImage {
+    width: 50px;
+  }
+
+  .quantitySelector {
+    flex-direction: column; /* Adjust quantity layout */
+    gap: 5px;
+  }
+
+  .imageModalContent {
+    max-width: 90%; /* Adjust modal width */
+  }
+
+  .closeButton {
+    font-size: 16px; /* Adjust close button */
+    top: 8px;
+    right: 8px;
+  }
+}

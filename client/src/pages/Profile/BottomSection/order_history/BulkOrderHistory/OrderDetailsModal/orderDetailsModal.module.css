@@ -63,3 +63,73 @@
 .closeBtn:hover {
     background-color: #B71C1C;
 }
+
+
+
+
+@media (max-width: 1024px) {
+  .modalContent {
+    width: 85%;
+    padding: 2rem; /* Adjust padding */
+  }
+
+  .modalHeading {
+    font-size: 1.8rem; /* Scale heading */
+  }
+
+  .modalBody {
+    font-size: 1rem; /* Adjust text size */
+    padding-right: 0.3rem;
+  }
+
+  .closeBtn {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.8rem; /* Adjust button size */
+  }
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    width: 90%;
+    padding: 1.8rem;
+  }
+
+  .modalHeading {
+    font-size: 1.6rem;
+  }
+
+  .modalBody {
+    font-size: 0.95rem;
+    padding-right: 0.2rem;
+  }
+
+  .modalFooter {
+    margin-top: 1rem; /* Adjust spacing */
+  }
+
+  .closeBtn {
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 95%;
+    padding: 1.5rem; /* Adjust padding */
+  }
+
+  .modalHeading {
+    font-size: 1.4rem; /* Scale down heading */
+  }
+
+  .modalBody {
+    font-size: 0.9rem;
+    padding-right: 0.1rem;
+  }
+
+  .closeBtn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.2rem;
+  }
+}
