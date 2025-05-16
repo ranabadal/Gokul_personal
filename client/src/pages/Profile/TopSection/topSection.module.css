@@ -3,24 +3,46 @@
     height: 5.25rem; /* 84px → 5.25rem */
     background-color: #FFF3F5;
     display: flex;
+    justify-content: space-evenly; /* Revert to evenly spaced layout */
+    align-items: center;
 }
 
+.below_header_container button {
+  display: none;
+}
+
+.dropdown{
+  display: flex; /* Initially hidden */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  list-style: none;
+}
+
+.dropdown.active {
+  display: flex; /* Show dropdown when active */
+  flex-direction: column;
+  border: none;
+  
+}
+
+
 .links {
-    width: 20%;
+    width: auto; /* Revert to auto width */
     height: 5.25rem; /* 84px → 5.25rem */
-    padding: 1.5rem 1.5rem; /* 24px → 1.5rem */
     font-family: 500;
     font-size: 1.5rem; /* 24px → 1.5rem */
     color: #4B4B4B;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center align links */
     align-items: center;
+    padding: 0 1rem; /* Add padding for spacing */
+    cursor: pointer;
 }
 
 .links:hover {
     border-bottom: 0.0625rem solid #E31E24; /* 1px → 0.0625rem */
     color: #E31E24;
-    cursor: pointer;
 }
 
 .container {
@@ -55,5 +77,356 @@
     box-shadow: 2px 1px 8px 0px rgba(0, 0, 0, 0.1); */
   }
   
+.below_header {
+  display: flex;
+  flex-direction: row; /* Align items in a row */
+  align-items: center;
+  justify-content: space-evenly; /* Evenly distribute items */
+  width: 100%;
+  background-color: #FFF3F5;
+  padding: 0.5rem 0; /* Add padding for spacing */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  scrollbar-width: thin; /* Thin scrollbar for Firefox */
+  scrollbar-color: #E31E24 #FFF3F5; /* Custom scrollbar colors for Firefox */
+}
 
+/* Custom scrollbar styles for WebKit browsers */
+.below_header::-webkit-scrollbar {
+  height: 0.5rem; /* Set scrollbar height */
+}
+
+.below_header::-webkit-scrollbar-thumb {
+  background-color: #E31E24; /* Scrollbar thumb color */
+  border-radius: 0.25rem; /* Rounded corners */
+}
+
+.below_header::-webkit-scrollbar-track {
+  background-color: #FFF3F5; /* Scrollbar track color */
+}
+
+  @media(max-width: 440px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .below_header {
+      display: flex;
+      flex-direction: row; /* Horizontal scrolling for mobile */
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 0.5rem;
+      width: 100%;
+      background-color: #FFF3F5;
+      border: none;
+      border-radius: 0.5rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    .below_header_container {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row; /* Ensure items are in a row */
+      align-items: center;
+      justify-content: flex-start; /* Align items to the start */
+      gap: 1rem; /* Add spacing between items */
+      width: auto; /* Adjust width for scrolling */
+      height: fit-content;
+      padding: 0.5rem;
+      position: relative;
+      gap: 1rem; /* Add spacing between elements */
+      padding: 0.2rem; /* Add padding for better spacing */
+      background-color: #FFF3F5;
+      border: none;
+      border-radius: 0.5rem; /* Add rounded corners */
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    }
+
+    .below_header_container button {
+      display: block;
+      width: 90%; /* Adjust width for better fit */
+      height: fit-content; /* Adjust height for better usability */
+      border-radius: 0.5rem; /* Add rounded corners */
+      background-color: #FFF; /* Set background color */
+      color: #E31E24; /* Set text color */
+      font-size: 1.25rem; /* Adjust font size */
+      font-weight: bold; /* Make text bold */
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease; /* Add smooth hover effect */
+    }
+
+    .below_header_container button:hover {
+      background-color: #E31E24; /* Change background on hover */
+      color: #FFF; /* Change text color on hover */
+    }
+
+    .dropdown {
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between; /* Align items with space between */
+      align-items: center; /* Center align items vertically */
+      width: 100%;
+      height: fit-content; /* Adjust height for better usability */
+      background-color: #FFF3F5;
+      border-radius: 0.5rem;
+      padding: 1rem; /* Increase padding for better spacing */
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+      position: absolute;
+      top: 5rem; /* Adjusted for better alignment */
+      left: 0;
+      z-index: 10;
+      display: none;
+      flex-direction: column;
+      gap: 0.2rem; /* Add more spacing between dropdown items */
+    }
+
+    .dropdown li {
+      position: relative;
+      display: flex;
+      justify-content: space-between; /* Align text and icons with space between */
+      align-items: center;
+      width: 100%;
+      height: 3rem; /* Adjust height for better usability */
+      list-style: none;
+      padding: 0.75rem; /* Add padding for better spacing */
+      border-radius: 0.5rem; /* Add rounded corners */
+      background-color: #FFF; /* Set background color */
+      transition: all 0.3s ease; /* Add smooth hover effect */
+    }
+
+    .dropdown li:hover {
+      background-color: #E31E24; /* Change background on hover */
+      color: #FFF; /* Change text color on hover */
+    }
+
+  .links {
+      display: flex;
+      justify-content: center;
+      flex-direction: row; /* Ensure items are in a row */
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem; /* Add spacing between icon and text */
+      font-size: 1rem; /* Adjust font size for mobile */
+      font-weight: bold;
+      color: #4B4B4B;
+      padding: 0.5rem 1rem; /* Add padding for better spacing */
+      border-radius: 0.5rem;
+      background-color: #FFF;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+      white-space: nowrap; /* Prevent text wrapping */
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      height: fit-content;
+      border: none;
+    }
+
+    .links > li {
+      display: flex;
+      justify-content: space-between; /* Align text and icons with space between */
+      align-items: center;
+    } 
+
+    .links svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .dropdown .links {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: row; /* Ensure items are in a row */
+      justify-content: space-between; /* Align content to the start */
+      align-items: center; /* Center align icons and text */
+      gap: 0.75rem; /* Add more spacing between icon and text */
+      font-size: 1rem; /* Adjust font size for smaller screens */
+      font-weight: bold; /* Make text bold */
+      color: #4B4B4B; /* Set default text color */
+      border-radius: 0.5rem; /* Add rounded corners */
+      background-color: #FFF; /* Set background color */
+      transition: all 0.3s ease; /* Add smooth hover effect */
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    }
+
+    .dropdown .links:hover {
+      background-color: #E31E24; /* Change background on hover */
+      color: #FFF; /* Change text color on hover */
+      transform: scale(1.02); /* Add slight scaling effect */
+    }
+
+    .dropdown .links li {
+      display: flex;
+      align-items: center; /* Center align icon and text */
+      gap: 0.5rem; /* Add spacing between icon and text */
+      list-style: none; /* Remove default list styling */
+    }
+
+    .dropdownToggle {
+      width: 90%; /* Adjust width for better fit */
+      height: 3rem; /* Adjust height for better usability */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #FFF; /* Set background color */
+      border-radius: 0.5rem; /* Add rounded corners */
+      font-size: 1.25rem; /* Adjust font size */
+      font-weight: bold; /* Make text bold */
+      color: #E31E24; /* Set text color */
+      cursor: pointer;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+      transition: all 0.3s ease; /* Add smooth hover effect */
+    }
+
+    .dropdownToggle:hover {
+      background-color: #E31E24; /* Change background on hover */
+      color: #FFF; /* Change text color on hover */
+      transform: scale(1.05); /* Add slight scaling effect */
+    }
+  }
+
+  @media (min-width: 768px) {
+    
+  }
+
+  @media (max-width: 768px) {
+    .below_header {
+      display: flex;
+      flex-direction: row; /* Align items in a row */
+      align-items: center;
+      justify-content: space-around; /* Adjust spacing for tablet screens */
+      gap: 1rem; /* Add spacing between items */
+      padding: 0.5rem 1rem; /* Add padding for better spacing */
+      width: 100%;
+      background-color: #FFF3F5;
+      border-radius: 0.5rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
   
+    .links {
+      font-size: 1.25rem; /* Adjust font size for tablet screens */
+      padding: 0.5rem 1.5rem; /* Add padding for better spacing */
+      white-space: nowrap; /* Prevent text wrapping */
+      border-radius: 0.5rem;
+      background-color: #FFF;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+  
+    .links:hover {
+      background-color: #E31E24; /* Change background on hover */
+      color: #FFF; /* Change text color on hover */
+    }
+  }
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .below_header {
+    justify-content: flex-start; /* Align items to the start */
+    gap: 0.5rem;
+  }
+
+  .links {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+  }
+}
+
+/* Small devices (tablets, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .below_header {
+    justify-content: space-around;
+    gap: 1rem;
+  }
+
+  .links {
+    font-size: 1.25rem;
+    padding: 0.5rem 1.5rem;
+    white-space: nowrap;
+  }
+}
+
+/* Medium devices (desktops, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .below_header {
+    justify-content: space-evenly;
+    gap: 1rem;
+  }
+
+  .links {
+    font-size: 1.5rem;
+    padding: 0.5rem 2rem;
+    white-space: nowrap;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .below_header {
+    justify-content: space-evenly;
+    gap: 1.5rem;
+  }
+
+  .links {
+    font-size: 1.75rem;
+    padding: 0.5rem 2.5rem;
+    white-space: nowrap;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .below_header {
+    justify-content: space-evenly;
+    gap: 2rem;
+  }
+
+  .links {
+    font-size: 2rem;
+    padding: 0.5rem 3rem;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 992px) {
+  .below_header {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    align-items: center;
+    justify-content: space-around; /* Evenly distribute items */
+    gap: 0; /* Remove unnecessary gaps */
+    padding: 0.5rem 0; /* Add padding for spacing */
+    width: 100%;
+    background-color: #FFF3F5;
+    border-radius: 0; /* Remove rounded corners */
+    box-shadow: none; /* Remove shadow for a clean layout */
+    overflow-x: visible; /* Disable scrolling */
+  }
+
+  .links {
+    font-size: 1.5rem; /* Standard font size for desktop */
+    padding: 0.5rem 1rem; /* Adjust padding for better spacing */
+    white-space: normal; /* Allow text wrapping if necessary */
+    border-radius: 0; /* Remove rounded corners */
+    background-color: transparent; /* Transparent background */
+    box-shadow: none; /* Remove shadow */
+    transition: color 0.3s ease; /* Smooth hover effect */
+  }
+
+  .links:hover {
+    color: #E31E24; /* Change text color on hover */
+    border-bottom: 0.0625rem solid #E31E24; /* Add underline on hover */
+  }
+}

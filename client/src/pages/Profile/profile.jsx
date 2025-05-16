@@ -8,7 +8,6 @@ import TopSection from './TopSection/topSection';
 const profile = () => {
   return (
     <div>
-      <AboveHeader/>
         <Header/>
         <TopSection/>
         <Footer/>

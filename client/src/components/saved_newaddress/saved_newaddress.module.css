@@ -30,7 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Madimi One";
+   
 }
 
 .saved_newaddress_content_left_address {
@@ -162,4 +162,89 @@
     background-color: #FF0000;
     color: #FFF3F5;
     transition: 0.3s ease-in-out;
+}
+
+
+
+@media (max-width: 1024px) {
+  .saved_newaddress_content {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    padding: 2rem 4rem;
+  }
+
+  .saved_newaddress_content_left, .saved_newaddress_content_right {
+    width: 90%; /* Ensure adaptive width */
+    max-height: auto;
+  }
+
+  .saved_newaddress_content_right_form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .saved_newaddress_content {
+    padding: 1.5rem;
+  }
+
+  .saved_newaddress_content_left_heading,
+  .saved_newaddress_content_right_heading {
+    font-size: 2.5rem; /* Scale heading */
+  }
+
+  .saved_newaddress_content_left_address_name,
+  .saved_newaddress_content_left_address_location {
+    font-size: 1.25rem; /* Adjust text sizes */
+  }
+
+  .saved_newaddress_content_left_address_btn {
+    gap: 1rem; /* Reduce button spacing */
+  }
+
+  .saved_newaddress_content_right_form_input input {
+    font-size: 1.25rem;
+    height: 3.5rem; /* Adjust input height */
+  }
+
+  .saved_newaddress_content_right_btn button {
+    font-size: 1.125rem;
+    height: 4rem; /* Adjust button size */
+  }
+}
+
+@media (max-width: 480px) {
+  .saved_newaddress_content {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .saved_newaddress_content_left{
+    height: fit-content;
+  }
+
+  .saved_newaddress_content_right{
+    height: fit-content;
+    padding-bottom: 20px;
+  }
+
+  .saved_newaddress_content_left_heading,
+  .saved_newaddress_content_right_heading {
+    font-size: 15px; /* Scale down heading */
+  }
+
+  .saved_newaddress_content_left_address {
+    gap: 0.5rem;
+  }
+
+  .saved_newaddress_content_right_form_input input {
+    font-size: 1rem;
+    height: 3rem;
+  }
+
+  .saved_newaddress_content_right_btn button {
+    font-size: 14px;
+    padding:10px;
+      height: 30px;
+  }
 }
