@@ -77,6 +77,10 @@
   cursor: pointer;
 }
 
+.iconLink{
+  color: white;
+}
+
 @media (max-width: 768px) {
   .topSection,
   .bottomSection {

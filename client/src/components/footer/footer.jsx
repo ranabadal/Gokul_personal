@@ -124,8 +124,22 @@ const Footer = () => {
     </div>
     <div className={styles.socialIcons}>
       {/* <FaYoutube /> */}
+      <a
+  href="https://www.facebook.com/merogokul/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className={styles.iconLink}
+>
       <FaFacebookF />
-      <FaInstagram />
+      </a>
+<a
+  href="https://www.instagram.com/new_gokulsweets/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className={styles.iconLink}
+>
+  <FaInstagram />
+</a>
       {/* <FaTwitter /> */}
       {/* <FaPinterestP /> */}
     </div>
