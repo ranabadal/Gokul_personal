@@ -104,7 +104,7 @@ const Footer = () => {
       <ul className={styles.navLinks}>
         <li onClick={() => navigate("/about")}>About Gokul</li>
         <li>Policy Info</li>
-        <li>Upcoming Products</li>
+        <li>Contact us</li>
         <li>Gifts</li>
         <li>Foodservice</li>
       </ul>
