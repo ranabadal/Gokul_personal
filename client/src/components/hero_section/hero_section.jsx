@@ -174,12 +174,12 @@ const HeroSection = () => {
             image: box,
             timer: <CountdownTimer />
         },
-        {
-            title: "Special Moments, Special Gifts",
-            description: "Make every moment memorable with our handcrafted gifts.",
-            image: ladoo,
-            timer: <CountdownTimer />
-        },
+        // {
+        //     title: "Special Moments, Special Gifts",
+        //     description: "Make every moment memorable with our handcrafted gifts.",
+        //     image: ladoo,
+        //     timer: <CountdownTimer />
+        // },
     ];
 
     const nextSlide = () => {
