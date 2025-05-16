@@ -17,13 +17,7 @@
   flex: 1;
   min-width: 250px;
 }
-/* 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  
-} */
+
 
 .navLinks {
   list-style: none;
@@ -71,6 +65,18 @@
   justify-content: flex-end;
 }
 
+.logoContainer {
+  display: flex;
+  /* justify-content: right; */
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .topSection,
   .bottomSection {
@@ -87,3 +93,4 @@
     justify-content: flex-start;
   }
 }
+

@@ -87,56 +87,51 @@
 
 import React from "react";
 import styles from "./footer.module.css";
-import gokul from "./assets/gokul.svg";
+import gokul from "./assets/gokul logo.svg";
 import { useNavigate } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaPinterestP } from "react-icons/fa";
 
 const Footer = () => {
   const navigate = useNavigate();
   return (
-    <footer className={styles.footer}>
-      <div className={styles.topSection}>
-      {/* <h2 className={styles.logo}>Gokul</h2> */}
-   
+   <footer className={styles.footer}>
+  <div className={styles.logoContainer}>
+    <img src={gokul} alt="Gokul Logo" className={styles.logo} onClick={() => navigate("/")}/>
+  </div>
 
-          {/* <img  src={gokul} alt="logo" /> */}
-        <div className={styles.left}>
-    
+  <div className={styles.topSection}>
+    <div className={styles.left}>
+      <ul className={styles.navLinks}>
+        <li onClick={() => navigate("/about")}>About Gokul</li>
+        <li onClick={() => navigate("/about")}>Policy Info</li>
+        <li onClick={() => navigate("/contact")}>Contact us</li>
+        <li onClick={() => navigate("/giftbox")}>Gifts</li>
+        <li onClick={() => navigate("/products")}>Foodservice</li>
+      </ul>
+    </div>
+  </div>
 
-          <ul className={styles.navLinks}>
-          <li onClick={() => navigate("/about")}>About Gokul</li>
-          <li>      Policy Info
-</li>
-          <li>Upcoming Products</li>
-          <li>Gifts</li>
-          <li>Foodservice</li>
-          </ul>
-        </div>
-      </div>
+  <div className={styles.bottomSection}>
+    <div className={styles.bottomLeft}>
+      <ul className={styles.policyLinks}>
+        <li>Terms & Conditions</li>
+        <li>Privacy Policy</li>
+        <li>CA Transparency in Supply Chains Act</li>
+      </ul>
+      <p className={styles.copyright}>
+        ©2025 Gokul, LLC. All Rights Reserved.
+      </p>
+    </div>
+    <div className={styles.socialIcons}>
+      <FaYoutube />
+      <FaFacebookF />
+      <FaInstagram />
+      <FaTwitter />
+      <FaPinterestP />
+    </div>
+  </div>
+</footer>
 
-      <div className={styles.bottomSection}>
-        <div className={styles.bottomLeft}>
-          <ul className={styles.policyLinks}>
-            <li>Terms & Conditions</li>
-            <li>Privacy Policy</li>
-            <li>CA Transparency in Supply Chains Act</li>
-          </ul>
-          <p className={styles.copyright}>
-            ©2025 Gokul, LLC. All Rights Reserved.
-          </p>
-
-          
-        </div>
-        <div className={styles.socialIcons}>
-          <FaYoutube />
-          <FaFacebookF />
-          <FaInstagram />
-          <FaTwitter />
-          <FaPinterestP />
-        </div>
-     
-      </div>
-    </footer>
   );
 };
 
