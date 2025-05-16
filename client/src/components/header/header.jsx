@@ -31,6 +31,10 @@ const Header = () => {
     navigate("/login");
   };
 
+   const handleLogin = () => {
+    navigate("/login");
+  };
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -155,14 +159,36 @@ const Header = () => {
         <span onClick={() => handleMenuItemClick("/giftbox")}>Gift Boxes</span>
         <span onClick={() => handleMenuItemClick("/bulkOrders")}>Bulk Order</span>
         <span onClick={() => handleMenuItemClick("/contact")}>Contact</span>
-        {user && (
+        {/* {user && (
           <span onClick={() => { handleLogout(); setMenuOpen(false); }} style={{ color: "#FFFFFF" }}>
             Logout
           </span>
-        )}
+        )} */}
+        {user ? (
+  <span
+    onClick={() => {
+      handleLogout();
+      setMenuOpen(false);
+    }}
+    style={{ color: "#FFFFFF" }}
+  >
+    Logout
+  </span>
+) : (
+  <span
+    onClick={() => {
+      handleLogin();
+      setMenuOpen(false);
+    }}
+    style={{ color: "#FFFFFF" }}
+  >
+    Login
+  </span>
+)}
       </div>
     </header>
   );
 };
 
 export default Header;
+

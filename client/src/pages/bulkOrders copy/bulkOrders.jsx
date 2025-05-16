@@ -292,7 +292,7 @@ const handleConfirmOrder = async (selectedAddress) => {
 
   return (
     <>
-      <AboveHeader />
+    
       <Header />
       <div className={`${styles.bulkOrderContainer} ${(showGiftBox || showRegularBoxModal) ? styles.hidden : ""}`}>
         {/* Left Section – Product Selection */}

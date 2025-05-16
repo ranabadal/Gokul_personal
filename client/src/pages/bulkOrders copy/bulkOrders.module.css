@@ -318,7 +318,133 @@
 
 
 
+@media (max-width: 1024px) {
+  .bulkOrderContainer {
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center;
+  }
 
+  .leftSection, .rightSection {
+    min-width: auto; /* Allow sections to shrink */
+    width: 90%;
+  }
+
+  .selectionGrid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust item grid */
+  }
+}
+
+@media (max-width: 768px) {
+  .bulkOrderContainer {
+    gap: 10px; /* Reduce spacing */
+    padding: 15px;
+  }
+
+  .leftSection, .rightSection {
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .boxSelection {
+    flex-wrap: wrap; /* Wrap box selection buttons */
+    gap: 10px;
+  }
+
+  .boxSelection button {
+    font-size: 16px; /* Adjust button size */
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .selectionGrid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust item grid further */
+    gap: 8px;
+  }
+
+  .item {
+    flex-direction: column; /* Stack image and details */
+    height: auto;
+    padding: 8px;
+  }
+
+  .boxSelection,
+.boxType {
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+  .boxSelection button,
+.boxType button {
+  width: 90px;
+  padding: 8px;
+  border: 2px solid red;
+  background: transparent;
+  cursor: pointer;
+  font-size: 10px;
+ 
+}
+
+.boxImage{
+  width: 60px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+  .item {
+    flex-direction: column; /* Stack image and details */
+    height: auto;
+    padding: 8px;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image {
+    width: 80px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .detailsContainer {
+    flex-direction: column; /* Stack details vertically */
+    align-items: center; /* Center align text */
+    text-align: center; /* Center text */
+  }
+
+  .controls {
+    flex-direction: row; /* Adjust quantity controls layout */
+    gap: 5px;
+  }
+
+
+
+  .imageContainer {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .detailsContainer {
+    text-align: center;
+  }
+
+  .controls {
+    flex-direction: column; /* Adjust quantity controls layout */
+    gap: 5px;
+  }
+}
 
 
 
@@ -493,3 +619,68 @@
 
 
 
+@media (max-width: 1024px) {
+  .modalContent {
+    width: 95%;
+    max-width: 700px; /* Adjust modal size for tablets */
+  }
+
+  .sizeOption {
+    flex-direction: column; /* Stack elements for better spacing */
+    text-align: center;
+  }
+
+  .quantitySelector {
+    justify-content: center; /* Align quantity buttons properly */
+  }
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    width: 90%;
+    max-width: 600px; /* Adjust modal size for smaller devices */
+  }
+
+  .sizeOptionsWrapper {
+    gap: 8px; /* Reduce spacing for smaller screens */
+  }
+
+  .quantitySelector button {
+    width: 25px;
+    height: 25px;
+    font-size: 16px; /* Adjust button size */
+  }
+
+  .sizeOption label {
+    font-size: 14px; /* Reduce label font for compact display */
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 80%;
+    max-width: 350px; /* Mobile-friendly sizing */
+    padding: 15px; /* Reduce padding */
+    height: fit-content;
+  }
+
+  .closeButton {
+    font-size: 12px; /* Adjust close button size */
+    top: 5px;
+    right: 5px;
+  }
+
+  .sizeOption {
+    padding: 8px;
+    text-align: left; /* Align text properly */
+  }
+
+  .finalSelection {
+    padding: 8px; /* Reduce space for compact layout */
+  }
+
+  .selectButton {
+    font-size: 12px;
+    padding: 10px 15px; /* Adjust button size */
+  }
+}

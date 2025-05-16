@@ -296,7 +296,7 @@ const GiftBoxCartRight = ({
                     {item.details.name}
                   </div>
                   <div className={styles.icons}>
-                    <div
+                    {/* <div
                       className={styles.editIcon}
                       onClick={() => handleEditBox(item.id, item.type)}
                     >
@@ -305,7 +305,7 @@ const GiftBoxCartRight = ({
                         alt="edit"
                         className={styles.editIconImage}
                       />
-                    </div>
+                    </div> */}
                     <div
                       className={styles.deleteIcon}
                       onClick={() => handleDeleteBox(item.id, item.type)}

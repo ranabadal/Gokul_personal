@@ -272,3 +272,92 @@
   background: #ccc;
   cursor: not-allowed;
 }
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .orderSummary {
+    max-width: 90%;
+    margin: auto;
+  }
+
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .orderItemRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .itemImage {
+    width: 50px;
+    height: 50px;
+  }
+
+  .checkoutButton {
+    font-size: 1rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .orderSummary{
+    max-width: 280px;
+  }
+
+  .orderTitle {
+  font-size: 14px;
+}
+
+.itemImage {
+  width: 35px;
+  height: 35px;
+  margin-right: 6px;
+}
+
+.selectedBoxName {
+  font-size: 12px;
+}
+
+
+.priceContainer {
+  font-size: 14px;
+}
+
+  .orderTitle, .orderPrice {
+    font-size: 12px;
+  }
+
+  .matchingHandbagsSection h3 {
+  font-size: 10px;
+
+}
+
+.matchingDetails {
+  font-size: 10px;
+}
+
+
+  .checkoutButton {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+
+
+  .applyButton {
+  padding: 5px;
+  font-size: 12px;
+}
+
+.promoSection input{
+min-width: 120px;
+}
+
+.deliveryContainer{
+  font-size: 10px;
+}
+}

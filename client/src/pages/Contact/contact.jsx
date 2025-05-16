@@ -89,7 +89,7 @@ const Contact = () => {
 
     return (
         <div className={styles.mainContainer}>
-            <AboveHeader />
+         
             <Header />
             <div className={styles.mainHeading}>Mero Gokul Welcomes You!</div>
             <div className={styles.contact}>
