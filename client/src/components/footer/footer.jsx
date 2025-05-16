@@ -123,11 +123,11 @@ const Footer = () => {
       </p>
     </div>
     <div className={styles.socialIcons}>
-      <FaYoutube />
+      {/* <FaYoutube /> */}
       <FaFacebookF />
       <FaInstagram />
-      <FaTwitter />
-      <FaPinterestP />
+      {/* <FaTwitter /> */}
+      {/* <FaPinterestP /> */}
     </div>
   </div>
 </footer>
