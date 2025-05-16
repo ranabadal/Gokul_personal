@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: 304.5px;
-  max-height: 467.75px;
+  max-height: 500px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

@@ -88,6 +88,7 @@ const Contact = () => {
     };
 
     return (
+        <div>
         <div className={styles.mainContainer}>
          
             <Header />
@@ -129,7 +130,12 @@ const Contact = () => {
                 </div>
             </div>
             <SocialConnect />
-            <Footer />
+            
+        </div>
+        <div className={styles.footer}>
+                            <Footer />
+
+            </div>
         </div>
     );
 };
