@@ -248,6 +248,7 @@ const GiftBoxCartRight = ({
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      
   
       if (response.data.success) {
         alert("Order has been placed! For more details, check your profile.");
