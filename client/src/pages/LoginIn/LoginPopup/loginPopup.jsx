@@ -247,7 +247,9 @@ const LoginSignupPopup = () => {
           <TextField fullWidth label="Email" name="email" variant="outlined" className={styles.inputField} onChange={handleLoginChange} />
           <TextField fullWidth label="Password" name="password" type="password" variant="outlined" className={styles.inputField} onChange={handleLoginChange} />
           <p className={styles.forgotPassword}>Forgot password?</p>
-          <Button fullWidth className={styles.loginButton} onClick={handleLogin}>Login</Button>
+          <Button fullWidth className={styles.loginButton} onClick={handleLogin}>
+            Login
+            </Button>
         </div>
       ) : (
         // Signup Form

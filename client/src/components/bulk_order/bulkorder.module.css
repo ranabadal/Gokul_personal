@@ -51,8 +51,8 @@
 }
 
 .bulk_order_container_left_btn button {
-    width: 100%;
-    max-width: 250px;
+    width: 350px;
+    max-width: 400px;
     height: 3.5rem;
     border-radius: 1rem;
     font-weight: 700;
@@ -81,8 +81,10 @@
     }
 
     .bulk_order_container_left_btn {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        margin-left: 24px;
     }
 
     .bulk_order_container_left_btn button {

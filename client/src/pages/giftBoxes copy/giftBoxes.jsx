@@ -161,8 +161,10 @@ const MainGiftBoxes = () => {
   return (
     <div className={styles.mainContainer}>
       <Header />
+            <div className={styles.heading0}>Gift Boxes</div>
 
-      <div className={styles.heading}>Gift Boxes</div>
+
+      {/* <div className={styles.heading}>Gift Boxes</div> */}
       <div className={styles.contentContainer}>
         <div className={styles.leftSection}>
           {/* Categories Section */}
@@ -218,7 +220,7 @@ const MainGiftBoxes = () => {
               <button  className={styles.loadMore} onClick={() => setVisibleGiftBoxesCount(visibleGiftBoxesCount + 5)}>Load More</button>
             )}
 
-            <div className={styles.heading}>General Handbags</div>
+            <div className={styles.heading1}>General Handbags</div>
             <div className={styles.productsList}>
               {filteredHandbags.length > 0
                 ? filteredHandbags.slice(0, visibleHandbagsCount).map((hb) => {

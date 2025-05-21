@@ -18,6 +18,7 @@
   justify-content: center;
   gap: 10px;
   margin-bottom: 15px;
+  /* color: #E1353C; */
 }
 
 .activeToggle {
@@ -29,6 +30,8 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+
 
 .inactiveToggle {
   background-color: white;
@@ -53,15 +56,16 @@
 
 .forgotPassword {
   text-align: right;
-  color: #007bff;
+  color: #E1353C;
   cursor: pointer;
 }
 
 /* Buttons */
 .loginButton,
 .signupButton {
+  color:#E1353C ;
   background-color: #E1353C;
-  color: white;
+  /* color: white; */
   padding: 12px;
   border-radius: 5px;
   cursor: pointer;
@@ -71,7 +75,17 @@
 .loginButton:hover,
 .signupButton:hover {
   background-color: #C13032;
+  color: white;
 }
+
+/* .loginbuttoninner{
+  color: #E1353C;
+} */
+
+.loginbuttoninner:hover{
+  color: white;
+}
+
 
 /* Social Login */
 .socialButtons {
