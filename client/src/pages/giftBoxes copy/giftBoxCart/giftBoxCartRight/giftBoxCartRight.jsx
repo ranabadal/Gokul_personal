@@ -162,6 +162,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./giftBoxCartRight.module.css";
 import { BASE_URL } from "../../../../Const/Const";
+import Delete from "../giftBoxCartRight/Assets/icons8-delete.svg"
 const GiftBoxCartRight = ({
   cartItems,         // Array of items: { type, details, quantity, matchingHandbags }
   basketTotal,       // Total price calculated from cart items
@@ -311,7 +312,7 @@ const GiftBoxCartRight = ({
                       onClick={() => handleDeleteBox(item.id, item.type)}
                     >
                       <img
-                        src="/path/to/deleteIcon.png"
+                        src={Delete}
                         alt="delete"
                         className={styles.deleteIconImage}
                       />
