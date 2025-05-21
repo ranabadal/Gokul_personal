@@ -60,6 +60,7 @@
 
 
 .quantity_selector {
+  display: flex;
   margin-top: 10px;
 }
 .quantity_button {
@@ -338,7 +339,11 @@
   }
   
   .select_button {
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
     font-size: 0.85rem;
+    margin-left: 15px;
     padding: 6px 12px;
   }
   
