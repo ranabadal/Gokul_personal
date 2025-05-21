@@ -73,6 +73,7 @@
   justify-content: center;
   gap: 15px;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .boxSelection button,
@@ -144,7 +145,7 @@
   overflow: hidden;
   padding: 10px;
   height: 120px;
-  max-width: fit-content;
+  /* max-width: fit-content; */
 }
 
 /* Image Container (left side) */
@@ -441,7 +442,7 @@
   }
 
   .controls {
-    flex-direction: column; /* Adjust quantity controls layout */
+    /* flex-direction: column;  */
     gap: 5px;
   }
 }
