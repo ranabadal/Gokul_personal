@@ -230,7 +230,8 @@ const LoginSignupPopup = () => {
           className={tabIndex === 0 ? styles.activeToggle : styles.inactiveToggle} 
           onClick={() => setTabIndex(0)}
         >
-          Login
+          <span className={styles.buttonlogin}>Login</span>
+         
         </button>
         <button 
           className={tabIndex === 1 ? styles.activeToggle : styles.inactiveToggle} 
