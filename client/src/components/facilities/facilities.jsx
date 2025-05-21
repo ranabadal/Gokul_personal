@@ -3,7 +3,7 @@ import styles from "./facilities.module.css";
 import truck from "./assets/truck.svg";
 import support from "./assets/support.svg";
 import badge from "./assets/badge.svg";
-
+import giftBoxsvg from "./assets/giftbox2.svg"
 const Facilities = () => {
     return(
         <div className={styles.facilities_section}>
@@ -44,16 +44,18 @@ const Facilities = () => {
             </div>
             <div className={styles.facilities_section_right}>
                 <div className={styles.facilities_section_right_top}>
-                    <img src={support} alt="support" />
+                    <img src={giftBoxsvg} alt="support" />
                 </div>
                 <div className={styles.facilities_section_right_mid}>
                     <span>
-                  Support
+                    {/* Support*/}
+                  GiftBoxes
                     </span>
                 </div>
                 <div className={styles.facilities_section_right_bottom}>
                     <span>
-                    We are here to help you
+                    {/* We are here to help you */}
+                    We provide gift boxes for<br/>your loved ones
                     </span>
                 </div>
             </div>
