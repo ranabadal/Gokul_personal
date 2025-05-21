@@ -12,6 +12,17 @@
   gap: 20px;
 }
 
+.heading0{
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+ justify-content: center;
+  color: #e31e24;
+  font-family: "Madimi One";
+  font-weight: 400;
+margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 .heading{
   font-size: 2rem;

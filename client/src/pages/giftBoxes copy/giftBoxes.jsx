@@ -161,8 +161,10 @@ const MainGiftBoxes = () => {
   return (
     <div className={styles.mainContainer}>
       <Header />
+            <div className={styles.heading0}>Gift Boxes</div>
 
-      <div className={styles.heading}>Gift Boxes</div>
+
+      {/* <div className={styles.heading}>Gift Boxes</div> */}
       <div className={styles.contentContainer}>
         <div className={styles.leftSection}>
           {/* Categories Section */}
