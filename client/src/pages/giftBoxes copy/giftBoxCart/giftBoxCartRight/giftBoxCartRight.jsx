@@ -162,6 +162,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./giftBoxCartRight.module.css";
 import { BASE_URL } from "../../../../Const/Const";
+import { useToaster } from "../../../../utils";
 const GiftBoxCartRight = ({
   cartItems,         // Array of items: { type, details, quantity, matchingHandbags }
   basketTotal,       // Total price calculated from cart items
@@ -178,6 +179,7 @@ const GiftBoxCartRight = ({
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
+  const setToast = useToaster();
   // Function to fetch addresses using the provided logic
   const fetchAddresses = async () => {
     try {
@@ -269,7 +271,24 @@ const GiftBoxCartRight = ({
 
   // Open the address modal on Checkout
   const openAddressModal = () => {
-    setShowAddressModal(true);
+       try {
+      const token = localStorage.getItem("jwtToken");
+
+      if (!token) {
+        setToast("Please log in first!", "error");
+        return;
+      }
+    else{
+       setShowAddressModal(true);
+    }
+    }
+      
+
+    catch (error) {
+      console.error("Error opening address modal:", error.message || error);
+    }
+
+
   };
 
   return (
