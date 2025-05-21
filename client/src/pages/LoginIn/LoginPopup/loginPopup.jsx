@@ -230,8 +230,7 @@ const LoginSignupPopup = () => {
           className={tabIndex === 0 ? styles.activeToggle : styles.inactiveToggle} 
           onClick={() => setTabIndex(0)}
         >
-          <span className={styles.buttonlogin}>Login</span>
-         
+          Login
         </button>
         <button 
           className={tabIndex === 1 ? styles.activeToggle : styles.inactiveToggle} 
@@ -248,7 +247,9 @@ const LoginSignupPopup = () => {
           <TextField fullWidth label="Email" name="email" variant="outlined" className={styles.inputField} onChange={handleLoginChange} />
           <TextField fullWidth label="Password" name="password" type="password" variant="outlined" className={styles.inputField} onChange={handleLoginChange} />
           <p className={styles.forgotPassword}>Forgot password?</p>
-          <Button fullWidth className={styles.loginButton} onClick={handleLogin}>Login</Button>
+          <Button fullWidth className={styles.loginButton} onClick={handleLogin}>
+            Login
+            </Button>
         </div>
       ) : (
         // Signup Form

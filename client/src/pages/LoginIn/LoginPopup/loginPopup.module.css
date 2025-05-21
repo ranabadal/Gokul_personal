@@ -63,8 +63,9 @@
 /* Buttons */
 .loginButton,
 .signupButton {
+  color:#E1353C ;
   background-color: #E1353C;
-  color: white;
+  /* color: white; */
   padding: 12px;
   border-radius: 5px;
   cursor: pointer;
@@ -76,6 +77,15 @@
   background-color: #C13032;
   color: white;
 }
+
+/* .loginbuttoninner{
+  color: #E1353C;
+} */
+
+.loginbuttoninner:hover{
+  color: white;
+}
+
 
 /* Social Login */
 .socialButtons {
