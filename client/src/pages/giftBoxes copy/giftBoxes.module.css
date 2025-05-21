@@ -25,6 +25,18 @@
   margin-bottom: 20px;
 }
 
+.heading1{
+  
+  display: flex;
+  justify-content: left;
+    color: #e31e24;
+      font-size: 2rem;
+        font-family: "Madimi One";
+  font-weight: 400;
+margin-top: 20px;
+margin-bottom: 10px;
+}
+
 /* Left Section: Categories */
 .leftSection {
   display: flex;

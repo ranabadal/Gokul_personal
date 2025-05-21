@@ -218,7 +218,7 @@ const MainGiftBoxes = () => {
               <button  className={styles.loadMore} onClick={() => setVisibleGiftBoxesCount(visibleGiftBoxesCount + 5)}>Load More</button>
             )}
 
-            <div className={styles.heading}>General Handbags</div>
+            <div className={styles.heading1}>General Handbags</div>
             <div className={styles.productsList}>
               {filteredHandbags.length > 0
                 ? filteredHandbags.slice(0, visibleHandbagsCount).map((hb) => {
