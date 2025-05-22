@@ -64,9 +64,10 @@
 .loginButton,
 .signupButton {
   color:#E1353C ;
-  background-color: #E1353C;
+
   /* color: white; */
   padding: 12px;
+  border: 1px solid #E1353C;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
@@ -126,6 +127,9 @@
   .signupButton {
     font-size: 15px;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .socialButtons {
@@ -141,7 +145,7 @@
   }
 
   .toggleContainer {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 8px;
   }
 
@@ -151,8 +155,12 @@
 
   .loginButton,
   .signupButton {
+    width: 100%;
     font-size: 14px;
     padding: 9px;
+      display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .socialButtons {

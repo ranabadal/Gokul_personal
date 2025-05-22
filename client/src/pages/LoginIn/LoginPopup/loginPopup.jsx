@@ -247,9 +247,9 @@ const LoginSignupPopup = () => {
           <TextField fullWidth label="Email" name="email" variant="outlined" className={styles.inputField} onChange={handleLoginChange} />
           <TextField fullWidth label="Password" name="password" type="password" variant="outlined" className={styles.inputField} onChange={handleLoginChange} />
           <p className={styles.forgotPassword}>Forgot password?</p>
-          <Button fullWidth className={styles.loginButton} onClick={handleLogin}>
+          <div  className={styles.loginButton} onClick={handleLogin}>
             Login
-            </Button>
+            </div>
         </div>
       ) : (
         // Signup Form
@@ -259,7 +259,7 @@ const LoginSignupPopup = () => {
           <TextField fullWidth label="Phone No." name="number" variant="outlined" className={styles.inputField} onChange={handleSignupChange} />
           <TextField fullWidth label="Email" name="email" variant="outlined" className={styles.inputField} onChange={handleSignupChange} />
           <TextField fullWidth label="Password" name="password" type="password" variant="outlined" className={styles.inputField} onChange={handleSignupChange} />
-          <Button fullWidth className={styles.signupButton} onClick={handleSignup}>Sign Up</Button>
+          <div  className={styles.signupButton} onClick={handleSignup}>Sign Up</div>
         </div>
       )}
     </div>

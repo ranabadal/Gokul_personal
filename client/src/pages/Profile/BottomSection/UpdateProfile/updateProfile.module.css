@@ -166,7 +166,7 @@
     .uploadInput {
       margin-top: 6px; /* Adjusted margin */
     }
-    Button {
+    .button {
       display: flex;
       justify-content: center;
       align-items: center;
