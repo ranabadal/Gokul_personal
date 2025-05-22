@@ -154,7 +154,7 @@ const Header = () => {
         <span onClick={() => handleMenuItemClick("/")}>Home</span>
         <span onClick={() => handleMenuItemClick("/about")}>About</span>
         <span onClick={() => handleMenuItemClick("/todaysDeal")}>Today's Deals</span>
-        <span onClick={() => handleMenuItemClick("/products")}>Products</span>
+        <span onClick={() => handleMenuItemClick("/products")}>TakeAway</span>
         <span onClick={() => handleMenuItemClick("/banquets")}>Banquet Hall</span>
         <span onClick={() => handleMenuItemClick("/giftbox")}>Gift Boxes</span>
         <span onClick={() => handleMenuItemClick("/bulkOrders")}>Bulk Order</span>
