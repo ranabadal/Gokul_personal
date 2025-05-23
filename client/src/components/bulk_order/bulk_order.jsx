@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./bulkorder.module.css";
 import sweet from "./assets/sweets.svg";
+import Background from "./assets/bg.png"
 import { useNavigate } from "react-router-dom";
 const BulkOrder = () => {
 const navigate = useNavigate();
