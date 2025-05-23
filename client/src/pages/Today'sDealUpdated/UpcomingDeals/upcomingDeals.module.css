@@ -9,7 +9,7 @@
     font-size: 2rem;
     font-weight: 400;
     color: #c51717; /* Dark gray for the title */
-    font-family: "Madimi One";
+ 
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -79,3 +79,16 @@
     width: 100vw; /* Full viewport width */
 
   }
+
+
+
+
+  @media (max-width: 480px) {
+  .arrowButton:first-child {
+    left: -47vw; /* Further adjustments for smaller screens */
+  }
+
+  .arrowButton:last-child {
+    right: -40vw;
+  }
+}

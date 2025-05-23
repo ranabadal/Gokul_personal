@@ -70,14 +70,14 @@
 
 @media (max-width: 440px) {
     .horizontal_cards_container{
-       margin-top: 85rem;
+       /* margin-top: 85rem; */
        display: flex;
        flex-direction: column;
        align-items: center;
        gap: 1.5rem; /* 24px / 16 */
 }
     .footer_container{
-        margin-top: 4.125rem; /* 66px / 16 */
+      margin: 0;
         width: 100%;
         display: flex;
         flex-direction: column;

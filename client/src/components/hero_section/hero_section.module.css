@@ -221,6 +221,7 @@
         display: flex;
         justify-content: center;
         gap: 0.5rem;
+        height: 250px;
         font-weight: 900;
         font-size: 1.25rem;
     }
@@ -247,31 +248,41 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        /* align-items: center;
+        text-align: center; */
     }
     
     .hero_section_right_title {
         font-size: 2.5rem;
         text-align: center;
+        height: 35px;
     }
 
     .hero_section_right_description {
         font-size: 1rem;
         text-align: center;
         padding: 0 1rem;
+        height: 30px;
     }
+
+    .buttonsinhero{
+    width: 100%;
+    margin: 0;
+ 
+
+}
+
 
     .hero_section_right_buttons {
         display: flex;
         justify-content: center;
-        gap: 1rem;
-        width: 100%;
+          margin-left: 0;
+       
     }
     
     .order_button, .explore_button {
-        width: 159px;
-        height: 36px;
+        width: 100%;
+        height: 3rem;
         border-radius: 0.7rem;
         font-size: 12px;
         font-weight: 700;
@@ -291,29 +302,7 @@
         display: none;
     }
 
-    
-.buttonsinhero{
-    width: 100px;
-    display: flex;
-    justify-content: space-between;
 
-}
-
-
-.order_button,
-.explore_button {
-    width: 18rem;
-    height: 4.5rem;
-    border-radius: 1.125rem;
-    font-size: 1.125rem;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-}
-
-.hero_section_right_buttons{
-    margin: 0;
-}
 }
 
 /* Small Mobile Devices */

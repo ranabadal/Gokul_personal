@@ -211,7 +211,7 @@ return (
           onChange={handleChange}
           error={errors.number}
         />
-        <Button type="submit" text="Update Profile" />
+        <Button className={styles.button} type="submit" text="Update Profile" />
       </form>
     </div>
     {isModalOpen && (
