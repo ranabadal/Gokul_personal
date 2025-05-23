@@ -11,16 +11,17 @@ const Facilities = () => {
             <div className={styles.facilities_section_left}>
 
                 <div className={styles.facilities_section_left_top}>
-                    <img src={truck} alt="truck" />
+                    <img src={support} alt="truck" />
                 </div>
                 <div className={styles.facilities_section_left_mid}>
                     <span>
-                    Delivery
+                    Support
                     </span>
                 </div>
                 <div className={styles.facilities_section_left_bottom}>
                     <span>
-                    Explore our edit of everything that ships
+{/* Explore our edit of everything that ships */}
+                    24/7 Support   
                     </span>
                 </div>
 
