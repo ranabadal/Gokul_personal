@@ -327,7 +327,7 @@ export default function TakeawayPage() {
                 )
               )
             )
-         }
+}      
           </div>
         </section>
       )}
