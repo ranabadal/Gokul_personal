@@ -327,7 +327,7 @@ export default function TakeawayPage() {
                 )
               )
             )
-}      
+            }      
           </div>
         </section>
       )}
@@ -335,7 +335,6 @@ export default function TakeawayPage() {
       {selectedCategory === "Restaurant" && (
         <section className={styles.restaurantSection}>
           <h2 className={styles.sectionRestaurentTitle}>Restaurant</h2>
-
           {/* Subcategories Carousel */}
           <div className={styles.subcategoriesWrapper}>
             <FiChevronLeft
@@ -357,7 +356,7 @@ export default function TakeawayPage() {
                       selectedSubcategory === sub.name ? styles.active : ""
                     }`}
                     onClick={() => setSelectedSubcategory(sub.name)}
-                  >
+                    >
                     <img
                       src={sub.image}
                       alt={sub.name}
