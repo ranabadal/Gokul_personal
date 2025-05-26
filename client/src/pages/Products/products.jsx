@@ -273,7 +273,6 @@ export default function TakeawayPage() {
                     View All
                   </button>
 </div>  */}
-
           {/* Product Grid for Sweets */}
           
           <div className={styles.productGrid}>
@@ -325,8 +324,10 @@ export default function TakeawayPage() {
                       </button>
                     </div>
                   </div>
-                ))
-            )}
+                )
+              )
+            )
+         }
           </div>
         </section>
       )}
@@ -346,7 +347,7 @@ export default function TakeawayPage() {
                 <div className={styles.loaderContainer}>
                   <Loader />
                 </div>
-              ) : errorSubcategories ? (
+                ) : errorSubcategories ? (
                 <p>{errorSubcategories}</p>
               ) : (
                 subcategories.map((sub) => (
@@ -447,7 +448,11 @@ export default function TakeawayPage() {
             )}
           </div>
         </section>
-      )}
+
+      )
+
+      }
+
       <Footer />
     </div>
   );
