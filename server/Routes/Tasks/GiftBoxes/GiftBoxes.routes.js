@@ -13,6 +13,7 @@ router.get("/giftBoxes", adminController.getAllGiftBoxes);
 router.post("/giftBoxes", adminController.createGiftBox);
 router.put("/giftBoxes/:id", adminController.updateGiftBox);
 router.delete("/giftBoxes/:id", adminController.deleteGiftBox);
+router.get("/giftBoxes/:id", adminController.getGiftBoxById);
 
 // ✅ General Handbag Routes
 router.get("/generalHandbags", adminController.getAllGeneralHandbags);

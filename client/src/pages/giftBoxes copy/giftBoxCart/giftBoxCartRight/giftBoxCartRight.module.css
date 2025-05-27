@@ -1,3 +1,4 @@
+/* Order Summary Container */
 .orderSummary {
   background-color: #fff;
   padding: 20px;
@@ -10,6 +11,7 @@
   max-height: fit-content;
 }
 
+/* Header Section */
 .header {
   display: flex;
   justify-content: space-between;
@@ -28,6 +30,7 @@
   color: #333;
 }
 
+/* Order Items */
 .orderItem {
   border-bottom: 1px solid #eee;
   margin-bottom: 10px;
@@ -40,6 +43,7 @@
   margin-bottom: 10px;
 }
 
+/* Product Image */
 .itemImage {
   width: 60px;
   height: 60px;
@@ -53,6 +57,7 @@
   border-radius: 4px;
 }
 
+/* Product Details */
 .itemDetails {
   flex: 1;
 }
@@ -69,6 +74,7 @@
   color: #444;
 }
 
+/* Edit & Delete Icons */
 .icons {
   display: flex;
   gap: 8px;
@@ -85,6 +91,7 @@
   height: 18px;
 }
 
+/* Quantity & Price */
 .quantityContainer {
   display: flex;
   justify-content: space-between;
@@ -99,6 +106,7 @@
   justify-content: space-between;
 }
 
+/* Matching Handbags */
 .matchingHandbagsSection {
   margin-top: 10px;
   padding-left: 70px;
@@ -131,6 +139,7 @@
   color: #555;
 }
 
+/* Promo Section */
 .promoContainer {
   margin-top: 15px;
   padding-top: 10px;
@@ -167,6 +176,7 @@
   font-size: 14px;
 }
 
+/* Delivery Selection */
 .deliveryContainer {
   margin-bottom: 10px;
 }
@@ -189,6 +199,7 @@
   font-size: 14px;
 }
 
+/* Charges Section */
 .chargesSection {
   margin-top: 10px;
 }
@@ -210,6 +221,7 @@
   color: #333;
 }
 
+/* Checkout Button */
 .checkoutButton {
   width: 100%;
   padding: 10px;
@@ -222,33 +234,67 @@
   cursor: pointer;
 }
 
-/* Modal Overlay: Full-screen semi-transparent background */
+/* Selected Sweets Section */
+.selectedSweetsSection {
+  margin-top: 15px;
+  background-color: #eef9f2;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.selectedSweetsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.selectedSweet {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.sweetImage {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.totalSweetsPrice,
+.finalTotalAmount {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Modal Overlay for Address Selection */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.65);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1200;
 }
 
-/* Modal Content: Popup box styled similarly to a zoom modal */
 .modalContent {
   background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  max-width: 500px;
+  padding: 20px;
+  border-radius: 6px;
   width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
 }
 
-/* Address Option styling */
 .addressOption {
   display: block;
   margin-bottom: 1rem;
@@ -256,30 +302,32 @@
   cursor: pointer;
 }
 
-/* Confirm Button styling */
 .confirmButton {
-  background: #28a745;
-  color: #fff;
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
   border: none;
-  padding: 0.8rem 1.2rem;
+  color: #fff;
   font-size: 1rem;
-  border-radius: 4px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-/* Disabled Confirm Button styling */
+.confirmButton:hover {
+  background-color: #388e3c;
+}
+
 .confirmButton:disabled {
-  background: #ccc;
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
-
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
   .orderSummary {
-    max-width: 90%;
-    margin: auto;
+    max-width: 100%;
+    padding: 15px;
   }
 
   .header {
@@ -289,75 +337,26 @@
 
   .orderItemRow {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .itemImage {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+
+  .matchingHandbagsSection {
+    padding-left: 20px;
+  }
+
+  .selectedSweetsContainer {
+    flex-direction: column;
+    align-items: center;
   }
 
   .checkoutButton {
-    font-size: 1rem;
+    font-size: 14px;
     padding: 8px;
   }
-}
-
-@media (max-width: 480px) {
-
-  .orderSummary{
-    max-width: 280px;
-  }
-
-  .orderTitle {
-  font-size: 14px;
-}
-
-.itemImage {
-  width: 35px;
-  height: 35px;
-  margin-right: 6px;
-}
-
-.selectedBoxName {
-  font-size: 12px;
-}
-
-
-.priceContainer {
-  font-size: 14px;
-}
-
-  .orderTitle, .orderPrice {
-    font-size: 12px;
-  }
-
-  .matchingHandbagsSection h3 {
-  font-size: 10px;
-
-}
-
-.matchingDetails {
-  font-size: 10px;
-}
-
-
-  .checkoutButton {
-    font-size: 0.9rem;
-    padding: 6px;
-  }
-
-
-  .applyButton {
-  padding: 5px;
-  font-size: 12px;
-}
-
-.promoSection input{
-min-width: 120px;
-}
-
-.deliveryContainer{
-  font-size: 10px;
-}
 }

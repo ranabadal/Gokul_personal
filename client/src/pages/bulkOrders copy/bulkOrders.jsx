@@ -14,6 +14,8 @@ import GiftBox from "./GiftBoxesForBulkPage/giftBoxesForBulkPage";
 import RegularBoxModal from "./RegularBoxModal";
 import { FaTrash } from "react-icons/fa";
 import { BASE_URL } from "../../Const/Const";
+import { useToaster } from "../../utils";
+
 const BulkOrder = () => {
   // Standard state definitions
   const [selectedBox, setSelectedBox] = useState("Sweet Box");
@@ -27,6 +29,7 @@ const BulkOrder = () => {
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
+  const setToast = useToaster();
   // Load Gift Box Selection from localStorage (or default structure)
   const [finalSelection, setFinalSelection] = useState(() => {
     return (
@@ -162,7 +165,7 @@ const BulkOrder = () => {
   const handlePlaceOrder = () => {
     const token = localStorage.getItem("jwtToken");
     if (!token) {
-      alert("Please log in to place an order.");
+      setToast("Please log in to place an order.");
       return;
     }
     if (
@@ -171,7 +174,7 @@ const BulkOrder = () => {
       finalSelection.giftBoxes.length === 0 &&
       finalSelection.generalHandbags.length === 0
     ) {
-      alert("Your order is empty! Please add items before placing an order.");
+      setToast("Your order is empty! Please add items before placing an order.");
       return;
     }
     setShowAddressModal(true);
@@ -184,11 +187,11 @@ const handleConfirmOrder = async (selectedAddress) => {
   try {
     const token = localStorage.getItem("jwtToken");
     if (!token) {
-      alert("User authentication required. Please log in.");
+      setToast("User authentication required. Please log in.");
       return;
     }
     if (!selectedAddress || typeof selectedAddress !== "object" || Object.keys(selectedAddress).length === 0) {
-      alert("Please select a valid delivery address before confirming the order.");
+      setToast("Please select a valid delivery address before confirming the order.");
       return;
     }
     if (
@@ -197,7 +200,7 @@ const handleConfirmOrder = async (selectedAddress) => {
       finalSelection.giftBoxes.length === 0 &&
       finalSelection.generalHandbags.length === 0
     ) {
-      alert("Your order is empty! Please add items before placing an order.");
+      setToast("Your order is empty! Please add items before placing an order.");
       return;
     }
 
@@ -217,7 +220,7 @@ const handleConfirmOrder = async (selectedAddress) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (response.data.success) {
-      alert("Order placed successfully!");
+      setToast("Order placed successfully!");
       console.log("Server Response:", response.data);
 
       // Clear all order data from state.
@@ -231,11 +234,11 @@ const handleConfirmOrder = async (selectedAddress) => {
       localStorage.removeItem("RegularBoxSelection");
       localStorage.removeItem("GiftBoxSelectionforBulkOrders");
     } else {
-      alert(response.data.message || "Failed to place order.");
+      setToast(response.data.message || "Failed to place order.");
     }
   } catch (error) {
     console.error("Error placing order:", error.response?.data || error.message || error);
-    alert(error.response?.data?.message || "Failed to place order. Please try again.");
+    setToast(error.response?.data?.message || "Failed to place order. Please try again.");
   }
    // Clear all order data from state.
    setSelectedItems({});
