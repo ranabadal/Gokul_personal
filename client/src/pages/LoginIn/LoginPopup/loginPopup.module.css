@@ -64,7 +64,8 @@
 .loginButton,
 .signupButton {
   color:#E1353C ;
-
+display: flex;
+justify-content: center;
   /* color: white; */
   padding: 12px;
   border: 1px solid #E1353C;
@@ -75,6 +76,8 @@
 
 .loginButton:hover,
 .signupButton:hover {
+  display: flex;
+  justify-content: center;
   background-color: #C13032;
   color: white;
 }

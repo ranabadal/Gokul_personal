@@ -21,12 +21,10 @@ export default function TakeawayPage() {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [errorProducts, setErrorProducts] = useState("");
   const [heroIndex, setHeroIndex] = useState(0);
-  const [selectedSweetsSubcategory, setSelectedSweetsSubcategory] =
-    useState(null);
+  const [selectedSweetsSubcategory, setSelectedSweetsSubcategory] = useState(null);
   const sweetsSubcategoriesRef = useRef(null);
   const [sweetsSubcategories, setSweetsSubcategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
   const [basket, setBasket] = useState([]);
 
   // Load basket from localStorage on mount
@@ -49,8 +47,7 @@ export default function TakeawayPage() {
       if (!token) {
         setToast("Please log in first!", "error");
         return;
-      }
-
+      }      
       const response = await fetch(`${BASE_URL}/api/cart`, {
         method: "POST",
         headers: {
@@ -59,7 +56,6 @@ export default function TakeawayPage() {
         },
         body: JSON.stringify({ productId, quantity: 1 }),
       });
-
       const data = await response.json();
       if (data.success) {
         setToast("Product added to cart successfully!", "success");
@@ -273,7 +269,6 @@ export default function TakeawayPage() {
                     View All
                   </button>
 </div>  */}
-
           {/* Product Grid for Sweets */}
           
           <div className={styles.productGrid}>
@@ -325,8 +320,10 @@ export default function TakeawayPage() {
                       </button>
                     </div>
                   </div>
-                ))
-            )}
+                )
+              )
+            )
+            }      
           </div>
         </section>
       )}
@@ -334,7 +331,6 @@ export default function TakeawayPage() {
       {selectedCategory === "Restaurant" && (
         <section className={styles.restaurantSection}>
           <h2 className={styles.sectionRestaurentTitle}>Restaurant</h2>
-
           {/* Subcategories Carousel */}
           <div className={styles.subcategoriesWrapper}>
             <FiChevronLeft
@@ -346,7 +342,7 @@ export default function TakeawayPage() {
                 <div className={styles.loaderContainer}>
                   <Loader />
                 </div>
-              ) : errorSubcategories ? (
+                ) : errorSubcategories ? (
                 <p>{errorSubcategories}</p>
               ) : (
                 subcategories.map((sub) => (
@@ -356,7 +352,7 @@ export default function TakeawayPage() {
                       selectedSubcategory === sub.name ? styles.active : ""
                     }`}
                     onClick={() => setSelectedSubcategory(sub.name)}
-                  >
+                    >
                     <img
                       src={sub.image}
                       alt={sub.name}
@@ -447,7 +443,8 @@ export default function TakeawayPage() {
             )}
           </div>
         </section>
-      )}
+      )
+      }
       <Footer />
     </div>
   );

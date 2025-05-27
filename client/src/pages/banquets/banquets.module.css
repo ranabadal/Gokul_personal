@@ -82,9 +82,9 @@
 }
 
 @media (max-width: 480px) {
-    .mainConatiner {
+    /* .mainConatiner {
         padding-top: 20px;
-    }
+    } */
 
     .topRightHeading {
         font-size: 30px;
