@@ -1,89 +1,90 @@
-
-
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./hall_detail.module.css";
 import { useNavigate } from "react-router-dom";
 
 const HallDetails = ({
-    name,
-    price,
-    seating,
-    platePrice,
-    description,
-    rating,
-    images,
-    icons,
-    onImageClick,
-    showMoreImages,
-    onAddToWishlist,
-    selectedImage,
-    
-     onCheckAvailability
+  name,
+  price,
+  seating,
+  platePrice,
+  description,
+  rating,
+  images,
+  icons,
+  onImageClick, // (optional) if you want to notify parent when an image is clicked
+  showMoreImages,
+  onAddToWishlist,
+  selectedImage, // (optional) if parent wants to control the displayed image
+  onCheckAvailability,
 }) => {
-    const [showExtraImages, setShowExtraImages] = useState(false); // State to toggle extra images
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showExtraImages, setShowExtraImages] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Auto-cycle images every 3 seconds
-    useEffect(() => {
-      if (images && images.length > 0) {
-        const interval = setInterval(() => {
-          setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 1900);
-        return () => clearInterval(interval);
-      }
-    }, [images]);
+  // Auto-cycle images every 1900ms if images are passed in.
+  useEffect(() => {
+    if (images && images.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 1900);
+      return () => clearInterval(interval);
+    }
+  }, [images]);
 
-
-  // When a user clicks a bottom image, update the current index to display it immediately.
+  // When a lower thumbnail is clicked, update the index immediately.
   const handleCardClick = (index) => {
+    // If clicking the 5th image (index 4) and extra images are not yet shown, toggle extra images.
     if (index === 4 && !showExtraImages) {
-      // If clicking the 5th image (index 4) and extra images are not yet shown,
-      // toggle to show extra images.
       setShowExtraImages(true);
     } else {
       setCurrentImageIndex(index);
+      // Optionally, notify parent of the clicked image.
+      if (onImageClick) onImageClick(images[index]);
     }
   };
 
-  // For extra images, adjust the index offset by 4.
+  // When clicking on an extra thumbnail, adjust the index offset by 4.
   const handleExtraImageClick = (index) => {
-    setCurrentImageIndex(index + 4);
+    const newIndex = index + 4;
+    setCurrentImageIndex(newIndex);
+    if (onImageClick) onImageClick(images[newIndex]);
   };
 
+  const navigate = useNavigate();
 
-      const navigate = useNavigate();
+  return (
+    <div className={`${styles.hall_details} ${showExtraImages ? styles.expanded : ""}`}>
+      <div className={styles.hall_details_left}>
+        <div className={styles.hall_details_left_top}>
+          <div className={styles.hall_details_left_top_line1}>
+            <div className={styles.hall_details_left_top_left_heading}>{name}</div>
+            {/* Uncomment the next block if you wish to allow adding to wishlist */}
+            {/* <div className={styles.hall_details_left_top_right}>
+              <img src={icons.heart} alt="heart" onClick={onAddToWishlist} />
+            </div> */}
+          </div>
+          <div className={styles.hall_details_left_top_line2}>
+            <div className={styles.hall_details_left_top_price}>{price}</div>
+            {/* Uncomment the next block to display rating stars */}
+            {/*
+            <div className={styles.hall_details_left_rating}>
+              {[...Array(5)].map((_, index) => (
+                <div key={index} className={styles.hall_details_left_rating_star}>
+                  <img src={icons.star} alt="star" />
+                </div>
+              ))}
+              <div className={styles.hall_details_left_rating_number}>{rating}</div>
+            </div>
+            */}
+          </div>
+        </div>
+        <div className={styles.hall_details_left_top_seating}>
+          <div className={styles.hall_details_left_top_seating_left}>{seating}</div>
+          {/* <div className={styles.hall_details_left_top_seating_right}>{platePrice}</div> */}
+        </div>
 
-    return (
-        <div className={`${styles.hall_details} ${showExtraImages ? styles.expanded : ""}`}>
-            <div className={styles.hall_details_left}>
-                <div className={styles.hall_details_left_top}>
-                    <div className={styles.hall_details_left_top_line1}>
-                        <div className={styles.hall_details_left_top_left_heading}>{name}</div>
-                        {/* <div className={styles.hall_details_left_top_right}>
-                            <img src={icons.heart} alt="heart"  onClick={onAddToWishlist}/>
-                        </div> */}
-                    </div>
-                    <div className={styles.hall_details_left_top_line2}>
-                        <div className={styles.hall_details_left_top_price}>{price}</div>
-                        {/* <div className={styles.hall_details_left_rating}>
-                            {[...Array(5)].map((_, index) => (
-                                <div key={index} className={styles.hall_details_left_rating_star}>
-                                    <img src={icons.star} alt="star" />
-                                </div>
-                            ))}
-                            <div className={styles.hall_details_left_rating_number}>{rating}</div>
-                        </div> */}
-                    </div>
-                     </div>
-                    <div className={styles.hall_details_left_top_seating}>
-                        <div className={styles.hall_details_left_top_seating_left}>{seating}</div>
-                        {/* <div className={styles.hall_details_left_top_seating_right}>{platePrice}</div> */}
-                    </div>
-               
+        <div className={styles.hall_details_left_descption}>{description}</div>
 
-                <div className={styles.hall_details_left_descption}>{description}</div>
-
-                <div className={styles.hall_details_left_cards}>
+        <div className={styles.hall_details_left_cards}>
           {images.slice(0, 4).map((img, index) => (
             <div
               key={index}
@@ -92,7 +93,11 @@ const HallDetails = ({
               }`}
               onClick={() => handleCardClick(index)}
             >
-              <img src={img} alt={`card${index + 1}`} className={currentImageIndex === index ? "selected" : ""} />
+              <img
+                src={img}
+                alt={`card${index + 1}`}
+                className={currentImageIndex === index ? styles.selected : ""}
+              />
             </div>
           ))}
           {images.length > 4 && !showExtraImages && (
@@ -102,8 +107,14 @@ const HallDetails = ({
               }`}
               onClick={() => handleCardClick(4)}
             >
-              <img src={images[4]} alt="card5" className={currentImageIndex === 4 ? "selected" : ""} />
-              {images.length > 5 && <div className={styles.more_images_overlay}>+{images.length - 5}</div>}
+              <img
+                src={images[4]}
+                alt="card5"
+                className={currentImageIndex === 4 ? styles.selected : ""}
+              />
+              {images.length > 5 && (
+                <div className={styles.more_images_overlay}>+{images.length - 5}</div>
+              )}
             </div>
           )}
         </div>
@@ -122,29 +133,32 @@ const HallDetails = ({
           </div>
         )}
 
-
-
-                <div className={styles.hall_details_left_bottom_box}>
-                    {/* <button className={styles.hall_details_left_bottom_box_button} onClick={() => navigate("/cartringForm")}>Check Availability</button> */}
-                                        <button className={styles.hall_details_left_bottom_box_button}   onClick={() => onCheckAvailability({
-      title: name, // Hall title
-      seatingCapacity: seating, // Seating capacity
-      images: images ,
-      hallPrice: price
-    })}>Check Availability</button>
-                </div>
-            </div>
-            <div className={styles.hall_details_right}>
+        <div className={styles.hall_details_left_bottom_box}>
+          <button
+            className={styles.hall_details_left_bottom_box_button}
+            onClick={() =>
+              onCheckAvailability({
+                title: name,
+                seatingCapacity: seating,
+                images: images,
+                hallPrice: price,
+              })
+            }
+          >
+            Check Availability
+          </button>
+        </div>
+      </div>
+      <div className={styles.hall_details_right}>
         {images && images.length > 0 && (
-          <img src={images[currentImageIndex]} alt="selected" className="selected" />
+          <img src={images[currentImageIndex]} alt="selected" className={styles.selected} />
         )}
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default HallDetails;
-
 
 
 // import React, { useState, useEffect } from "react";
