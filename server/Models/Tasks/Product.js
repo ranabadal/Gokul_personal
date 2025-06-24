@@ -34,7 +34,6 @@
 
 
 
-
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
@@ -45,17 +44,23 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   rating: { type: Number, default: 0 },
   reviewCount: { type: Number, default: 0 },
-  image: { type: String, required: true }, // Base64 image string
+
+  // Updated image field to store Cloudinary URL & public ID
+  image: { 
+    url: { type: String, required: true },  // Cloudinary image URL
+    public_id: { type: String, required: true } // Cloudinary public ID for easy deletion
+  },
 
   // Fields for Today's Deal Product
   oldPrice: { type: Number },
-  
+
   // Flag to identify Today's Deal Product
   bulkOrderAvailable: { type: Boolean, default: false }, // Checkbox for bulk order
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
 
+// Update `updatedAt` timestamp before saving
 productSchema.pre('save', function(next) {
   this.updatedAt = Date.now();
   next();

@@ -328,7 +328,7 @@ const handleConfirmOrder = async (selectedAddress) => {
                 {(selectedBox === "Sweet Box" ? sweets : snacks).map((item) => (
                   <div key={item._id} className={styles.item}>
                     <div className={styles.imageContainer}>
-                      <img src={item.image} alt={item.name} className={styles.image} />
+                      <img src={item.image?.url} alt={item.name} className={styles.image} />
                     </div>
                     <div className={styles.detailsContainer}>
                       <div className={styles.name}>{item.name}</div>

@@ -1053,7 +1053,7 @@ const GiftBoxAndBulkTemplate = ({
     <div className={styles.product_details}>
       {/* Main Product Image */}
       <div className={styles.product_image} onClick={() => handleImageClick(image)}>
-        <img src={image} alt={name} />
+        <img src={image?.url} alt={name} />
       </div>
 
       {/* Product Information */}
@@ -1099,7 +1099,7 @@ const GiftBoxAndBulkTemplate = ({
                     <div className={styles.handbag_info}>
                       {handbag.image && (
                         <img
-                          src={handbag.image}
+                          src={handbag.image?.url}
                           alt={handbag.name}
                           className={styles.handbag_image}
                           onClick={() => handleImageClick(handbag.image)}
@@ -1153,7 +1153,7 @@ const GiftBoxAndBulkTemplate = ({
               <div className={styles.selectedSweetsDisplay}>
                 {selectedSweetsDisplay.map((sweet) => (
                   <div key={sweet._id} className={styles.preferredSweet}>
-                    <img src={sweet.image} alt={sweet.name} className={styles.sweetImage} />
+                    <img src={sweet.image?.url} alt={sweet.name} className={styles.sweetImage} />
                     <div>{sweet.name}</div>
                   </div>
                 ))}
@@ -1198,7 +1198,7 @@ const GiftBoxAndBulkTemplate = ({
                         checked={giftBoxSweets.preferredSweets.includes(sweet._id)}
                         onChange={() => handleSweetsCheckboxChange(sweet)}
                       />
-                      <img src={sweet.image} alt={sweet.name} className={styles.sweetImage} />
+                      <img src={sweet.image?.url} alt={sweet.name} className={styles.sweetImage} />
                       <span>
                         {sweet.name} - ₹{sweet.price}
                       </span>

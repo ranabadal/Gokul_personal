@@ -507,7 +507,7 @@ const MainGiftBoxes = () => {
                     }`}
                     onClick={() => setSelectedCategory(cat._id)}
                   >
-                    <img src={cat.image} alt={cat.name} className={styles.subcategoryImage} />
+                    <img src={cat.image?.url} alt={cat.name} className={styles.subcategoryImage} />
                     <p className={styles.subcategoryName}>{cat.name}</p>
                   </div>
                 ))}
