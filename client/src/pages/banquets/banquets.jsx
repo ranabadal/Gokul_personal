@@ -160,7 +160,6 @@
 
 // export default Banquets;
 
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./banquets.module.css";
@@ -175,7 +174,7 @@ import heart from "../../components/hall_details/assets/red heart.svg";
 import star from "../../components/hall_details/assets/star.svg";
 import { useToaster } from "../../utils";
 import Loader from "../../components/Loader/loader1/sweetLoader";
-import { BASE_URL } from "../../Const/Const"; 
+import { BASE_URL } from "../../Const/Const";
 
 const Banquets = () => {
   const [banquets, setBanquets] = useState([]);
@@ -193,11 +192,10 @@ const Banquets = () => {
 
         const data = await response.json();
         if (data.success) {
+          // Update each banquet so that the selected image is the first image's URL.
           const updatedBanquets = data.banquets.map((banquet) => ({
             ...banquet,
-            selectedImage: banquet.images[0]?.data
-              ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
-              : null,
+            selectedImage: banquet.images[0]?.url || null,
           }));
           setBanquets(updatedBanquets);
         } else {
@@ -236,9 +234,7 @@ const Banquets = () => {
           seatingCapacity: banquet.seatingCapacity,
           hallTitle: banquet.title,
           hallPrice: banquet.price,
-          hallImages: banquet.images.length > 0
-            ? banquet.images.map((img) => `data:${img.contentType};base64,${img.data}`)
-            : [],
+          hallImages: banquet.images ? banquet.images.map((img) => img.url) : [],
         },
       });
     } catch (error) {
@@ -255,7 +251,9 @@ const Banquets = () => {
       <div className={styles.header}>
         <Header />
       </div>
-    <div className={styles.topRightHeading}>  <GokulHeading /></div>
+      <div className={styles.topRightHeading}>
+        <GokulHeading />
+      </div>
 
       {isLoading && <Loader />}
       {error && <div className={styles.error}>Error: {error}</div>}
@@ -271,14 +269,12 @@ const Banquets = () => {
                 seating={`${banquet.seatingCapacity} Seating`}
                 description={banquet.description}
                 rating={banquet.rating}
-                images={banquet.images.map(
-                  (img) => `data:${img.contentType};base64,${img.data}`
-                )}
+                images={banquet.images ? banquet.images.map((img) => img.url) : []}
                 selectedImage={banquet.selectedImage}
                 onImageClick={(image) => handleImageClick(banquet._id, image)}
                 onCheckAvailability={() => handleCheckAvailability(banquet)}
                 icons={{ heart, star }}
-                showMoreImages={banquet.images.length > 5}
+                showMoreImages={banquet.images ? banquet.images.length > 5 : false}
               />
             </div>
 
@@ -288,7 +284,7 @@ const Banquets = () => {
               </div>
             )}
 
-            {index % 2 === 1 && (
+            {index % 3 === 1 && (
               <div className={styles.deals_timer}>
                 <DealsTimer />
               </div>

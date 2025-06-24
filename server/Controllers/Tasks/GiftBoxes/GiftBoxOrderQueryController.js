@@ -420,6 +420,364 @@
 
 // controllers/giftBoxOrderQueryController.js
 
+
+// const GiftBoxOrderQuery = require("../../../Models/Tasks/GiftBoxes/GiftBoxOrderQuery");
+// const User = require("../../../Models/Auth/Auth.model"); // Import User model
+// const nodemailer = require("nodemailer");
+// const mongoose = require("mongoose");
+
+// // ----------------------------------------------------------------------------
+// // Helper: Create a nodemailer transporter instance
+// const transporter = nodemailer.createTransport({
+//   service: "Gmail",
+//   auth: {
+//     user: process.env.EMAIL_USER,
+//     pass: process.env.EMAIL_PASS,
+//   },
+// });
+
+// // ----------------------------------------------------------------------------
+// // Helper: Send email
+// const sendEmail = async (to, subject, text) => {
+//   try {
+//     const mailOptions = {
+//       from: process.env.EMAIL_USER,
+//       to,
+//       subject,
+//       text,
+//     };
+//     await transporter.sendMail(mailOptions);
+//     console.log(`Email sent to ${to} with subject: ${subject}`);
+//   } catch (error) {
+//     console.error("Error sending email:", error);
+//   }
+// };
+
+// // ----------------------------------------------------------------------------
+// // Helper: Format order details text (for email)
+// // This function formats the cart items and address into a string.
+// const formatOrderDetails = (query) => {
+//   let details = "";
+//   if (query.cartItems && query.cartItems.length > 0) {
+//     query.cartItems.forEach((item, idx) => {
+//       const itemTotal =
+//         Number(item.details.price) * Number(item.details.quantity);
+//       details += `Item ${idx + 1} (${item.type}):
+//   Name: ${item.details.name}
+//   Unit Price: ₹${item.details.price}
+//   Quantity: ${item.details.quantity}
+//   Item Total: ₹${itemTotal}\n`;
+//       if (item.matchingHandbags && item.matchingHandbags.length > 0) {
+//         details += "  Matching Handbags:\n";
+//         item.matchingHandbags.forEach((mh, i) => {
+//           const mhTotal = Number(mh.price) * Number(mh.quantity);
+//           details += `    ${i + 1}. ${mh.name} | Unit Price: ₹${mh.price} | Quantity: ${mh.quantity} | Total: ₹${mhTotal}\n`;
+//         });
+//       }
+//       details += "\n";
+//     });
+//   }
+//   details += `Delivery Address:
+//   Province: ${query.address.province}
+//   City: ${query.address.city}
+//   Area: ${query.address.area}
+//   Landmark: ${query.address.landmark}\n`;
+//   details += `Overall Total: ₹${query.totalPrice}\n`;
+//   return details;
+// };
+
+// // ----------------------------------------------------------------------------
+// // CREATE a new bulk order query
+// exports.createQuery = async (req, res) => {
+//   try {
+//     // Expect req.user to be set by the authentication middleware
+//     const userId = req.user.id;
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
+
+//     // We expect cartItems, address and totalPrice in the request body.
+//     const { cartItems, address, totalPrice } = req.body;
+
+//     // Compose the query data (also including user details)
+//     const queryData = {
+//       ...req.body,
+//       user: new mongoose.Types.ObjectId(userId),
+//       userName: user.name,
+//       userEmail: user.email,
+//       userMobile: user.number, // Assuming field is "mobile"
+//       cartItems,
+//       address,
+//       totalPrice,
+//       status: "Pending", // default status
+//     };
+
+//     console.log("Final Query Data:", queryData);
+
+//     const newQuery = new GiftBoxOrderQuery(queryData);
+//     await newQuery.save();
+
+//     // Format order details for email
+//     const orderText = formatOrderDetails(newQuery);
+
+//     // Send confirmation email to user
+//     await sendEmail(
+//       user.email,
+//       "Order Confirmation - Gift Box Order",
+//       `Dear ${user.name},
+
+// Thank you for your order! Here are your order details:
+
+// ${orderText}
+
+// We will notify you once your order is processed.
+
+// Best regards,
+// Gokuls`
+//     );
+
+//     // Send notification email to admin
+//     await sendEmail(
+//       process.env.ADMIN_EMAIL,
+//       "New Gift Box Order",
+//       `Dear Admin,
+
+// A new gift box order has been placed.
+
+// User Details:
+//   Name: ${user.name}
+//   Email: ${user.email}
+//   Mobile: ${user.number}
+
+// Order Details:
+// ${orderText}
+
+// Please review the order in the admin panel.
+
+// Best regards,
+// Gokuls`
+//     );
+
+//     res.status(201).json({
+//       message: "Gift Box Order query created successfully",
+//       query: newQuery,
+//       user: { name: user.name, mobile: user.number, email: user.email },
+//     });
+//   } catch (error) {
+//     console.error("Error creating query:", error.message);
+//     res.status(500).json({ error: "Failed to create bulk order query" });
+//   }
+// };
+
+// // ----------------------------------------------------------------------------
+// // GET all queries (Admin protected route)
+// exports.getAllQueries = async (req, res) => {
+//   try {
+//     const orders = await GiftBoxOrderQuery.find().populate("user", "name email mobile");
+//     res.status(200).json({ success: true, orders });
+//   } catch (error) {
+//     console.error("Error fetching queries:", error.message);
+//     res.status(500).json({ success: false, message: "Error fetching orders" });
+//   }
+// };
+
+// // ----------------------------------------------------------------------------
+// // GET queries for the logged-in user
+// exports.getUserOrders = async (req, res) => {
+//   try {
+//     const userId = req.user?.id;
+//     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+//       return res.status(400).json({ error: "Invalid User ID format" });
+//     }
+//     const orders = await GiftBoxOrderQuery.find({ user: userId });
+//     res.status(200).json(orders);
+//   } catch (error) {
+//     console.error("Error fetching gift box orders:", error.message);
+//     res.status(500).json({ error: "Failed to fetch gift box orders" });
+//   }
+// };
+
+// // ----------------------------------------------------------------------------
+// // GET one query by ID
+// exports.getQueryById = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const query = await GiftBoxOrderQuery.findById(queryId).populate("user", "name mobile email");
+//     if (!query) {
+//       return res.status(404).json({ error: "Gift Box order query not found" });
+//     }
+//     res.status(200).json(query);
+//   } catch (error) {
+//     console.error("Error fetching query:", error.message);
+//     res.status(500).json({ error: "Failed to fetch bulk order query" });
+//   }
+// };
+
+// // ----------------------------------------------------------------------------
+// // UPDATE a query (general update, e.g. marking as Completed)
+// exports.updateQuery = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const updatedData = req.body;
+
+//     const query = await GiftBoxOrderQuery.findByIdAndUpdate(queryId, updatedData, {
+//       new: true,
+//       runValidators: true,
+//     });
+//     if (!query) {
+//       return res.status(404).json({ error: "Bulk order query not found" });
+//     }
+
+//     // If the updatedData contains status and it is one of the monitored statuses,
+//     // send an email notification. (For example, Completed)
+//     if (updatedData.status) {
+//       const status = updatedData.status;
+//       let subject = "";
+//       let message = "";
+//       if (status === "Completed") {
+//         subject = "Order Completed";
+//         message = `Dear ${query.userName},
+
+// Your order has been marked as Completed.
+
+// Order Details:
+// ${formatOrderDetails(query)}
+
+// Thank you for your purchase.
+
+// Best regards,
+// Gokuls`;
+//       }
+//       // You can add additional status cases here...
+
+//       if (subject) {
+//         await sendEmail(query.userEmail, subject, message);
+//       }
+//     }
+
+//     res.status(200).json({
+//       message: "Bulk order query updated successfully",
+//       query,
+//     });
+//   } catch (error) {
+//     console.error("Error updating query:", error.message);
+//     res.status(500).json({ error: "Failed to update bulk order query" });
+//   }
+// };
+
+// // ----------------------------------------------------------------------------
+// // DELETE a query by ID
+// exports.deleteQuery = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const query = await GiftBoxOrderQuery.findByIdAndDelete(queryId);
+//     if (!query) {
+//       return res.status(404).json({ error: "Bulk order query not found" });
+//     }
+//     res.status(200).json({ message: "Bulk order query deleted successfully" });
+//   } catch (error) {
+//     console.error("Error deleting query:", error.message);
+//     res.status(500).json({ error: "Failed to delete bulk order query" });
+//   }
+// };
+
+// // ----------------------------------------------------------------------------
+// // CANCEL a query (by user) – set status to "Cancelled"
+// exports.cancelUserOrder = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const updatedQuery = await GiftBoxOrderQuery.findByIdAndUpdate(
+//       queryId,
+//       { status: "Cancelled" },
+//       { new: true }
+//     );
+
+//     if (!updatedQuery) {
+//       return res.status(404).json({ error: "Bulk order query not found" });
+//     }
+
+//     // Send cancellation email to the user
+//     await sendEmail(
+//       updatedQuery.userEmail,
+//       "Order Cancelled",
+//       `Dear ${updatedQuery.userName},
+
+// Your order has been cancelled.
+
+// Order Details:
+// ${formatOrderDetails(updatedQuery)}
+
+// If you have any questions, please contact our support.
+
+// Best regards,
+// Gokuls`
+//     );
+
+//     res.status(200).json({
+//       message: "Bulk order query cancelled successfully",
+//       query: updatedQuery,
+//     });
+//   } catch (error) {
+//     console.error("Error cancelling query:", error.message);
+//     res.status(500).json({ error: "Failed to cancel bulk order query" });
+//   }
+// };
+
+// // ----------------------------------------------------------------------------
+// // APPROVE a query (by admin) – set status to "Approved"
+// // You could similarly add a reject endpoint if needed.
+// exports.approveQuery = async (req, res) => {
+//   try {
+//     const queryId = req.params.id;
+//     const updatedQuery = await GiftBoxOrderQuery.findByIdAndUpdate(
+//       queryId,
+//       { status: "Approved" },
+//       { new: true }
+//     );
+
+//     if (!updatedQuery) {
+//       return res.status(404).json({ error: "Bulk order query not found" });
+//     }
+
+//     // Send approval email to the user
+//     await sendEmail(
+//       updatedQuery.userEmail,
+//       "Order Approved",
+//       `Dear ${updatedQuery.userName},
+
+// Your order has been approved!
+
+// Order Details:
+// ${formatOrderDetails(updatedQuery)}
+
+// Thank you for your order.
+
+// Best regards,
+// Gokuls`
+//     );
+
+//     // Optionally send an email to admin (if needed)
+//     await sendEmail(
+//       process.env.ADMIN_EMAIL,
+//       "Order Approved - Gift Box Order",
+//       `Order approved for ${updatedQuery.userName}.
+      
+// Order Details:
+// ${formatOrderDetails(updatedQuery)}`
+//     );
+
+//     res.status(200).json({
+//       message: "Bulk order query approved successfully",
+//       query: updatedQuery,
+//     });
+//   } catch (error) {
+//     console.error("Error approving query:", error.message);
+//     res.status(500).json({ error: "Failed to approve bulk order query" });
+//   }
+// };
+
+
 const GiftBoxOrderQuery = require("../../../Models/Tasks/GiftBoxes/GiftBoxOrderQuery");
 const User = require("../../../Models/Auth/Auth.model"); // Import User model
 const nodemailer = require("nodemailer");
@@ -473,6 +831,13 @@ const formatOrderDetails = (query) => {
           details += `    ${i + 1}. ${mh.name} | Unit Price: ₹${mh.price} | Quantity: ${mh.quantity} | Total: ₹${mhTotal}\n`;
         });
       }
+      // --- New Section: Selected Sweets ---
+      if (item.selectedSweets && item.selectedSweets.length > 0) {
+        details += "  Selected Sweets:\n";
+        item.selectedSweets.forEach((sweet, i) => {
+          details += `    ${i + 1}. ${sweet.name} | Unit Price: ₹${sweet.price}\n`;
+        });
+      }
       details += "\n";
     });
   }
@@ -506,7 +871,7 @@ exports.createQuery = async (req, res) => {
       userName: user.name,
       userEmail: user.email,
       userMobile: user.number, // Assuming field is "mobile"
-      cartItems,
+      cartItems, // cartItems should include "selectedSweets" if any.
       address,
       totalPrice,
       status: "Pending", // default status
@@ -517,7 +882,7 @@ exports.createQuery = async (req, res) => {
     const newQuery = new GiftBoxOrderQuery(queryData);
     await newQuery.save();
 
-    // Format order details for email
+    // Format order details for email (will include selectedSweets if set)
     const orderText = formatOrderDetails(newQuery);
 
     // Send confirmation email to user
@@ -619,7 +984,6 @@ exports.updateQuery = async (req, res) => {
   try {
     const queryId = req.params.id;
     const updatedData = req.body;
-
     const query = await GiftBoxOrderQuery.findByIdAndUpdate(queryId, updatedData, {
       new: true,
       runValidators: true,
@@ -627,9 +991,7 @@ exports.updateQuery = async (req, res) => {
     if (!query) {
       return res.status(404).json({ error: "Bulk order query not found" });
     }
-
-    // If the updatedData contains status and it is one of the monitored statuses,
-    // send an email notification. (For example, Completed)
+    // If updatedData contains status and it is one of the monitored statuses, send an email notification.
     if (updatedData.status) {
       const status = updatedData.status;
       let subject = "";
@@ -648,13 +1010,11 @@ Thank you for your purchase.
 Best regards,
 Gokuls`;
       }
-      // You can add additional status cases here...
-
+      // Additional status cases can be added here...
       if (subject) {
         await sendEmail(query.userEmail, subject, message);
       }
     }
-
     res.status(200).json({
       message: "Bulk order query updated successfully",
       query,
@@ -691,12 +1051,10 @@ exports.cancelUserOrder = async (req, res) => {
       { status: "Cancelled" },
       { new: true }
     );
-
     if (!updatedQuery) {
       return res.status(404).json({ error: "Bulk order query not found" });
     }
-
-    // Send cancellation email to the user
+    // Note: updatedQuery will include new fields (e.g. selectedSweets) if they were included on creation.
     await sendEmail(
       updatedQuery.userEmail,
       "Order Cancelled",
@@ -712,7 +1070,6 @@ If you have any questions, please contact our support.
 Best regards,
 Gokuls`
     );
-
     res.status(200).json({
       message: "Bulk order query cancelled successfully",
       query: updatedQuery,
@@ -725,7 +1082,6 @@ Gokuls`
 
 // ----------------------------------------------------------------------------
 // APPROVE a query (by admin) – set status to "Approved"
-// You could similarly add a reject endpoint if needed.
 exports.approveQuery = async (req, res) => {
   try {
     const queryId = req.params.id;
@@ -734,12 +1090,10 @@ exports.approveQuery = async (req, res) => {
       { status: "Approved" },
       { new: true }
     );
-
     if (!updatedQuery) {
       return res.status(404).json({ error: "Bulk order query not found" });
     }
-
-    // Send approval email to the user
+    // Note: updatedQuery may include additional fields (e.g. selectedSweets).
     await sendEmail(
       updatedQuery.userEmail,
       "Order Approved",
@@ -755,17 +1109,15 @@ Thank you for your order.
 Best regards,
 Gokuls`
     );
-
-    // Optionally send an email to admin (if needed)
+    // Optionally send an email to admin as well.
     await sendEmail(
       process.env.ADMIN_EMAIL,
       "Order Approved - Gift Box Order",
       `Order approved for ${updatedQuery.userName}.
-      
+
 Order Details:
 ${formatOrderDetails(updatedQuery)}`
     );
-
     res.status(200).json({
       message: "Bulk order query approved successfully",
       query: updatedQuery,
@@ -774,4 +1126,15 @@ ${formatOrderDetails(updatedQuery)}`
     console.error("Error approving query:", error.message);
     res.status(500).json({ error: "Failed to approve bulk order query" });
   }
+};
+
+module.exports = {
+  createQuery: exports.createQuery,
+  getAllQueries: exports.getAllQueries,
+  getUserOrders: exports.getUserOrders,
+  getQueryById: exports.getQueryById,
+  updateQuery: exports.updateQuery,
+  deleteQuery: exports.deleteQuery,
+  cancelUserOrder: exports.cancelUserOrder,
+  approveQuery: exports.approveQuery,
 };
