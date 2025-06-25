@@ -240,7 +240,7 @@ const Home = () => {
             <HallDetails
               key={banquet._id}
               name={banquet.title}
-              price={`₹ ${banquet.price}/day`}
+              price={`Min. Charges ${banquet.price}`}
               seating={`${banquet.seatingCapacity} Seating`}
               description={banquet.description}
               rating={banquet.rating}
@@ -260,9 +260,8 @@ const Home = () => {
                     seatingCapacity: banquet.seatingCapacity,
                     hallTitle: banquet.title,
                     hallPrice: banquet.price,
-                    hallImage: banquet.images[0]
-                      ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
-                      : null,
+                    hallImage: banquet.images[0]?.url || null,
+                    hallImages: banquet.images.map((img) => img.url),
                   },
                 })
               }

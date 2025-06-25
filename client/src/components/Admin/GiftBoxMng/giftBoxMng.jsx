@@ -966,24 +966,32 @@ const AdminDashboard = () => {
     }
   };
 
-  // CREATE / ADD FUNCTIONS
-  const handleAddCategory = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("name", newCategory.name);
-      if (newCategory.image instanceof File) {
-        formData.append("image", newCategory.image);
-      }
-      await axios.post(`${BASE_URL}/api/giftboxpage/categories`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      setNewCategory({ name: "", image: "" });
-      fetchData();
-    } catch (error) {
-      console.error("Error adding category:", error);
-    }
-  };
+ const handleAddCategory = async () => {
+  const fd = new FormData();
+  fd.append("name", newCategory.name);
+  if (newCategory.image instanceof File) {
+    fd.append("image", newCategory.image);
+  }
+  await axios.post(`${BASE_URL}/api/giftboxpage/categories`, fd, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
+  fetchData();
+};
 
+const handleUpdateCategory = async () => {
+  const fd = new FormData();
+  fd.append("name", newCategory.name);
+  if (newCategory.image instanceof File) {
+    fd.append("image", newCategory.image);
+  }
+  await axios.put(
+    `${BASE_URL}/api/giftboxpage/categories/${editId}`,
+    fd,
+    { headers: { "Content-Type": "multipart/form-data" } }
+  );
+  fetchData();
+  handleCancelEdit();
+};
   const handleAddGiftBox = async () => {
     try {
       const payload = { ...newGiftBox };
@@ -1012,70 +1020,163 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleUpdateCategory = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("name", newCategory.name);
-      if (newCategory.image instanceof File) {
-        formData.append("image", newCategory.image);
-      }
-      await axios.put(`${BASE_URL}/api/giftboxpage/categories/${editId}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      setNewCategory({ name: "", image: "" });
-      setEditMode(false);
-      setEditType("");
-      setEditId("");
-      fetchData();
-    } catch (error) {
-      console.error("Error updating category:", error);
-    }
-  };
+ 
 
-  const handleUpdateGiftBox = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("name", newGiftBox.name);
-      formData.append("description", newGiftBox.description);
-      formData.append("category", newGiftBox.category);
-      formData.append("price", newGiftBox.price);
-      formData.append("minOrderQuantity", newGiftBox.minOrderQuantity);
-      formData.append("sweetsQuantity", newGiftBox.sweetsQuantity);
-      if (newGiftBox.image instanceof File) {
-        formData.append("image", newGiftBox.image);
-      }
-      if (newGiftBox.hasMatchingHandbag && newGiftBox.matchingHandbag) {
-        formData.append("matchingHandbag[name]", newGiftBox.matchingHandbag.name);
-        formData.append("matchingHandbag[price]", newGiftBox.matchingHandbag.price);
-        formData.append("matchingHandbag[minOrderQuantity]", newGiftBox.matchingHandbag.minOrderQuantity);
-        if (newGiftBox.matchingHandbag.image instanceof File) {
-          formData.append("matchingHandbag[image]", newGiftBox.matchingHandbag.image);
-        }
-      }
-      formData.append("preferredSweets", JSON.stringify(newGiftBox.preferredSweets));
-      await axios.put(`${BASE_URL}/api/giftboxpage/giftBoxes/${editId}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      setNewGiftBox({
-        name: "",
-        description: "",
-        category: "",
-        image: "",
-        price: "",
-        minOrderQuantity: "",
-        hasMatchingHandbag: false,
-        matchingHandbag: { name: "", image: "", price: "", minOrderQuantity: "" },
-        sweetsQuantity: "",
-        preferredSweets: [],
-      });
-      setEditMode(false);
-      setEditType("");
-      setEditId("");
-      fetchData();
-    } catch (error) {
-      console.error("Error updating gift box:", error);
+//  const handleUpdateGiftBox = async () => {
+//   try {
+//     const formData = new FormData();
+
+//     // 1) Primitives
+//     formData.append("name", newGiftBox.name);
+//     formData.append("description", newGiftBox.description);
+//     formData.append("category", newGiftBox.category);
+//     formData.append("price", newGiftBox.price);
+//     formData.append("minOrderQuantity", newGiftBox.minOrderQuantity);
+//     formData.append("sweetsQuantity", newGiftBox.sweetsQuantity);
+
+//     // 2) Main image (only if changed)
+//     if (newGiftBox.image instanceof File) {
+//       formData.append("image", newGiftBox.image);
+//     }
+
+//     // 3) preferredSweets as multiple fields
+//     newGiftBox.preferredSweets.forEach((id) => {
+//       formData.append("preferredSweets", id);
+//     });
+
+//     // 4) matchingHandbag metadata + optional file
+//     if (newGiftBox.hasMatchingHandbag) {
+//       // send the object as JSON so server can parse it
+//       formData.append(
+//         "matchingHandbags",
+//         JSON.stringify([{
+//           name: newGiftBox.matchingHandbag.name,
+//           price: newGiftBox.matchingHandbag.price,
+//           minOrderQuantity: newGiftBox.matchingHandbag.minOrderQuantity,
+//         }])
+//       );
+//       if (newGiftBox.matchingHandbag.image instanceof File) {
+//         formData.append("matchingHandbagImage", newGiftBox.matchingHandbag.image);
+//       }
+//     }
+
+//     // 5) Debug payload (optional)
+//     // for (let [k,v] of formData.entries()) console.log(k, v);
+
+//     // 6) Send
+//     await axios.put(
+//       `${BASE_URL}/api/giftboxpage/giftBoxes/${editId}`,
+//       formData,
+//       { headers: { "Content-Type": "multipart/form-data" } }
+//     );
+
+//     // 7) Reset UI
+//     setNewGiftBox({
+//       name: "",
+//       description: "",
+//       category: "",
+//       image: "",
+//       price: "",
+//       minOrderQuantity: "",
+//       hasMatchingHandbag: false,
+//       matchingHandbag: { name: "", image: "", price: "", minOrderQuantity: "" },
+//       sweetsQuantity: "",
+//       preferredSweets: [],
+//     });
+//     setEditMode(false);
+//     setEditType("");
+//     setEditId("");
+//     fetchData();
+//   }
+//   catch (error) {
+//     console.error(
+//       "Error updating gift box:",
+//       error.response?.data || error.message
+//     );
+//   }
+// };
+
+
+
+const handleUpdateGiftBox = async () => {
+  try {
+    const formData = new FormData();
+
+    // 1) Primitives
+    formData.append("name", newGiftBox.name);
+    formData.append("description", newGiftBox.description);
+    formData.append("category", newGiftBox.category);
+    formData.append("price", newGiftBox.price);
+    formData.append("minOrderQuantity", newGiftBox.minOrderQuantity);
+    formData.append("sweetsQuantity", newGiftBox.sweetsQuantity);
+
+    // 2) Main image (only if the user picked a new File)
+    if (newGiftBox.image instanceof File) {
+      formData.append("image", newGiftBox.image);
     }
-  };
+
+    // 3) preferredSweets: ALWAYS send just the ID
+    newGiftBox.preferredSweets.forEach((item) => {
+      // if item is an object, pull out its _id; otherwise assume it’s already a string
+      const id = item && typeof item === "object" && item._id 
+        ? item._id 
+        : item;
+      formData.append("preferredSweets", id);
+    });
+
+    // 4) matchingHandbags metadata + optional file
+    if (newGiftBox.hasMatchingHandbag) {
+      // metadata as JSON array
+      formData.append(
+        "matchingHandbags",
+        JSON.stringify([{
+          name: newGiftBox.matchingHandbag.name,
+          price: newGiftBox.matchingHandbag.price,
+          minOrderQuantity: newGiftBox.matchingHandbag.minOrderQuantity,
+        }])
+      );
+      // optional handbag image file
+      if (newGiftBox.matchingHandbag.image instanceof File) {
+        formData.append(
+          "matchingHandbagImage",
+          newGiftBox.matchingHandbag.image
+        );
+      }
+    }
+
+    // 5) Send to server
+    await axios.put(
+      `${BASE_URL}/api/giftboxpage/giftBoxes/${editId}`,
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+
+    // 6) Reset form state & exit edit mode
+    setNewGiftBox({
+      name: "",
+      description: "",
+      category: "",
+      image: "",
+      price: "",
+      minOrderQuantity: "",
+      hasMatchingHandbag: false,
+      matchingHandbag: { name: "", image: "", price: "", minOrderQuantity: "" },
+      sweetsQuantity: "",
+      preferredSweets: [],
+    });
+    setEditMode(false);
+    setEditType("");
+    setEditId("");
+    fetchData();
+  } catch (error) {
+    console.error(
+      "Error updating gift box:",
+      error.response?.data || error.message
+    );
+  }
+};
+
+
 
   const handleUpdateHandbag = async () => {
     try {
@@ -1158,7 +1259,7 @@ const AdminDashboard = () => {
         <button onClick={() => setSelectedOption("handbag")}>Handbags</button>
       </div>
 
-      {selectedOption === "category" && (
+      {/* {selectedOption === "category" && (
         <div className={styles.formContainer}>
           <h2>Add Category</h2>
           <input
@@ -1170,7 +1271,66 @@ const AdminDashboard = () => {
           <input type="file" onChange={handleCategoryImageUpload} />
           <button onClick={handleAddCategory}>Add Category</button>
         </div>
+      )} */}
+      {selectedOption === "category" && (
+  <div className={styles.formContainer}>
+    <h2>
+      {editMode && editType === "category"
+        ? "Edit Category"
+        : "Add New Category"}
+    </h2>
+
+    {/* Name field */}
+    <input
+      type="text"
+      placeholder="Category Name"
+      value={newCategory.name}
+      onChange={e =>
+        setNewCategory(prev => ({ ...prev, name: e.target.value }))
+      }
+    />
+
+    {/* Image preview when editing */}
+    {editMode && editType === "category" && newCategory.image?.url && (
+      <div className={styles.imagePreviewContainer}>
+        <img
+          src={newCategory.image.url}
+          alt="Current Category"
+          style={{ width: 100, height: 100, objectFit: "cover" }}
+        />
+        <button
+          className={styles.imageDeleteButton}
+          onClick={() =>
+            setNewCategory(prev => ({ ...prev, image: "" }))
+          }
+        >
+          X
+        </button>
+      </div>
+    )}
+
+    {/* File input */}
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handleCategoryImageUpload}
+    />
+
+    {/* Action buttons */}
+    <div className={styles.formActions}>
+      {editMode && editType === "category" ? (
+        <>
+          <button onClick={handleUpdateCategory}>
+            Update Category
+          </button>
+          <button onClick={handleCancelEdit}>Cancel</button>
+        </>
+      ) : (
+        <button onClick={handleAddCategory}>Add Category</button>
       )}
+    </div>
+  </div>
+)}
 
       {selectedOption === "giftBox" && (
         <div className={styles.formContainer}>
