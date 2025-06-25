@@ -28,7 +28,8 @@ exports.addBanquet = async (req, res) => {
       price,
       // oldPrice,
        perPlatePrice,
-      seatingCapacity,
+      seatingCapacity: Number(seatingCapacity),
+
       // rating,
       images,
     });
@@ -92,7 +93,7 @@ exports.updateBanquet = async (req, res) => {
     banquet.price = price;
     // banquet.oldPrice = oldPrice;
     banquet.perPlatePrice = perPlatePrice;
-    banquet.seatingCapacity = seatingCapacity;
+   banquet.seatingCapacity = Number(seatingCapacity);
     // banquet.rating = rating;
 
     await banquet.save();
@@ -167,29 +168,40 @@ exports.editBanquet = async (req, res) => {
   }
 };
 
-// ✅ Get all banquets with pagination
+
+
 exports.getAllBanquets = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
+    // console.log('🔥 getAllBanquets hit');  
 
+    // 1. parse pagination
+    const page  = parseInt(req.query.page, 10)  || 1;
+    const limit = parseInt(req.query.limit, 10) || 10;
+    const skip  = (page - 1) * limit;
+
+    // 2. fetch full documents (no .select())
     const banquets = await Banquet.find()
-      .select("title description price images") // adjust selection as needed
       .limit(limit)
-      .skip(skip);
+      .skip(skip)
+      .lean();  
 
-    const total = await Banquet.countDocuments();
+    // 3. double-check that seatingCapacity is there
+    // if (banquets.length) {
+    //   console.log('🔥 first banquet object:', JSON.stringify(banquets[0], null, 2));
+    //   console.log('🔥 first seatingCapacity:', banquets[0].seatingCapacity);
+    // }
 
-    res.status(200).json({
-      success: true,
-      total,
+    // 4. send it off
+    return res.status(200).json({
+      success:     true,
+      total:       await Banquet.countDocuments(),
       currentPage: page,
-      totalPages: Math.ceil(total / limit),
+      totalPages:  Math.ceil(await Banquet.countDocuments() / limit),
       banquets,
     });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error", error });
+  } catch (err) {
+    console.error('Error in getAllBanquets:', err);
+    return res.status(500).json({ success: false, message: 'Server error' });
   }
 };
 

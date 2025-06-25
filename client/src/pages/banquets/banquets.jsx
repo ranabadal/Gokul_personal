@@ -160,6 +160,11 @@
 
 // export default Banquets;
 
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./banquets.module.css";
@@ -191,8 +196,11 @@ const Banquets = () => {
         if (!response.ok) throw new Error("Failed to fetch banquet data.");
 
         const data = await response.json();
+
+        // 🔍 Debug: inspect exactly what's coming back
+        console.log("Fetched banquets from API:", data.banquets);
+
         if (data.success) {
-          // Update each banquet so that the selected image is the first image's URL.
           const updatedBanquets = data.banquets.map((banquet) => ({
             ...banquet,
             selectedImage: banquet.images[0]?.url || null,
@@ -213,9 +221,9 @@ const Banquets = () => {
   }, []);
 
   const handleImageClick = (banquetId, image) => {
-    setBanquets((prevBanquets) =>
-      prevBanquets.map((banquet) =>
-        banquet._id === banquetId ? { ...banquet, selectedImage: image } : banquet
+    setBanquets((prev) =>
+      prev.map((b) =>
+        b._id === banquetId ? { ...b, selectedImage: image } : b
       )
     );
   };
@@ -223,7 +231,6 @@ const Banquets = () => {
   const handleCheckAvailability = (banquet) => {
     try {
       const token = localStorage.getItem("jwtToken");
-
       if (!token) {
         setToast("Please log in first!", "error");
         return;
@@ -234,20 +241,18 @@ const Banquets = () => {
           seatingCapacity: banquet.seatingCapacity,
           hallTitle: banquet.title,
           hallPrice: banquet.price,
-          hallImages: banquet.images ? banquet.images.map((img) => img.url) : [],
+          hallImages: banquet.images.map((img) => img.url),
         },
       });
     } catch (error) {
       console.error("Error in check availability:", error);
-      alert("An error occurred while checking availability.", "error");
+      alert("An error occurred while checking availability.");
     }
   };
 
   return (
     <div className={styles.mainConatiner}>
-      <div className={styles.above_header}>
-        {/* <AboveHeader /> */}
-      </div>
+      <div className={styles.above_header}>{/* <AboveHeader /> */}</div>
       <div className={styles.header}>
         <Header />
       </div>
@@ -266,15 +271,15 @@ const Banquets = () => {
               <HallDetails
                 name={banquet.title}
                 price={`Min. Charges ${banquet.price}`}
-                seating={`${banquet.seatingCapacity} Seating`}
+                seating={`${banquet.seatingCapacity || "N/A"} Seating`}
                 description={banquet.description}
                 rating={banquet.rating}
-                images={banquet.images ? banquet.images.map((img) => img.url) : []}
+                images={banquet.images.map((img) => img.url)}
                 selectedImage={banquet.selectedImage}
-                onImageClick={(image) => handleImageClick(banquet._id, image)}
+                onImageClick={(img) => handleImageClick(banquet._id, img)}
                 onCheckAvailability={() => handleCheckAvailability(banquet)}
                 icons={{ heart, star }}
-                showMoreImages={banquet.images ? banquet.images.length > 5 : false}
+                showMoreImages={banquet.images.length > 5}
               />
             </div>
 

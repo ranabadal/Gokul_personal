@@ -19,6 +19,9 @@
 // const Banquet = mongoose.model('Banquet', banquetSchema);
 
 // module.exports = Banquet;
+
+
+
 const mongoose = require('mongoose');
 
 const imageSchema = new mongoose.Schema({

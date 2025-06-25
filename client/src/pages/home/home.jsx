@@ -47,12 +47,10 @@ const Home = () => {
         if (!response.ok) throw new Error("Failed to fetch banquet data.");
 
         const data = await response.json();
-        if (data.success) {
+       if (data.success) {
           const updatedBanquets = data.banquets.map((banquet) => ({
             ...banquet,
-            selectedImage: banquet.images[0]?.data
-              ? `data:${banquet.images[0].contentType};base64,${banquet.images[0].data}`
-              : null,
+            selectedImage: banquet.images[0]?.url || null,
           }));
           setBanquets(updatedBanquets);
         } else {
@@ -65,6 +63,7 @@ const Home = () => {
         setIsLoading(false);
       }
     };
+
 
     fetchBanquets();
   }, []);
@@ -246,9 +245,7 @@ const Home = () => {
               description={banquet.description}
               rating={banquet.rating}
               icons={{ heart, star }}
-              images={banquet.images.map(
-                (img) => `data:${img.contentType};base64,${img.data}`
-              )}
+              images={banquet.images.map((img) => img.url)}
               selectedImage={banquet.selectedImage}
               onImageClick={(image) =>
                 setBanquets((prevBanquets) =>
