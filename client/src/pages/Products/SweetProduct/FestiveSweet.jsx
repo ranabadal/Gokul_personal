@@ -8,9 +8,7 @@ const FestiveSweet = ({ product, addToCart, removeFromCart, addToWishlist, isInB
     return (
       <div className={styles.card}>
         <img 
-          src={product.image && product.image.contentType && product.image.data 
-            ? `data:${product.image.contentType};base64,${product.image.data}` 
-            : product.image}
+          src={product.image?.url}
           alt={product.name} 
           className={styles.image} 
         />
