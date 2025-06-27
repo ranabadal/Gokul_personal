@@ -167,53 +167,65 @@ const HeroSection = () => {
             description: "Elevate every occasion with Gokul, where we offer premium gifts that illuminate life’s special moments.",
             image: thali,
             timer: <CountdownTimer />
-        },
+        }
+        ,
+        
         {
             title: "Celebrate with Gokul!",
             description: "Discover the joy of gifting with our exclusive Diwali offers.",
             image: box,
             timer: <CountdownTimer />
-        },
+        }
+
+        ,
         // {
         //     title: "Special Moments, Special Gifts",
         //     description: "Make every moment memorable with our handcrafted gifts.",
         //     image: ladoo,
         //     timer: <CountdownTimer />
         // },
-    ];
+    
+    ]
 
-    const nextSlide = () => {
+    ;
+
+    const nextSlide = () => 
+        {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-    };
+        };
 
-    const prevSlide = () => {
+    const prevSlide = () => 
+        {
         setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    };
+        }
+        ;
 
-    useEffect(() => {
+    useEffect(() => 
+        {
         const slideInterval = setTimeout(nextSlide, 2000);
         return () => clearTimeout(slideInterval);
-    }, [currentSlide]);
+        },
+        [currentSlide]);
 
-    return (
-        <div>
+        return (
+            <div>
             <div className={styles.hero_section_container}>
-                <div className={styles.hero_section}>
-                    <button className={styles.hero_section_bttn_left} onClick={prevSlide}><span>&larr;</span></button>
-                    <div className={styles.hero_section_left}>
+            <div className={styles.hero_section}>
+            <button className={styles.hero_section_bttn_left} onClick={prevSlide}><span>&larr;</span></button>
+            <div className={styles.hero_section_left}>
                         {/* <div className={styles.hero_section_left_div_1}>
-                            <div className={styles.hero_section_left_top}>Baisakhi Offer Ends in</div>
-                            {slides[currentSlide].timer}
+                        <div className={styles.hero_section_left_top}>Baisakhi Offer Ends in</div>
+                        {slides[currentSlide].timer}
                         </div> */}
                         <div className={styles.hero_section_left_bottom}>
-                            <img src={slides[currentSlide].image} className={styles.image} alt="Offer Box" />
+                        <img src={slides[currentSlide].image} className={styles.image} alt="Offer Box" />
                         </div>
                     </div>
                     <div className={styles.hero_section_right_container}>
-                        <h2 className={styles.hero_section_right_title}>{slides[currentSlide].title}</h2>
-                        <p className={styles.hero_section_right_description}>
-                            {slides[currentSlide].description}                
-                        </p>
+                    <h2 className={styles.hero_section_right_title}>{slides[currentSlide].title}</h2>
+                    <p className={styles.hero_section_right_description}>
+                    {slides[currentSlide].description}                
+                    </p>
                         <div className={styles.buttonsinhero}>
                           <div className={styles.hero_section_right_buttons}>
                 <button className={styles.order_button} onClick={() => navigate("/products")}>Order Now</button>
@@ -234,13 +246,11 @@ const HeroSection = () => {
                 {slides.map((_, index) => (
                     <div
                         key={index}
-                        className={`${styles.hero_section_bottom_dot} ${currentSlide === index ? styles.active : ""}`}
-                        onClick={() => setCurrentSlide(index)}>
-
+                      className={`${styles.hero_section_bottom_dot} ${currentSlide === index ? styles.active : ""}`}
+                     onClick={() => setCurrentSlide(index)}>
                     </div>
-
                 ))}
-            </div>
+       </div>
         </div>
     );
 };
