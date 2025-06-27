@@ -86,6 +86,7 @@ const GiftBoxesHistory = () => {
 
   return (
     <div className={styles.orderContainer}>
+      <div className={styles.heading}>Gift Boxes Order History</div>
       <div className={styles.orderTableContainer}>
         <table className={styles.orderTable}>
           <thead>

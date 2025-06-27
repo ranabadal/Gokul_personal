@@ -1196,6 +1196,7 @@ const handleEdit = (item, type) => {
             <input
               type="text"
               placeholder="Description"
+           maxLength={200}
               value={newGiftBox.description}
               onChange={(e) => setNewGiftBox({ ...newGiftBox, description: e.target.value })}
             />

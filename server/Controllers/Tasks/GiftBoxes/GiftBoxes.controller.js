@@ -358,165 +358,308 @@ exports.getGiftBoxById = async (req, res) => {
   }
 };
 
-// ✅ Create a New Gift Box (with sweets and matching handbags)
+// // ✅ Create a New Gift Box (with sweets and matching handbags)
+// exports.createGiftBox = async (req, res) => {
+//   try {
+//     const { 
+//       category, 
+//       name, 
+//       description, 
+//       price, 
+//       minOrderQuantity, 
+//       matchingHandbags, 
+//       sweetsQuantity, 
+//       preferredSweets 
+//     } = req.body;
+    
+//     if (!category || !name || !req.file || !description || !price || !minOrderQuantity) {
+//       return res.status(400).json({ message: "Please provide all required fields." });
+//     }
+    
+//     const categoryFound = await GiftBoxesCategory.findById(category);
+//     if (!categoryFound) {
+//       return res.status(400).json({ message: "Invalid category" });
+//     }
+    
+//     // Upload gift box image to Cloudinary (folder: gift_boxes)
+//     const result = await cloudinary.uploader.upload(req.file.path, { folder: "gift_boxes" });
+    
+//     const giftBox = new GiftBoxes({
+//       category,
+//       name,
+//       image: { url: result.secure_url, public_id: result.public_id },
+//       description,
+//       price,
+//       minOrderQuantity,
+//       matchingHandbags: matchingHandbags || [],
+//       sweetsQuantity: sweetsQuantity || 0,
+//       preferredSweets: preferredSweets || []
+//     });
+    
+//     await giftBox.save();
+//     res.status(201).json(giftBox);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
+
+
+// // ✅ Create a New Gift Box (with sweets and matching handbags)
+// exports.createGiftBox = async (req, res) => {
+//   try {
+//     const { 
+//       category, 
+//       name, 
+//       description, 
+//       price, 
+//       minOrderQuantity, 
+//       matchingHandbags, 
+//       sweetsQuantity, 
+//       preferredSweets 
+//     } = req.body;
+    
+//     if (!category || !name || !req.file || !description || !price || !minOrderQuantity) {
+//       return res.status(400).json({ message: "Please provide all required fields." });
+//     }
+    
+//     const categoryFound = await GiftBoxesCategory.findById(category);
+//     if (!categoryFound) {
+//       return res.status(400).json({ message: "Invalid category" });
+//     }
+    
+//     // Upload gift box image to Cloudinary (folder: gift_boxes)
+//     const result = await cloudinary.uploader.upload(req.file.path, { folder: "gift_boxes" });
+    
+//     const giftBox = new GiftBoxes({
+//       category,
+//       name,
+//       image: { url: result.secure_url, public_id: result.public_id },
+//       description,
+//       price,
+//       minOrderQuantity,
+//       matchingHandbags: matchingHandbags || [],
+//       sweetsQuantity: sweetsQuantity || 0,
+//       preferredSweets: preferredSweets || []
+//     });
+    
+//     await giftBox.save();
+//     res.status(201).json(giftBox);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+// Controller: createGiftBox
 exports.createGiftBox = async (req, res) => {
   try {
-    const { 
-      category, 
-      name, 
-      description, 
-      price, 
-      minOrderQuantity, 
-      matchingHandbags, 
-      sweetsQuantity, 
-      preferredSweets 
+    // 1) Grab uploaded files
+    const mainFile    = req.files?.image?.[0];
+    const handbagFile = req.files?.matchingHandbagImage?.[0];
+
+    // 2) Destructure body fields
+    let {
+      category,
+      name,
+      description,
+      price,
+      minOrderQuantity,
+      matchingHandbags,
+      sweetsQuantity,
+      preferredSweets
     } = req.body;
-    
-    if (!category || !name || !req.file || !description || !price || !minOrderQuantity) {
-      return res.status(400).json({ message: "Please provide all required fields." });
+
+    // 3) Validate required fields
+    if (
+      !category ||
+      !name ||
+      !description ||
+      !price ||
+      !minOrderQuantity ||
+      !mainFile
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Please provide all required fields." });
     }
-    
+
+    // 4) Check category exists
     const categoryFound = await GiftBoxesCategory.findById(category);
     if (!categoryFound) {
       return res.status(400).json({ message: "Invalid category" });
     }
-    
-    // Upload gift box image to Cloudinary (folder: gift_boxes)
-    const result = await cloudinary.uploader.upload(req.file.path, { folder: "gift_boxes" });
-    
+
+    // 5) Upload main gift-box image
+    const imgRes = await cloudinary.uploader.upload(mainFile.path, {
+      folder: "gift_boxes"
+    });
+
+    // 6) Normalize matchingHandbags metadata
+    let mhPayload = [];
+    if (matchingHandbags) {
+      // can arrive as JSON string or array
+      const raw = typeof matchingHandbags === "string"
+        ? JSON.parse(matchingHandbags)
+        : matchingHandbags;
+      mhPayload = Array.isArray(raw) ? raw : [raw];
+      // attach empty image slot for each
+      mhPayload = mhPayload.map(item => ({
+        ...item,
+        image: { url: "", public_id: "" }
+      }));
+    }
+
+    // 7) Normalize preferredSweets IDs
+    let psPayload = [];
+    if (preferredSweets) {
+      const raw = typeof preferredSweets === "string"
+        ? JSON.parse(preferredSweets)
+        : preferredSweets;
+      psPayload = Array.isArray(raw) ? raw : [raw];
+    }
+
+    // 8) Build document
     const giftBox = new GiftBoxes({
       category,
       name,
-      image: { url: result.secure_url, public_id: result.public_id },
       description,
       price,
       minOrderQuantity,
-      matchingHandbags: matchingHandbags || [],
       sweetsQuantity: sweetsQuantity || 0,
-      preferredSweets: preferredSweets || []
+      matchingHandbags: mhPayload,
+      preferredSweets: psPayload,
+      image: {
+        url:       imgRes.secure_url,
+        public_id: imgRes.public_id
+      }
     });
-    
+
+    // 9) If a matching handbag image was provided, upload and attach
+    if (handbagFile && giftBox.matchingHandbags.length) {
+      const hbRes = await cloudinary.uploader.upload(handbagFile.path, {
+        folder: "gift_boxes/handbags"
+      });
+      giftBox.matchingHandbags[0].image = {
+        url:       hbRes.secure_url,
+        public_id: hbRes.public_id
+      };
+    }
+
+    // 10) Persist and respond
     await giftBox.save();
-    res.status(201).json(giftBox);
+    return res.status(201).json(giftBox);
+
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("Error in createGiftBox:", error);
+    return res.status(400).json({ error: error.message });
   }
 };
 
-// // ✅ Update Gift Box (handles image updates)
 // exports.updateGiftBox = async (req, res) => {
 //   try {
-//     // Retrieve the existing gift box document
+//     // 1) Fetch your doc
 //     const giftBox = await GiftBoxes.findById(req.params.id);
 //     if (!giftBox) {
-//       return res.status(404).json({ message: "Gift Box not found" });
+//       return res.status(404).json({ message: 'Gift Box not found' });
 //     }
-    
-//     // Prepare updatedImage by keeping the existing image
-//     let updatedImage = giftBox.image;
-    
-//     // If a new file is provided, process the image update
+
+//     // 2) Determine the final image object:
+//     let newImageObj;
+
+//     // A) If the client uploaded a new file
 //     if (req.file) {
-//       // Only destroy the previous image if it exists and has a public_id
-//       if (giftBox.image && giftBox.image.public_id) {
+//       // destroy previous if you have its public_id
+//       if (giftBox.image?.public_id) {
 //         await cloudinary.uploader.destroy(giftBox.image.public_id);
 //       }
-//       // Upload the new file to Cloudinary using the intended folder
-//       const result = await cloudinary.uploader.upload(req.file.path, { folder: "bulkorders/giftBoxes" });
-//       updatedImage = { url: result.secure_url, public_id: result.public_id };
+//       const uploadRes = await cloudinary.uploader.upload(req.file.path, {
+//         folder: 'bulkorders/giftBoxes'
+//       });
+//       newImageObj = {
+//         url: uploadRes.secure_url,
+//         public_id: uploadRes.public_id
+//       };
 //     }
-    
-//     // Update text fields if provided; else leave unchanged
-//     giftBox.name = req.body.name || giftBox.name;
-//     giftBox.description = req.body.description || giftBox.description;
-//     giftBox.price = req.body.price || giftBox.price;
-//     giftBox.minOrderQuantity = req.body.minOrderQuantity || giftBox.minOrderQuantity;
-//     giftBox.category = req.body.category || giftBox.category;
-    
-//     // If matchingHandbags is provided, try to parse it (it could be a JSON string)
-//     if (req.body.matchingHandbags) {
-//       try {
-//         giftBox.matchingHandbags = (typeof req.body.matchingHandbags === "string")
-//           ? JSON.parse(req.body.matchingHandbags)
-//           : req.body.matchingHandbags;
-//       } catch (parseError) {
-//         console.error("Error parsing matchingHandbags:", parseError);
-//         giftBox.matchingHandbags = []; // Fallback to an empty array
+//     // B) Else if the DB currently stores image as a raw string (legacy)
+//     else if (typeof giftBox.image === 'string') {
+//       const uploadRes = await cloudinary.uploader.upload(giftBox.image, {
+//         folder: 'bulkorders/giftBoxes'
+//       });
+//       newImageObj = {
+//         url: uploadRes.secure_url,
+//         public_id: uploadRes.public_id
+//       };
+//     }
+//     // C) Else if you already have a valid object, keep it
+//     else if (
+//       giftBox.image &&
+//       typeof giftBox.image === 'object' &&
+//       giftBox.image.url &&
+//       giftBox.image.public_id
+//     ) {
+//       newImageObj = giftBox.image;
+//     }
+
+//     // Assign final image only if we resolved one
+//     if (newImageObj) {
+//       giftBox.image = newImageObj;
+//     }
+
+//     // 3) Update other fields (only override if provided)
+//     giftBox.name             = req.body.name             ?? giftBox.name;
+//     giftBox.description      = req.body.description      ?? giftBox.description;
+//     giftBox.category         = req.body.category         ?? giftBox.category;
+//     giftBox.price            = req.body.price
+//                                  ? Number(req.body.price)
+//                                  : giftBox.price;
+//     giftBox.minOrderQuantity = req.body.minOrderQuantity
+//                                  ? Number(req.body.minOrderQuantity)
+//                                  : giftBox.minOrderQuantity;
+//     giftBox.sweetsQuantity   = req.body.sweetsQuantity
+//                                  ? Number(req.body.sweetsQuantity)
+//                                  : giftBox.sweetsQuantity;
+
+//     // 4) preferredSweets → parse array or string
+//     if (req.body.preferredSweets) {
+//       let ps = req.body.preferredSweets;
+//       if (typeof ps === 'string') {
+//         ps = JSON.parse(ps);
 //       }
+//       giftBox.preferredSweets = Array.isArray(ps) ? ps : [ps];
 //     }
-    
-//     giftBox.sweetsQuantity = req.body.sweetsQuantity || giftBox.sweetsQuantity;
-//     giftBox.preferredSweets = req.body.preferredSweets || giftBox.preferredSweets;
-    
-//     // Always update the image field only if a new image was provided,
-//     // otherwise preserve the existing valid image data.
-//     giftBox.image = updatedImage;
-    
-//     // Save the updated document
+
+//     // 5) matchingHandbags → same parsing
+//     if (req.body.matchingHandbags) {
+//       let mh = req.body.matchingHandbags;
+//       if (typeof mh === 'string') {
+//         mh = JSON.parse(mh);
+//       }
+//       giftBox.matchingHandbags = Array.isArray(mh) ? mh : [mh];
+//     }
+
+//     // 6) Save & respond
 //     await giftBox.save();
-//     res.json({ message: "Gift Box updated successfully", giftBox });
-//   } catch (error) {
-//     // Log detailed error info to help with debugging
-//     console.error("Error updating gift box in controller:", error);
-//     res.status(500).json({ error: error.message });
+//     res.json({ success: true, message: 'Gift Box updated', giftBox });
+//   } catch (err) {
+//     console.error('Error in updateGiftBox:', err);
+//     res.status(500).json({ message: err.message });
 //   }
 // };
-
-// controllers/giftBoxController.js
 
 
 
 exports.updateGiftBox = async (req, res) => {
   try {
-    // 1) Fetch your doc
+    // 1) Extract any uploaded files
+    const mainFile    = req.files?.image?.[0];
+    const handbagFile = req.files?.matchingHandbagImage?.[0];
+
+    // 2) Load existing document
     const giftBox = await GiftBoxes.findById(req.params.id);
     if (!giftBox) {
-      return res.status(404).json({ message: 'Gift Box not found' });
+      return res.status(404).json({ message: "Gift Box not found" });
     }
 
-    // 2) Determine the final image object:
-    let newImageObj;
-
-    // A) If the client uploaded a new file
-    if (req.file) {
-      // destroy previous if you have its public_id
-      if (giftBox.image?.public_id) {
-        await cloudinary.uploader.destroy(giftBox.image.public_id);
-      }
-      const uploadRes = await cloudinary.uploader.upload(req.file.path, {
-        folder: 'bulkorders/giftBoxes'
-      });
-      newImageObj = {
-        url: uploadRes.secure_url,
-        public_id: uploadRes.public_id
-      };
-    }
-    // B) Else if the DB currently stores image as a raw string (legacy)
-    else if (typeof giftBox.image === 'string') {
-      const uploadRes = await cloudinary.uploader.upload(giftBox.image, {
-        folder: 'bulkorders/giftBoxes'
-      });
-      newImageObj = {
-        url: uploadRes.secure_url,
-        public_id: uploadRes.public_id
-      };
-    }
-    // C) Else if you already have a valid object, keep it
-    else if (
-      giftBox.image &&
-      typeof giftBox.image === 'object' &&
-      giftBox.image.url &&
-      giftBox.image.public_id
-    ) {
-      newImageObj = giftBox.image;
-    }
-
-    // Assign final image only if we resolved one
-    if (newImageObj) {
-      giftBox.image = newImageObj;
-    }
-
-    // 3) Update other fields (only override if provided)
+    // 3) Update scalar fields (if present)
     giftBox.name             = req.body.name             ?? giftBox.name;
     giftBox.description      = req.body.description      ?? giftBox.description;
     giftBox.category         = req.body.category         ?? giftBox.category;
@@ -530,32 +673,66 @@ exports.updateGiftBox = async (req, res) => {
                                  ? Number(req.body.sweetsQuantity)
                                  : giftBox.sweetsQuantity;
 
-    // 4) preferredSweets → parse array or string
+    // 4) Parse & assign preferredSweets array
     if (req.body.preferredSweets) {
       let ps = req.body.preferredSweets;
-      if (typeof ps === 'string') {
-        ps = JSON.parse(ps);
-      }
+      if (typeof ps === "string") ps = JSON.parse(ps);
       giftBox.preferredSweets = Array.isArray(ps) ? ps : [ps];
     }
 
-    // 5) matchingHandbags → same parsing
+    // 5) Parse & assign matchingHandbags metadata
     if (req.body.matchingHandbags) {
       let mh = req.body.matchingHandbags;
-      if (typeof mh === 'string') {
-        mh = JSON.parse(mh);
-      }
-      giftBox.matchingHandbags = Array.isArray(mh) ? mh : [mh];
+      if (typeof mh === "string") mh = JSON.parse(mh);
+      // preserve any existing image object if metadata only changed
+      giftBox.matchingHandbags = (Array.isArray(mh) ? mh : [mh]).map((item, i) => ({
+        ...item,
+        image: giftBox.matchingHandbags[i]?.image || {}
+      }));
     }
 
-    // 6) Save & respond
+    // 6) Handle main gift-box image replacement
+    if (mainFile) {
+      // delete old
+      if (giftBox.image?.public_id) {
+        await cloudinary.uploader.destroy(giftBox.image.public_id);
+      }
+      // upload new
+      const up = await cloudinary.uploader.upload(mainFile.path, {
+        folder: "gift_boxes"
+      });
+      giftBox.image = {
+        url:       up.secure_url,
+        public_id: up.public_id
+      };
+    }
+
+    // 7) Handle matching-handbag image replacement
+    if (handbagFile && giftBox.matchingHandbags.length > 0) {
+      const oldId = giftBox.matchingHandbags[0].image?.public_id;
+      if (oldId) {
+        await cloudinary.uploader.destroy(oldId);
+      }
+      const hbUp = await cloudinary.uploader.upload(handbagFile.path, {
+        folder: "gift_boxes/handbags"
+      });
+      giftBox.matchingHandbags[0].image = {
+        url:       hbUp.secure_url,
+        public_id: hbUp.public_id
+      };
+    }
+
+    // 8) Persist & reply
     await giftBox.save();
-    res.json({ success: true, message: 'Gift Box updated', giftBox });
+    res.json({ success: true, message: "Gift Box updated", giftBox });
+
   } catch (err) {
-    console.error('Error in updateGiftBox:', err);
+    console.error("Error in updateGiftBox:", err);
     res.status(500).json({ message: err.message });
   }
 };
+
+
 // ✅ Delete Gift Box (removes Cloudinary image)
 exports.deleteGiftBox = async (req, res) => {
   try {

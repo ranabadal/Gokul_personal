@@ -86,7 +86,7 @@ const OrderDetailsModal = ({ order, onClose }) => {
           {order.cartItems && order.cartItems.length > 0 ? (
             order.cartItems.map((item, idx) => (
               <div key={idx} className={styles.itemDetails}>
-                <p><strong>{item.details.name}</strong> - ₹{item.details.price} x {item.quantity}</p>
+                <p><strong>{item.details.name}</strong> - ₹{item.details.price} x {item.details.quantity}</p>
               </div>
             ))
           ) : (

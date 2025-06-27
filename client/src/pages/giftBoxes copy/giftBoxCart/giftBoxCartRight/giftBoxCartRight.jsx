@@ -208,7 +208,7 @@ const GiftBoxCartRight = ({
         name: item.details.name,
         price: item.details.price,
         quantity: item.quantity || 1,
-        image: item.details.image,
+        image: item.details.image?.url,
       },
       matchingHandbags: item.matchingHandbags.map((mh) => ({
         name: mh.name,
@@ -296,7 +296,7 @@ const GiftBoxCartRight = ({
             <div key={`${item.id}_${item.type}`} className={styles.orderItem}>
               <div className={styles.orderItemRow}>
                 <div className={styles.itemImage}>
-                  <img src={item.details.image} alt={item.details.name} className={styles.orderImage} />
+                  <img src={item.details.image?.url} alt={item.details.name} className={styles.orderImage} />
                 </div>
                 <div className={styles.itemDetails}>
                   <div className={styles.topSection}>

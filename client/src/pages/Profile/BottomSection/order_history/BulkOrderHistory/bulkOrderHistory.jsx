@@ -80,6 +80,7 @@ const BulkOrderHistory = () => {
 
   return (
     <div className={styles.orderContainer}>
+      <div className={styles.heading}>Bulk Order History</div>
       <div className={styles.orderTableContainer}>
         <table className={styles.orderTable}>
           <thead>

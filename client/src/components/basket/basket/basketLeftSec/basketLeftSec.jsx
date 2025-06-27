@@ -276,11 +276,11 @@ const Basket = ({ cartItems, updateCartItems }) => {
 
                 {/* Product Image */}
                 <img
-                  src={
-                    item.productId?.image?.data
-                      ? `data:${item.productId.image.contentType};base64,${item.productId.image.data}`
-                      : item.productId?.image || "fallback-image-url.jpg"
-                  }
+               src={
+  item.productId?.image?.url
+    ? item.productId.image.url
+    : "fallback-image-url.jpg"
+}
                   alt={item.productId?.name || "Product Image"}
                   className={styles.productImage}
                 />

@@ -605,6 +605,7 @@ const MainGiftBoxes = () => {
             handleCheckout={handleCheckout}
             handleEditBox={handleEditBox}
             handleDeleteBox={handleDeleteBox}
+            onClearCart={() => setCartItems([])}
           />
         </div>
       </div>

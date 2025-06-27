@@ -812,6 +812,26 @@ const AdminDashboard = () => {
     preferredSweets: [],
   });
 
+
+  // outside your component
+const initialGiftBox = {
+  name: "",
+  description: "",
+  category: "",
+  image: "",               // File or ""
+  price: "",
+  minOrderQuantity: "",
+  hasMatchingHandbag: false,
+  matchingHandbag: {
+    name: "",
+    image: "",             // File or ""
+    price: "",
+    minOrderQuantity: ""
+  },
+  sweetsQuantity: "",
+  preferredSweets: []
+};
+
   // Form state for General Handbag
   const [newHandbag, setNewHandbag] = useState({
     name: "",
@@ -992,35 +1012,80 @@ const handleUpdateCategory = async () => {
   fetchData();
   handleCancelEdit();
 };
-  const handleAddGiftBox = async () => {
-    try {
-      const payload = { ...newGiftBox };
-      if (newGiftBox.hasMatchingHandbag) {
-        payload.matchingHandbags = [newGiftBox.matchingHandbag];
-      } else {
-        payload.matchingHandbags = [];
-      }
-      delete payload.matchingHandbag;
-      await axios.post(`${BASE_URL}/api/giftboxpage/giftBoxes`, payload);
-      setNewGiftBox({
-        name: "",
-        description: "",
-        category: "",
-        image: "",
-        price: "",
-        minOrderQuantity: "",
-        hasMatchingHandbag: false,
-        matchingHandbag: { name: "", image: "", price: "", minOrderQuantity: "" },
-        sweetsQuantity: "",
-        preferredSweets: [],
-      });
-      fetchData();
-    } catch (error) {
-      console.error("Error adding gift box:", error);
-    }
-  };
+  // const handleAddGiftBox = async () => {
+  //   try {
+  //     const payload = { ...newGiftBox };
+  //     if (newGiftBox.hasMatchingHandbag) {
+  //       payload.matchingHandbags = [newGiftBox.matchingHandbag];
+  //     } else {
+  //       payload.matchingHandbags = [];
+  //     }
+  //     delete payload.matchingHandbag;
+  //     await axios.post(`${BASE_URL}/api/giftboxpage/giftBoxes`, payload);
+  //     setNewGiftBox({
+  //       name: "",
+  //       description: "",
+  //       category: "",
+  //       image: "",
+  //       price: "",
+  //       minOrderQuantity: "",
+  //       hasMatchingHandbag: false,
+  //       matchingHandbag: { name: "", image: "", price: "", minOrderQuantity: "" },
+  //       sweetsQuantity: "",
+  //       preferredSweets: [],
+  //     });
+  //     fetchData();
+  //   } catch (error) {
+  //     console.error("Error adding gift box:", error);
+  //   }
+  // };
 
- 
+ const handleAddGiftBox = async () => {
+  try {
+    const fd = new FormData();
+    // primitives:
+    fd.append("name", newGiftBox.name);
+    fd.append("description", newGiftBox.description);
+    fd.append("category", newGiftBox.category);
+    fd.append("price", newGiftBox.price);
+    fd.append("minOrderQuantity", newGiftBox.minOrderQuantity);
+    fd.append("sweetsQuantity", newGiftBox.sweetsQuantity);
+
+    // main image
+    if (newGiftBox.image instanceof File) {
+      fd.append("image", newGiftBox.image);
+    }
+
+    // matching handbag data + file
+    if (newGiftBox.hasMatchingHandbag) {
+      const meta = {
+        name: newGiftBox.matchingHandbag.name,
+        price: newGiftBox.matchingHandbag.price,
+        minOrderQuantity: newGiftBox.matchingHandbag.minOrderQuantity,
+      };
+      fd.append("matchingHandbags", JSON.stringify([meta]));
+
+      if (newGiftBox.matchingHandbag.image instanceof File) {
+        fd.append("matchingHandbagImage", newGiftBox.matchingHandbag.image);
+      }
+    }
+
+    // preferredSweets (just IDs)
+    newGiftBox.preferredSweets.forEach((sId) => {
+      fd.append("preferredSweets", sId);
+    });
+
+    await axios.post(
+      `${BASE_URL}/api/giftboxpage/giftBoxes`,
+      fd,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+      setNewGiftBox(initialGiftBox);
+    // reset state + refetch...
+  } catch (err) {
+    console.error("Error adding gift box:", err.response?.data || err);
+  }
+};
 
 //  const handleUpdateGiftBox = async () => {
 //   try {

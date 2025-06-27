@@ -238,7 +238,7 @@ const GiftBox = ({ setFinalSelection }) => {
       {zoomedImage && (
         <div className={styles.imageModal} onClick={handleCloseModal}>
           <div className={styles.imageModalContent}>
-            <img src={zoomedImage} alt="Zoomed Preview" className={styles.modalImage} />
+            <img src={zoomedImage?.url} alt="Zoomed Preview" className={styles.modalImage} />
             <button className={styles.closeButton} onClick={handleCloseModal}>
               ✖
             </button>
@@ -261,7 +261,7 @@ const GiftBox = ({ setFinalSelection }) => {
                 setActiveGeneralHandbag(null);
               }}
             >
-              <img src={category.image || pic} alt={category.name} className={styles.subcategoryImage} />
+              <img src={category.image?.url} alt={category.name} className={styles.subcategoryImage} />
               <p className={styles.subcategoryName}>{category.name}</p>
             </div>
           ))}
@@ -278,7 +278,7 @@ const GiftBox = ({ setFinalSelection }) => {
             </button>
             <h2>{activeGiftBox.name}</h2>
             <img
-              src={activeGiftBox.image}
+              src={activeGiftBox.image?.url}
               alt={activeGiftBox.name}
               className={styles.selectedBoxImage}
               onClick={() => handleImageClick(activeGiftBox.image)}
@@ -315,7 +315,7 @@ const GiftBox = ({ setFinalSelection }) => {
                         className={styles.handbagCheckbox}
                       />
                       <img
-                        src={handbag.image}
+                        src={handbag.image?.url}
                         alt={handbag.name}
                         className={styles.handbagImage}
                         onClick={() => handleImageClick(handbag.image)}
@@ -354,7 +354,7 @@ const GiftBox = ({ setFinalSelection }) => {
                 ?.filter((box) => box._id !== activeGiftBox._id)
                 .map((box) => (
                   <div key={box._id} className={styles.boxCard} onClick={() => handleGiftBoxSelect(box)}>
-                    <img src={box.image} alt={box.name} className={styles.boxImage} />
+                    <img src={box.image?.url} alt={box.name} className={styles.boxImage} />
                     <h3>{box.name}</h3>
                     <p>{box.description}</p>
                     <p>
@@ -377,7 +377,7 @@ const GiftBox = ({ setFinalSelection }) => {
             <h2>{activeGeneralHandbag.name}</h2>
             <img
               src={activeGeneralHandbag.image}
-              alt={activeGeneralHandbag.name}
+              alt={activeGeneralHandbag.name?.url}
               className={styles.selectedBoxImage}
               onClick={() => handleImageClick(activeGeneralHandbag.image)}
             />
@@ -411,7 +411,7 @@ const GiftBox = ({ setFinalSelection }) => {
                 ?.filter((handbag) => handbag._id !== activeGeneralHandbag._id)
                 .map((handbag) => (
                   <div key={handbag._id} className={styles.boxCard} onClick={() => handleGeneralHandbagSelect(handbag)}>
-                    <img src={handbag.image} alt={handbag.name} className={styles.boxImage} />
+                    <img src={handbag.image?.url} alt={handbag.name} className={styles.boxImage} />
                     <h3>{handbag.name}</h3>
                     <p>
                       Price: ₹{handbag.price} | Min Order: {handbag.minOrderQuantity}
@@ -428,7 +428,7 @@ const GiftBox = ({ setFinalSelection }) => {
         <div className={styles.boxSelection}>
           {sampleGiftBoxes[selectedCategory]?.map((box) => (
             <div key={box._id} className={styles.boxCard} onClick={() => handleGiftBoxSelect(box)}>
-              <img src={box.image} alt={box.name} className={styles.boxImage} />
+              <img src={box.image?.url} alt={box.name} className={styles.boxImage} />
               <h3>{box.name}</h3>
               <p>{box.description}</p>
               <p>
@@ -438,7 +438,7 @@ const GiftBox = ({ setFinalSelection }) => {
           ))}
           {sampleHandbags[selectedCategory]?.map((handbag) => (
             <div key={handbag._id} className={styles.boxCard} onClick={() => handleGeneralHandbagSelect(handbag)}>
-              <img src={handbag.image} alt={handbag.name} className={styles.boxImage} />
+              <img src={handbag.image?.url} alt={handbag.name} className={styles.boxImage} />
               <h3>{handbag.name}</h3>
               <p>
                 Price: ₹{handbag.price} | Min Order: {handbag.minOrderQuantity}

@@ -159,7 +159,7 @@ const OrderCard = ({ item, bulkQuantity }) => {
   const quantity = bulkQuantity !== undefined ? bulkQuantity : item.quantity;
   return (
     <div className={styles.orderItem}>
-      <img src={item.productId.image} alt={item.productId.name} className={styles.itemImage} />
+      <img src={item.productId.image?.url} alt={item.productId.name} className={styles.itemImage} />
       <div className={styles.itemDetails}>
         <h3 className={styles.itemTitle}>{item.productId.name}</h3>
         <p className={styles.itemQuantity}>{item.productId.price} × {quantity}</p>

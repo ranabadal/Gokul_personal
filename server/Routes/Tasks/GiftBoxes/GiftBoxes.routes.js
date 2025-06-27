@@ -29,6 +29,12 @@ const router = express.Router();
 const adminController = require("../../../Controllers/Tasks/GiftBoxes/GiftBoxes.controller");
 const upload = require("../../../Middlewares/upload");
 
+const uploadMulti = upload.fields([
+  { name: "image", maxCount: 1 },               // gift-box main image
+  { name: "matchingHandbagImage", maxCount: 1 } // optional handbag image
+]);
+
+
 // ✅ Category Routes
 router.get("/categories", adminController.getAllCategories);
 router.post("/categories", upload.single("image"), adminController.createCategory);
@@ -38,8 +44,18 @@ router.delete("/categories/:id", adminController.deleteCategory);
 // ✅ Gift Box Routes
 router.get("/giftBoxes", adminController.getAllGiftBoxes);
 router.get("/giftBoxes/:id", adminController.getGiftBoxById);
-router.post("/giftBoxes", upload.single("image"), adminController.createGiftBox);
-router.put("/giftBoxes/:id", upload.single("image"), adminController.updateGiftBox);
+router.post(
+  "/giftBoxes",
+  uploadMulti,
+  adminController.createGiftBox
+);
+
+router.put(
+  "/giftBoxes/:id",
+  uploadMulti,
+  adminController.updateGiftBox
+);
+
 router.delete("/giftBoxes/:id", adminController.deleteGiftBox);
 
 // ✅ General Handbag Routes
