@@ -217,43 +217,43 @@ const HeroSection = () => {
                         <div className={styles.hero_section_left_top}>Baisakhi Offer Ends in</div>
                         {slides[currentSlide].timer}
                         </div> */}
-                        <div className={styles.hero_section_left_bottom}>
-                        <img src={slides[currentSlide].image} className={styles.image} alt="Offer Box" />
-                        </div>
+                    <div className={styles.hero_section_left_bottom}>
+                    <img src={slides[currentSlide].image} className={styles.image} alt="Offer Box" />
+                    </div>
                     </div>
                     <div className={styles.hero_section_right_container}>
                     <h2 className={styles.hero_section_right_title}>{slides[currentSlide].title}</h2>
                     <p className={styles.hero_section_right_description}>
                     {slides[currentSlide].description}                
                     </p>
-                        <div className={styles.buttonsinhero}>
-                          <div className={styles.hero_section_right_buttons}>
-                <button className={styles.order_button} onClick={() => navigate("/products")}>Order Now</button>
-                <button className={styles.explore_button} onClick={() => navigate("/about")}>Explore More</button>
-            </div>
-            </div>
+                    <div className={styles.buttonsinhero}>
+                    <div className={styles.hero_section_right_buttons}>
+                    <button className={styles.order_button} onClick={() => navigate("/products")}>Order Now</button>
+                    <button className={styles.explore_button} onClick={() => navigate("/about")}>Explore More</button>
+                    </div>
+                    </div>
                     </div>
                     <button className={styles.hero_section_bttn_right} onClick={nextSlide}><span>&rarr;</span></button>
-                </div>                
-            </div>
+                    </div>                
+                    </div>
             
             {/* <div className={styles.hero_section_right_buttons}>
                 <button className={styles.order_button} onClick={() => navigate("/products")}>Order Now</button>
                 <button className={styles.explore_button} onClick={() => navigate("/about")}>Explore More</button>
             </div> */}
 
-            <div className={styles.hero_section_bottom_dots}>
+                <div className={styles.hero_section_bottom_dots}>
                 {slides.map((_, index) => (
-                    <div
-                        key={index}
-                      className={`${styles.hero_section_bottom_dot} ${currentSlide === index ? styles.active : ""}`}
-                     onClick={() => setCurrentSlide(index)}>
-                    </div>
+                <div
+                key={index}
+                className={`${styles.hero_section_bottom_dot} ${currentSlide === index ? styles.active : ""}`}
+                onClick={() => setCurrentSlide(index)}>
+                </div>
                 ))}
-       </div>
-        </div>
-    );
-};
+                </div>
+                </div>
+                );
+                };
 
-export default HeroSection;
-export { CountdownTimer };
+                export default HeroSection;
+                export { CountdownTimer };
