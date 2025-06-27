@@ -212,10 +212,7 @@ const HeroSection = () => {
                     <div className={styles.hero_section_right_container}>
                         <h2 className={styles.hero_section_right_title}>{slides[currentSlide].title}</h2>
                         <p className={styles.hero_section_right_description}>
-                            {slides[currentSlide].description}
-                            
-
-                            
+                            {slides[currentSlide].description}                
                         </p>
                         <div className={styles.buttonsinhero}>
                           <div className={styles.hero_section_right_buttons}>
@@ -227,7 +224,6 @@ const HeroSection = () => {
                     <button className={styles.hero_section_bttn_right} onClick={nextSlide}><span>&rarr;</span></button>
                 </div>                
             </div>
-            
             
             {/* <div className={styles.hero_section_right_buttons}>
                 <button className={styles.order_button} onClick={() => navigate("/products")}>Order Now</button>

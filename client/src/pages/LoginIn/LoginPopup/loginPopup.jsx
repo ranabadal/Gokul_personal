@@ -528,6 +528,7 @@ const LoginSignupPopup = () => {
             error={!!signupErrors.email}
             helperText={signupErrors.email}
           />
+
           <TextField
             fullWidth
             label="Password"
@@ -540,6 +541,7 @@ const LoginSignupPopup = () => {
             error={!!signupErrors.password}
             helperText={signupErrors.password}
           />
+          
           <div className={styles.signupButton} onClick={handleSignup}>
             Sign Up
           </div>
