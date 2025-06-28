@@ -56,9 +56,18 @@ const CateringForm = () => {
 };
 
 
-  const totalCost =
-    guestCount && selectedCart ? parseInt(guestCount, 10) * menuPrices[selectedCart] : hallPrice;
+  // const totalCost =
+  //   guestCount && selectedCart ? parseInt(guestCount, 10) * menuPrices[selectedCart] : hallPrice;
 
+
+  const totalCost =
+  guestCount && selectedCart &&
+  parseInt(guestCount, 10) * menuPrices[selectedCart] > 0
+    ? parseInt(guestCount, 10) * menuPrices[selectedCart]
+    : hallPrice;
+
+
+    
   useEffect(() => {
     const fetchHallBookings = async () => {
       try {

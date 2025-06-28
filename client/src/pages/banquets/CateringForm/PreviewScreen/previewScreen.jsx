@@ -81,7 +81,7 @@ const PreviewScreen = ({
         },
         body: JSON.stringify({
           hallTitle,
-          hallImages, // send hallImages array
+          // hallImages, // send hallImages array
           occasion,
           guestCount,
           selectedCart,
@@ -93,12 +93,31 @@ const PreviewScreen = ({
         }),
       });
 
+      // if (response.ok) {
+      //   const data = await response.json();
+      //   setToast("Your banquet query has been submitted successfully!");
+      //   setLoading(false);
+      //   navigate("/banquets");
+      // } 
+      
       if (response.ok) {
-        const data = await response.json();
-        setToast("Your banquet query has been submitted successfully!");
-        setLoading(false);
-        navigate("/banquets");
-      } else {
+  let data = {};
+  try {
+    data = await response.json(); // try parsing only if response has content
+  } catch (err) {
+    // Ignore JSON parsing errors if response body is empty
+  }
+
+  setToast("Your banquet query has been submitted successfully!");
+  setSuccessMessage("Your banquet query has been submitted successfully!");
+  setLoading(false);
+
+  setTimeout(() => {
+    navigate("/banquets");
+  }, 1500);
+}
+
+      else {
         const errorData = await response.json();
         setErrorMessage(errorData.error || "Failed to submit query. Please try again.");
         setLoading(false);
@@ -177,3 +196,4 @@ const PreviewScreen = ({
 };
 
 export default PreviewScreen;
+
