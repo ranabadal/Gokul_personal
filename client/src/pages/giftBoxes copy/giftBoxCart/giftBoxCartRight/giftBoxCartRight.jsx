@@ -214,7 +214,7 @@ const GiftBoxCartRight = ({
         name: mh.name,
         price: mh.price,
         quantity: mh.quantity || 1,
-        image: mh.image,
+        image: mh.image?.url,
       })),
       selectedSweets: item.selectedSweets || [],
     }));
@@ -339,7 +339,7 @@ const GiftBoxCartRight = ({
                       <div key={idx} className={styles.matchingHandbagItem}>
                         <div className={styles.matchingItemRow}>
                           <div className={styles.matchingImage}>
-                            <img src={mh.image} alt={mh.name} className={styles.orderImage} />
+                            <img src={mh.image?.url} alt={mh.name} className={styles.orderImage} />
                           </div>
                           <div className={styles.matchingDetails}>
                             <div>{mh.name}</div>
@@ -361,7 +361,7 @@ const GiftBoxCartRight = ({
                     <div className={styles.selectedSweetsContainer}>
                       {item.selectedSweets.map((sweet) => (
                         <div key={sweet._id} className={styles.selectedSweet}>
-                          <img src={sweet.image} alt={sweet.name} className={styles.sweetImage} />
+                          <img src={sweet.image?.url} alt={sweet.name} className={styles.sweetImage} />
                           <span>
                             {sweet.name} - ₹{sweet.price}
                           </span>

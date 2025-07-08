@@ -150,12 +150,14 @@ import React, { useState, useEffect } from "react";
 import styles from "./takeAwayHistory.module.css";
 import OrderDetailsModal from "./OrderDetailsModal/orderDetailsModal";
 import { BASE_URL } from "../../../../../Const/Const";
+import { useToaster } from "../../../../../utils"; // Adjust the import path as necessary
 
 const TakeawayOrdersHistory = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+    const setToast = useToaster();
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -198,7 +200,7 @@ const TakeawayOrdersHistory = () => {
 
   const handleCancelOrder = async (orderId, status) => {
     if (["Accepted", "Rejected", "Canceled"].includes(status)) {
-      alert(`You cannot cancel an order once it has been ${status}.`);
+      setToast(`You cannot cancel an order once it has been ${status}.`, "error");
       return;
     }
 
@@ -215,18 +217,18 @@ const TakeawayOrdersHistory = () => {
       );
 
       if (res.ok) {
-        alert("Order canceled successfully!");
+        setToast("Order canceled successfully!", "success");
         setOrders((prev) =>
           prev.map((order) =>
             order._id === orderId ? { ...order, status: "Canceled" } : order
           )
         );
       } else {
-        alert("Failed to cancel order.");
+        setToast("Failed to cancel order.", "error");
       }
     } catch (err) {
       console.error("❌ Error canceling order:", err);
-      alert("An unexpected error occurred. Please try again later.");
+      setToast("An unexpected error occurred. Please try again later.", "error");
     }
   };
 

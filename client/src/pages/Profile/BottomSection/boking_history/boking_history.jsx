@@ -6,6 +6,7 @@ import BelowHeader from "../../../../components/below_header/below_header";
 import Footer from "../../../../components/footer/footer";
 import Boking from "../../../../components/boking/boking";
 
+
 const Boking_history = () => {
    
 

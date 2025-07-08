@@ -99,7 +99,7 @@ const PreviewScreen = ({
       //   setLoading(false);
       //   navigate("/banquets");
       // } 
-      
+
       if (response.ok) {
   let data = {};
   try {
@@ -108,7 +108,7 @@ const PreviewScreen = ({
     // Ignore JSON parsing errors if response body is empty
   }
 
-  setToast("Your banquet query has been submitted successfully!");
+  setToast("Your banquet query has been submitted successfully!", "success");
   setSuccessMessage("Your banquet query has been submitted successfully!");
   setLoading(false);
 

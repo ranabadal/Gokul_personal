@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import styles from "./giftBoxesHistory.module.css";
 import OrderDetailsModal from "./OrderDetailsModal/orderDetailsModal"; // Modal Component
 import { BASE_URL } from "../../../../../Const/Const";
+import { useToaster } from "../../../../../utils"; // Adjust the import path as necessary
 const GiftBoxesHistory = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const setToast = useToaster();
 
   // Fetch user orders from the backend
   useEffect(() => {
@@ -39,16 +41,16 @@ const GiftBoxesHistory = () => {
   // Cancel Order Function
   const handleCancelOrder = async (orderId, orderStatus) => {
     if (orderStatus === "Approved") {
-      alert("You cannot cancel an order once it has been approved.");
+      setToast("You cannot cancel an order once it has been approved.","error");
       return;
     }
 
     if (orderStatus === "Rejected") {
-      alert("You cannot cancel an order once it has been rejected.");
+      setToast("You cannot cancel an order once it has been rejected.","error");
       return;
     }
     if (orderStatus === "Canceled") {
-      alert("This order has already been canceled.");
+      setToast("This order has already been canceled.","success");
       return;
     }
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
@@ -61,16 +63,16 @@ const GiftBoxesHistory = () => {
       });
 
       if (response.ok) {
-        alert("Order canceled successfully!");
+        setToast("Order canceled successfully!","success");
         setOrders((prevOrders) =>
           prevOrders.map((order) => (order._id === orderId ? { ...order, status: "Canceled" } : order))
         );
       } else {
-        alert("Failed to cancel order.");
+        setToast("Failed to cancel order.");
       }
     } catch (error) {
       console.error("Error canceling order:", error);
-      alert("An error occurred. Please try again later.");
+      setToast("An error occurred. Please try again later.","error");
     }
   };
 

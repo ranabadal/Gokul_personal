@@ -44,7 +44,7 @@ const Cart = () => {
 
   return (
     <>
-      <AboveHeader />
+     
       <Header />
       <div className={styles.container}>
         <div className={styles.leftSection}>

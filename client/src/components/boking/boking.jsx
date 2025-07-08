@@ -4,12 +4,15 @@ import React, { useState, useEffect } from "react";
 import styles from "./boking.module.css";
 import Loader from "../../components/Loader/loader2/loader2";
 import { BASE_URL } from "../../Const/Const";
+import { useToaster } from "../../utils";
+
 const Boking = () => {
     const [queries, setQueries] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedQuery, setSelectedQuery] = useState(null);
     const [loading, setLoading] = useState(false);
     const bookingsPerPage = 2;
+    const setToast = useToaster();
 
     useEffect(() => {
         const fetchUserBookings = async () => {
@@ -52,16 +55,16 @@ const Boking = () => {
 
     const handleCancelOrder = async (orderId, orderStatus) => {
         if (orderStatus === "Approved") {
-            alert("You cannot cancel an order once it has been approved.");
+            setToast("You cannot cancel the booking once it has been approved.", "error");
             return;
         }
 
         if (orderStatus === "Canceled") {
-            alert("This order has already been canceled.");
+            setToast("This booking has already been canceled.", "error");
             return;
         }
 
-        if (!window.confirm("Are you sure you want to cancel this order?")) return;
+        if (!window.confirm("Are you sure you want to cancel this booking?")) return;
 
         try {
             const token = localStorage.getItem("jwtToken");
@@ -71,7 +74,7 @@ const Boking = () => {
             });
 
             if (response.ok) {
-                alert("Order canceled successfully!");
+                setToast("Booking canceled successfully!", "success");
 
                 const updatedResponse = await fetch(`${BASE_URL}/api/queries/user`, {
                     method: "GET",
@@ -82,14 +85,14 @@ const Boking = () => {
                     const updatedData = await updatedResponse.json();
                     setQueries(updatedData);
                 } else {
-                    alert("Failed to refresh orders. Please try again.");
+                    setToast("Failed to refresh orders. Please try again.", "error");
                 }
             } else {
-                alert("Failed to cancel order.");
+                setToast("Failed to cancel booking.", "error");
             }
         } catch (error) {
             console.error("Error canceling order:", error);
-            alert("An error occurred. Please try again later.");
+            setToast("An error occurred. Please try again later.", "error");
         }
     };
 
@@ -126,7 +129,7 @@ const Boking = () => {
                                         onClick={() => handleCancelOrder(booking._id, booking.status)}
                                         className={styles.cancelBtn}
                                     >
-                                        Cancel Order
+                                        Cancel Booking
                                     </button>
                                 </div>
                             </div>

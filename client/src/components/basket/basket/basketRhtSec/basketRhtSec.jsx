@@ -248,7 +248,7 @@ export default function OrderSummary({ cartItems = [], addresses, customTitle, c
       });
   
       if (response.status === 201) {
-        setToast("Order placed successfully!", "success");
+        setToast("Order placed successfully! kindly visit Profile section for more details", "success");
 
         // Delete the checked items from the basket by calling the API for each one
         await Promise.all(
